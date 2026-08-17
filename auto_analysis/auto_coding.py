@@ -10,9 +10,22 @@ import time
 from dotenv import load_dotenv
 from openai import OpenAI
 from collections import Counter
+from google.auth import default
+from google.auth.transport.requests import Request
+
+# 获取 Google Cloud 凭据和项目 ID
+credentials, project_id = default()
+credentials.refresh(Request())  # 刷新 token
+# 设置Vertex AI
+REGION = "us-central1"
+base_url = f"https://{REGION}-aiplatform.googleapis.com/v1beta1/projects/{project_id}/locations/{REGION}/endpoints/openapi"
+client = OpenAI(
+    base_url=base_url,
+    api_key=credentials.token,
+)
 
 load_dotenv()
-client = OpenAI(api_key=os.getenv("OPENAI_API_KEY"))
+client = OpenAI(api_key=os.getenv("VERTEX_API_KEY"))
 
 SYSTEM_PROMPT = "../prompts/coded_prompt.txt"
 FEW_SHOT_EXAMPLES = "../prompts/coded_examples.txt"
