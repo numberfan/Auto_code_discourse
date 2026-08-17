@@ -1,0 +1,17 @@
+## CONTEXT (surrounding turns for reference):
+[Turn {n-5}] {Speaker}: {Utterance}
+[Turn {n-4}] {Speaker}: {Utterance}
+[Turn {n-3}] {Speaker}: {Utterance}
+[Turn {n-2}] {Speaker}: {Utterance}
+[Turn {n-1}] {Speaker}: {Utterance}
+
+## TARGET TURN TO CODE:
+>>> [Turn {n}] Teacher: {Utterance} <<<
+
+[Turn {n+1}] {Speaker}: {Utterance}
+[Turn {n+2}] {Speaker}: {Utterance}
+
+## TASK:
+Analyze the TARGET TURN above. Identify any APT moves present.
+Remember: most teacher utterances contain NO APT moves.
+Output your analysis in JSON format.

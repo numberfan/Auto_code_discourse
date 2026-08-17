@@ -1,0 +1,102 @@
+## EXAMPLES:
+
+### Example 1: Say more
+Context:
+[Turn 21] Taurus: They want to impress people.
+>>> [Turn 22] Teacher: Who are the they? <<<
+[Turn 23] Taurus: People who have the appearance anxiety.
+
+Output: {"turn_id": 22, "codes": ["say_more"], "reasoning": "Teacher asks Taurus to clarify who 'they' refers to, pushing for more specific elaboration."}
+
+---
+
+### Example 2: Press for reasoning
+Context:
+[Turn 9] Jessica: To keep order.
+>>> [Turn 10] Teacher: To keep order. Why is it important that they keep order? Can you explain? No? Anyone help her out. Who can expand on that? Why is it important that they keep order? <<<
+[Turn 11] Jovin: Uh, to prevent chaos.
+
+Output: {"turn_id": 10, "codes": ["say_more", "press_for_reasoning"], "reasoning": "Teacher asks WHY it's important (press for reasoning) and also invites others to expand (say more/add on)."}
+
+---
+
+### Example 3: Revoice
+Context:
+[Turn 1] Ryan: It is about something that was built after the squatter area was destroyed by fire.
+>>> [Turn 2] Teacher: Yeah, it is about something that was built after the squatter area was destroyed by fire. Umm. What do you think about that William? About the government rebuilding afterwards, what are your thoughts? <<<
+[Turn 3] William: It is pretty good, right?
+
+Output: {"turn_id": 2, "codes": ["revoice"], "reasoning": "Teacher repeats Ryan's statement to make it available to the class, then redirects to William for his thoughts."}
+
+---
+
+### Example 4: Agree/Disagree
+Context:
+[Turn 3] William: It is pretty good, right?
+>>> [Turn 4] Teacher: Good. Does anyone agree with him? That was a good thing to rebuild but they could do better. <<<
+[Turn 5] Student 1: Yes.
+
+Output: {"turn_id": 4, "codes": ["agree_disagree"], "reasoning": "Teacher explicitly asks if anyone agrees with William's position."}
+
+---
+
+### Example 5: Challenge
+Context:
+[Turn 83] Viola: Compare with friends.
+>>> [Turn 84] Teacher: Compare with friends in a positive way or in a negative way? <<<
+[Turn 85] Viola: Negative.
+>>> [Turn 86] Teacher: Negative ways! But we're helping those people who have anxiety. Can you think of another feature for this smartwatch? <<<
+[Turn 87] Student B: Maybe you can use this watch to let other people know…
+
+Output for Turn 84: {"turn_id": 84, "codes": ["press_for_reasoning"], "reasoning": "Teacher asks Viola to specify the nature of the comparison."}
+Output for Turn 86: {"turn_id": 86, "codes": ["challenge"], "reasoning": "Teacher pushes back — if the goal is helping people with anxiety, comparing negatively contradicts the purpose. Teacher challenges Viola to reconsider."}
+
+---
+
+### Example 6: Restate
+Context:
+[Turn 71] Gabriel: (speaks softly)
+>>> [Turn 72] Teacher: Yeah. Anyone else agree with that? Lynn, do you agree with that? <<<
+>>> [Turn 69] Teacher: What did he say? What did Gabriel say? <<<
+[Turn 70] Lynn: I didn't hear.
+>>> [Turn 71] Teacher: You didn't hear. Gabriel, what did you say? <<<
+
+Output for Turn 69: {"turn_id": 69, "codes": ["restate"], "reasoning": "Teacher asks Lynn to restate what Gabriel said, ensuring students listen to each other."}
+
+---
+
+### Example 7: Add on
+Context:
+[Turn 10] Student 4: Simple living.
+>>> [Turn 11] Teacher: Yeah, lessons, like a series of lessons. And, or basically like a class. So we're having a class on Saturdays. On what topic? What's the topic then? <<<
+[Turn 12] Student 5: No, I don't.
+
+Output: {"turn_id": 11, "codes": ["add_on"], "reasoning": "Teacher invites additional input — what is the topic of the course."}
+
+---
+
+### Example 8: No APT move (most common!)
+Context:
+[Turn 1] Ss: (chatting)
+>>> [Turn 2] Teacher: Okay, today we have two guests visiting us. <<<
+[Turn 3] Guest 1: So good morning, class.
+
+Output: {"turn_id": 2, "codes": [], "reasoning": "Classroom management/introduction. No APT move present."}
+
+---
+
+### Example 9: No APT move (content delivery)
+Context:
+>>> [Turn 17] Teacher: Okay, so before we start the topic today, I will ask you to do something here. Can you please scan the QR code? So as you can see appearance anxiety. Now I want you to think of one to two words that are the reasons why people have anxiety about their looks and their appearance. <<<
+
+Output: {"turn_id": 17, "codes": [], "reasoning": "Teacher is giving procedural instructions and setting up an activity. Not asking students to elaborate, reason, or respond to each other's ideas."}
+
+---
+
+### Example 10: Explain others
+Context:
+[Turn 14] Student C: I think there, George is going to the state school and then he's not going to be seeing Emily for a long time.
+>>> [Turn 15] Teacher: I like that. I like that. Who can rephrase what he said in your own words? Yeah? <<<
+[Turn 16] Student D: George needs to go to university and won't be seeing Emily for a long time.
+
+Output: {"turn_id": 15, "codes": ["explain_others"], "reasoning": "Teacher asks another student to rephrase/interpret what Student C said in their own words."}
