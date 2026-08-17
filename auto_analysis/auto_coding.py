@@ -1,34 +1,23 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
 # @Time         : 2026/8/17 10:59
-# @Description  : 自动编码：GPT 4o, 滑动窗口对目标进行编码，多轮投票后确定编码结果
+# @Description  : 自动编码：使用 Vertex AI / DeepSeek 等，滑动窗口对目标进行编码，多轮投票后确定编码结果
 
-import json
-import os
 import time
-
-from dotenv import load_dotenv
-from openai import OpenAI
 from collections import Counter
-from google.auth import default
-from google.auth.transport.requests import Request
+from auto_analysis import config
+from auto_analysis.utils import load_text_file, extract_json
 
-# 获取 Google Cloud 凭据和项目 ID
-credentials, project_id = default()
-credentials.refresh(Request())  # 刷新 token
-# 设置Vertex AI
-REGION = "us-central1"
-base_url = f"https://{REGION}-aiplatform.googleapis.com/v1beta1/projects/{project_id}/locations/{REGION}/endpoints/openapi"
-client = OpenAI(
-    base_url=base_url,
-    api_key=credentials.token,
-)
+# 初始化llm
+client = config.get_client()
+MODEL_NAME = config.get_model_name()
+USE_JSON_MODE = config.supports_json_mode()
 
-load_dotenv()
-client = OpenAI(api_key=os.getenv("VERTEX_API_KEY"))
+SYSTEM_PROMPT_PATH = "prompts/coded_prompt.txt"
+FEW_SHOT_EXAMPLES_PATH = "prompts/coded_examples.txt"
 
-SYSTEM_PROMPT = "../prompts/coded_prompt.txt"
-FEW_SHOT_EXAMPLES = "../prompts/coded_examples.txt"
+SYSTEM_PROMPT = load_text_file(SYSTEM_PROMPT_PATH)
+FEW_SHOT_EXAMPLES = load_text_file(FEW_SHOT_EXAMPLES_PATH)
 
 
 def build_context_window(transcript: list, target_idx: int,
@@ -65,7 +54,6 @@ def build_context_window(transcript: list, target_idx: int,
 def code_single_turn(transcript: list, target_idx: int,
                      temperature: float = 0.0) -> dict:
     """对单个教师话轮进行 APT 编码"""
-
     context = build_context_window(transcript, target_idx)
 
     user_prompt = f"""## CONTEXT:
@@ -75,25 +63,34 @@ def code_single_turn(transcript: list, target_idx: int,
                     Analyze the TARGET TURN (marked with >>>) above. 
                     Identify any APT moves present.
                     Remember: most teacher utterances contain NO APT moves.
-                    Output your analysis in JSON format:
-                    {{"turn_id": <number>, "codes": [...], "reasoning": "..."}}
+                    
+                    ## OUTPUT FORMAT:
+                    Return ONLY a valid JSON object (no text outside JSON):
+                    {{"turn_id": <number>, "codes": ["<code1>", "<code2>", ...], "reasoning": "..."}}
+                    If no APT moves are present, use an empty list: []
                     """
+    system_content = SYSTEM_PROMPT
+    if FEW_SHOT_EXAMPLES:
+        system_content += "\n\n" + FEW_SHOT_EXAMPLES
 
     messages = [
         {"role": "system", "content": SYSTEM_PROMPT + "\n\n" + FEW_SHOT_EXAMPLES},
         {"role": "user", "content": user_prompt}
     ]
 
-    response = client.chat.completions.create(
-        model="gpt-4o",
-        messages=messages,
-        temperature=temperature,
-        max_tokens=300,
-        response_format={"type": "json_object"}
-    )
+    # 构建请求参数
+    kwargs = {
+        "model": config.get_model_name(),
+        "messages": messages,
+        "temperature": temperature,
+    }
 
-    result = json.loads(response.choices[0].message.content)
-    return result
+    # 启用 JSON Mode (如果配置支持)
+    if config.supports_json_mode():
+        kwargs["response_format"] = {"type": "json_object"}
+
+    response = client.chat.completions.create(**kwargs)
+    return extract_json(response.choices[0].message.content)
 
 
 def code_with_voting(transcript: list, target_idx: int,

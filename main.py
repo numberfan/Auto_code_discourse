@@ -1,6 +1,8 @@
 import json
 import os
 
+import pandas as pd
+
 from auto_analysis.assess_func import evaluate_predictions, print_evaluation_report
 from auto_analysis.auto_coding import code_full_transcript
 from auto_analysis.data_clean_to_json import clean_excel_to_json
@@ -52,4 +54,9 @@ def auto_coding():
 
 
 if __name__ == '__main__':
-    auto_coding()
+    result = clean_excel_to_json(EXCEL_PATH, FILE_ID)
+    print("Matched code columns:", result["statistics"])  # 或单独打印 code distribution
+    print("First gold labels:", result["gold"][:5])
+
+
+    # auto_coding()

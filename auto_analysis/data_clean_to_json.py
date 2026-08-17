@@ -8,26 +8,67 @@ import pandas as pd
 import json
 import re
 
-# APT code 列名到标准化名称的映射
-CODE_COLUMN_MAP = {
-    "Say more": "say_more",
-    "Revoice": "revoice",
-    "Press for reasoning": "press_for_reasoning",
-    "Challenge": "challenge",
-    "Restate": "restate",
-    "Agree/Disagree": "agree_disagree",
-    "Add on": "add_on",
-    "Explain with others": "explain_others",
+# 标准编码及其可能的基础名称（列名清理后应匹配其中之一）
+CODE_BASE_NAMES = {
+    "say_more": ["say more"],
+    "revoice": ["revoice"],
+    "press_for_reasoning": ["press for reasoning"],
+    "challenge": ["challenge"],
+    "restate": ["restate"],
+    "agree_disagree": ["agree disagree", "agree/disagree"],
+    "add_on": ["add on"],
+    "explain_others": ["explain others", "explain with others"],
 }
+
+
+def clean_col_name(s: str) -> str:
+    """
+    清理列名，用于匹配：
+    - 去除括号及其内容
+    - 转小写
+    - 非字母字符替换为空格
+    - 合并多个空格
+    """
+    s = str(s).strip()
+    # 去括号内容
+    s = re.sub(r'\([^)]*\)', '', s)
+    s = s.lower()
+    # 除字母和空格外全部替换为空格
+    s = re.sub(r'[^a-z\s]', ' ', s)
+    # 合并多个空格
+    s = re.sub(r'\s+', ' ', s).strip()
+    return s
+
+
+def build_code_to_col_mapping(df_columns) -> dict:
+    """
+    根据列名模糊匹配，建立标准编码 -> 实际列名 的映射。
+    """
+    code_to_col = {}
+    for code, base_names in CODE_BASE_NAMES.items():
+        # 先清理所有基础名称
+        cleaned_bases = [clean_col_name(b) for b in base_names]
+        for col in df_columns:
+            cleaned_col = clean_col_name(col)
+            if cleaned_col in cleaned_bases:
+                code_to_col[code] = col
+                break
+    return code_to_col
 
 
 def clean_excel_to_json(filepath: str, file_id: str) -> dict:
     """将 Excel 文件转换为标准化 JSON"""
 
-    df = pd.read_excel(filepath)
+    # 使用第二行作为列名
+    df = pd.read_excel(filepath, header=1)
 
     # 标准化列名
     df.columns = [str(c).strip() for c in df.columns]
+
+    # 建立 code 到实际列的映射
+    code_to_col = build_code_to_col_mapping(df.columns)
+    # 可选：打印映射结果用于调试
+    print("Matched columns:", code_to_col)
 
     transcript = []
     gold_labels = []
@@ -50,15 +91,13 @@ def clean_excel_to_json(filepath: str, file_id: str) -> dict:
 
         # 提取 APT codes
         codes = []
-        for col_name, code_name in CODE_COLUMN_MAP.items():
-            # 模糊匹配列名（因为不同文件列名可能有细微差异）
-            matching_cols = [c for c in df.columns if code_name.replace("_", " ") in c.lower()
-                             or col_name.lower() in c.lower()]
-            for mc in matching_cols:
-                val = row.get(mc)
-                if pd.notna(val) and str(val).strip() == "1":
-                    codes.append(code_name)
-                    break
+        for code, col in code_to_col.items():
+            val = row.get(col)
+            if pd.notna(val):
+                val_str = str(val).strip()
+                # 兼容数字 1 / 1.0 和文本 "1"
+                if val_str in ("1", "1.0", "1.00"):
+                    codes.append(code)
 
         turn = {
             "turn_id": turn_id,
