@@ -1,0 +1,2451 @@
+{
+  "file_id": "chris_moon_v1",
+  "language": "en",
+  "total_turns": 244,
+  "teacher_turns": 121,
+  "transcript": [
+    {
+      "turn_id": 1,
+      "timestamp": "00:00-00:43",
+      "speaker": "Teacher",
+      "utterance": "Okay, we are recording. So, as you all recall, about two weeks ago we did a reading over Shep Kip Mei. Jayden, please sit down. What do you recall about that reading? What was it about? Amanda, do you recall anything? The reading that we did of Shep Kip Mei two weeks ago. Anyone else want to help her out? Do you remember Ryan? No?",
+      "is_teacher": true,
+      "word_count": 65
+    },
+    {
+      "turn_id": 2,
+      "timestamp": "00:45-00:53",
+      "speaker": "Ryan",
+      "utterance": "It is about something that was built after the squatter area was destroyed by fire.",
+      "is_teacher": false,
+      "word_count": 15
+    },
+    {
+      "turn_id": 3,
+      "timestamp": "00:53 – 01:07",
+      "speaker": "Teacher",
+      "utterance": "Yeah, it is about something that was built after the squatter area was destroyed by fire. Umm. What do you think about that William? About the government rebuilding afterwards, what are your thoughts?",
+      "is_teacher": true,
+      "word_count": 33
+    },
+    {
+      "turn_id": 4,
+      "timestamp": "01:07-01:09",
+      "speaker": "William",
+      "utterance": "It is pretty good, right?",
+      "is_teacher": false,
+      "word_count": 5
+    },
+    {
+      "turn_id": 5,
+      "timestamp": "01:09-01:13",
+      "speaker": "Teacher",
+      "utterance": "Good. Does anyone agree with him? That was a good thing to rebuild but they could do better.",
+      "is_teacher": true,
+      "word_count": 18
+    },
+    {
+      "turn_id": 6,
+      "timestamp": "01:13-01:15",
+      "speaker": "Student 1",
+      "utterance": "Yes.",
+      "is_teacher": false,
+      "word_count": 1
+    },
+    {
+      "turn_id": 7,
+      "timestamp": "01:16-01:23",
+      "speaker": "Teacher",
+      "utterance": "Is anyone disagreeing with him, maybe the government shouldn’t have rebuilt and should have used the land for something else?",
+      "is_teacher": true,
+      "word_count": 20
+    },
+    {
+      "turn_id": 8,
+      "timestamp": "01:34-01:38",
+      "speaker": "Student 2",
+      "utterance": "Yeah. (Inaudible)",
+      "is_teacher": false,
+      "word_count": 2
+    },
+    {
+      "turn_id": 9,
+      "timestamp": "01:38-01:41",
+      "speaker": "Teacher",
+      "utterance": "So you said they are for now, because… Because what? Maybe they are too reliant on government to provide",
+      "is_teacher": true,
+      "word_count": 19
+    },
+    {
+      "turn_id": 10,
+      "timestamp": "01:41-01:47",
+      "speaker": "Student 2",
+      "utterance": "(Inaudible)",
+      "is_teacher": false,
+      "word_count": 1
+    },
+    {
+      "turn_id": 11,
+      "timestamp": "01:47-01:53",
+      "speaker": "Teacher",
+      "utterance": "Okay. So, it is a huge liability. So what should the government have done instead? What do you think?",
+      "is_teacher": true,
+      "word_count": 19
+    },
+    {
+      "turn_id": 12,
+      "timestamp": "01:53-01:54",
+      "speaker": "Student 2",
+      "utterance": "What?",
+      "is_teacher": false,
+      "word_count": 1
+    },
+    {
+      "turn_id": 13,
+      "timestamp": "01:54-01:56",
+      "speaker": "Teacher",
+      "utterance": "What should the government have done instead of rebuilding?",
+      "is_teacher": true,
+      "word_count": 9
+    },
+    {
+      "turn_id": 14,
+      "timestamp": "01:57-02:08",
+      "speaker": "Student 2",
+      "utterance": "They should have rebuilt slopes. Umm. Slopes they could",
+      "is_teacher": false,
+      "word_count": 9
+    },
+    {
+      "turn_id": 15,
+      "timestamp": "02:08-02:23",
+      "speaker": "Teacher",
+      "utterance": "Okay. So good point. Good point. Does anyone else have any thought over the fire that devastated the area of Shek Kip Mei and the rebuilding of the settlement there? Isabelle?",
+      "is_teacher": true,
+      "word_count": 31
+    },
+    {
+      "turn_id": 16,
+      "timestamp": "02:23-02:44",
+      "speaker": "Isabelle",
+      "utterance": "(Inaudible)",
+      "is_teacher": false,
+      "word_count": 1
+    },
+    {
+      "turn_id": 17,
+      "timestamp": "02:44-02:56",
+      "speaker": "Teacher",
+      "utterance": "Does anyone else agree with her? Or disagree?",
+      "is_teacher": true,
+      "word_count": 8
+    },
+    {
+      "turn_id": 18,
+      "timestamp": "02:56-03:00",
+      "speaker": "Student 3",
+      "utterance": "I think, I think she made a really good point.",
+      "is_teacher": false,
+      "word_count": 10
+    },
+    {
+      "turn_id": 19,
+      "timestamp": "03:00-03:08",
+      "speaker": "Teacher",
+      "utterance": "So, let’s move on to the first place we visited. We visited Mei Ho House.",
+      "is_teacher": true,
+      "word_count": 15
+    },
+    {
+      "turn_id": 20,
+      "timestamp": "03:08-03:11",
+      "speaker": "Jay",
+      "utterance": "Yes, it’s now a hospital.",
+      "is_teacher": false,
+      "word_count": 5
+    },
+    {
+      "turn_id": 21,
+      "timestamp": "03:11-03:13",
+      "speaker": "Teacher",
+      "utterance": "It’s now a hospital. What else is it Jay?",
+      "is_teacher": true,
+      "word_count": 9
+    },
+    {
+      "turn_id": 22,
+      "timestamp": "03:13-03:14",
+      "speaker": "Jay",
+      "utterance": "It’s a museum.",
+      "is_teacher": false,
+      "word_count": 3
+    },
+    {
+      "turn_id": 23,
+      "timestamp": "03:14-03:18",
+      "speaker": "Teacher",
+      "utterance": "Good Jay, it’s a museum. What kind of things do they show in the house?",
+      "is_teacher": true,
+      "word_count": 15
+    },
+    {
+      "turn_id": 24,
+      "timestamp": "03:18-03:25",
+      "speaker": "Jay",
+      "utterance": "Famous, umm… It’s recorded.",
+      "is_teacher": false,
+      "word_count": 4
+    },
+    {
+      "turn_id": 25,
+      "timestamp": "03:26-03:29",
+      "speaker": "Teacher",
+      "utterance": "What kind of things do they show? Lynn, what kind of things do they show in the house?",
+      "is_teacher": true,
+      "word_count": 18
+    },
+    {
+      "turn_id": 26,
+      "timestamp": "03:30-03:35",
+      "speaker": "Lynn",
+      "utterance": "(Inaudible)",
+      "is_teacher": false,
+      "word_count": 1
+    },
+    {
+      "turn_id": 27,
+      "timestamp": "03:35-03:42",
+      "speaker": "Teacher",
+      "utterance": "Yeah, so it shows how different homes look in the past, different shops look in the past, how things were put together. Yes, Jay?",
+      "is_teacher": true,
+      "word_count": 24
+    },
+    {
+      "turn_id": 28,
+      "timestamp": "03:42-03:45",
+      "speaker": "Jay",
+      "utterance": "It shows what the kids play when they were young.",
+      "is_teacher": false,
+      "word_count": 10
+    },
+    {
+      "turn_id": 29,
+      "timestamp": "03:45-03:55",
+      "speaker": "Teacher",
+      "utterance": "It shows what the kids play when they were young, good. How is that different from what you play with now? How is it the same, how is it different from what you play with now?",
+      "is_teacher": true,
+      "word_count": 36
+    },
+    {
+      "turn_id": 30,
+      "timestamp": "03:55-04:07",
+      "speaker": "Jay",
+      "utterance": "(Inaudible)",
+      "is_teacher": false,
+      "word_count": 1
+    },
+    {
+      "turn_id": 31,
+      "timestamp": "04:07-04:14",
+      "speaker": "Teacher",
+      "utterance": "Okay.  How else did what you see in the museum compare to how you live now?",
+      "is_teacher": true,
+      "word_count": 16
+    },
+    {
+      "turn_id": 32,
+      "timestamp": "04:14-04:16",
+      "speaker": "Student 4",
+      "utterance": "They didn't have an iPad.",
+      "is_teacher": false,
+      "word_count": 5
+    },
+    {
+      "turn_id": 33,
+      "timestamp": "04:16-04:22",
+      "speaker": "Teacher",
+      "utterance": "They didn't have an iPad. That’s true. Andrew, what do you think?  How does what you saw in the museum compare to things now?",
+      "is_teacher": true,
+      "word_count": 24
+    },
+    {
+      "turn_id": 34,
+      "timestamp": "04:22-04:24",
+      "speaker": "Andrew",
+      "utterance": "Not much.",
+      "is_teacher": false,
+      "word_count": 2
+    },
+    {
+      "turn_id": 35,
+      "timestamp": "04:24-04:33",
+      "speaker": "Teacher",
+      "utterance": "The various exhibits you saw in the museum, say maybe one of the rooms, one of the houses.  How does that compare to, to now?",
+      "is_teacher": true,
+      "word_count": 25
+    },
+    {
+      "turn_id": 36,
+      "timestamp": "04:33-04:35",
+      "speaker": "Andrew",
+      "utterance": "They’re old.",
+      "is_teacher": false,
+      "word_count": 2
+    },
+    {
+      "turn_id": 37,
+      "timestamp": "04:35-04:38",
+      "speaker": "Teacher",
+      "utterance": "They’re old?  Well, remember, they're from 50, 60 years ago.",
+      "is_teacher": true,
+      "word_count": 10
+    },
+    {
+      "turn_id": 38,
+      "timestamp": "04:38-04:41",
+      "speaker": "Andrew",
+      "utterance": "That’s the reason why.",
+      "is_teacher": false,
+      "word_count": 4
+    },
+    {
+      "turn_id": 39,
+      "timestamp": "04:41-04:44",
+      "speaker": "Teacher",
+      "utterance": "That’s the reason why? They’re old",
+      "is_teacher": true,
+      "word_count": 6
+    },
+    {
+      "turn_id": 40,
+      "timestamp": "04:45-04:46",
+      "speaker": "Andrew",
+      "utterance": "Well, the system.",
+      "is_teacher": false,
+      "word_count": 3
+    },
+    {
+      "turn_id": 41,
+      "timestamp": "04:47-04:49",
+      "speaker": "Teacher",
+      "utterance": "The system?",
+      "is_teacher": true,
+      "word_count": 2
+    },
+    {
+      "turn_id": 42,
+      "timestamp": "04:50-04:54",
+      "speaker": "Andrew",
+      "utterance": "Nowadays, we have better lighting.",
+      "is_teacher": false,
+      "word_count": 5
+    },
+    {
+      "turn_id": 43,
+      "timestamp": "04:54-04:57",
+      "speaker": "Teacher",
+      "utterance": "Okay. What is better, what does better lighting? What difference does that make?",
+      "is_teacher": true,
+      "word_count": 13
+    },
+    {
+      "turn_id": 44,
+      "timestamp": "04:57-05:03",
+      "speaker": "Andrew",
+      "utterance": "So the students can study better.  It is brighter.",
+      "is_teacher": false,
+      "word_count": 9
+    },
+    {
+      "turn_id": 45,
+      "timestamp": "05:03-05:10",
+      "speaker": "Teacher",
+      "utterance": "It is brighter. They can study better. Do you remember where the students actually studied? Where was their school?",
+      "is_teacher": true,
+      "word_count": 19
+    },
+    {
+      "turn_id": 46,
+      "timestamp": "05:10-05:11",
+      "speaker": "Student 5",
+      "utterance": "Rooftop.",
+      "is_teacher": false,
+      "word_count": 1
+    },
+    {
+      "turn_id": 47,
+      "timestamp": "05:11-05:27",
+      "speaker": "Teacher",
+      "utterance": "Rooftop, good.  Uh, it was in the rooftop. Was there a cover on the roof? No? No. It didn't matter what the weather, they would be on the roof. Let's go back to the housing really quick.  So were the rooms say are bigger or smaller than what you're used to now?",
+      "is_teacher": true,
+      "word_count": 52
+    },
+    {
+      "turn_id": 48,
+      "timestamp": "05:27-05:29",
+      "speaker": "Student 5",
+      "utterance": "Smaller.",
+      "is_teacher": false,
+      "word_count": 1
+    },
+    {
+      "turn_id": 49,
+      "timestamp": "05:29-05:30",
+      "speaker": "Teacher",
+      "utterance": "Smaller. How much smaller.",
+      "is_teacher": true,
+      "word_count": 4
+    },
+    {
+      "turn_id": 50,
+      "timestamp": "05:30-05:31",
+      "speaker": "Student 5",
+      "utterance": "Very small.",
+      "is_teacher": false,
+      "word_count": 2
+    },
+    {
+      "turn_id": 51,
+      "timestamp": "05:31-05:43",
+      "speaker": "Teacher",
+      "utterance": "Very small and Bobo, what do you think about that when you saw those small rooms, knowing that maybe four or five people lived in that small little space?",
+      "is_teacher": true,
+      "word_count": 29
+    },
+    {
+      "turn_id": 52,
+      "timestamp": "05:43-05:45",
+      "speaker": "Bobo",
+      "utterance": "(Inaudible)",
+      "is_teacher": false,
+      "word_count": 1
+    },
+    {
+      "turn_id": 53,
+      "timestamp": "05:45-05:50",
+      "speaker": "Teacher",
+      "utterance": "Yeah? And how do you compare that to your own bedroom now?",
+      "is_teacher": true,
+      "word_count": 12
+    },
+    {
+      "turn_id": 54,
+      "timestamp": "05:53-05:54",
+      "speaker": "Bobo",
+      "utterance": "It’s much better.",
+      "is_teacher": false,
+      "word_count": 3
+    },
+    {
+      "turn_id": 55,
+      "timestamp": "05:54-05:57",
+      "speaker": "Teacher",
+      "utterance": "It’s much better now. Why is it better?",
+      "is_teacher": true,
+      "word_count": 8
+    },
+    {
+      "turn_id": 56,
+      "timestamp": "05:57-06:00",
+      "speaker": "Bobo",
+      "utterance": "Because, more space.",
+      "is_teacher": false,
+      "word_count": 3
+    },
+    {
+      "turn_id": 57,
+      "timestamp": "06:00-06:23",
+      "speaker": "Teacher",
+      "utterance": "Does anyone maybe disagree with her? Who thinks that it could have been better back then when you had less space? Anyone disagree?  So everyone agrees. Was there anything else in the exhibit there that caught your eye? Anything else that you saw that maybe stood out, that made you think about what things were like in the past?",
+      "is_teacher": true,
+      "word_count": 59
+    },
+    {
+      "turn_id": 58,
+      "timestamp": "06:23-06:28",
+      "speaker": "Student 6",
+      "utterance": "There was a big wooden barrel of rice instead of uh, plastic packet.",
+      "is_teacher": false,
+      "word_count": 13
+    },
+    {
+      "turn_id": 59,
+      "timestamp": "06:28-06:40",
+      "speaker": "Teacher",
+      "utterance": "Yeah, there's a big wooden barrel. We, Ryan, you mentioned water buckets. Um, what was key about the water buckets? Why did the tour guide point out the water buckets?",
+      "is_teacher": true,
+      "word_count": 30
+    },
+    {
+      "turn_id": 60,
+      "timestamp": "06:40-06:42",
+      "speaker": "Ryan",
+      "utterance": "I guess they were full of water.",
+      "is_teacher": false,
+      "word_count": 7
+    },
+    {
+      "turn_id": 61,
+      "timestamp": "06:42-06:47",
+      "speaker": "Teacher",
+      "utterance": "They were full of water.  But what, what did he have you do to them? What did he have you do with the buckets of water?",
+      "is_teacher": true,
+      "word_count": 26
+    },
+    {
+      "turn_id": 62,
+      "timestamp": "06:47-06:50",
+      "speaker": "Ryan",
+      "utterance": "He wanted us to carry the buckets?",
+      "is_teacher": false,
+      "word_count": 7
+    },
+    {
+      "turn_id": 63,
+      "timestamp": "06:50-06:52",
+      "speaker": "Teacher",
+      "utterance": "Why did he want you to carry the buckets?",
+      "is_teacher": true,
+      "word_count": 9
+    },
+    {
+      "turn_id": 64,
+      "timestamp": "06:54-06:56",
+      "speaker": "Ryan",
+      "utterance": "So I could drink.",
+      "is_teacher": false,
+      "word_count": 4
+    },
+    {
+      "turn_id": 65,
+      "timestamp": "06:56-07:01",
+      "speaker": "Teacher",
+      "utterance": "For those of you that did carry the buckets, were they light or were they heavy?",
+      "is_teacher": true,
+      "word_count": 16
+    },
+    {
+      "turn_id": 66,
+      "timestamp": "07:01-07:02",
+      "speaker": "Lynn",
+      "utterance": "Heavy",
+      "is_teacher": false,
+      "word_count": 1
+    },
+    {
+      "turn_id": 67,
+      "timestamp": "07:02-07:14",
+      "speaker": "Teacher",
+      "utterance": "Heavy. And why was he pointing out how heavy the water buckets were? Patricia, what do you think? Why was he pointing out how heavy the water buckets were?",
+      "is_teacher": true,
+      "word_count": 29
+    },
+    {
+      "turn_id": 68,
+      "timestamp": "07:14-07:17",
+      "speaker": "Patricia",
+      "utterance": "Because he had nothing to do.",
+      "is_teacher": false,
+      "word_count": 6
+    },
+    {
+      "turn_id": 69,
+      "timestamp": "07:17-07:20",
+      "speaker": "Teacher",
+      "utterance": "No, there was a specific reason.",
+      "is_teacher": true,
+      "word_count": 6
+    },
+    {
+      "turn_id": 70,
+      "timestamp": "07:20-07:23",
+      "speaker": "Patricia",
+      "utterance": "To show how hard their life was.",
+      "is_teacher": false,
+      "word_count": 7
+    },
+    {
+      "turn_id": 71,
+      "timestamp": "07:23-07:28",
+      "speaker": "Teacher",
+      "utterance": "And why would that make your life hard, just having heavy water buckets?",
+      "is_teacher": true,
+      "word_count": 13
+    },
+    {
+      "turn_id": 72,
+      "timestamp": "07:28-07:31",
+      "speaker": "Patricia",
+      "utterance": "Because it is heavy.",
+      "is_teacher": false,
+      "word_count": 4
+    },
+    {
+      "turn_id": 73,
+      "timestamp": "07:31-07:35",
+      "speaker": "Teacher",
+      "utterance": "Did they have water right there in their flats, in their homes?",
+      "is_teacher": true,
+      "word_count": 12
+    },
+    {
+      "turn_id": 74,
+      "timestamp": "07:35-07:37",
+      "speaker": "Patricia",
+      "utterance": "Oh, they need to travel with the buckets.",
+      "is_teacher": false,
+      "word_count": 8
+    },
+    {
+      "turn_id": 75,
+      "timestamp": "07:37-08:10",
+      "speaker": "Teacher",
+      "utterance": "That's right. They needed to travel with the buckets. The water wasn't there on site. They had to travel. Nowadays, if you need water, what do you do? You just go to your kitchen, go to your washroom, turn all the tap, and you have all the water you need.Was it like that back then? No, they had to travel to get their water. Um, the buckets were heavy, the water was heavy. So he wanted you to think about, about what, what did he want you to think about Ruby?",
+      "is_teacher": true,
+      "word_count": 91
+    },
+    {
+      "turn_id": 76,
+      "timestamp": "08:11-08:13",
+      "speaker": "Ruby",
+      "utterance": "Um, about how hard they were.",
+      "is_teacher": false,
+      "word_count": 6
+    },
+    {
+      "turn_id": 77,
+      "timestamp": "08:13-08:29",
+      "speaker": "Teacher",
+      "utterance": "Yeah. About how, how hard things were back then, about how difficult it was. You didn't just have instant water. You had to go walk and get water. Anything else that stood out about the, uh, about the museum? About some of the exhibits there? Yes.",
+      "is_teacher": true,
+      "word_count": 46
+    },
+    {
+      "turn_id": 78,
+      "timestamp": "08:29-08:35",
+      "speaker": "Student 6",
+      "utterance": "The game. Like the sports game, the exercise.",
+      "is_teacher": false,
+      "word_count": 8
+    },
+    {
+      "turn_id": 79,
+      "timestamp": "08:35-08:38",
+      "speaker": "Teacher",
+      "utterance": "And why did that stand out?",
+      "is_teacher": true,
+      "word_count": 6
+    },
+    {
+      "turn_id": 80,
+      "timestamp": "08:38-08:38",
+      "speaker": "Student 6",
+      "utterance": "Because I lost to you.",
+      "is_teacher": false,
+      "word_count": 5
+    },
+    {
+      "turn_id": 81,
+      "timestamp": "08:38-09:12",
+      "speaker": "Teacher",
+      "utterance": "That’s right. Why did you lose to me? Because I am faster than you. Now, it’s on record. It is being recorded.  So afterwards, after we went to the museum, he, we didn't go to it, but we went to go see the old north, uh, cabin magistrate. What kind of building is that? What was it used for?",
+      "is_teacher": true,
+      "word_count": 59
+    },
+    {
+      "turn_id": 82,
+      "timestamp": "09:12-09:13",
+      "speaker": "Student 7",
+      "utterance": "I think court",
+      "is_teacher": false,
+      "word_count": 3
+    },
+    {
+      "turn_id": 83,
+      "timestamp": "09:13-09:18",
+      "speaker": "Teacher",
+      "utterance": "Used for courts.  And, um, do you remember how many people they roughly saw there every day? He gave a number.",
+      "is_teacher": true,
+      "word_count": 21
+    },
+    {
+      "turn_id": 84,
+      "timestamp": "09:18-09:20",
+      "speaker": "Student 8",
+      "utterance": "800.",
+      "is_teacher": false,
+      "word_count": 1
+    },
+    {
+      "turn_id": 85,
+      "timestamp": "09:20-09:26",
+      "speaker": "Teacher",
+      "utterance": "Um, what were those people being seen for? What were the majority of the cases for?",
+      "is_teacher": true,
+      "word_count": 16
+    },
+    {
+      "turn_id": 86,
+      "timestamp": "09:26-09:29",
+      "speaker": "Student 8",
+      "utterance": "Child abuse.",
+      "is_teacher": false,
+      "word_count": 2
+    },
+    {
+      "turn_id": 87,
+      "timestamp": "09:29-09:36",
+      "speaker": "Teacher",
+      "utterance": "Not quite child abuse. Anything else? William do you remember? No?",
+      "is_teacher": true,
+      "word_count": 11
+    },
+    {
+      "turn_id": 88,
+      "timestamp": "09:36-09:39",
+      "speaker": "William",
+      "utterance": "No, why can't I remember?",
+      "is_teacher": false,
+      "word_count": 5
+    },
+    {
+      "turn_id": 89,
+      "timestamp": "09:39-10:21",
+      "speaker": "Teacher",
+      "utterance": "So, a couple of family problems, couple divorces but no he also indicated that a lot of the cases were for jaywalking. Just walking across the street, just cutting people off. That’s how they were able to see so many people in single day because there were lots of minor things that would give people tickets for and have them appear in court. But you're right there is also a lot of family issues, family courts. How does that, how does that make you feel, do we still have various family issues today? Yes? And what can we do to resolve these issues? Daniel?",
+      "is_teacher": true,
+      "word_count": 104
+    },
+    {
+      "turn_id": 90,
+      "timestamp": "10:21-10:23",
+      "speaker": "Daniel",
+      "utterance": "Family planning.",
+      "is_teacher": false,
+      "word_count": 2
+    },
+    {
+      "turn_id": 91,
+      "timestamp": "10:23-10:26",
+      "speaker": "Teacher",
+      "utterance": "Okay, what do you mean by family planning?",
+      "is_teacher": true,
+      "word_count": 8
+    },
+    {
+      "turn_id": 92,
+      "timestamp": "10:26-10:38",
+      "speaker": "Daniel",
+      "utterance": "It's like a lot of fun people might think they understand the issues that they have and, um, the system of how to build a family.",
+      "is_teacher": false,
+      "word_count": 26
+    },
+    {
+      "turn_id": 93,
+      "timestamp": "10:38-10:40",
+      "speaker": "Teacher",
+      "utterance": "Good good.",
+      "is_teacher": true,
+      "word_count": 2
+    },
+    {
+      "turn_id": 94,
+      "timestamp": "10:40-10:43",
+      "speaker": "Ethan",
+      "utterance": "That is not family planning.",
+      "is_teacher": false,
+      "word_count": 5
+    },
+    {
+      "turn_id": 95,
+      "timestamp": "10:43-10:51",
+      "speaker": "Teacher",
+      "utterance": "That's why I asked about it. Family planning encompasses a lot of different things and how would you rephrase that Ethan, what do you think family planning means?",
+      "is_teacher": true,
+      "word_count": 28
+    },
+    {
+      "turn_id": 96,
+      "timestamp": "10:51-11:00",
+      "speaker": "Ethan",
+      "utterance": "Family planning is like planning how many children you want to have. The thing you talked about was ,uh, marriage counselling.",
+      "is_teacher": false,
+      "word_count": 21
+    },
+    {
+      "turn_id": 97,
+      "timestamp": "11:00-11:10",
+      "speaker": "Teacher",
+      "utterance": "But that’s still planning. That’s still planning all the responsibilities. It’s not just one thing, it encompasses many different things. Would you agree Ethan?",
+      "is_teacher": true,
+      "word_count": 24
+    },
+    {
+      "turn_id": 98,
+      "timestamp": "11:00-11:03",
+      "speaker": "Ethan",
+      "utterance": "I would, yeah.",
+      "is_teacher": false,
+      "word_count": 3
+    },
+    {
+      "turn_id": 99,
+      "timestamp": "11:03-11:30",
+      "speaker": "Teacher",
+      "utterance": "You would agree with me that's fine. I don't know if we mentioned this but the building isn't being used now. So the government's no longer using the building, what do you think should happen to it? Any thoughts?",
+      "is_teacher": true,
+      "word_count": 39
+    },
+    {
+      "turn_id": 100,
+      "timestamp": "11:30-11:32",
+      "speaker": "Student 9",
+      "utterance": "Should be demolished.",
+      "is_teacher": false,
+      "word_count": 3
+    },
+    {
+      "turn_id": 101,
+      "timestamp": "1132:-11:38",
+      "speaker": "Teacher",
+      "utterance": "You think it should be demolished, you said that. Why should it be demolished?",
+      "is_teacher": true,
+      "word_count": 14
+    },
+    {
+      "turn_id": 102,
+      "timestamp": "11:38-11:40",
+      "speaker": "Student 9",
+      "utterance": "Because no one uses it.",
+      "is_teacher": false,
+      "word_count": 5
+    },
+    {
+      "turn_id": 103,
+      "timestamp": "11:40-11:42",
+      "speaker": "Teacher",
+      "utterance": "Jada what do you think should be done with the building?",
+      "is_teacher": true,
+      "word_count": 11
+    },
+    {
+      "turn_id": 104,
+      "timestamp": "11:42-11:51",
+      "speaker": "Jada",
+      "utterance": "Check it out, and try to build new places. So, there is eventual use.",
+      "is_teacher": false,
+      "word_count": 14
+    },
+    {
+      "turn_id": 105,
+      "timestamp": "11:51-12:00",
+      "speaker": "Teacher",
+      "utterance": "Okay, so when you say replace it with more residential buildings do you mean demolish it and build something new or maybe convert the building into residential?",
+      "is_teacher": true,
+      "word_count": 27
+    },
+    {
+      "turn_id": 106,
+      "timestamp": "12:00-12:02",
+      "speaker": "Jada",
+      "utterance": "Demolish it.",
+      "is_teacher": false,
+      "word_count": 2
+    },
+    {
+      "turn_id": 107,
+      "timestamp": "12:02-12:09",
+      "speaker": "Teacher",
+      "utterance": "Demolish it? Does anyone think they should do something besides demolishing it? Alyssa, what do you think should be done with the building?",
+      "is_teacher": true,
+      "word_count": 23
+    },
+    {
+      "turn_id": 108,
+      "timestamp": "12:09-12:16",
+      "speaker": "Alyssa",
+      "utterance": "They should like refurbish it in order to make it better.",
+      "is_teacher": false,
+      "word_count": 11
+    },
+    {
+      "turn_id": 109,
+      "timestamp": "12:16-12:22",
+      "speaker": "Teacher",
+      "utterance": "Make it better. So, if they were to refurbish would you want them to still use it as a court or something else?",
+      "is_teacher": true,
+      "word_count": 23
+    },
+    {
+      "turn_id": 110,
+      "timestamp": "12:22-12:27",
+      "speaker": "Alyssa",
+      "utterance": "Yeah, as a court.",
+      "is_teacher": false,
+      "word_count": 4
+    },
+    {
+      "turn_id": 111,
+      "timestamp": "12:27-12:35",
+      "speaker": "Teacher",
+      "utterance": "Court. So if they refurbished the building and if they didn't use it as a court, what else could they use it for?",
+      "is_teacher": true,
+      "word_count": 23
+    },
+    {
+      "turn_id": 112,
+      "timestamp": "12:35-12:36",
+      "speaker": "Patricia",
+      "utterance": "Supermarket.",
+      "is_teacher": false,
+      "word_count": 1
+    },
+    {
+      "turn_id": 113,
+      "timestamp": "12:36-12:42",
+      "speaker": "Teacher",
+      "utterance": "Supermarket? Do you think a supermarket is the best use for a historic building?",
+      "is_teacher": true,
+      "word_count": 14
+    },
+    {
+      "turn_id": 114,
+      "timestamp": "12:42-12:43",
+      "speaker": "Patricia",
+      "utterance": "Yes.",
+      "is_teacher": false,
+      "word_count": 1
+    },
+    {
+      "turn_id": 115,
+      "timestamp": "12:43-12:46",
+      "speaker": "Teacher",
+      "utterance": "Really? Why is that?",
+      "is_teacher": true,
+      "word_count": 4
+    },
+    {
+      "turn_id": 116,
+      "timestamp": "12:46-12:48",
+      "speaker": "Patricia",
+      "utterance": "It’s useful.",
+      "is_teacher": false,
+      "word_count": 2
+    },
+    {
+      "turn_id": 117,
+      "timestamp": "12:48-13:08",
+      "speaker": "Teacher",
+      "utterance": "Okay. So what you're trying to say is that the building needs to have some sort of use for the local community, right? Is that what you mean Patricia? What about a museum kind of like how the Mei Ho House was turned into a museum.",
+      "is_teacher": true,
+      "word_count": 46
+    },
+    {
+      "turn_id": 118,
+      "timestamp": "13:08-13:11",
+      "speaker": "Student 10",
+      "utterance": "We have too many museums.",
+      "is_teacher": false,
+      "word_count": 5
+    },
+    {
+      "turn_id": 119,
+      "timestamp": "13:11-13:16",
+      "speaker": "Teacher",
+      "utterance": "We have too many museums? Does Hong Kong have any other courthoses that are museums?",
+      "is_teacher": true,
+      "word_count": 15
+    },
+    {
+      "turn_id": 120,
+      "timestamp": "13:16-13:17",
+      "speaker": "Patricia",
+      "utterance": "Yes, yes.",
+      "is_teacher": false,
+      "word_count": 2
+    },
+    {
+      "turn_id": 121,
+      "timestamp": "13:17-13:18",
+      "speaker": "Teacher",
+      "utterance": "Really, where?",
+      "is_teacher": true,
+      "word_count": 2
+    },
+    {
+      "turn_id": 122,
+      "timestamp": "13:18-13:24",
+      "speaker": "Patricia",
+      "utterance": "I don’t know which one it is.",
+      "is_teacher": false,
+      "word_count": 7
+    },
+    {
+      "turn_id": 123,
+      "timestamp": "13:24-13:48",
+      "speaker": "Teacher",
+      "utterance": "Okay. Don’t need another museum. So, it seems that a majority of you think that the building will be better served to maybe be demolished and be replaced with something that's more beneficial for the community. Is that kind of what you're, what you're in agreement on? Okay. Lynn, do you think anything differently?",
+      "is_teacher": true,
+      "word_count": 54
+    },
+    {
+      "turn_id": 124,
+      "timestamp": "13:48-14:07",
+      "speaker": "Lynn",
+      "utterance": "I think maybe turn it into a public entertainment area like playground or workshops. And make it something more beneficial. So the mental problems are also solved.",
+      "is_teacher": false,
+      "word_count": 27
+    },
+    {
+      "turn_id": 125,
+      "timestamp": "14:07-14:20",
+      "speaker": "Teacher",
+      "utterance": "Okay, so um, a multi-purpose space. Alright, good. Where did we go after the magistrate, where did we go to see, walk by?",
+      "is_teacher": true,
+      "word_count": 23
+    },
+    {
+      "turn_id": 126,
+      "timestamp": "14:20-14:21",
+      "speaker": "Student 11",
+      "utterance": "Snake",
+      "is_teacher": false,
+      "word_count": 1
+    },
+    {
+      "turn_id": 127,
+      "timestamp": "14:21-14:22",
+      "speaker": "Teacher",
+      "utterance": "Uh, before that.",
+      "is_teacher": true,
+      "word_count": 3
+    },
+    {
+      "turn_id": 128,
+      "timestamp": "14:22-14:23",
+      "speaker": "Student 11",
+      "utterance": "A mango shop.",
+      "is_teacher": false,
+      "word_count": 3
+    },
+    {
+      "turn_id": 129,
+      "timestamp": "14:23-14:38",
+      "speaker": "Teacher",
+      "utterance": "Ohh, we saw the mango shop but that wasn't where we were going before the tour. We saw the pawn shop, what's the importance of the pawn shop?",
+      "is_teacher": true,
+      "word_count": 28
+    },
+    {
+      "turn_id": 130,
+      "timestamp": "14:38-14:41",
+      "speaker": "Student 11",
+      "utterance": "It is supposed to bolster the economy.",
+      "is_teacher": false,
+      "word_count": 7
+    },
+    {
+      "turn_id": 131,
+      "timestamp": "14:41-14:43",
+      "speaker": "Teacher",
+      "utterance": "And how does it bolster the economy?",
+      "is_teacher": true,
+      "word_count": 7
+    },
+    {
+      "turn_id": 132,
+      "timestamp": "14:43-14:55",
+      "speaker": "Student 11",
+      "utterance": "People are investing or pawning their items and many people enjoy pawning.",
+      "is_teacher": false,
+      "word_count": 12
+    },
+    {
+      "turn_id": 133,
+      "timestamp": "14:55-15:08",
+      "speaker": "Teacher",
+      "utterance": "Okay and do we still use a lot of pawn shops now? No, maybe? Why not? Do you know why we don't really use a lot of pawn shops anyone else know why?",
+      "is_teacher": true,
+      "word_count": 33
+    },
+    {
+      "turn_id": 134,
+      "timestamp": "15:08-15:10",
+      "speaker": "Student 11",
+      "utterance": "We have banks           .",
+      "is_teacher": false,
+      "word_count": 4
+    },
+    {
+      "turn_id": 135,
+      "timestamp": "15:10-15:13",
+      "speaker": "Teacher",
+      "utterance": "We have banks, and what do banks do for us?",
+      "is_teacher": true,
+      "word_count": 10
+    },
+    {
+      "turn_id": 136,
+      "timestamp": "15:13-15:16",
+      "speaker": "Student 11",
+      "utterance": "They give us loans.",
+      "is_teacher": false,
+      "word_count": 4
+    },
+    {
+      "turn_id": 137,
+      "timestamp": "15:16-15:49",
+      "speaker": "Teacher",
+      "utterance": "Loans. Do you agree with that Jessica? What do you agree with? No, what he's saying is that with a lot of the banks, now banks are able to give out personal loans. Previously with the pawn shop you would need to do, what, just ask for money, and they give it to you? No, items. Do you agree with that Ethan, that all you have to do is give items in the pawn shop and they give you money? What if you need more money?",
+      "is_teacher": true,
+      "word_count": 86
+    },
+    {
+      "turn_id": 138,
+      "timestamp": "15:50-15:53",
+      "speaker": "Student 12",
+      "utterance": "Give more items.",
+      "is_teacher": false,
+      "word_count": 3
+    },
+    {
+      "turn_id": 139,
+      "timestamp": "15:53-15:57",
+      "speaker": "Teacher",
+      "utterance": "What do you do if you cannot pay back the items?",
+      "is_teacher": true,
+      "word_count": 11
+    },
+    {
+      "turn_id": 140,
+      "timestamp": "15:57-16:02",
+      "speaker": "Student 12",
+      "utterance": "The items are gone.",
+      "is_teacher": false,
+      "word_count": 4
+    },
+    {
+      "turn_id": 141,
+      "timestamp": "16:02-16:24",
+      "speaker": "Teacher",
+      "utterance": "Pawn shop would sell your items try to refute what their loss is. Nowadays people don't have to do that, they can just go to a bank and request a loan. The bank can look at your credit history and decide whether or not to give you money. With it so easy to give money, to get money from the bank our pawn shops still needed now? Yes, why is that?",
+      "is_teacher": true,
+      "word_count": 71
+    },
+    {
+      "turn_id": 142,
+      "timestamp": "16:24-16:35",
+      "speaker": "Alyssa",
+      "utterance": "Um, because there is a process… (inaudible)",
+      "is_teacher": false,
+      "word_count": 7
+    },
+    {
+      "turn_id": 143,
+      "timestamp": "16:35-16:45",
+      "speaker": "Teacher",
+      "utterance": "Uh, I heard some people say no, that pawn shops aren't needed. Uh, Jayden, do you think they're needed?",
+      "is_teacher": true,
+      "word_count": 19
+    },
+    {
+      "turn_id": 144,
+      "timestamp": "16:43-16:45",
+      "speaker": "Jayden",
+      "utterance": "No.",
+      "is_teacher": false,
+      "word_count": 1
+    },
+    {
+      "turn_id": 145,
+      "timestamp": "16:45-16:47",
+      "speaker": "Teacher",
+      "utterance": "No? Why not?",
+      "is_teacher": true,
+      "word_count": 3
+    },
+    {
+      "turn_id": 146,
+      "timestamp": "16:47-16:50",
+      "speaker": "Jayden",
+      "utterance": "There is no one using them.",
+      "is_teacher": false,
+      "word_count": 6
+    },
+    {
+      "turn_id": 147,
+      "timestamp": "16:50-16:56",
+      "speaker": "Teacher",
+      "utterance": "There's no one in them. Do you know anyone at all who may have used a pawn shop? No. So are you trying to say that they're old and antiquated?",
+      "is_teacher": true,
+      "word_count": 30
+    },
+    {
+      "turn_id": 148,
+      "timestamp": "16:56-16:57",
+      "speaker": "Jayden",
+      "utterance": "Yes",
+      "is_teacher": false,
+      "word_count": 1
+    },
+    {
+      "turn_id": 149,
+      "timestamp": "16:57-17:07",
+      "speaker": "Teacher",
+      "utterance": "Yes. Does anyone else agree with that? They're, uh, a leftover shop, a leftover part of Hong Kong that's no longer necessary. I agree. Do you agree with that, Clarence?",
+      "is_teacher": true,
+      "word_count": 30
+    },
+    {
+      "turn_id": 150,
+      "timestamp": "17:07-17:08",
+      "speaker": "Clarence",
+      "utterance": "Yes.",
+      "is_teacher": false,
+      "word_count": 1
+    },
+    {
+      "turn_id": 151,
+      "timestamp": "17:08-17:10",
+      "speaker": "Teacher",
+      "utterance": "What specifically do you agree with?",
+      "is_teacher": true,
+      "word_count": 6
+    },
+    {
+      "turn_id": 152,
+      "timestamp": "17:10-17:24",
+      "speaker": "Clarence",
+      "utterance": "I like, I believe, like, not that you spoke about banks right now, it's more convenient. It's more clear like as. He clearly stated that how you should do stuff, but pawn shops have random price for you to buy the same thing,",
+      "is_teacher": false,
+      "word_count": 43
+    },
+    {
+      "turn_id": 153,
+      "timestamp": "17:24-17:33",
+      "speaker": "Teacher",
+      "utterance": "Okay, so what you're saying is with banks maybe you have more security?  Okay. And pawn shops, it'll be different depending on what shop you go to.",
+      "is_teacher": true,
+      "word_count": 27
+    },
+    {
+      "turn_id": 154,
+      "timestamp": "17:33-17:44",
+      "speaker": "Phillip",
+      "utterance": "I disagree because I think with  the current rate of inflation, your money is probably not worth the same thing.",
+      "is_teacher": false,
+      "word_count": 20
+    },
+    {
+      "turn_id": 155,
+      "timestamp": "17:44-17:45",
+      "speaker": "Ethan",
+      "utterance": "That’s so cool.",
+      "is_teacher": false,
+      "word_count": 3
+    },
+    {
+      "turn_id": 156,
+      "timestamp": "17:45-17:47",
+      "speaker": "Teacher",
+      "utterance": "You think that’s cool Ethan? Why do you think it’s cool?",
+      "is_teacher": true,
+      "word_count": 11
+    },
+    {
+      "turn_id": 157,
+      "timestamp": "17:47-17:52",
+      "speaker": "Ethan",
+      "utterance": "He expressed amazing knowledge to the entire class.",
+      "is_teacher": false,
+      "word_count": 8
+    },
+    {
+      "turn_id": 158,
+      "timestamp": "17:52-18:!3",
+      "speaker": "Teacher",
+      "utterance": "Okay, so as the guy pointed out, the pawn shop was an older establishment, an older kind of business that people don't really use anymore, they are  gravitating towards banks. After the pawn shop, we went to go see the Kung Wo Beancurd Factory.  What was unique about this place?",
+      "is_teacher": true,
+      "word_count": 50
+    },
+    {
+      "turn_id": 159,
+      "timestamp": "18:13-18:17",
+      "speaker": "Selena",
+      "utterance": "It was a shop",
+      "is_teacher": false,
+      "word_count": 4
+    },
+    {
+      "turn_id": 160,
+      "timestamp": "18:17-18:24",
+      "speaker": "Teacher",
+      "utterance": "What kind of shop was it? Factory, behind it. There was a factory behind the shop. What did the shop do specifically?",
+      "is_teacher": true,
+      "word_count": 22
+    },
+    {
+      "turn_id": 161,
+      "timestamp": "18:24-18:26",
+      "speaker": "Phillip",
+      "utterance": "Tofu.",
+      "is_teacher": false,
+      "word_count": 1
+    },
+    {
+      "turn_id": 162,
+      "timestamp": "18:26-18:29",
+      "speaker": "Teacher",
+      "utterance": "Tofu. Why was this unique?",
+      "is_teacher": true,
+      "word_count": 5
+    },
+    {
+      "turn_id": 163,
+      "timestamp": "18:29-18:36",
+      "speaker": "Phillip",
+      "utterance": "(inaudible)",
+      "is_teacher": false,
+      "word_count": 1
+    },
+    {
+      "turn_id": 164,
+      "timestamp": "18:36-18:48",
+      "speaker": "Teacher",
+      "utterance": "Okay, so can you maybe add on that? Selena, you said there aren't many shops that have a factory behind it. What else makes it unique?",
+      "is_teacher": true,
+      "word_count": 26
+    },
+    {
+      "turn_id": 165,
+      "timestamp": "18:48-18:49",
+      "speaker": "Selena",
+      "utterance": "I don't know.",
+      "is_teacher": false,
+      "word_count": 3
+    },
+    {
+      "turn_id": 166,
+      "timestamp": "18:49-18:53",
+      "speaker": "Teacher",
+      "utterance": "Was there anything in particular that you liked about the shop?",
+      "is_teacher": true,
+      "word_count": 11
+    },
+    {
+      "turn_id": 167,
+      "timestamp": "18:53-18:56",
+      "speaker": "Ethan",
+      "utterance": "I like when Mr. Moon bought me some, uh, drinks.",
+      "is_teacher": false,
+      "word_count": 10
+    },
+    {
+      "turn_id": 168,
+      "timestamp": "18:56-18:59",
+      "speaker": "Selena",
+      "utterance": "I agree.",
+      "is_teacher": false,
+      "word_count": 2
+    },
+    {
+      "turn_id": 169,
+      "timestamp": "18:59-19:08",
+      "speaker": "Teacher",
+      "utterance": "So something unique about the shop is that, is this a chain run store that's owned by a corporation or is it a small local business?",
+      "is_teacher": true,
+      "word_count": 26
+    },
+    {
+      "turn_id": 170,
+      "timestamp": "19:08-19:11",
+      "speaker": "Phillip",
+      "utterance": "No, it's small. Small local business.",
+      "is_teacher": false,
+      "word_count": 6
+    },
+    {
+      "turn_id": 171,
+      "timestamp": "19:11-19:21",
+      "speaker": "Teacher",
+      "utterance": "Is that a good thing or a bad thing? (inaudible)  You didn't control the quality. Uh, what else is good about the small local business?",
+      "is_teacher": true,
+      "word_count": 25
+    },
+    {
+      "turn_id": 172,
+      "timestamp": "19:21-19:24",
+      "speaker": "Phillip",
+      "utterance": "There is, uh, there is more competition.",
+      "is_teacher": false,
+      "word_count": 7
+    },
+    {
+      "turn_id": 173,
+      "timestamp": "19:24-19:26",
+      "speaker": "Teacher",
+      "utterance": "More competition. How so?",
+      "is_teacher": true,
+      "word_count": 4
+    },
+    {
+      "turn_id": 174,
+      "timestamp": "19:26-19:51",
+      "speaker": "Phillip",
+      "utterance": "Uh, because everything is just, all the store has that, uh, that company can control whatever prices, uh, to sell for all of their products.  These companies start and also keep things at a reasonable price.",
+      "is_teacher": false,
+      "word_count": 36
+    },
+    {
+      "turn_id": 175,
+      "timestamp": "19:51-20:03",
+      "speaker": "Teacher",
+      "utterance": "Good. Good. Does anyone else have anything to add on to that? Also, with a small local business, a lot of the money you spend in the shop doesn't go somewhere else. Where does it usually stay?",
+      "is_teacher": true,
+      "word_count": 37
+    },
+    {
+      "turn_id": 176,
+      "timestamp": "20:04-20:08",
+      "speaker": "Jayden",
+      "utterance": "Stays with the business owners?",
+      "is_teacher": false,
+      "word_count": 5
+    },
+    {
+      "turn_id": 177,
+      "timestamp": "20:08-20:12",
+      "speaker": "Teacher",
+      "utterance": "It stays with the business owners within the community. And then what do they do with that money?",
+      "is_teacher": true,
+      "word_count": 18
+    },
+    {
+      "turn_id": 178,
+      "timestamp": "20:12-20:13",
+      "speaker": "Jayden",
+      "utterance": "They spend it in the community",
+      "is_teacher": false,
+      "word_count": 6
+    },
+    {
+      "turn_id": 179,
+      "timestamp": "20:13-20:25",
+      "speaker": "Teacher",
+      "utterance": "They spend it in the community. Good job. How would say the beancurd store compared to a shop flight? Starbucks. What would you prefer?",
+      "is_teacher": true,
+      "word_count": 24
+    },
+    {
+      "turn_id": 180,
+      "timestamp": "20:25-20.28",
+      "speaker": "Jayden",
+      "utterance": "Starbucks, because it has wifi.",
+      "is_teacher": false,
+      "word_count": 5
+    },
+    {
+      "turn_id": 181,
+      "timestamp": "20:28-20:51",
+      "speaker": "Teacher",
+      "utterance": "You said wifi. How do you know the bean card shop didn't have wifi? Did you ask?  so do you tend to enjoy, um, maybe modern or, um, corporate stores or the small, local, traditional stores? Which do you prefer, Bobo?",
+      "is_teacher": true,
+      "word_count": 41
+    },
+    {
+      "turn_id": 182,
+      "timestamp": "20:51-20:53",
+      "speaker": "Bobo",
+      "utterance": "The modern one.",
+      "is_teacher": false,
+      "word_count": 3
+    },
+    {
+      "turn_id": 183,
+      "timestamp": "20:53-20:55",
+      "speaker": "Teacher",
+      "utterance": "The modern one. Why is that?",
+      "is_teacher": true,
+      "word_count": 6
+    },
+    {
+      "turn_id": 184,
+      "timestamp": "20:58-21:01",
+      "speaker": "Bobo",
+      "utterance": "Because it’s less crowded.",
+      "is_teacher": false,
+      "word_count": 4
+    },
+    {
+      "turn_id": 185,
+      "timestamp": "21:02-21:05",
+      "speaker": "Teacher",
+      "utterance": "Less crowded, why are they less crowded?",
+      "is_teacher": true,
+      "word_count": 7
+    },
+    {
+      "turn_id": 186,
+      "timestamp": "21:05-21:07",
+      "speaker": "Bobo",
+      "utterance": "They’re bigger.",
+      "is_teacher": false,
+      "word_count": 2
+    },
+    {
+      "turn_id": 187,
+      "timestamp": "21:07-21:24",
+      "speaker": "Teacher",
+      "utterance": "Um, does that make them better, bigger, better? Do you agree with that, Skyler, that the modern stores are bigger, less crowded, therefore they're better, or perhaps maybe the smaller local stores are better. What do you agree with?",
+      "is_teacher": true,
+      "word_count": 39
+    },
+    {
+      "turn_id": 188,
+      "timestamp": "21:24-21:26",
+      "speaker": "Skyler",
+      "utterance": "I think smaller.",
+      "is_teacher": false,
+      "word_count": 3
+    },
+    {
+      "turn_id": 189,
+      "timestamp": "21:26-21:29",
+      "speaker": "Teacher",
+      "utterance": "You think the smaller ones, and why is that?",
+      "is_teacher": true,
+      "word_count": 9
+    },
+    {
+      "turn_id": 190,
+      "timestamp": "21:29-21:30",
+      "speaker": "Skylar",
+      "utterance": "I don’t know.",
+      "is_teacher": false,
+      "word_count": 3
+    },
+    {
+      "turn_id": 191,
+      "timestamp": "21:41-22:05",
+      "speaker": "Teacher",
+      "utterance": "Okay. Um, many, many years ago most of the shops in Hong Kong used to be small, local shops like this. A lot of the economy of Hong Kong was built on finance and businesses through these small local shops. Now, as more and more of these local shops are being replaced, do you think Hong Kong is losing some of its character? Losing what makes it unique?",
+      "is_teacher": true,
+      "word_count": 68
+    },
+    {
+      "turn_id": 192,
+      "timestamp": "22:05-22:06",
+      "speaker": "Phillip",
+      "utterance": "Yes.",
+      "is_teacher": false,
+      "word_count": 1
+    },
+    {
+      "turn_id": 193,
+      "timestamp": "22:06-22:26",
+      "speaker": "Teacher",
+      "utterance": "Yes. Then. What should you do? Should you preserve these local shops? Bobo just said that the bigger, better modern corporate stores are are better. So if the small local shops give us our character, how do we rectify that in terms of which we support?",
+      "is_teacher": true,
+      "word_count": 46
+    },
+    {
+      "turn_id": 194,
+      "timestamp": "22:26-22:27",
+      "speaker": "Phillip",
+      "utterance": "We donate money.",
+      "is_teacher": false,
+      "word_count": 3
+    },
+    {
+      "turn_id": 195,
+      "timestamp": "22:27-22:32",
+      "speaker": "Teacher",
+      "utterance": "How do you donate money to a shop?",
+      "is_teacher": true,
+      "word_count": 8
+    },
+    {
+      "turn_id": 196,
+      "timestamp": "22:32-22:35",
+      "speaker": "Phillip",
+      "utterance": "I buy things from them.",
+      "is_teacher": false,
+      "word_count": 5
+    },
+    {
+      "turn_id": 197,
+      "timestamp": "22:35-22:51",
+      "speaker": "Teacher",
+      "utterance": "Good. You go and buy things, you support them. You go and spend money. If there's a shop you care about and you want it to stay local, you want it to exist, you need to go and support it. Uh, what other kinds of shops did we see along the tour?",
+      "is_teacher": true,
+      "word_count": 52
+    },
+    {
+      "turn_id": 198,
+      "timestamp": "22:51-22:52",
+      "speaker": "Amanda",
+      "utterance": "Toy Street",
+      "is_teacher": false,
+      "word_count": 2
+    },
+    {
+      "turn_id": 199,
+      "timestamp": "22:52-23:11",
+      "speaker": "Teacher",
+      "utterance": "What was toy street called? What was the name of the street?  I don't think it was that specific street. I think it was, uh, what was it? Fuk Wing Street. Is that the name of the street? With the all the toys. What was special about that street?",
+      "is_teacher": true,
+      "word_count": 49
+    },
+    {
+      "turn_id": 200,
+      "timestamp": "23:11-23:14",
+      "speaker": "Amanda",
+      "utterance": "Many toys.",
+      "is_teacher": false,
+      "word_count": 2
+    },
+    {
+      "turn_id": 201,
+      "timestamp": "23:14-23:16",
+      "speaker": "Teacher",
+      "utterance": "Many toys. And many, many, what?",
+      "is_teacher": true,
+      "word_count": 6
+    },
+    {
+      "turn_id": 202,
+      "timestamp": "23:16-23:17",
+      "speaker": "Amanda",
+      "utterance": "Many cats.",
+      "is_teacher": false,
+      "word_count": 2
+    },
+    {
+      "turn_id": 203,
+      "timestamp": "23:17-23:28",
+      "speaker": "Teacher",
+      "utterance": "Many cats, many shops. Were all those again, were they local shops or were they main brand, big mega shops.",
+      "is_teacher": true,
+      "word_count": 20
+    },
+    {
+      "turn_id": 204,
+      "timestamp": "23:28-23:30",
+      "speaker": "Amanda",
+      "utterance": "Small local shops.",
+      "is_teacher": false,
+      "word_count": 3
+    },
+    {
+      "turn_id": 205,
+      "timestamp": "23:30-23:37",
+      "speaker": "Teacher",
+      "utterance": "Do you enjoy shopping in those, Amanda, or do you enjoy the bigger, more modern stores?",
+      "is_teacher": true,
+      "word_count": 16
+    },
+    {
+      "turn_id": 206,
+      "timestamp": "23:37-23:43",
+      "speaker": "Amanda",
+      "utterance": "I mean, I like shopping in the local markets.",
+      "is_teacher": false,
+      "word_count": 9
+    },
+    {
+      "turn_id": 207,
+      "timestamp": "23:43-23:44",
+      "speaker": "Teacher",
+      "utterance": "Why is that?",
+      "is_teacher": true,
+      "word_count": 3
+    },
+    {
+      "turn_id": 208,
+      "timestamp": "23:44-23:49",
+      "speaker": "Amanda",
+      "utterance": "Because they usually have, um, they’re cheaper.",
+      "is_teacher": false,
+      "word_count": 7
+    },
+    {
+      "turn_id": 209,
+      "timestamp": "23:49-23:54",
+      "speaker": "Teacher",
+      "utterance": "Cheaper.  What are you shopping in the shops on the side of the street or the market stall in the middle of the street?",
+      "is_teacher": true,
+      "word_count": 24
+    },
+    {
+      "turn_id": 210,
+      "timestamp": "23:54-23:55",
+      "speaker": "Amanda",
+      "utterance": "Both.",
+      "is_teacher": false,
+      "word_count": 1
+    },
+    {
+      "turn_id": 211,
+      "timestamp": "23:55-24:01",
+      "speaker": "Teacher",
+      "utterance": "Both? Which of those do you prefer? The shops or the stalls?",
+      "is_teacher": true,
+      "word_count": 12
+    },
+    {
+      "turn_id": 212,
+      "timestamp": "24:01-24:03",
+      "speaker": "Amanda",
+      "utterance": "Uh, stalls.",
+      "is_teacher": false,
+      "word_count": 2
+    },
+    {
+      "turn_id": 213,
+      "timestamp": "24:03-24:08",
+      "speaker": "Teacher",
+      "utterance": "What about you, which do you prefer?",
+      "is_teacher": true,
+      "word_count": 7
+    },
+    {
+      "turn_id": 214,
+      "timestamp": "24:08-24:09",
+      "speaker": "Selena",
+      "utterance": "Shops.",
+      "is_teacher": false,
+      "word_count": 1
+    },
+    {
+      "turn_id": 215,
+      "timestamp": "24:09-24:12",
+      "speaker": "Teacher",
+      "utterance": "Okay, so why do you like the shops and Amanda? Why do you like the stalls?",
+      "is_teacher": true,
+      "word_count": 16
+    },
+    {
+      "turn_id": 216,
+      "timestamp": "24:12-24:17",
+      "speaker": "Amanda",
+      "utterance": "I like the stalls because we can bargain.",
+      "is_teacher": false,
+      "word_count": 8
+    },
+    {
+      "turn_id": 217,
+      "timestamp": "24:17-24:20",
+      "speaker": "Teacher",
+      "utterance": "Okay, can you bargain in the shops then?",
+      "is_teacher": true,
+      "word_count": 8
+    },
+    {
+      "turn_id": 218,
+      "timestamp": "24:20-24:26",
+      "speaker": "Selena",
+      "utterance": "(inaudible)",
+      "is_teacher": false,
+      "word_count": 1
+    },
+    {
+      "turn_id": 219,
+      "timestamp": "24:26-24:52",
+      "speaker": "Teacher",
+      "utterance": "Okay, so Toy Street was just one of many streets in the area. There were also streets that had fashion, clothing, merchandise. Also streets that, uh, had, um, machinery, drills, things like that. What do you think about these open markets when compared to a mall, which is better, Phillip? Which one do you think is better?",
+      "is_teacher": true,
+      "word_count": 57
+    },
+    {
+      "turn_id": 220,
+      "timestamp": "24:52-24:54",
+      "speaker": "Phillip",
+      "utterance": "Between what?",
+      "is_teacher": false,
+      "word_count": 2
+    },
+    {
+      "turn_id": 221,
+      "timestamp": "24:54-24:58",
+      "speaker": "Teacher",
+      "utterance": "Between the open market site we visited or a modern mall.",
+      "is_teacher": true,
+      "word_count": 11
+    },
+    {
+      "turn_id": 222,
+      "timestamp": "24:59-25:11",
+      "speaker": "Phillip",
+      "utterance": "I think the markets, because in the modern mall, uh, like they said you can bargain price. But in the markets you probably get scammed",
+      "is_teacher": false,
+      "word_count": 25
+    },
+    {
+      "turn_id": 223,
+      "timestamp": "25:13-25:36",
+      "speaker": "Teacher",
+      "utterance": "Why is that funny, saying that you might get scammed?  It's true. It's negative, but it's true.  So maybe you have more security in the bigger malls, but sometimes better deals at the market. There's just more risk involved. And what do you…",
+      "is_teacher": true,
+      "word_count": 43
+    },
+    {
+      "turn_id": 224,
+      "timestamp": "25:36-25:38",
+      "speaker": "Phillip",
+      "utterance": "High reward.",
+      "is_teacher": false,
+      "word_count": 2
+    },
+    {
+      "turn_id": 225,
+      "timestamp": "25:38-25:55",
+      "speaker": "Teacher",
+      "utterance": "Yeah, high risk, high reward. So is at times risk worth it? Sometimes. All right, good. Um, before we move on, what was your favorite part of the tour? Um, let's see.  Kayden, what was your favorite part of the tour? What did you enjoy the most?",
+      "is_teacher": true,
+      "word_count": 47
+    },
+    {
+      "turn_id": 226,
+      "timestamp": "25:55-26:01",
+      "speaker": "Kayden",
+      "utterance": "Uh, such a good question. A bit boring.",
+      "is_teacher": false,
+      "word_count": 8
+    },
+    {
+      "turn_id": 227,
+      "timestamp": "26:01-26:06",
+      "speaker": "Teacher",
+      "utterance": "You thought it was a bit boring. What could have made it better? Why was it boring?",
+      "is_teacher": true,
+      "word_count": 17
+    },
+    {
+      "turn_id": 228,
+      "timestamp": "26:06-26:08",
+      "speaker": "Kayden",
+      "utterance": "I don’t know.",
+      "is_teacher": false,
+      "word_count": 3
+    },
+    {
+      "turn_id": 229,
+      "timestamp": "26:08-26:17",
+      "speaker": "Teacher",
+      "utterance": "You didn't know the stuff. So what could have made the tour better? What if I had revise?",
+      "is_teacher": true,
+      "word_count": 18
+    },
+    {
+      "turn_id": 230,
+      "timestamp": "26:17-26:19",
+      "speaker": "Kayden",
+      "utterance": "If I had revised.",
+      "is_teacher": false,
+      "word_count": 4
+    },
+    {
+      "turn_id": 231,
+      "timestamp": "26:19-26:23",
+      "speaker": "Student 13",
+      "utterance": "Ah, if he had done previous research on the places.",
+      "is_teacher": false,
+      "word_count": 10
+    },
+    {
+      "turn_id": 232,
+      "timestamp": "26:24-26:30",
+      "speaker": "Teacher",
+      "utterance": "That’s okay. Jay, what did you like about the trip? What was your favorite part?",
+      "is_teacher": true,
+      "word_count": 15
+    },
+    {
+      "turn_id": 233,
+      "timestamp": "26:30-26:38",
+      "speaker": "Jay",
+      "utterance": "Um, when we left to go.",
+      "is_teacher": false,
+      "word_count": 6
+    },
+    {
+      "turn_id": 234,
+      "timestamp": "26:38-26:40",
+      "speaker": "Teacher",
+      "utterance": "Why? Why was that?",
+      "is_teacher": true,
+      "word_count": 4
+    },
+    {
+      "turn_id": 235,
+      "timestamp": "26:40-26:43",
+      "speaker": "Jay",
+      "utterance": "Uh, because it was kind of boring.",
+      "is_teacher": false,
+      "word_count": 7
+    },
+    {
+      "turn_id": 236,
+      "timestamp": "26:43-26:47",
+      "speaker": "Teacher",
+      "utterance": "So you found it boring. Okay. So what would you change to make it less boring?",
+      "is_teacher": true,
+      "word_count": 16
+    },
+    {
+      "turn_id": 237,
+      "timestamp": "25:47-26:51",
+      "speaker": "Jay",
+      "utterance": "I wouldn’t go there",
+      "is_teacher": false,
+      "word_count": 4
+    },
+    {
+      "turn_id": 238,
+      "timestamp": "26:51-26:55",
+      "speaker": "Teacher",
+      "utterance": "So what would make it more interesting to you? That's why I'm asking. What would make it more interesting?",
+      "is_teacher": true,
+      "word_count": 19
+    },
+    {
+      "turn_id": 239,
+      "timestamp": "26:55-26:57",
+      "speaker": "Jay",
+      "utterance": "More interactive activities.",
+      "is_teacher": false,
+      "word_count": 3
+    },
+    {
+      "turn_id": 240,
+      "timestamp": "26:17-27:17",
+      "speaker": "Teacher",
+      "utterance": "Okay. More interactive activities. Uh, does everyone think it was boring or were there some people who enjoyed it? Please. Yeah, but why did you look at that stuff? Why was it important to go and see this place?",
+      "is_teacher": true,
+      "word_count": 39
+    },
+    {
+      "turn_id": 241,
+      "timestamp": "27:17-27:22",
+      "speaker": "Phillip",
+      "utterance": "It was not important. Historic value.",
+      "is_teacher": false,
+      "word_count": 6
+    },
+    {
+      "turn_id": 242,
+      "timestamp": "27:22-27:29",
+      "speaker": "Teacher",
+      "utterance": "Historic value. Remember, what's the theme of this unit? What are we looking at? What were we, what were we studying in the past few weeks?",
+      "is_teacher": true,
+      "word_count": 26
+    },
+    {
+      "turn_id": 243,
+      "timestamp": "27:29-27:32",
+      "speaker": "Selena",
+      "utterance": "How to manage society.",
+      "is_teacher": false,
+      "word_count": 4
+    },
+    {
+      "turn_id": 244,
+      "timestamp": "27:32-29:30",
+      "speaker": "Teacher",
+      "utterance": "Society, that's right. Impoverished society, how the other side lives. How can we help the other? So we went to a different part of Hong Kong to see the history, see the culture, see what it was like, see how it's different from how things are here.  And let's see. I don't think we have time to get to the reading, so we will go ahead and do that next time. Uh, remember tomorrow I'm not going to be here, so you'll have both periods.  You'll have both periods. To work on your travel brochure, remember for your travel brochure, you need to highlight at least one of the places we went to, one of the places we  discussed and talked about. In addition to your travel brochure, you're doing a presentation that you'll be giving on Thursday.  Um. The travel brochure needs to be done by the end of Wednesday, submitted to OneNote. A soft copy and one person in the group needs to print it out and bring it to class.  On Thursday. You can go to the washroom. You are going to be presenting, so you'll come up here. You'll present what you found interesting from the tour, what you learned, what you enjoy. You'll talk about it a little bit.  Thursday, you're presenting just in this class on Friday, you're presenting to the rest of the classes. So think of Thursday as practice  for you two refine and get your presentation down, and then Friday you'll be presenting to the rest of the classes, presentation for each other, like three, three to four, three to four minutes, okay?  Um, Wednesday, no class. You'll be doing Chinese history instead to make up for the missed class.",
+      "is_teacher": true,
+      "word_count": 289
+    }
+  ],
+  "gold": [
+    {
+      "turn_id": 1,
+      "codes": []
+    },
+    {
+      "turn_id": 3,
+      "codes": []
+    },
+    {
+      "turn_id": 5,
+      "codes": []
+    },
+    {
+      "turn_id": 7,
+      "codes": []
+    },
+    {
+      "turn_id": 9,
+      "codes": []
+    },
+    {
+      "turn_id": 11,
+      "codes": []
+    },
+    {
+      "turn_id": 13,
+      "codes": []
+    },
+    {
+      "turn_id": 15,
+      "codes": []
+    },
+    {
+      "turn_id": 17,
+      "codes": []
+    },
+    {
+      "turn_id": 19,
+      "codes": []
+    },
+    {
+      "turn_id": 21,
+      "codes": []
+    },
+    {
+      "turn_id": 23,
+      "codes": []
+    },
+    {
+      "turn_id": 25,
+      "codes": []
+    },
+    {
+      "turn_id": 27,
+      "codes": []
+    },
+    {
+      "turn_id": 29,
+      "codes": []
+    },
+    {
+      "turn_id": 31,
+      "codes": []
+    },
+    {
+      "turn_id": 33,
+      "codes": []
+    },
+    {
+      "turn_id": 35,
+      "codes": []
+    },
+    {
+      "turn_id": 37,
+      "codes": []
+    },
+    {
+      "turn_id": 39,
+      "codes": []
+    },
+    {
+      "turn_id": 41,
+      "codes": []
+    },
+    {
+      "turn_id": 43,
+      "codes": []
+    },
+    {
+      "turn_id": 45,
+      "codes": []
+    },
+    {
+      "turn_id": 47,
+      "codes": []
+    },
+    {
+      "turn_id": 49,
+      "codes": []
+    },
+    {
+      "turn_id": 51,
+      "codes": []
+    },
+    {
+      "turn_id": 53,
+      "codes": []
+    },
+    {
+      "turn_id": 55,
+      "codes": []
+    },
+    {
+      "turn_id": 57,
+      "codes": []
+    },
+    {
+      "turn_id": 59,
+      "codes": []
+    },
+    {
+      "turn_id": 61,
+      "codes": []
+    },
+    {
+      "turn_id": 63,
+      "codes": []
+    },
+    {
+      "turn_id": 65,
+      "codes": []
+    },
+    {
+      "turn_id": 67,
+      "codes": []
+    },
+    {
+      "turn_id": 69,
+      "codes": []
+    },
+    {
+      "turn_id": 71,
+      "codes": []
+    },
+    {
+      "turn_id": 73,
+      "codes": []
+    },
+    {
+      "turn_id": 75,
+      "codes": []
+    },
+    {
+      "turn_id": 77,
+      "codes": []
+    },
+    {
+      "turn_id": 79,
+      "codes": []
+    },
+    {
+      "turn_id": 81,
+      "codes": []
+    },
+    {
+      "turn_id": 83,
+      "codes": []
+    },
+    {
+      "turn_id": 85,
+      "codes": []
+    },
+    {
+      "turn_id": 87,
+      "codes": []
+    },
+    {
+      "turn_id": 89,
+      "codes": []
+    },
+    {
+      "turn_id": 91,
+      "codes": []
+    },
+    {
+      "turn_id": 93,
+      "codes": []
+    },
+    {
+      "turn_id": 95,
+      "codes": []
+    },
+    {
+      "turn_id": 97,
+      "codes": []
+    },
+    {
+      "turn_id": 99,
+      "codes": []
+    },
+    {
+      "turn_id": 101,
+      "codes": []
+    },
+    {
+      "turn_id": 103,
+      "codes": []
+    },
+    {
+      "turn_id": 105,
+      "codes": []
+    },
+    {
+      "turn_id": 107,
+      "codes": []
+    },
+    {
+      "turn_id": 109,
+      "codes": []
+    },
+    {
+      "turn_id": 111,
+      "codes": []
+    },
+    {
+      "turn_id": 113,
+      "codes": []
+    },
+    {
+      "turn_id": 115,
+      "codes": []
+    },
+    {
+      "turn_id": 117,
+      "codes": []
+    },
+    {
+      "turn_id": 119,
+      "codes": []
+    },
+    {
+      "turn_id": 121,
+      "codes": []
+    },
+    {
+      "turn_id": 123,
+      "codes": []
+    },
+    {
+      "turn_id": 125,
+      "codes": []
+    },
+    {
+      "turn_id": 127,
+      "codes": []
+    },
+    {
+      "turn_id": 129,
+      "codes": []
+    },
+    {
+      "turn_id": 131,
+      "codes": []
+    },
+    {
+      "turn_id": 133,
+      "codes": []
+    },
+    {
+      "turn_id": 135,
+      "codes": []
+    },
+    {
+      "turn_id": 137,
+      "codes": []
+    },
+    {
+      "turn_id": 139,
+      "codes": []
+    },
+    {
+      "turn_id": 141,
+      "codes": []
+    },
+    {
+      "turn_id": 143,
+      "codes": []
+    },
+    {
+      "turn_id": 145,
+      "codes": []
+    },
+    {
+      "turn_id": 147,
+      "codes": []
+    },
+    {
+      "turn_id": 149,
+      "codes": []
+    },
+    {
+      "turn_id": 151,
+      "codes": []
+    },
+    {
+      "turn_id": 153,
+      "codes": []
+    },
+    {
+      "turn_id": 156,
+      "codes": []
+    },
+    {
+      "turn_id": 158,
+      "codes": []
+    },
+    {
+      "turn_id": 160,
+      "codes": []
+    },
+    {
+      "turn_id": 162,
+      "codes": []
+    },
+    {
+      "turn_id": 164,
+      "codes": []
+    },
+    {
+      "turn_id": 166,
+      "codes": []
+    },
+    {
+      "turn_id": 169,
+      "codes": []
+    },
+    {
+      "turn_id": 171,
+      "codes": []
+    },
+    {
+      "turn_id": 173,
+      "codes": []
+    },
+    {
+      "turn_id": 175,
+      "codes": []
+    },
+    {
+      "turn_id": 177,
+      "codes": []
+    },
+    {
+      "turn_id": 179,
+      "codes": []
+    },
+    {
+      "turn_id": 181,
+      "codes": []
+    },
+    {
+      "turn_id": 183,
+      "codes": []
+    },
+    {
+      "turn_id": 185,
+      "codes": []
+    },
+    {
+      "turn_id": 187,
+      "codes": []
+    },
+    {
+      "turn_id": 189,
+      "codes": []
+    },
+    {
+      "turn_id": 191,
+      "codes": []
+    },
+    {
+      "turn_id": 193,
+      "codes": []
+    },
+    {
+      "turn_id": 195,
+      "codes": []
+    },
+    {
+      "turn_id": 197,
+      "codes": []
+    },
+    {
+      "turn_id": 199,
+      "codes": []
+    },
+    {
+      "turn_id": 201,
+      "codes": []
+    },
+    {
+      "turn_id": 203,
+      "codes": []
+    },
+    {
+      "turn_id": 205,
+      "codes": []
+    },
+    {
+      "turn_id": 207,
+      "codes": []
+    },
+    {
+      "turn_id": 209,
+      "codes": []
+    },
+    {
+      "turn_id": 211,
+      "codes": []
+    },
+    {
+      "turn_id": 213,
+      "codes": []
+    },
+    {
+      "turn_id": 215,
+      "codes": []
+    },
+    {
+      "turn_id": 217,
+      "codes": []
+    },
+    {
+      "turn_id": 219,
+      "codes": []
+    },
+    {
+      "turn_id": 221,
+      "codes": []
+    },
+    {
+      "turn_id": 223,
+      "codes": []
+    },
+    {
+      "turn_id": 225,
+      "codes": []
+    },
+    {
+      "turn_id": 227,
+      "codes": []
+    },
+    {
+      "turn_id": 229,
+      "codes": []
+    },
+    {
+      "turn_id": 232,
+      "codes": []
+    },
+    {
+      "turn_id": 234,
+      "codes": []
+    },
+    {
+      "turn_id": 236,
+      "codes": []
+    },
+    {
+      "turn_id": 238,
+      "codes": []
+    },
+    {
+      "turn_id": 240,
+      "codes": []
+    },
+    {
+      "turn_id": 242,
+      "codes": []
+    },
+    {
+      "turn_id": 244,
+      "codes": []
+    }
+  ],
+  "statistics": {
+    "coded_turns": 0,
+    "uncoded_turns": 121,
+    "code_distribution": {}
+  }
+}

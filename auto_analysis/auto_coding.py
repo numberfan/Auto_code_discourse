@@ -4,11 +4,15 @@
 # @Description  : 自动编码：GPT 4o, 滑动窗口对目标进行编码，多轮投票后确定编码结果
 
 import json
+import os
 import time
+
+from dotenv import load_dotenv
 from openai import OpenAI
 from collections import Counter
 
-client = OpenAI(api_key="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")
+load_dotenv()
+client = OpenAI(api_key=os.getenv("OPENAI_API_KEY"))
 
 SYSTEM_PROMPT = "../prompts/coded_prompt.txt"
 FEW_SHOT_EXAMPLES = "../prompts/coded_examples.txt"
@@ -44,7 +48,6 @@ def build_context_window(transcript: list, target_idx: int,
         )
 
     return "\n".join(context_lines)
-
 
 def code_single_turn(transcript: list, target_idx: int,
                      temperature: float = 0.0) -> dict:
