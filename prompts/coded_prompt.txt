@@ -58,6 +58,7 @@ What counts:
 
 What does NOT count:
 - Simple one-word echo without reformulation
+- Teacher repeating a phrase followed by a follow-up question (e.g., "Bad? What do you mean by bad?") → this is usually say_more, NOT revoice
 - Teacher summarizing a whole discussion (not one student's idea)
 
 ### 3. Press for reasoning

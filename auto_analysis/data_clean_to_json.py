@@ -58,9 +58,16 @@ def build_code_to_col_mapping(df_columns) -> dict:
         cleaned_bases = [clean_col_name(b) for b in base_names]
         for col in df_columns:
             cleaned_col = clean_col_name(col)
-            if cleaned_col in cleaned_bases:
-                code_to_col[code] = col
+            matched = False
+            for kw in cleaned_bases:
+                if kw in cleaned_col:
+                    code_to_col[code] = col
+                    matched = True
+                    break
+            if matched:
                 break
+            if not matched:
+                print(f"警告：未找到代码 '{code}' 对应的列，请检查 Excel 表头。")
     return code_to_col
 
 

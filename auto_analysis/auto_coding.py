@@ -20,8 +20,7 @@ SYSTEM_PROMPT = load_text_file(SYSTEM_PROMPT_PATH)
 FEW_SHOT_EXAMPLES = load_text_file(FEW_SHOT_EXAMPLES_PATH)
 
 
-def build_context_window(transcript: list, target_idx: int,
-                         before: int = 5, after: int = 2) -> str:
+def build_context_window(transcript: list, target_idx: int, before: int = 5, after: int = 2) -> str:
     """构建目标话轮的上下文窗口"""
 
     context_lines = []
@@ -48,13 +47,11 @@ def build_context_window(transcript: list, target_idx: int,
         context_lines.append(
             f"[Turn {turn['turn_id']}] {turn['speaker']}: {turn['utterance']}"
         )
-
     return "\n".join(context_lines)
 
 MAX_RETRIES= 3
 
-def code_single_turn(transcript: list, target_idx: int,
-                     temperature: float = 0.0) -> dict:
+def code_single_turn(transcript: list, target_idx: int, temperature: float = 0.0) -> dict:
     """对单个教师话轮进行 APT 编码（带重试）"""
     context = build_context_window(transcript, target_idx)
     target_turn = transcript[target_idx]
@@ -105,22 +102,16 @@ def code_single_turn(transcript: list, target_idx: int,
                 raise RuntimeError(f"连续 {MAX_RETRIES} 次调用 LLM 失败，放弃该话轮。")
 
 
-def code_with_voting(transcript: list, target_idx: int,
-                     n_votes: int = 5) -> dict:
-    """多次推理投票"""
-
+def code_with_voting(transcript: list, target_idx: int, n_votes: int = 5) -> dict:
     all_results = []
-
     for i in range(n_votes):
         temp = 0.0 if i == 0 else 0.4
         result = code_single_turn(transcript, target_idx, temperature=temp)
         all_results.append(result)
         time.sleep(0.5)
 
-    # 投票逻辑
     code_counts = Counter()
     reasoning_list = []
-
     for r in all_results:
         codes = r.get("codes", [])
         if not codes:
@@ -129,39 +120,36 @@ def code_with_voting(transcript: list, target_idx: int,
             code_counts[code] += 1
         reasoning_list.append(r.get("reasoning", ""))
 
-    # 决策
     n = n_votes
+    none_votes = code_counts.get("__NONE__", 0)
+    non_none_counts = {c: cnt for c, cnt in code_counts.items() if c != "__NONE__"}
+    max_code, max_count = max(non_none_counts.items(), key=lambda x: x[1], default=(None, 0))
+
     final_codes = []
     confidence_map = {}
-    none_votes = code_counts.pop("__NONE__", 0)
     needs_review = False
 
-    # 找出投票数最高的 code
-    if code_counts:
-        max_count = max(code_counts.values())
-        max_codes = [c for c, cnt in code_counts.items() if cnt == max_count]
-    else:
-        max_codes = []
-    # 如果达到阈值，正常输出
-    for code, count in code_counts.items():
-        agreement = count / n
-        if agreement >= 0.6:
-            final_codes.append(code)
-            confidence_map[code] = round(agreement, 2)
-    # 若没有达到阈值的 code，但模型给出了非空预测
-    if not final_codes and max_codes and none_votes < n * 0.6:
-        final_codes = max_codes[:1]
-        confidence_map[final_codes[0]] = round(max_count / n, 2)
+    # 严格多数 (> n/2)
+    majority_threshold = n / 2
+    if max_count > majority_threshold:
+        for code, cnt in non_none_counts.items():
+            if cnt == max_count:
+                final_codes.append(code)
+                confidence_map[code] = round(cnt / n, 2)
+    # 未达多数，但非空票 > 空票且至少有 2 票，取最高票并标记复核
+    elif max_code is not None and max_count >= 2 and max_count > none_votes:
+        final_codes.append(max_code)
+        confidence_map[max_code] = round(max_count / n, 2)
         needs_review = True
 
-    # 额外复核条件
-    if final_codes and any(v < 0.8 for v in confidence_map.values()):
+    # 如果最终有代码，但最低置信度 < 0.6，需要复核
+    if final_codes and min(confidence_map.values()) < 0.6:
         needs_review = True
-    if not final_codes and none_votes < n * 0.8:
+    # 如果有非空票但没入选，需要复核
+    elif not final_codes and max_code is not None:
         needs_review = True
 
     target = transcript[target_idx]
-
     return {
         "turn_id": target["turn_id"],
         "speaker": target["speaker"],
@@ -171,7 +159,7 @@ def code_with_voting(transcript: list, target_idx: int,
         "needs_review": needs_review,
         "vote_detail": dict(code_counts),
         "none_votes": none_votes,
-        "sample_reasoning": reasoning_list[0]
+        "sample_reasoning": reasoning_list[0] if reasoning_list else ""
     }
 
 
@@ -185,11 +173,29 @@ def code_full_transcript(transcript: list, n_votes: int = 5) -> list:
     ]
 
     print(f"Total teacher turns to code: {len(teacher_turns)}")
+    failed_turns = []
 
     for idx, (array_idx, turn) in enumerate(teacher_turns):
         print(f"  Coding turn {turn['turn_id']} ({idx + 1}/{len(teacher_turns)})...")
-        result = code_with_voting(transcript, array_idx, n_votes=n_votes)
-        results.append(result)
+        try:
+            result = code_with_voting(transcript, array_idx, n_votes=n_votes)
+            results.append(result)
+        except Exception as e:
+            # 记录失败，填入默认空结果
+            print(f"  [错误] Turn {turn['turn_id']} 编码失败: {e}")
+            failed_turns.append(turn['turn_id'])
+            results.append({
+                "turn_id": turn["turn_id"],
+                "speaker": turn.get("speaker", ""),
+                "utterance": turn.get("utterance", "")[:100],
+                "codes": [],
+                "confidence": {},
+                "needs_review": True,  # 失败需要人工复核
+                "vote_detail": {},
+                "none_votes": 0,
+                "sample_reasoning": f"ERROR: {str(e)}"
+            })
         time.sleep(1)  # rate limiting
-
-    return results
+        if failed_turns:
+            print(f"\n警告：以下话轮编码失败，已标记为 needs_review=True: {failed_turns}")
+        return results

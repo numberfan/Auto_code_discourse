@@ -195,3 +195,11 @@ Output: {"turn_id": 61, "codes": ["add_on"], "reasoning": "Addressing OTHER stud
 CONTRAST — if the teacher had said:
 >>> "Do you AGREE with her that homework should be banned?" <<<
 → This would be agree_disagree because it explicitly asks for a position using agree/disagree language.
+
+### Example 20: Say more, NOT revoice (partial echo is not revoice)
+Context:
+[Turn 44] Mia: I think social media is bad for teenagers.
+>>> [Turn 45] Teacher: Bad for teenagers? What do you mean by "bad"? <<<
+[Turn 46] Mia: Like, it makes them feel they're not good enough.
+
+Output: {"turn_id": 45, "codes": ["say_more"], "reasoning": "Teacher echoes a fragment ('bad for teenagers?') but does NOT rephrase or restate Mia's idea in new/clearer words. The main function is asking Mia to clarify what she means by 'bad'. A brief echo followed by a clarification question → say_more, NOT revoice. Revoice requires meaningful REFORMULATION of the student's idea."}
