@@ -77,13 +77,13 @@ def auto_coding(excel_path: str, file_id: str, n_votes: int, json_dir: str):
 if __name__ == '__main__':
     args = parse_args()
     # 调用llm进行自动分析 （清洗、编码、评估）
-    # auto_coding(args.excel, args.file_id, args.votes, args.json_dir)
+    auto_coding(args.excel, args.file_id, args.votes, args.json_dir)
 
-    result = clean_excel_to_json(args.excel, args.file_id)
-    gold_data = result["gold"]
+    # result = clean_excel_to_json(args.excel, args.file_id)
+    # gold_data = result["gold"]
     #
-    with open("coded_discourse/json/predictions_chris_moon_v1.json", "r", encoding="utf-8") as f:
-         pred_data = json.load(f)["predictions"]
+    # with open("coded_discourse/json/predictions_chris_moon_v1.json", "r", encoding="utf-8") as f:
+    #      pred_data = json.load(f)["predictions"]
     #
-    # # 评估具体错误的细节
-    error_analysis(gold_data, pred_data)
+    # # # 评估具体错误的细节
+    # error_analysis(gold_data, pred_data)

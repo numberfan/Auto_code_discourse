@@ -13,8 +13,10 @@ client = config.get_client()
 MODEL_NAME = config.get_model_name()
 USE_JSON_MODE = config.supports_json_mode()
 
+config.print_status() # 打印模型状态
+
 SYSTEM_PROMPT_PATH = "prompts/coded_prompt.txt"
-FEW_SHOT_EXAMPLES_PATH = "prompts/coded_examples.txt"
+FEW_SHOT_EXAMPLES_PATH = "prompts/few_show.txt"
 
 SYSTEM_PROMPT = load_text_file(SYSTEM_PROMPT_PATH)
 FEW_SHOT_EXAMPLES = load_text_file(FEW_SHOT_EXAMPLES_PATH)
@@ -63,7 +65,7 @@ def code_single_turn(transcript: list, target_idx: int, temperature: float = 0.0
         f"Pay special attention to the student utterance immediately BEFORE the target — "
         f"it helps determine if the teacher is addressing the SAME student or OTHER students.\n"
         f"Identify any APT moves present.\n"
-        f"Remember: most teacher utterances (~60%) contain NO APT moves.\n\n"
+        f"Remember: If the teacher is responding to or following up on student talk (even briefly), assign a code. Only leave codes=[] when the utterance is clearly procedural, feedback, or content delivery.\n\n"
         f"## OUTPUT FORMAT:\n"
         f"Return ONLY a valid JSON object (no text outside JSON):\n"
         f'{{"turn_id": {target_turn["turn_id"]}, "codes": [], "reasoning": "..."}}\n'
@@ -89,7 +91,9 @@ def code_single_turn(transcript: list, target_idx: int, temperature: float = 0.0
     # 重试循环
     for attempt in range(MAX_RETRIES):
         try:
+            print(f"  [调用中] 正在向 {MODEL_NAME} 发送请求 (Turn {target_turn['turn_id']}, 尝试 {attempt + 1}/{MAX_RETRIES})...")
             response = client.chat.completions.create(**kwargs)
+            print(f"  [成功] 收到响应 (Turn {target_turn['turn_id']})")
             return extract_json(response.choices[0].message.content)
         except Exception as e:
             print(f"  [尝试 {attempt + 1}/{MAX_RETRIES}] 调用失败: {e}")

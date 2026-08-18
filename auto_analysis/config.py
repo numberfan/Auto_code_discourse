@@ -10,7 +10,7 @@ import httpx
 
 load_dotenv()
 
-LLM_PROVIDER = os.getenv("LLM_PROVIDER", "deepseek").lower()
+LLM_PROVIDER = os.getenv("LLM_PROVIDER", "vertex_ai").lower()
 REGION = os.getenv("VERTEX_AI_REGION", "us-central1")
 
 PROJECT_ID = None
@@ -19,13 +19,15 @@ PROJECT_ID = None
 def _get_gcp_project_id():
     from google.auth import default
     _, project_id = default()
+    if not project_id:
+        raise ValueError(
+            "未能自动获取 GCP 项目 ID，请检查是否已运行 gcloud auth application-default login 或设置 GOOGLE_CLOUD_PROJECT")
     return project_id
 
 PROVIDERS = {
     "vertex_ai": {
         "api_key_env": None,
-        "base_url": f"https://{REGION}-aiplatform.googleapis.com/v1beta1/projects/{PROJECT_ID}/locations/{REGION}/endpoints/openapi",
-        "default_model": f"publishers/google/models/gemini-1.5-pro-001",
+        "default_model": "google/gemini-1.5-pro",
         "supports_json_mode": True,
     },
     "deepseek": {
@@ -35,6 +37,15 @@ PROVIDERS = {
         "supports_json_mode": True,
     }
 }
+
+# config.py 中添加此函数
+def print_status():
+    model = get_model_name()
+    print(f"\n{'='*40}")
+    print(f"系统配置已加载")
+    print(f"Provider: {LLM_PROVIDER.upper()}")
+    print(f"Model:    {model}")
+    print(f"{'='*40}\n")
 
 def get_client() -> OpenAI:
 
@@ -46,21 +57,20 @@ def get_client() -> OpenAI:
     if LLM_PROVIDER == "vertex_ai":
         from google.auth import default
         from google.auth.transport.requests import Request
+
         # 获取 GCP 项目 ID
         global PROJECT_ID
         if PROJECT_ID is None:
             PROJECT_ID = _get_gcp_project_id()
 
-        base_url = provider["base_url"].format(PROJECT_ID=PROJECT_ID)
+        base_url = f"https://{REGION}-aiplatform.googleapis.com/v1beta1/projects/{PROJECT_ID}/locations/{REGION}/endpoints/openapi"
 
         # 获取 Google 访问凭证
         credentials, _ = default(scopes=["https://www.googleapis.com/auth/cloud-platform"])
         credentials.refresh(Request())
         token = credentials.token
 
-        # 如果使用代理，请确保代理支持 HTTPS；否则注释掉代理部分
-        # custom_http_client = httpx.Client(proxy="socks5://127.0.0.1:7897", trust_env=False)
-        custom_http_client = httpx.Client(trust_env=False)  # 完全不使用环境代理
+        custom_http_client = httpx.Client(trust_env=False)
         return OpenAI(base_url=base_url, api_key=token, http_client=custom_http_client)
     else:
         api_key = os.getenv(provider["api_key_env"])
