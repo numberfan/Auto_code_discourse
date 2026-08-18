@@ -17,17 +17,21 @@ PROJECT_ID = None
 
 # 提取本地项目 ID (google需要）
 def _get_gcp_project_id():
+    # 优先从环境变量读取
+    env_project = os.getenv("GOOGLE_CLOUD_PROJECT")
+    if env_project:
+        return env_project
+
     from google.auth import default
     _, project_id = default()
     if not project_id:
-        raise ValueError(
-            "未能自动获取 GCP 项目 ID，请检查是否已运行 gcloud auth application-default login 或设置 GOOGLE_CLOUD_PROJECT")
+        raise ValueError("未能自动获取 GCP 项目 ID")
     return project_id
 
 PROVIDERS = {
     "vertex_ai": {
         "api_key_env": None,
-        "default_model": "google/gemini-1.5-pro",
+        "default_model": "google/gemini-2.5-pro",
         "supports_json_mode": True,
     },
     "deepseek": {
@@ -70,7 +74,15 @@ def get_client() -> OpenAI:
         credentials.refresh(Request())
         token = credentials.token
 
-        custom_http_client = httpx.Client(trust_env=False)
+        # 本地代理
+        proxy_url = os.getenv("PROXY_URL", "http://127.0.0.1:7897")
+        custom_http_client = httpx.Client(
+            proxy=proxy_url,
+            trust_env=False,
+            timeout=60.0
+        )
+
+        # custom_http_client = httpx.Client(trust_env=False)
         return OpenAI(base_url=base_url, api_key=token, http_client=custom_http_client)
     else:
         api_key = os.getenv(provider["api_key_env"])
