@@ -2,9 +2,11 @@ import json
 import os
 import argparse
 
+from auto_analysis import llm_config
 from auto_analysis.assess_func import evaluate_predictions, print_evaluation_report
 from auto_analysis.auto_coding import code_full_transcript
 from auto_analysis.data_clean_to_json import clean_excel_to_json
+from auto_analysis.llm_config import get_model_name
 from error_analysis.error_analysis import error_analysis
 
 # 默认配置（可被命令行覆盖）
@@ -55,7 +57,7 @@ def auto_coding(excel_path: str, file_id: str, n_votes: int, json_dir: str):
     pred_output = {
         "file_id": file_id,
         "predictions": predictions,
-        "generated_by": "gpt-4o",  # 建议改为从 config 读取模型名
+        "generated_by": get_model_name(),
         "n_votes": n_votes,
     }
     pred_json_path = os.path.join(json_dir, f"predictions_{file_id}.json")

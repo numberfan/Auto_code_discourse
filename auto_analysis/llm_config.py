@@ -5,7 +5,7 @@
 
 import os
 from dotenv import load_dotenv
-from openai import OpenAI
+from openai import OpenAI, AsyncOpenAI
 import httpx
 
 load_dotenv()
@@ -42,7 +42,7 @@ PROVIDERS = {
     }
 }
 
-# config.py 中添加此函数
+# llm_config.py 中添加此函数
 def print_status():
     model = get_model_name()
     print(f"\n{'='*40}")
@@ -53,7 +53,7 @@ def print_status():
 
 def get_client() -> OpenAI:
 
-    """OpenAI SDK 统一调用"""
+    """OpenAI SDK 统一调用 (同步调用分析）"""
     provider = PROVIDERS.get(LLM_PROVIDER)
     if not provider:
         raise ValueError(f"不支持的 LLM_PROVIDER: {LLM_PROVIDER}")
@@ -93,6 +93,38 @@ def get_client() -> OpenAI:
         custom_http_client = httpx.Client(trust_env=False)
         return OpenAI(api_key=api_key, base_url=provider["base_url"], http_client=custom_http_client)
 
+def get_async_client() -> AsyncOpenAI:
+    """异步 OpenAI SDK 客户端"""
+    provider = PROVIDERS.get(LLM_PROVIDER)
+    if not provider:
+        raise ValueError(f"不支持的 LLM_PROVIDER: {LLM_PROVIDER}")
+
+    if LLM_PROVIDER == "vertex_ai":
+        from google.auth import default
+        from google.auth.transport.requests import Request
+        global PROJECT_ID
+        if PROJECT_ID is None:
+            PROJECT_ID = _get_gcp_project_id()
+
+        base_url = f"https://{REGION}-aiplatform.googleapis.com/v1beta1/projects/{PROJECT_ID}/locations/{REGION}/endpoints/openapi"
+
+        credentials, _ = default(scopes=["https://www.googleapis.com/auth/cloud-platform"])
+        credentials.refresh(Request())
+        token = credentials.token
+
+        proxy_url = os.getenv("PROXY_URL", "http://127.0.0.1:7897")
+        custom_http_client = httpx.AsyncClient(
+            proxy=proxy_url,
+            trust_env=False,
+            timeout=60.0
+        )
+        return AsyncOpenAI(base_url=base_url, api_key=token, http_client=custom_http_client)
+    else:
+        api_key = os.getenv(provider["api_key_env"])
+        if not api_key:
+            raise ValueError(f"缺少 {provider['api_key_env']} 环境变量")
+        custom_http_client = httpx.AsyncClient(trust_env=False, timeout=60.0)
+        return AsyncOpenAI(api_key=api_key, base_url=provider["base_url"], http_client=custom_http_client)
 
 def get_model_name() -> str:
     provider = PROVIDERS.get(LLM_PROVIDER)
