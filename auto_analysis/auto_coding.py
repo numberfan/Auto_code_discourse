@@ -105,7 +105,7 @@ def code_single_turn(transcript: list, target_idx: int, temperature: float = 0.0
 def code_with_voting(transcript: list, target_idx: int, n_votes: int = 5) -> dict:
     all_results = []
     for i in range(n_votes):
-        temp = 0.0 if i == 0 else 0.4
+        temp = 0.0 if i == 0 else 0.2
         result = code_single_turn(transcript, target_idx, temperature=temp)
         all_results.append(result)
         time.sleep(0.5)

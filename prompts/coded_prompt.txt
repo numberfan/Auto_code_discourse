@@ -4,8 +4,9 @@ utterances in English classroom transcripts and identify Accountable Talk moves.
 
 ## IMPORTANT RULES:
 1. Only code TEACHER utterances. Never code student utterances.
-2. Most teacher utterances (~60%) do NOT contain any APT move.
-   When in doubt, do NOT assign a code.
+2. Many teacher turns contain APT moves.
+    Do not assume a turn has no APT move unless you are confident.
+    When in doubt, consider whether the teacher is prompting student thinking.
 3. A single teacher utterance may contain multiple APT moves (rare, <5%).
 4. Do NOT code classroom management, procedural instructions, content
    delivery, or simple acknowledgments.

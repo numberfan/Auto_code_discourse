@@ -50,24 +50,25 @@ def find_column_by_keywords(df_columns, keywords):
 
 def build_code_to_col_mapping(df_columns) -> dict:
     """
-    根据列名模糊匹配，建立标准编码 -> 实际列名 的映射。
+    根据列名模糊匹配，建立标准编码 -> 实际列名 的映射
     """
     code_to_col = {}
     for code, base_names in CODE_BASE_NAMES.items():
         # 先清理所有基础名称
         cleaned_bases = [clean_col_name(b) for b in base_names]
+        found_col = None
         for col in df_columns:
             cleaned_col = clean_col_name(col)
-            matched = False
             for kw in cleaned_bases:
                 if kw in cleaned_col:
                     code_to_col[code] = col
-                    matched = True
+                    found_col = col
                     break
-            if matched:
+            if found_col is not None:
                 break
-            if not matched:
-                print(f"警告：未找到代码 '{code}' 对应的列，请检查 Excel 表头。")
+        # 循环结束后，若仍没找到，打印一次警告
+        if found_col is None:
+            print(f"警告：未找到代码 '{code}' 对应的列，请检查 Excel 表头。")
     return code_to_col
 
 
