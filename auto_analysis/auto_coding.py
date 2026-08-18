@@ -90,7 +90,7 @@ async def code_single_turn(client, transcript: list, target_idx: int, temperatur
     for attempt in range(MAX_RETRIES):
         try:
             print(f"[调用中] 正在向 {MODEL_NAME} 发送请求 (Turn {target_turn['turn_id']}, 尝试 {attempt + 1}/{MAX_RETRIES})...")
-            response = client.chat.completions.create(**kwargs)
+            response = await client.chat.completions.create(**kwargs)
             print(f"[成功] 收到响应 (Turn {target_turn['turn_id']})")
             return extract_json(response.choices[0].message.content)
         except Exception as e:
@@ -98,7 +98,7 @@ async def code_single_turn(client, transcript: list, target_idx: int, temperatur
             if attempt < MAX_RETRIES - 1:
                 sleep_time = 2 ** attempt  # 1秒, 2秒, 4秒
                 print(f"等待 {sleep_time} 秒后重试...")
-                time.sleep(sleep_time)
+                await asyncio.sleep(sleep_time)
             else:
                 # 最后一次失败则抛出异常
                 raise RuntimeError(f"连续 {MAX_RETRIES} 次调用 LLM 失败，放弃该话轮。")
@@ -331,7 +331,7 @@ async def confirm_uncertain_turn(client, transcript: list, target_idx: int, firs
         kwargs["response_format"] = {"type": "json_object"}
 
     try:
-        response = client.chat.completions.create(**kwargs)
+        response = await client.chat.completions.create(**kwargs)
         result = extract_json(response.choices[0].message.content)
         return result
     except Exception as e:

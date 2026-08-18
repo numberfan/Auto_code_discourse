@@ -79,7 +79,7 @@ def auto_coding(excel_path: str, file_id: str, n_votes: int, json_dir: str):
 if __name__ == '__main__':
     args = parse_args()
     # 调用llm进行自动分析 （清洗、编码、评估）
-    # auto_coding(args.excel, args.file_id, args.votes, args.json_dir)
+    auto_coding(args.excel, args.file_id, args.votes, args.json_dir)
 
     result = clean_excel_to_json(args.excel, args.file_id)
     gold_data = result["gold"]
