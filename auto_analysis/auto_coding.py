@@ -57,20 +57,21 @@ def code_single_turn(transcript: list, target_idx: int,
                      temperature: float = 0.0) -> dict:
     """对单个教师话轮进行 APT 编码（带重试）"""
     context = build_context_window(transcript, target_idx)
+    target_turn = transcript[target_idx]
 
-    user_prompt = f"""## CONTEXT:
-                    {context}
-
-                    ## TASK:
-                    Analyze the TARGET TURN (marked with >>>) above. 
-                    Identify any APT moves present.
-                    Remember: most teacher utterances contain NO APT moves.
-
-                    ## OUTPUT FORMAT:
-                    Return ONLY a valid JSON object (no text outside JSON):
-                    {{"turn_id": <number>, "codes": ["<code1>", "<code2>", ...], "reasoning": "..."}}
-                    If no APT moves are present, use an empty list: []
-                    """
+    user_prompt = (
+        f"## CONTEXT:\n{context}\n\n"
+        f"## TASK:\n"
+        f"Analyze the TARGET TURN (marked with >>>) above.\n"
+        f"Pay special attention to the student utterance immediately BEFORE the target — "
+        f"it helps determine if the teacher is addressing the SAME student or OTHER students.\n"
+        f"Identify any APT moves present.\n"
+        f"Remember: most teacher utterances (~60%) contain NO APT moves.\n\n"
+        f"## OUTPUT FORMAT:\n"
+        f"Return ONLY a valid JSON object (no text outside JSON):\n"
+        f'{{"turn_id": {target_turn["turn_id"]}, "codes": [], "reasoning": "..."}}\n'
+        f"If no APT moves are present, use an empty list for codes."
+    )
 
     # 构建消息
     system_content = SYSTEM_PROMPT + "\n\n" + FEW_SHOT_EXAMPLES
@@ -81,11 +82,11 @@ def code_single_turn(transcript: list, target_idx: int,
 
     # 构建请求参数
     kwargs = {
-        "model": config.get_model_name(),
+        "model": MODEL_NAME,
         "messages": messages,
         "temperature": temperature,
     }
-    if config.supports_json_mode():
+    if USE_JSON_MODE:
         kwargs["response_format"] = {"type": "json_object"}
 
     # 重试循环
@@ -111,11 +112,10 @@ def code_with_voting(transcript: list, target_idx: int,
     all_results = []
 
     for i in range(n_votes):
-        # 第一次用 temperature=0，其余用 0.3-0.5
         temp = 0.0 if i == 0 else 0.4
         result = code_single_turn(transcript, target_idx, temperature=temp)
         all_results.append(result)
-        time.sleep(0.5)  # rate limiting
+        time.sleep(0.5)
 
     # 投票逻辑
     code_counts = Counter()
@@ -134,6 +134,7 @@ def code_with_voting(transcript: list, target_idx: int,
     final_codes = []
     confidence_map = {}
     none_votes = code_counts.pop("__NONE__", 0)
+    needs_review = False
 
     # 找出投票数最高的 code
     if code_counts:
@@ -147,19 +148,17 @@ def code_with_voting(transcript: list, target_idx: int,
         if agreement >= 0.6:
             final_codes.append(code)
             confidence_map[code] = round(agreement, 2)
-    # 若没有达到阈值的 code，但模型给出了非空预测（可能分歧大）
+    # 若没有达到阈值的 code，但模型给出了非空预测
     if not final_codes and max_codes and none_votes < n * 0.6:
-        # 取票数最高的 code 作为暂定输出，标记需复核
         final_codes = max_codes[:1]
         confidence_map[final_codes[0]] = round(max_count / n, 2)
         needs_review = True
 
-    # 判断是否需要人工复核
-    needs_review = False
+    # 额外复核条件
     if final_codes and any(v < 0.8 for v in confidence_map.values()):
         needs_review = True
     if not final_codes and none_votes < n * 0.8:
-        needs_review = True  # 模型不确定是否该编码
+        needs_review = True
 
     target = transcript[target_idx]
 
@@ -172,7 +171,7 @@ def code_with_voting(transcript: list, target_idx: int,
         "needs_review": needs_review,
         "vote_detail": dict(code_counts),
         "none_votes": none_votes,
-        "sample_reasoning": reasoning_list[0]  # 第一次（temperature=0）的推理
+        "sample_reasoning": reasoning_list[0]
     }
 
 
