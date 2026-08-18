@@ -59,16 +59,30 @@ def build_code_to_col_mapping(df_columns) -> dict:
 def clean_excel_to_json(filepath: str, file_id: str) -> dict:
     """将 Excel 文件转换为标准化 JSON"""
 
-    # 使用第二行作为列名
-    df = pd.read_excel(filepath, header=1)
+    df_raw = pd.read_excel(filepath, header=None)
+    # 前两行是标题行
+    first_row = df_raw.iloc[0]
+    second_row = df_raw.iloc[1]
+    column_names = []
+    for i in range(df_raw.shape[1]):
+        val_second = second_row.iloc[i]
+        if pd.notna(val_second) and str(val_second).strip() != '':
+            column_names.append(str(val_second).strip())
+        else:
+            val_first = first_row.iloc[i]
+            if pd.notna(val_first) and str(val_first).strip() != '':
+                column_names.append(str(val_first).strip())
+            else:
+                column_names.append(f"Unnamed_{i}")
+
+    df_raw.columns = column_names
+    df = df_raw.iloc[2:].reset_index(drop=True)
 
     # 标准化列名
     df.columns = [str(c).strip() for c in df.columns]
 
     # 建立 code 到实际列的映射
     code_to_col = build_code_to_col_mapping(df.columns)
-    # 可选：打印映射结果用于调试
-    print("Matched columns:", code_to_col)
 
     transcript = []
     gold_labels = []

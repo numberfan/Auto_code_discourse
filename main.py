@@ -6,6 +6,7 @@ import pandas as pd
 from auto_analysis.assess_func import evaluate_predictions, print_evaluation_report
 from auto_analysis.auto_coding import code_full_transcript
 from auto_analysis.data_clean_to_json import clean_excel_to_json
+from error_analysis import error_analysis
 
 EXCEL_PATH = "coded_discourse/excel/chris moon video 1 transcription_susan_5_22.xlsx"
 JSON_DIR = "coded_discourse/json"
@@ -55,8 +56,15 @@ def auto_coding():
 
 if __name__ == '__main__':
     result = clean_excel_to_json(EXCEL_PATH, FILE_ID)
-    print("Matched code columns:", result["statistics"])  # 或单独打印 code distribution
-    print("First gold labels:", result["gold"][:5])
+    gold_data = result["gold"]
+
+    with open("coded_discourse/json/predictions_chris_moon_v1.json", "r", encoding="utf-8") as f:
+        pred_data = json.load(f)["predictions"]
+    # 直接评估
+    # result = evaluate_predictions(gold_data, pred_data)
+    # print_evaluation_report(result)
+
+    confusions = error_analysis(gold_data, pred_data)
 
 
     # auto_coding()
