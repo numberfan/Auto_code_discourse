@@ -20,7 +20,7 @@ SYSTEM_PROMPT = load_text_file(SYSTEM_PROMPT_PATH)
 FEW_SHOT_EXAMPLES = load_text_file(FEW_SHOT_EXAMPLES_PATH)
 
 
-def build_context_window(transcript: list, target_idx: int, before: int = 5, after: int = 2) -> str:
+def build_context_window(transcript: list, target_idx: int, before: int = 5, after: int = 0) -> str:
     """构建目标话轮的上下文窗口"""
 
     context_lines = []
@@ -196,6 +196,8 @@ def code_full_transcript(transcript: list, n_votes: int = 5) -> list:
                 "sample_reasoning": f"ERROR: {str(e)}"
             })
         time.sleep(1)  # rate limiting
-        if failed_turns:
-            print(f"\n警告：以下话轮编码失败，已标记为 needs_review=True: {failed_turns}")
-        return results
+
+    if failed_turns:
+        print(f"\n警告：以下话轮编码失败，已标记为 needs_review=True: {failed_turns}")
+
+    return results
