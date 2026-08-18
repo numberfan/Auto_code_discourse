@@ -1,7 +1,11 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
 # @Time         : 2026/8/17 11:07
-# @Description  : 编码准确性计算
+# @Description  : 编码准确性计算、保存结果
+
+import os
+import json
+import time
 
 from sklearn.metrics import (
     f1_score, precision_score, recall_score,
@@ -16,14 +20,8 @@ ALL_CODES = [
 
 
 def evaluate_predictions(gold_data: list, pred_data: list) -> dict:
-    """
-    评估预测结果
+    """评估预测结果 """
 
-    gold_data: [{"turn_id": 1, "codes": ["say_more"]}, ...]
-    pred_data: [{"turn_id": 1, "codes": ["say_more"], "confidence": {...}}, ...]
-    """
-
-    # 对齐 gold 和 pred
     gold_map = {item["turn_id"]: set(item["codes"]) for item in gold_data}
     pred_map = {item["turn_id"]: set(item["codes"]) for item in pred_data}
 
@@ -35,9 +33,9 @@ def evaluate_predictions(gold_data: list, pred_data: list) -> dict:
         binary_gold.append(1 if gold_map[turn_id] else 0)
         binary_pred.append(1 if pred_map.get(turn_id, set()) else 0)
 
-    binary_f1 = f1_score(binary_gold, binary_pred)
-    binary_precision = precision_score(binary_gold, binary_pred)
-    binary_recall = recall_score(binary_gold, binary_pred)
+    binary_f1 = f1_score(binary_gold, binary_pred, zero_division=0)
+    binary_precision = precision_score(binary_gold, binary_pred, zero_division=0)
+    binary_recall = recall_score(binary_gold, binary_pred, zero_division=0)
 
     # === 阶段二：每个 code 的 F1 ===
     per_code_metrics = {}
@@ -80,6 +78,20 @@ def evaluate_predictions(gold_data: list, pred_data: list) -> dict:
         "turns_without_apt_moves": sum(1 for v in gold_map.values() if not v),
     }
 
+
+def save_evaluation_report(eval_results: dict, output_dir: str = "report", file_id: str = "eval", timestamp: str = None) -> str:
+    """保存评估报告"""
+    if timestamp is None:
+        timestamp = time.strftime("%Y%m%d_%H%M%S")
+
+    os.makedirs(output_dir, exist_ok=True)
+    eval_output_path = os.path.join(output_dir, f"evaluation_{file_id}_{timestamp}.json")
+
+    with open(eval_output_path, "w", encoding="utf-8") as f:
+        json.dump(eval_results, f, indent=2, ensure_ascii=False)
+
+    print(f"评估报告已成功保存至: {eval_output_path}")
+    return eval_output_path
 
 def print_evaluation_report(eval_results: dict):
     """打印评估报告"""

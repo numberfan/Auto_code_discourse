@@ -1,13 +1,12 @@
 import json
 import os
 import argparse
-
-from auto_analysis import llm_config
-from auto_analysis.assess_func import evaluate_predictions, print_evaluation_report
+import time
+from auto_analysis.evaluation.assess_func import evaluate_predictions, print_evaluation_report, save_evaluation_report
 from auto_analysis.auto_coding import code_full_transcript
 from auto_analysis.data_clean_to_json import clean_excel_to_json
 from auto_analysis.llm_config import get_model_name
-from error_analysis.error_analysis import error_analysis
+from auto_analysis.evaluation.error_analysis import error_analysis
 
 # 默认配置（可被命令行覆盖）
 DEFAULT_EXCEL_PATH = "coded_discourse/excel/chris moon video 1 transcription_susan_5_22.xlsx"
@@ -27,6 +26,8 @@ def parse_args():
 
 def auto_coding(excel_path: str, file_id: str, n_votes: int, json_dir: str):
     """执行完整的自动编码流程"""
+    timestamp = time.strftime("%Y%m%d_%H%M%S")
+
     # 1. 检查是否有已清洗好的json， 且 excel未修改
     os.makedirs(json_dir, exist_ok=True)
     clean_json_path = os.path.join(json_dir, f"{file_id}.json")
@@ -73,6 +74,15 @@ def auto_coding(excel_path: str, file_id: str, n_votes: int, json_dir: str):
             for p in predictions
         ]
         eval_result = evaluate_predictions(gold, pred_for_eval)
+
+        # 打印并保存评估报告
+        print_evaluation_report(eval_result)
+        save_evaluation_report(eval_result, json_dir, file_id, timestamp)
+
+        # 4. 错误分析与存档
+        print("开始错误分析...")
+        error_analysis(gold, predictions, json_dir, file_id, timestamp)
+
         print_evaluation_report(eval_result)
 
 
@@ -80,12 +90,3 @@ if __name__ == '__main__':
     args = parse_args()
     # 调用llm进行自动分析 （清洗、编码、评估）
     auto_coding(args.excel, args.file_id, args.votes, args.json_dir)
-
-    result = clean_excel_to_json(args.excel, args.file_id)
-    gold_data = result["gold"]
-
-    with open("coded_discourse/json/predictions_chris_moon_v1.json", "r", encoding="utf-8") as f:
-          pred_data = json.load(f)["predictions"]
-
-    # 评估具体错误的细节
-    error_analysis(gold_data, pred_data)
