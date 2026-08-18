@@ -39,6 +39,14 @@ def clean_col_name(s: str) -> str:
     s = re.sub(r'\s+', ' ', s).strip()
     return s
 
+def find_column_by_keywords(df_columns, keywords):
+    """根据关键词列表找到最可能的列名"""
+    for col in df_columns:
+        cleaned = clean_col_name(col)
+        for kw in keywords:
+            if kw in cleaned:
+                return col
+    return None
 
 def build_code_to_col_mapping(df_columns) -> dict:
     """
@@ -84,21 +92,39 @@ def clean_excel_to_json(filepath: str, file_id: str) -> dict:
     # 建立 code 到实际列的映射
     code_to_col = build_code_to_col_mapping(df.columns)
 
+    # 动态查找关键列
+    turn_col = find_column_by_keywords(df.columns, ["number", "turn", "no", "line"])
+    speaker_col = find_column_by_keywords(df.columns, ["speaker", "teacher", "name"])
+    utterance_col = find_column_by_keywords(df.columns, ["utterance", "transcript", "content", "text"])
+    timestamp_col = find_column_by_keywords(df.columns, ["timestamp", "time"])
+
+    # 如果关键列缺失，抛出异常或打印警告
+    if turn_col is None:
+        raise ValueError("无法找到表示话轮序号（Number/Turn）的列，请检查 Excel 表头。")
+    if speaker_col is None:
+        raise ValueError("无法找到表示说话人（Speaker）的列。")
+    if utterance_col is None:
+        raise ValueError("无法找到表示话语内容（Utterance）的列。")
+    if timestamp_col is None:
+        print("警告：未找到时间戳列，将使用空字符串代替。")
+
     transcript = []
     gold_labels = []
 
     for _, row in df.iterrows():
         # 跳过汇总行
-        if pd.isna(row.get("Number")) or str(row.get("Number")).lower() == "sum":
+        turn_val = row.get(turn_col)
+        if pd.isna(turn_val) or str(turn_val).strip().lower() == "sum":
             continue
 
-        turn_id = int(row["Number"]) if not pd.isna(row.get("Number")) else None
-        if turn_id is None:
+        try:
+            turn_id = int(turn_val)
+        except (ValueError, TypeError):
             continue
 
-        speaker = str(row.get("Speaker", "")).strip().rstrip(":")
-        utterance = str(row.get("Utterance", "")).strip()
-        timestamp = str(row.get("Timestamp", row.get("Time", ""))).strip()
+        speaker = str(row.get(speaker_col, "")).strip().rstrip(":")
+        utterance = str(row.get(utterance_col, "")).strip()
+        timestamp = str(row.get(timestamp_col, "")) if timestamp_col else ""
 
         # 判断是否是教师
         is_teacher = any(kw in speaker.lower() for kw in ["teacher", "t:"])

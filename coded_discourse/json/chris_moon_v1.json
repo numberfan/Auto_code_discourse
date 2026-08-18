@@ -1964,23 +1964,33 @@
     },
     {
       "turn_id": 3,
-      "codes": []
+      "codes": [
+        "add_on"
+      ]
     },
     {
       "turn_id": 5,
-      "codes": []
+      "codes": [
+        "agree_disagree"
+      ]
     },
     {
       "turn_id": 7,
-      "codes": []
+      "codes": [
+        "agree_disagree"
+      ]
     },
     {
       "turn_id": 9,
-      "codes": []
+      "codes": [
+        "say_more"
+      ]
     },
     {
       "turn_id": 11,
-      "codes": []
+      "codes": [
+        "say_more"
+      ]
     },
     {
       "turn_id": 13,
@@ -1988,11 +1998,15 @@
     },
     {
       "turn_id": 15,
-      "codes": []
+      "codes": [
+        "add_on"
+      ]
     },
     {
       "turn_id": 17,
-      "codes": []
+      "codes": [
+        "agree_disagree"
+      ]
     },
     {
       "turn_id": 19,
@@ -2000,11 +2014,15 @@
     },
     {
       "turn_id": 21,
-      "codes": []
+      "codes": [
+        "say_more"
+      ]
     },
     {
       "turn_id": 23,
-      "codes": []
+      "codes": [
+        "say_more"
+      ]
     },
     {
       "turn_id": 25,
@@ -2012,103 +2030,153 @@
     },
     {
       "turn_id": 27,
-      "codes": []
+      "codes": [
+        "add_on"
+      ]
     },
     {
       "turn_id": 29,
-      "codes": []
+      "codes": [
+        "say_more"
+      ]
     },
     {
       "turn_id": 31,
-      "codes": []
+      "codes": [
+        "add_on"
+      ]
     },
     {
       "turn_id": 33,
-      "codes": []
+      "codes": [
+        "add_on"
+      ]
     },
     {
       "turn_id": 35,
-      "codes": []
+      "codes": [
+        "say_more"
+      ]
     },
     {
       "turn_id": 37,
-      "codes": []
+      "codes": [
+        "challenge"
+      ]
     },
     {
       "turn_id": 39,
-      "codes": []
+      "codes": [
+        "challenge"
+      ]
     },
     {
       "turn_id": 41,
-      "codes": []
+      "codes": [
+        "say_more"
+      ]
     },
     {
       "turn_id": 43,
-      "codes": []
+      "codes": [
+        "say_more"
+      ]
     },
     {
       "turn_id": 45,
-      "codes": []
+      "codes": [
+        "add_on"
+      ]
     },
     {
       "turn_id": 47,
-      "codes": []
+      "codes": [
+        "say_more"
+      ]
     },
     {
       "turn_id": 49,
-      "codes": []
+      "codes": [
+        "say_more"
+      ]
     },
     {
       "turn_id": 51,
-      "codes": []
+      "codes": [
+        "add_on"
+      ]
     },
     {
       "turn_id": 53,
-      "codes": []
+      "codes": [
+        "say_more"
+      ]
     },
     {
       "turn_id": 55,
-      "codes": []
+      "codes": [
+        "press_for_reasoning"
+      ]
     },
     {
       "turn_id": 57,
-      "codes": []
+      "codes": [
+        "agree_disagree"
+      ]
     },
     {
       "turn_id": 59,
-      "codes": []
+      "codes": [
+        "press_for_reasoning"
+      ]
     },
     {
       "turn_id": 61,
-      "codes": []
+      "codes": [
+        "say_more"
+      ]
     },
     {
       "turn_id": 63,
-      "codes": []
+      "codes": [
+        "press_for_reasoning"
+      ]
     },
     {
       "turn_id": 65,
-      "codes": []
+      "codes": [
+        "add_on"
+      ]
     },
     {
       "turn_id": 67,
-      "codes": []
+      "codes": [
+        "press_for_reasoning"
+      ]
     },
     {
       "turn_id": 69,
-      "codes": []
+      "codes": [
+        "challenge"
+      ]
     },
     {
       "turn_id": 71,
-      "codes": []
+      "codes": [
+        "press_for_reasoning"
+      ]
     },
     {
       "turn_id": 73,
-      "codes": []
+      "codes": [
+        "say_more"
+      ]
     },
     {
       "turn_id": 75,
-      "codes": []
+      "codes": [
+        "add_on"
+      ]
     },
     {
       "turn_id": 77,
@@ -2116,7 +2184,9 @@
     },
     {
       "turn_id": 79,
-      "codes": []
+      "codes": [
+        "press_for_reasoning"
+      ]
     },
     {
       "turn_id": 81,
@@ -2124,23 +2194,33 @@
     },
     {
       "turn_id": 83,
-      "codes": []
+      "codes": [
+        "add_on"
+      ]
     },
     {
       "turn_id": 85,
-      "codes": []
+      "codes": [
+        "say_more"
+      ]
     },
     {
       "turn_id": 87,
-      "codes": []
+      "codes": [
+        "add_on"
+      ]
     },
     {
       "turn_id": 89,
-      "codes": []
+      "codes": [
+        "add_on"
+      ]
     },
     {
       "turn_id": 91,
-      "codes": []
+      "codes": [
+        "say_more"
+      ]
     },
     {
       "turn_id": 93,
@@ -2148,11 +2228,15 @@
     },
     {
       "turn_id": 95,
-      "codes": []
+      "codes": [
+        "say_more"
+      ]
     },
     {
       "turn_id": 97,
-      "codes": []
+      "codes": [
+        "say_more"
+      ]
     },
     {
       "turn_id": 99,
@@ -2160,51 +2244,75 @@
     },
     {
       "turn_id": 101,
-      "codes": []
+      "codes": [
+        "press_for_reasoning"
+      ]
     },
     {
       "turn_id": 103,
-      "codes": []
+      "codes": [
+        "add_on"
+      ]
     },
     {
       "turn_id": 105,
-      "codes": []
+      "codes": [
+        "say_more"
+      ]
     },
     {
       "turn_id": 107,
-      "codes": []
+      "codes": [
+        "add_on"
+      ]
     },
     {
       "turn_id": 109,
-      "codes": []
+      "codes": [
+        "say_more"
+      ]
     },
     {
       "turn_id": 111,
-      "codes": []
+      "codes": [
+        "add_on"
+      ]
     },
     {
       "turn_id": 113,
-      "codes": []
+      "codes": [
+        "revoice"
+      ]
     },
     {
       "turn_id": 115,
-      "codes": []
+      "codes": [
+        "press_for_reasoning"
+      ]
     },
     {
       "turn_id": 117,
-      "codes": []
+      "codes": [
+        "revoice"
+      ]
     },
     {
       "turn_id": 119,
-      "codes": []
+      "codes": [
+        "add_on"
+      ]
     },
     {
       "turn_id": 121,
-      "codes": []
+      "codes": [
+        "say_more"
+      ]
     },
     {
       "turn_id": 123,
-      "codes": []
+      "codes": [
+        "add_on"
+      ]
     },
     {
       "turn_id": 125,
@@ -2216,51 +2324,75 @@
     },
     {
       "turn_id": 129,
-      "codes": []
+      "codes": [
+        "say_more"
+      ]
     },
     {
       "turn_id": 131,
-      "codes": []
+      "codes": [
+        "say_more"
+      ]
     },
     {
       "turn_id": 133,
-      "codes": []
+      "codes": [
+        "press_for_reasoning"
+      ]
     },
     {
       "turn_id": 135,
-      "codes": []
+      "codes": [
+        "say_more"
+      ]
     },
     {
       "turn_id": 137,
-      "codes": []
+      "codes": [
+        "agree_disagree"
+      ]
     },
     {
       "turn_id": 139,
-      "codes": []
+      "codes": [
+        "say_more"
+      ]
     },
     {
       "turn_id": 141,
-      "codes": []
+      "codes": [
+        "add_on"
+      ]
     },
     {
       "turn_id": 143,
-      "codes": []
+      "codes": [
+        "add_on"
+      ]
     },
     {
       "turn_id": 145,
-      "codes": []
+      "codes": [
+        "press_for_reasoning"
+      ]
     },
     {
       "turn_id": 147,
-      "codes": []
+      "codes": [
+        "revoice"
+      ]
     },
     {
       "turn_id": 149,
-      "codes": []
+      "codes": [
+        "agree_disagree"
+      ]
     },
     {
       "turn_id": 151,
-      "codes": []
+      "codes": [
+        "say_more"
+      ]
     },
     {
       "turn_id": 153,
@@ -2268,7 +2400,9 @@
     },
     {
       "turn_id": 156,
-      "codes": []
+      "codes": [
+        "press_for_reasoning"
+      ]
     },
     {
       "turn_id": 158,
@@ -2276,19 +2410,27 @@
     },
     {
       "turn_id": 160,
-      "codes": []
+      "codes": [
+        "add_on"
+      ]
     },
     {
       "turn_id": 162,
-      "codes": []
+      "codes": [
+        "press_for_reasoning"
+      ]
     },
     {
       "turn_id": 164,
-      "codes": []
+      "codes": [
+        "add_on"
+      ]
     },
     {
       "turn_id": 166,
-      "codes": []
+      "codes": [
+        "add_on"
+      ]
     },
     {
       "turn_id": 169,
@@ -2296,43 +2438,63 @@
     },
     {
       "turn_id": 171,
-      "codes": []
+      "codes": [
+        "say_more"
+      ]
     },
     {
       "turn_id": 173,
-      "codes": []
+      "codes": [
+        "say_more"
+      ]
     },
     {
       "turn_id": 175,
-      "codes": []
+      "codes": [
+        "add_on"
+      ]
     },
     {
       "turn_id": 177,
-      "codes": []
+      "codes": [
+        "say_more"
+      ]
     },
     {
       "turn_id": 179,
-      "codes": []
+      "codes": [
+        "say_more"
+      ]
     },
     {
       "turn_id": 181,
-      "codes": []
+      "codes": [
+        "add_on"
+      ]
     },
     {
       "turn_id": 183,
-      "codes": []
+      "codes": [
+        "press_for_reasoning"
+      ]
     },
     {
       "turn_id": 185,
-      "codes": []
+      "codes": [
+        "press_for_reasoning"
+      ]
     },
     {
       "turn_id": 187,
-      "codes": []
+      "codes": [
+        "agree_disagree"
+      ]
     },
     {
       "turn_id": 189,
-      "codes": []
+      "codes": [
+        "press_for_reasoning"
+      ]
     },
     {
       "turn_id": 191,
@@ -2340,11 +2502,15 @@
     },
     {
       "turn_id": 193,
-      "codes": []
+      "codes": [
+        "say_more"
+      ]
     },
     {
       "turn_id": 195,
-      "codes": []
+      "codes": [
+        "say_more"
+      ]
     },
     {
       "turn_id": 197,
@@ -2352,11 +2518,15 @@
     },
     {
       "turn_id": 199,
-      "codes": []
+      "codes": [
+        "say_more"
+      ]
     },
     {
       "turn_id": 201,
-      "codes": []
+      "codes": [
+        "say_more"
+      ]
     },
     {
       "turn_id": 203,
@@ -2364,31 +2534,45 @@
     },
     {
       "turn_id": 205,
-      "codes": []
+      "codes": [
+        "say_more"
+      ]
     },
     {
       "turn_id": 207,
-      "codes": []
+      "codes": [
+        "press_for_reasoning"
+      ]
     },
     {
       "turn_id": 209,
-      "codes": []
+      "codes": [
+        "say_more"
+      ]
     },
     {
       "turn_id": 211,
-      "codes": []
+      "codes": [
+        "say_more"
+      ]
     },
     {
       "turn_id": 213,
-      "codes": []
+      "codes": [
+        "add_on"
+      ]
     },
     {
       "turn_id": 215,
-      "codes": []
+      "codes": [
+        "press_for_reasoning"
+      ]
     },
     {
       "turn_id": 217,
-      "codes": []
+      "codes": [
+        "add_on"
+      ]
     },
     {
       "turn_id": 219,
@@ -2400,7 +2584,9 @@
     },
     {
       "turn_id": 223,
-      "codes": []
+      "codes": [
+        "press_for_reasoning"
+      ]
     },
     {
       "turn_id": 225,
@@ -2408,11 +2594,15 @@
     },
     {
       "turn_id": 227,
-      "codes": []
+      "codes": [
+        "press_for_reasoning"
+      ]
     },
     {
       "turn_id": 229,
-      "codes": []
+      "codes": [
+        "say_more"
+      ]
     },
     {
       "turn_id": 232,
@@ -2420,19 +2610,27 @@
     },
     {
       "turn_id": 234,
-      "codes": []
+      "codes": [
+        "press_for_reasoning"
+      ]
     },
     {
       "turn_id": 236,
-      "codes": []
+      "codes": [
+        "say_more"
+      ]
     },
     {
       "turn_id": 238,
-      "codes": []
+      "codes": [
+        "say_more"
+      ]
     },
     {
       "turn_id": 240,
-      "codes": []
+      "codes": [
+        "add_on"
+      ]
     },
     {
       "turn_id": 242,
@@ -2444,8 +2642,15 @@
     }
   ],
   "statistics": {
-    "coded_turns": 0,
-    "uncoded_turns": 121,
-    "code_distribution": {}
+    "coded_turns": 99,
+    "uncoded_turns": 22,
+    "code_distribution": {
+      "add_on": 27,
+      "agree_disagree": 7,
+      "say_more": 39,
+      "challenge": 3,
+      "press_for_reasoning": 20,
+      "revoice": 3
+    }
   }
 }

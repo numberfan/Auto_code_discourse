@@ -3,6 +3,7 @@
 # @Time         : 2026/8/17 14:06
 # @Description  :
 import json
+import re
 
 
 def load_text_file(filepath):
@@ -19,12 +20,14 @@ def extract_json(text: str) -> dict:
     从模型输出中提取 JSON 对象。
     当模型返回的文本包含前后缀时，尝试提取第一个完整的 JSON 对象。
     """
-    # 首先尝试直接解析
+    text = text.strip()
+    if text.startswith("```"):
+        text = re.sub(r'^```(?:json)?\s*', '', text)
+        text = re.sub(r'\s*```$', '', text)
     try:
         return json.loads(text)
     except json.JSONDecodeError:
         pass
-    # 使用正则找到第一个 { 和最后一个 } 之间的内容
     match = re.search(r'\{.*\}', text, re.DOTALL)
     if match:
         try:

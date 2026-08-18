@@ -51,30 +51,31 @@ def build_context_window(transcript: list, target_idx: int,
 
     return "\n".join(context_lines)
 
+MAX_RETRIES= 3
+
 def code_single_turn(transcript: list, target_idx: int,
                      temperature: float = 0.0) -> dict:
-    """对单个教师话轮进行 APT 编码"""
+    """对单个教师话轮进行 APT 编码（带重试）"""
     context = build_context_window(transcript, target_idx)
 
     user_prompt = f"""## CONTEXT:
                     {context}
-                    
+
                     ## TASK:
                     Analyze the TARGET TURN (marked with >>>) above. 
                     Identify any APT moves present.
                     Remember: most teacher utterances contain NO APT moves.
-                    
+
                     ## OUTPUT FORMAT:
                     Return ONLY a valid JSON object (no text outside JSON):
                     {{"turn_id": <number>, "codes": ["<code1>", "<code2>", ...], "reasoning": "..."}}
                     If no APT moves are present, use an empty list: []
                     """
-    system_content = SYSTEM_PROMPT
-    if FEW_SHOT_EXAMPLES:
-        system_content += "\n\n" + FEW_SHOT_EXAMPLES
 
+    # 构建消息
+    system_content = SYSTEM_PROMPT + "\n\n" + FEW_SHOT_EXAMPLES
     messages = [
-        {"role": "system", "content": SYSTEM_PROMPT + "\n\n" + FEW_SHOT_EXAMPLES},
+        {"role": "system", "content": system_content},
         {"role": "user", "content": user_prompt}
     ]
 
@@ -84,13 +85,23 @@ def code_single_turn(transcript: list, target_idx: int,
         "messages": messages,
         "temperature": temperature,
     }
-
-    # 启用 JSON Mode (如果配置支持)
     if config.supports_json_mode():
         kwargs["response_format"] = {"type": "json_object"}
 
-    response = client.chat.completions.create(**kwargs)
-    return extract_json(response.choices[0].message.content)
+    # 重试循环
+    for attempt in range(MAX_RETRIES):
+        try:
+            response = client.chat.completions.create(**kwargs)
+            return extract_json(response.choices[0].message.content)
+        except Exception as e:
+            print(f"  [尝试 {attempt + 1}/{MAX_RETRIES}] 调用失败: {e}")
+            if attempt < MAX_RETRIES - 1:
+                sleep_time = 2 ** attempt  # 1秒, 2秒, 4秒
+                print(f"  等待 {sleep_time} 秒后重试...")
+                time.sleep(sleep_time)
+            else:
+                # 最后一次失败则抛出异常，终止
+                raise RuntimeError(f"连续 {MAX_RETRIES} 次调用 LLM 失败，放弃该话轮。")
 
 
 def code_with_voting(transcript: list, target_idx: int,
@@ -122,19 +133,26 @@ def code_with_voting(transcript: list, target_idx: int,
     n = n_votes
     final_codes = []
     confidence_map = {}
-
-    # 如果多数认为无 code
     none_votes = code_counts.pop("__NONE__", 0)
 
+    # 找出投票数最高的 code
+    if code_counts:
+        max_count = max(code_counts.values())
+        max_codes = [c for c, cnt in code_counts.items() if cnt == max_count]
+    else:
+        max_codes = []
+    # 如果达到阈值，正常输出
     for code, count in code_counts.items():
         agreement = count / n
-        if agreement >= 0.6:  # 60% 阈值
+        if agreement >= 0.6:
             final_codes.append(code)
             confidence_map[code] = round(agreement, 2)
-
-    # 如果没有 code 达到阈值，且 NONE 占多数
-    if not final_codes and none_votes >= n * 0.6:
-        pass  # 保持空
+    # 若没有达到阈值的 code，但模型给出了非空预测（可能分歧大）
+    if not final_codes and max_codes and none_votes < n * 0.6:
+        # 取票数最高的 code 作为暂定输出，标记需复核
+        final_codes = max_codes[:1]
+        confidence_map[final_codes[0]] = round(max_count / n, 2)
+        needs_review = True
 
     # 判断是否需要人工复核
     needs_review = False

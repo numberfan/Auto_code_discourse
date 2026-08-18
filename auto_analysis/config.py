@@ -15,19 +15,16 @@ REGION = os.getenv("VERTEX_AI_REGION", "us-central1")
 
 PROJECT_ID = None
 
-# 提取本地项目 ID
+# 提取本地项目 ID (google需要）
 def _get_gcp_project_id():
     from google.auth import default
     _, project_id = default()
     return project_id
 
-
-PROJECT_ID = _get_gcp_project_id()
-
 PROVIDERS = {
     "vertex_ai": {
         "api_key_env": None,
-        "base_url": f"https://{REGION}-aiplatform.googleapis.com/v1beta1/projects/{{PROJECT_ID}}/locations/{REGION}/endpoints/openapi",
+        "base_url": f"https://{REGION}-aiplatform.googleapis.com/v1beta1/projects/{PROJECT_ID}/locations/{REGION}/endpoints/openapi",
         "default_model": f"publishers/google/models/gemini-1.5-pro-001",
         "supports_json_mode": True,
     },
