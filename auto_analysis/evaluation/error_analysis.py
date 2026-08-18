@@ -61,23 +61,23 @@ def error_analysis(gold_data, pred_data, output_dir="report", file_id="analysis"
     for c in pure_misses[:5]:
         print(f"Turn {c['turn_id']}: \"{c['utterance']}\"  Gold: {c['gold']}")
 
-        # 保存详细分析结果到文件
-        os.makedirs(output_dir, exist_ok=True)
-        error_output_path = os.path.join(output_dir, f"error_analysis_{file_id}_{timestamp}.json")
+    # 保存详细分析结果到文件
+    os.makedirs(output_dir, exist_ok=True)
+    error_output_path = os.path.join(output_dir, f"error_analysis_{file_id}_{timestamp}.json")
 
-        analysis_report = {
-            "file_id": file_id,
-            "timestamp": timestamp,
-            "total_errors": len(confusions),
-            "pure_misses_count": len(pure_misses),
-            "confusion_pairs": {pair: count for pair, count in sorted_pairs},
-            "detailed_confusions": confusions
-        }
+    analysis_report = {
+        "file_id": file_id,
+        "timestamp": timestamp,
+        "total_errors": len(confusions),
+        "pure_misses_count": len(pure_misses),
+        "confusion_pairs": {pair: count for pair, count in sorted_pairs},
+        "detailed_confusions": confusions
+    }
 
-        with open(error_output_path, "w", encoding="utf-8") as f:
-            json.dump(analysis_report, f, indent=2, ensure_ascii=False)
+    with open(error_output_path, "w", encoding="utf-8") as f:
+        json.dump(analysis_report, f, indent=2, ensure_ascii=False)
 
-        print(f"\n错误分析详情已成功保存至: {error_output_path}")
+    print(f"\n错误分析详情已成功保存至: {error_output_path}")
 
     return confusions
 

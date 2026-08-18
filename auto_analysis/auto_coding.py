@@ -13,7 +13,7 @@ MODEL_NAME = llm_config.get_model_name()
 USE_JSON_MODE = llm_config.supports_json_mode()
 llm_config.print_status()  # 打印模型状态
 
-PROMPT_VERSION = "v2"
+PROMPT_VERSION = "v3"
 SYSTEM_PROMPT_PATH = f"prompts/{PROMPT_VERSION}/coded_prompt.txt"
 FEW_SHOT_EXAMPLES_PATH = f"prompts/{PROMPT_VERSION}/few_shot.txt"
 CONFIRM_PROMPT_PATH = f"prompts/{PROMPT_VERSION}/confirm_prompt.txt"

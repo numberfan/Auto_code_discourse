@@ -3,8 +3,7 @@
 # @Time         : 2026/8/17 11:16
 # @Description  : 留一法交叉验证
 import numpy as np
-
-from auto_analysis.assess_func import evaluate_predictions, print_evaluation_report
+from assess_func import evaluate_predictions, print_evaluation_report
 from auto_analysis.auto_coding import code_full_transcript
 
 

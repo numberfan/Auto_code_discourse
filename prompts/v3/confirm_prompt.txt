@@ -1,0 +1,75 @@
+You are an expert APT coder performing a SECOND-PASS REVIEW.
+
+The first-pass analysis of this teacher utterance produced an UNCERTAIN result.
+Your job is to make a FINAL DECISION using precise definitions.
+
+## FIRST-PASS RESULT:
+- Turn ID: {turn_id}
+- First-pass votes: {vote_detail}
+- Candidate codes: {candidate_codes}
+- Addressee (majority): {addressee_decision}
+
+## DECISION HIERARCHY (apply these checks IN ORDER before settling on a code)
+
+IMPORTANT: say_more and add_on are RESIDUAL codes. They are the DEFAULT when
+no specific higher-order code fits. The specific codes (revoice, challenge,
+press_for_reasoning, explain_others, agree_disagree, restate) must have their
+STRICT criteria CLEARLY met. When in doubt, choose the residual code.
+
+For same_student moves, check in order:
+1. revoice (restatement is PRIMARY purpose)
+2. challenge (teacher supplies contradiction)
+3. press_for_reasoning (must explain WHY/HOW)
+4. say_more (default)
+
+For other_student moves, check in order:
+1. explain_others (interpretation request)
+2. agree_disagree (explicit stance request)
+3. restate (verbatim repetition request)
+4. add_on (default)
+
+## PRECISE CODE DEFINITIONS (use these to resolve ambiguity):
+
+### say_more
+Teacher asks the SAME student to elaborate, clarify, or continue.
+KEY TEST: Can the student answer by simply providing MORE INFORMATION
+(details, examples, specifications)? → say_more
+
+### press_for_reasoning
+Teacher asks the SAME student to explain WHY or provide EVIDENCE.
+KEY TEST: Must the student explain a CAUSE-EFFECT or LOGICAL relationship? → press_for_reasoning
+BOUNDARY: "Because what?" = say_more (completing a thought, not new reasoning)
+BOUNDARY: "What do you think?" = say_more (opinion, not justification)
+
+### revoice
+Teacher RESTATES student's idea in different/clearer words as the PRIMARY action.
+KEY TEST: Remove the restatement — does the turn lose its main purpose?
+- If yes → revoice
+- If no (there's a follow-up question that's the real point) → code the question instead
+
+### challenge
+Teacher supplies a SPECIFIC contradiction or counter-example.
+KEY TEST: Does the teacher's utterance contain NEW information that
+THREATENS the student's claim? → challenge
+
+### add_on
+Teacher invites OTHER students to contribute new ideas.
+KEY TEST: Is the floor being opened to new speakers? → add_on
+
+### agree_disagree
+Teacher EXPLICITLY uses agree/disagree language directed at other students.
+KEY TEST: Does the utterance contain "agree", "disagree", "whose side"? → agree_disagree
+BOUNDARY: "What do others think?" = add_on (no explicit position-taking language)
+
+### restate
+Teacher asks another student to REPEAT what was said (verbatim).
+
+### explain_others
+Teacher asks another student to INTERPRET/EXPLAIN what was said (in own words).
+
+## TASK:
+Given the context and the first-pass uncertainty, make your FINAL decision.
+If the candidates are wrong, you may choose a different code or [].
+
+## OUTPUT:
+{"turn_id": <number>, "codes": [], "reasoning": "<why this is the correct final answer>"}

@@ -83,8 +83,6 @@ def auto_coding(excel_path: str, file_id: str, n_votes: int, json_dir: str):
         print("开始错误分析...")
         error_analysis(gold, predictions, json_dir, file_id, timestamp)
 
-        print_evaluation_report(eval_result)
-
 
 if __name__ == '__main__':
     args = parse_args()
