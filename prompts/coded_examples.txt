@@ -1,102 +1,197 @@
 ## EXAMPLES:
 
-### Example 1: Say more
+=== TYPE A EXAMPLES (Teacher ↔ Same Student) ===
+
+### Example 1: Say more (clarification from same student)
 Context:
 [Turn 21] Taurus: They want to impress people.
 >>> [Turn 22] Teacher: Who are the they? <<<
 [Turn 23] Taurus: People who have the appearance anxiety.
 
-Output: {"turn_id": 22, "codes": ["say_more"], "reasoning": "Teacher asks Taurus to clarify who 'they' refers to, pushing for more specific elaboration."}
+Output: {"turn_id": 22, "codes": ["say_more"], "reasoning": "Addressing SAME student (Taurus). Asking for clarification (who are 'they'?). No reasoning demanded. → say_more"}
 
 ---
 
-### Example 2: Press for reasoning
+### Example 2: Say more (asking for opinion/thoughts from same student)
+Context:
+[Turn 12] Student: The government built new flats.
+>>> [Turn 13] Teacher: What do you think about that? What should the government have done instead? <<<
+[Turn 14] Student: Maybe they should have given money directly to the families.
+
+Output: {"turn_id": 13, "codes": ["say_more"], "reasoning": "Addressing SAME student. Asking for opinion and alternative ideas. Student can answer with suggestions — no causal logic required. → say_more, NOT press_for_reasoning"}
+
+---
+
+### Example 3: Press for reasoning (explicit WHY to same student)
 Context:
 [Turn 9] Jessica: To keep order.
->>> [Turn 10] Teacher: To keep order. Why is it important that they keep order? Can you explain? No? Anyone help her out. Who can expand on that? Why is it important that they keep order? <<<
-[Turn 11] Jovin: Uh, to prevent chaos.
+>>> [Turn 10] Teacher: Why is it important that they keep order? <<<
+[Turn 11] Jessica: Uh, to prevent chaos.
 
-Output: {"turn_id": 10, "codes": ["say_more", "press_for_reasoning"], "reasoning": "Teacher asks WHY it's important (press for reasoning) and also invites others to expand (say more/add on)."}
+Output: {"turn_id": 10, "codes": ["press_for_reasoning"], "reasoning": "Addressing SAME student (Jessica). Explicitly asks 'WHY is it important' — demands causal explanation. → press_for_reasoning"}
 
 ---
 
-### Example 3: Revoice
+### Example 4: Revoice (teacher rephrases student's idea)
 Context:
-[Turn 1] Ryan: It is about something that was built after the squatter area was destroyed by fire.
->>> [Turn 2] Teacher: Yeah, it is about something that was built after the squatter area was destroyed by fire. Umm. What do you think about that William? About the government rebuilding afterwards, what are your thoughts? <<<
-[Turn 3] William: It is pretty good, right?
+[Turn 33] Amy: I think people feel bad because they compare themselves on social media.
+>>> [Turn 34] Teacher: So you're saying social media comparison is the main cause of the anxiety? <<<
+[Turn 35] Amy: Yeah, exactly.
 
-Output: {"turn_id": 2, "codes": ["revoice"], "reasoning": "Teacher repeats Ryan's statement to make it available to the class, then redirects to William for his thoughts."}
+Output: {"turn_id": 34, "codes": ["revoice"], "reasoning": "Teacher rephrases Amy's idea in more concise/clear language to confirm understanding and make it available to class. → revoice"}
 
 ---
 
-### Example 4: Agree/Disagree
+### Example 5: Challenge (teacher supplies counter-argument to same student)
 Context:
-[Turn 3] William: It is pretty good, right?
->>> [Turn 4] Teacher: Good. Does anyone agree with him? That was a good thing to rebuild but they could do better. <<<
-[Turn 5] Student 1: Yes.
+[Turn 85] Viola: Negative.
+>>> [Turn 86] Teacher: Negative ways! But we're helping those people who have anxiety. Can you think of another feature? <<<
+[Turn 87] Viola: Maybe a positive affirmation feature.
 
-Output: {"turn_id": 4, "codes": ["agree_disagree"], "reasoning": "Teacher explicitly asks if anyone agrees with William's position."}
+Output: {"turn_id": 86, "codes": ["challenge"], "reasoning": "Addressing SAME student (Viola). Teacher supplies specific contradiction: 'we're helping people with anxiety' contradicts 'comparing negatively'. → challenge"}
 
 ---
 
-### Example 5: Challenge
+### Example 6: Say more, NOT challenge (asking to specify, no contradiction)
 Context:
 [Turn 83] Viola: Compare with friends.
 >>> [Turn 84] Teacher: Compare with friends in a positive way or in a negative way? <<<
 [Turn 85] Viola: Negative.
->>> [Turn 86] Teacher: Negative ways! But we're helping those people who have anxiety. Can you think of another feature for this smartwatch? <<<
-[Turn 87] Student B: Maybe you can use this watch to let other people know…
 
-Output for Turn 84: {"turn_id": 84, "codes": ["press_for_reasoning"], "reasoning": "Teacher asks Viola to specify the nature of the comparison."}
-Output for Turn 86: {"turn_id": 86, "codes": ["challenge"], "reasoning": "Teacher pushes back — if the goal is helping people with anxiety, comparing negatively contradicts the purpose. Teacher challenges Viola to reconsider."}
+Output: {"turn_id": 84, "codes": ["say_more"], "reasoning": "Addressing SAME student (Viola). Asking her to specify. Teacher does NOT supply any counter-argument or contradiction. → say_more, NOT challenge"}
 
 ---
 
-### Example 6: Restate
+### Example 7: Say more, NOT press_for_reasoning (no explicit WHY)
+Context:
+[Turn 50] James: I think the school is too small.
+>>> [Turn 51] Teacher: What do you think about that when you see those small rooms? <<<
+[Turn 52] James: It feels very cramped and uncomfortable.
+
+Output: {"turn_id": 51, "codes": ["say_more"], "reasoning": "Addressing SAME student (James). Asking what he thinks/feels — student can respond with observations or opinions without explaining causal logic. → say_more, NOT press_for_reasoning"}
+
+---
+
+=== TYPE B EXAMPLES (Teacher → Other Students) ===
+
+### Example 8: Add on (inviting other students to contribute)
+Context:
+[Turn 40] Student A: Maybe we can add a breathing exercise feature.
+>>> [Turn 41] Teacher: That's interesting. Anyone else? Any other ideas? <<<
+[Turn 42] Student B: How about a meditation timer?
+
+Output: {"turn_id": 41, "codes": ["add_on"], "reasoning": "Addressing OTHER students (the class). 'Anyone else?' opens the floor to new contributors with new ideas. → add_on"}
+
+---
+
+### Example 9: Add on (redirecting to a new student)
+Context:
+[Turn 5] Student A: I think the building looks modern.
+[Turn 6] Teacher: Good point.
+>>> [Turn 7] Teacher: William, what about you? What do you notice? <<<
+[Turn 8] William: I think it's too crowded.
+
+Output: {"turn_id": 7, "codes": ["add_on"], "reasoning": "Addressing a DIFFERENT student (William, not Student A). Discussion is ongoing, teacher invites new contributor. → add_on"}
+
+---
+
+### Example 10: Agree/Disagree (explicit agree/disagree language)
+Context:
+[Turn 3] William: It is pretty good, right?
+>>> [Turn 4] Teacher: Does anyone agree with him? <<<
+[Turn 5] Student 1: Yes.
+
+Output: {"turn_id": 4, "codes": ["agree_disagree"], "reasoning": "Addressing OTHER students. Explicitly asks 'agree' — requesting students to take a position on William's idea. → agree_disagree"}
+
+---
+
+### Example 11: Restate (ask student B to repeat student A's words)
 Context:
 [Turn 71] Gabriel: (speaks softly)
->>> [Turn 72] Teacher: Yeah. Anyone else agree with that? Lynn, do you agree with that? <<<
->>> [Turn 69] Teacher: What did he say? What did Gabriel say? <<<
-[Turn 70] Lynn: I didn't hear.
->>> [Turn 71] Teacher: You didn't hear. Gabriel, what did you say? <<<
+>>> [Turn 72] Teacher: What did Gabriel say? Did you hear what he said? <<<
+[Turn 73] Lynn: I didn't hear.
 
-Output for Turn 69: {"turn_id": 69, "codes": ["restate"], "reasoning": "Teacher asks Lynn to restate what Gabriel said, ensuring students listen to each other."}
+Output: {"turn_id": 72, "codes": ["restate"], "reasoning": "Addressing OTHER student (Lynn). Asking her to repeat what Gabriel said. Purpose: ensure listening. → restate"}
 
 ---
 
-### Example 7: Add on
+### Example 12: Explain others (ask student B to interpret student A's thinking)
 Context:
-[Turn 10] Student 4: Simple living.
->>> [Turn 11] Teacher: Yeah, lessons, like a series of lessons. And, or basically like a class. So we're having a class on Saturdays. On what topic? What's the topic then? <<<
-[Turn 12] Student 5: No, I don't.
+[Turn 14] Student C: I think George is going to the state school and won't see Emily.
+>>> [Turn 15] Teacher: Who can rephrase what he said in your own words? <<<
+[Turn 16] Student D: George needs to go to university and won't be seeing Emily.
 
-Output: {"turn_id": 11, "codes": ["add_on"], "reasoning": "Teacher invites additional input — what is the topic of the course."}
+Output: {"turn_id": 15, "codes": ["explain_others"], "reasoning": "Addressing OTHER students. Asks them to interpret/rephrase Student C's idea in their own words. Requires understanding, not just repetition. → explain_others"}
 
 ---
 
-### Example 8: No APT move (most common!)
-Context:
-[Turn 1] Ss: (chatting)
->>> [Turn 2] Teacher: Okay, today we have two guests visiting us. <<<
-[Turn 3] Guest 1: So good morning, class.
+=== NO APT MOVE EXAMPLES ===
 
-Output: {"turn_id": 2, "codes": [], "reasoning": "Classroom management/introduction. No APT move present."}
+### Example 13: No APT move (procedural)
+Context:
+>>> [Turn 17] Teacher: Okay, please scan the QR code. I want you to think of one to two words about why people have appearance anxiety. <<<
+
+Output: {"turn_id": 17, "codes": [], "reasoning": "Procedural instruction and activity setup. No discourse move directed at student thinking. → no code"}
 
 ---
 
-### Example 9: No APT move (content delivery)
+### Example 14: No APT move (content delivery)
 Context:
->>> [Turn 17] Teacher: Okay, so before we start the topic today, I will ask you to do something here. Can you please scan the QR code? So as you can see appearance anxiety. Now I want you to think of one to two words that are the reasons why people have anxiety about their looks and their appearance. <<<
+>>> [Turn 30] Teacher: So today we're going to talk about the housing problem in Hong Kong. As you know, many families live in very small spaces. <<<
 
-Output: {"turn_id": 17, "codes": [], "reasoning": "Teacher is giving procedural instructions and setting up an activity. Not asking students to elaborate, reason, or respond to each other's ideas."}
+Output: {"turn_id": 30, "codes": [], "reasoning": "Teacher is delivering content/lecturing. Not responding to or building on student talk. → no code"}
 
 ---
 
-### Example 10: Explain others
+### Example 15: No APT move (simple feedback)
 Context:
-[Turn 14] Student C: I think there, George is going to the state school and then he's not going to be seeing Emily for a long time.
->>> [Turn 15] Teacher: I like that. I like that. Who can rephrase what he said in your own words? Yeah? <<<
-[Turn 16] Student D: George needs to go to university and won't be seeing Emily for a long time.
+[Turn 28] Student: Because they feel insecure.
+>>> [Turn 29] Teacher: Good. Very good. <<<
 
-Output: {"turn_id": 15, "codes": ["explain_others"], "reasoning": "Teacher asks another student to rephrase/interpret what Student C said in their own words."}
+Output: {"turn_id": 29, "codes": [], "reasoning": "Simple acknowledgment. No follow-up question or discourse move. → no code"}
+
+---
+
+=== TRICKY CONTRAST EXAMPLES ===
+
+### Example 16: Multi-code utterance (revoice + add_on)
+Context:
+[Turn 1] Ryan: It is about something built after the squatter area was destroyed by fire.
+>>> [Turn 2] Teacher: Yeah, it is about something built after the fire. What do you think about that, William? <<<
+[Turn 3] William: It is pretty good.
+
+Output: {"turn_id": 2, "codes": ["revoice", "add_on"], "reasoning": "First part: teacher repeats Ryan's words → revoice. Second part: teacher turns to William (different student) for his thoughts → add_on. Two moves in one utterance."}
+
+---
+
+### Example 17: add_on, NOT say_more (teacher turns to class)
+Context:
+[Turn 9] Jessica: To keep order.
+>>> [Turn 10] Teacher: Anyone help her out? Who can expand on that? <<<
+[Turn 11] Jovin: To prevent chaos.
+
+Output: {"turn_id": 10, "codes": ["add_on"], "reasoning": "Teacher turns to OTHER students ('Anyone'). Inviting new contributors to help. → add_on (Type B), NOT say_more (Type A)"}
+
+---
+
+### Example 18: press_for_reasoning + add_on (multi-code)
+Context:
+[Turn 9] Jessica: To keep order.
+>>> [Turn 10] Teacher: Why is it important that they keep order? No? Anyone want to help? <<<
+[Turn 11] Jovin: To prevent chaos.
+
+Output: {"turn_id": 10, "codes": ["press_for_reasoning", "add_on"], "reasoning": "'Why is it important' demands reasoning from Jessica → press_for_reasoning. 'Anyone want to help?' turns to class → add_on. Two moves."}
+
+---
+
+### Example 19: add_on, NOT agree_disagree (no explicit agree/disagree language)
+Context:
+[Turn 60] Student A: I think homework should be banned.
+>>> [Turn 61] Teacher: Okay, what do others think? Does anyone have a different view? <<<
+[Turn 62] Student B: I think homework is useful.
+
+Output: {"turn_id": 61, "codes": ["add_on"], "reasoning": "Addressing OTHER students. 'What do others think?' invites new contributions. 'A different view' invites alternative ideas but does NOT use explicit agree/disagree language. → add_on, NOT agree_disagree"}
+
+CONTRAST — if the teacher had said:
+>>> "Do you AGREE with her that homework should be banned?" <<<
+→ This would be agree_disagree because it explicitly asks for a position using agree/disagree language.

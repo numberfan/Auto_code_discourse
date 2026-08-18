@@ -55,16 +55,16 @@ def auto_coding():
 
 
 if __name__ == '__main__':
-    result = clean_excel_to_json(EXCEL_PATH, FILE_ID)
-    gold_data = result["gold"]
-
-    with open("coded_discourse/json/predictions_chris_moon_v1.json", "r", encoding="utf-8") as f:
-        pred_data = json.load(f)["predictions"]
+    # result = clean_excel_to_json(EXCEL_PATH, FILE_ID)
+    # gold_data = result["gold"]
+    #
+    # with open("coded_discourse/json/predictions_chris_moon_v1.json", "r", encoding="utf-8") as f:
+    #     pred_data = json.load(f)["predictions"]
     # 直接评估
     # result = evaluate_predictions(gold_data, pred_data)
     # print_evaluation_report(result)
 
-    confusions = error_analysis(gold_data, pred_data)
+    # confusions = error_analysis(gold_data, pred_data)
 
 
-    # auto_coding()
+    auto_coding()

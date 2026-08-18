@@ -10,78 +10,184 @@ utterances in English classroom transcripts and identify Accountable Talk moves.
 4. Do NOT code classroom management, procedural instructions, content
    delivery, or simple acknowledgments.
 
-## THE 8 APT CODES:
+## FRAMEWORK: TWO TYPES OF APT MOVES
 
-### 1. Say more (T3)
-The teacher asks a student to elaborate, expand, or clarify their idea.
-- "Can you say more about that?"
-- "What do you mean by...?"
-- "Can you explain further?"
-- "Can you give me an example?"
-NOTE: This includes asking OTHER students to expand on someone's idea,
-or inviting anyone to elaborate. Even if the teacher provides hints/scaffolding
-while asking for elaboration, it still counts.
+APT moves fall into two categories based on PARTICIPANT STRUCTURE:
 
-### 2. Revoice (T1)
-The teacher repeats or rephrases what a student said, often to clarify
-or make it available to the whole class.
+### TYPE A: Teacher ↔ Same Student (one-on-one follow-up)
+The teacher continues the interaction with the SAME student who just spoke.
+Codes: say_more, revoice, press_for_reasoning, challenge
+
+### TYPE B: Teacher → Other Student(s) (connecting students' thinking)
+The teacher REDIRECTS the conversation to OTHER students, inviting them to
+contribute to or engage with the ongoing discussion.
+Codes: restate, agree_disagree, add_on, explain_others
+
+## FIRST DECISION: Who is the teacher addressing?
+Before choosing a specific code, determine:
+- Is the teacher continuing with the SAME student? → Choose from Type A
+- Is the teacher turning to OTHER student(s)? → Choose from Type B
+
+---
+
+## TYPE A CODES (Teacher ↔ Same Student):
+
+### 1. Say more
+The teacher asks the CURRENT student to elaborate, expand, or clarify
+their own idea. The teacher wants MORE CONTENT from this student.
+
+What counts:
+- Asking for clarification: "What do you mean by...?"
+- Asking for elaboration: "Can you say more about that?"
+- Asking for examples: "Can you give me an example?"
+- Asking for specifics: "Which ones?" / "Like what?"
+- Asking for opinion/thoughts: "What do you think about that?"
+
+What does NOT count:
+- Asking WHY (→ press_for_reasoning)
+- Directing the question to a different student (→ Type B)
+
+### 2. Revoice
+The teacher REPEATS or REPHRASES what the current student just said,
+to clarify or make it available to the whole class.
+
+What counts:
 - "So what you're saying is..."
-- "Let me see if I understand. You're suggesting that..."
-NOTE: Simple echoing of a single word (e.g., Student: "Face." Teacher: "Face.")
-is NOT revoicing unless the teacher reformulates or adds interpretive framing.
+- "Let me see if I understand — you think that..."
+- Teacher restates student's answer in clearer/different words
 
-### 3. Press for reasoning (T2)
-The teacher asks a student to provide reasons, evidence, or justification
-for their answer or opinion.
-- "Why do you think that?"
-- "What's your evidence?"
-- "How did you arrive at that conclusion?"
-- "Why is that?"
-NOTE: Must explicitly ask for reasoning/justification, not just elaboration.
+What does NOT count:
+- Simple one-word echo without reformulation
+- Teacher summarizing a whole discussion (not one student's idea)
 
-### 4. Challenge (T4)
-The teacher presents a counter-argument, counter-example, or pushes back
-on a student's idea to test its robustness.
-- "But what about...?"
-- "Can you think of a case where that wouldn't work?"
-- "Negative ways! But we're helping those people who have anxiety."
-NOTE: The teacher actively introduces a contradicting perspective,
-not just asking students to consider alternatives.
+### 3. Press for reasoning
+The teacher asks the CURRENT student to provide REASONS, EVIDENCE, or
+LOGICAL JUSTIFICATION for their claim. The teacher wants to know WHY.
+
+REQUIRED — must explicitly demand causal/logical explanation:
+- "WHY do you think that?"
+- "WHY is that?"
+- "What's your EVIDENCE?"
+- "HOW did you arrive at that conclusion?"
+- "What makes you say that?"
+- "Can you JUSTIFY/PROVE that?"
+
+KEY TEST: Can the student answer by simply giving more information?
+- If yes → say_more
+- If the student MUST explain a cause-effect or logical relationship → press_for_reasoning
+
+COMMON ERRORS (these are NOT press_for_reasoning):
+- "What do you think?" → say_more (asking for opinion, not reasoning)
+- "In what way?" → say_more (specification, not causation)
+- "What should they have done?" → say_more (alternative ideas, not reasoning)
+- "What happened?" → likely no APT move (content question), or say_more if following up on a student's claim
+
+### 4. Challenge
+The teacher presents a SPECIFIC counter-argument or contradiction that
+puts PRESSURE on the current student's claim.
+
+REQUIRED — teacher must SUPPLY the contradicting information:
+- "But [specific contradicting fact]!"
+- "But what about [counter-example]?"
+- "You said X, but earlier you said Y — how does that work?"
+- "But we're trying to help people with anxiety [contradicts negative comparison]"
+
+KEY TEST: Does the teacher's utterance contain a SPECIFIC piece of
+information that CONTRADICTS or THREATENS the student's position?
+- If yes → challenge
+- If teacher just probes without providing counter-info → press_for_reasoning or say_more
+
+What does NOT count:
+- "Are you sure?" (no counter-argument supplied)
+- "Positive or negative?" (asking to specify, not challenging)
+- "What about other options?" (asking for more, not contradicting)
+
+---
+
+## TYPE B CODES (Teacher → Other Students):
 
 ### 5. Restate
-The teacher asks a student to restate or repeat what another student said.
-- "Can you repeat what he/she just said?"
+The teacher asks Student B to REPEAT or RESTATE what Student A said
+(verbatim or near-verbatim).
+
+What counts:
+- "Can you repeat what he just said?"
 - "What did Gabriel say?"
 - "Did you hear what she said?"
-NOTE: The goal is to ensure students listen to each other.
+
+PURPOSE: Ensuring students LISTEN to each other.
+NOTE: Only requires repetition, not interpretation (→ explain_others).
 
 ### 6. Agree/Disagree
-The teacher asks students to take a position on another student's idea —
-to agree or disagree with it.
-- "Do you agree with that?"
-- "Does anyone disagree?"
-- "Who agrees with Adrian?"
-- "Whose side would you take?"
-NOTE: Must explicitly invite agreement/disagreement, not just ask for opinions.
+The teacher EXPLICITLY asks students to take a POSITION (agree or disagree)
+on another student's idea.
+
+REQUIRED — must use explicit agree/disagree language:
+- "Do you AGREE with that?"
+- "Does anyone DISAGREE?"
+- "Who AGREES with Adrian?"
+- "Whose SIDE would you take?"
+
+What does NOT count:
+- "What do you think about what she said?" (no agree/disagree language → add_on)
+- "Anyone else?" (inviting contributions, not positions → add_on)
+- "Does anyone have a different view?" (inviting alternative ideas → add_on)
 
 ### 7. Add on
-The teacher invites students to add to, build upon, or contribute additional
-ideas related to what has been said.
-- "Anyone else? Any other ideas?"
-- "What else?"
-- "Does anyone have anything to add?"
-- "Any alternatives?"
-- "Anyone want to help her out?"
-NOTE: This is broader than Say more. Add on invites NEW contributions
-from OTHER students, while Say more asks the SAME student to elaborate.
+The teacher invites OTHER students to contribute NEW ideas or build upon
+what has been discussed.
 
-### 8. Explain others (T5)
-The teacher asks a student to explain or interpret another student's thinking.
+What counts:
+- "Anyone else?"
+- "Any other ideas?"
+- "What else?" (directed to class)
+- "Does anyone have anything to add?"
+- "Who else wants to share?"
+- "Anyone want to help her out?"
+- "[New student name], what do you think?"
+- "Does anyone have a different view?"
+
+KEY FEATURE: Opens the floor to new contributors. Does NOT require them
+to engage with a specific peer's idea (unlike agree_disagree or explain_others).
+
+### 8. Explain others
+The teacher asks Student B to INTERPRET or EXPLAIN Student A's thinking
+in their own words.
+
+What counts:
 - "Can you explain what she means?"
 - "Why do you think he said that?"
 - "Can you put that in your own words?"
-NOTE: Different from Restate (which is just repeating). Explain others
-requires interpretation of another's reasoning.
+- "What do you think [Student A] was trying to say?"
+
+KEY DISTINCTION from Restate: Explain others requires INTERPRETATION
+and understanding, not just repetition.
+
+---
+
+## DECISION FLOWCHART:
+
+Step 1: Is this classroom management, procedural, feedback, or lecturing?
+        → YES: codes = [] (NO APT move). STOP.
+
+Step 2: Does the teacher REPEAT/REPHRASE what a student just said?
+        → YES: revoice. (May continue to check for additional codes.)
+
+Step 3: WHO is the teacher addressing?
+
+        → SAME student who just spoke: Go to Step 4 (Type A)
+        → OTHER student(s) or the whole class: Go to Step 5 (Type B)
+
+Step 4 (Type A — Same student):
+   4a. Does the teacher supply a SPECIFIC contradiction? → challenge
+   4b. Does the teacher explicitly ask WHY / for evidence? → press_for_reasoning
+   4c. Otherwise (asks for more detail, opinion, examples) → say_more
+
+Step 5 (Type B — Other students):
+   5a. Does the teacher ask to REPEAT another's words? → restate
+   5b. Does the teacher ask to INTERPRET/EXPLAIN another's thinking? → explain_others
+   5c. Does the teacher explicitly ask to AGREE/DISAGREE? → agree_disagree
+   5d. Otherwise (invites new ideas, contributions) → add_on
 
 ## WHAT IS NOT AN APT MOVE (DO NOT CODE):
 - Classroom management: "Please open your iPad", "Stand up", "Good morning"
@@ -90,6 +196,7 @@ requires interpretation of another's reasoning.
 - Content delivery/lecturing (even if long)
 - Rhetorical questions the teacher answers themselves
 - Reading instructions or text aloud
+- Content questions that initiate a topic (not following up on student talk)
 - Roll-calling scores: "A?", "One", "B?", "Zero"
 
 ## OUTPUT FORMAT:
@@ -97,5 +204,5 @@ For each teacher utterance, respond in JSON:
 {
   "turn_id": <number>,
   "codes": [],  // empty array if no APT move
-  "reasoning": "<brief explanation of why you coded or did not code>"
+  "reasoning": "<brief explanation: 1) who is teacher addressing? 2) what is the move?>"
 }
