@@ -17,3 +17,9 @@
    * 视角一：标准 Prompt，要求精确分类（偏低温度）。 
    * 视角二：修改 Prompt，得到高召回结果。 
    * 合并：对于两个视角结果不一致的话轮，单独用第三个 Prompt 进行仲裁，只准选择一个代码。
+6. 两轮分析思路 （显示决策树、分布聚合、二次确认） 《- chain-of-though, self-consistency, ensemble
+   * 第一轮 (决策树 prompt): 快速决策树判断 → 大部分话轮直接出结果  （needs_review=True）
+   * 第二轮 (精确定义 prompt): 聚焦型确认 → 给出最终判断
+
+## 整体思路
+![img.png](readme/img.png)

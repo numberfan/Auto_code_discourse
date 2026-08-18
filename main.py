@@ -13,7 +13,7 @@ from error_analysis.error_analysis import error_analysis
 DEFAULT_EXCEL_PATH = "coded_discourse/excel/chris moon video 1 transcription_susan_5_22.xlsx"
 DEFAULT_JSON_DIR = "coded_discourse/json"
 DEFAULT_FILE_ID = "chris_moon_v1"
-DEFAULT_N_VOTES = 3
+DEFAULT_N_VOTES = 5
 
 
 def parse_args():
