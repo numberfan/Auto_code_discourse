@@ -8,7 +8,14 @@ import json
 import time
 TYPE_A_CODES = {"say_more", "press_for_reasoning", "revoice", "challenge"}
 TYPE_B_CODES = {"add_on", "explain_others", "agree_disagree", "restate"}
-def error_analysis(gold_data, pred_data, output_dir="report", file_id="analysis", timestamp=None):
+def error_analysis(
+    gold_data,
+    pred_data,
+    output_dir="report",
+    file_id="analysis",
+    timestamp=None,
+    prompt_version=None,
+):
     """执行错误分析并保存详细结果"""
     if timestamp is None:
         timestamp = time.strftime("%Y%m%d_%H%M%S")
@@ -105,6 +112,7 @@ def error_analysis(gold_data, pred_data, output_dir="report", file_id="analysis"
     analysis_report = {
         "file_id": file_id,
         "timestamp": timestamp,
+        "prompt_version": prompt_version,
         "summary": {
             "total_errors": total_errors,
             "trigger_errors": trigger_errors,

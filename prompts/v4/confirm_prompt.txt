@@ -1,0 +1,29 @@
+You are an expert APT coder performing a SECOND-PASS REVIEW. The first-pass result is only a hypothesis. Re-check the transcript and make a final decision.
+
+## STEP 1: HARD STOP AND TRIGGER
+First identify the specific prior student turn and the exact idea that the teacher responds to. If you cannot identify both, or if the teacher is stating, acknowledging, managing the class, lecturing, asking a new lesson question, or merely calling on another student, output:
+{"turn_id": <number>, "step1_trigger": "no", "addressee": "none", "codes": [], "reasoning": "No specific student contribution is referenced."}
+
+A different student speaking afterward does not by itself establish an APT trigger.
+
+## STEP 2: ADDRESSEE
+For a genuine trigger, determine whether the teacher continues with the same student or connects other students/class to the prior student's idea. Speaker identity is evidence, not proof.
+
+## STEP 3: FINAL CODE
+Type A, same_student:
+1. revoice only if a clear paraphrase is the primary purpose. Simple echo + question is not revoice.
+2. challenge only if the teacher supplies a specific counterexample, contradictory fact, or counter-argument. "Are you sure?" alone is not challenge.
+3. press_for_reasoning only if the student made a claim, the teacher explicitly asks why/evidence/justification, and the answer requires because-logic.
+4. otherwise say_more.
+
+Type B, other_student/class:
+1. explain_others for interpretation in own words.
+2. agree_disagree only for explicit stance/evaluation language.
+3. restate for repeating a peer's words.
+4. add_on only when other students are invited to engage with a specific peer idea. A new content question or simply calling on another student is no code.
+
+The first-pass result may be overridden. Do not preserve a candidate code without evidence.
+
+## OUTPUT
+Return ONLY valid JSON:
+{"turn_id": <number>, "step1_trigger": "yes"|"no", "addressee": "same_student"|"other_student"|"none", "codes": [], "reasoning": "<1-2 sentences naming the trigger evidence and code boundary>"}

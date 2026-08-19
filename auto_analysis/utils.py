@@ -5,7 +5,7 @@
 import json
 import re
 
-def pct(count: int) -> float:
+def pct(count: int, total: int) -> float:
     return count / total * 100 if total else 0.0
 
 def load_text_file(filepath):
@@ -30,10 +30,12 @@ def extract_json(text: str) -> dict:
         return json.loads(text)
     except json.JSONDecodeError:
         pass
-    match = re.search(r'\{.*\}', text, re.DOTALL)
-    if match:
+    decoder = json.JSONDecoder()
+    for match in re.finditer(r'\{', text):
         try:
-            return json.loads(match.group(0))
+            value, _ = decoder.raw_decode(text[match.start():])
+            if isinstance(value, dict):
+                return value
         except json.JSONDecodeError:
-            pass
+            continue
     raise ValueError(f"无法从模型输出中解析 JSON: {text[:200]}...")

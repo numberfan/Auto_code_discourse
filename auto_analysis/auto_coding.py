@@ -12,7 +12,7 @@ USE_JSON_MODE = llm_config.supports_json_mode()
 llm_config.print_status()  # 打印模型状态
 
 # prompt
-PROMPT_VERSION = "v3"
+PROMPT_VERSION = "v4"
 SYSTEM_PROMPT = load_text_file(f"prompts/{PROMPT_VERSION}/coded_prompt.txt")
 FEW_SHOT_EXAMPLES = load_text_file(f"prompts/{PROMPT_VERSION}/few_shot.txt")
 CONFIRM_PROMPT = load_text_file(f"prompts/{PROMPT_VERSION}/confirm_prompt.txt")
@@ -24,6 +24,8 @@ ALL_VALID_CODES = TYPE_A_CODES | TYPE_B_CODES
 
 # llm重连
 MAX_RETRIES = 3
+PREDICT_MAX_OUTPUT_TOKENS = 1024
+CONFIRM_MAX_OUTPUT_TOKENS = 512
 
 
 # 上下文窗口
@@ -106,7 +108,7 @@ def is_confident(result: dict) -> bool:
         return False
 
     # Case 5: 高风险代码进入复查。错误分析显示 add_on/challenge 容易自信误报，
-    high_risk_codes = {"add_on", "challenge"}
+    high_risk_codes = {"add_on", "revoice", "challenge"}
     if codes_set & high_risk_codes:
         return False
 
@@ -150,6 +152,7 @@ async def predict_single(client, transcript: list, target_idx: int) -> dict:
         "model": MODEL_NAME,
         "messages": messages,
         "temperature": 0.0,
+        "max_tokens": PREDICT_MAX_OUTPUT_TOKENS,
     }
     if USE_JSON_MODE:
         kwargs["response_format"] = {"type": "json_object"}
@@ -158,6 +161,9 @@ async def predict_single(client, transcript: list, target_idx: int) -> dict:
             print(f"[预测] Turn {target_turn['turn_id']} (尝试 {attempt + 1}/{MAX_RETRIES})...")
             response = await client.chat.completions.create(**kwargs)
             return extract_json(response.choices[0].message.content)
+        except ValueError as e:
+            print(f"[解析失败] Turn {target_turn['turn_id']}: {e}")
+            raise RuntimeError(f"Turn {target_turn['turn_id']}: 模型返回了无效 JSON") from e
         except Exception as e:
             print(f"[失败] 尝试 {attempt + 1}: {e}")
             if attempt < MAX_RETRIES - 1:
@@ -183,6 +189,7 @@ async def confirm_prediction(client, transcript: list, target_idx: int, first_re
         f'"{target_turn["utterance"]}"\n\n'
         f"Make your FINAL decision. Output ONLY valid JSON:\n"
         f'{{"turn_id": {target_turn["turn_id"]}, '
+        f'"step1_trigger": "yes"|"no", '
         f'"addressee": "same_student"|"other_student"|"none", '
         f'"codes": [], "reasoning": "..."}}'
     )
@@ -194,6 +201,7 @@ async def confirm_prediction(client, transcript: list, target_idx: int, first_re
         "model": MODEL_NAME,
         "messages": messages,
         "temperature": 0.0,
+        "max_tokens": CONFIRM_MAX_OUTPUT_TOKENS,
     }
     if USE_JSON_MODE:
         kwargs["response_format"] = {"type": "json_object"}
@@ -221,6 +229,10 @@ async def code_single_teacher_turn(client, transcript: list, target_idx: int) ->
     if confirm_result and "codes" in confirm_result:
         # 用 confirm 返回的 addressee 做类型过滤
         addressee = confirm_result.get("addressee", "none")
+        trigger = confirm_result.get(
+            "step1_trigger",
+            "no" if addressee == "none" else first_result.get("step1_trigger", "unknown"),
+        )
         if addressee == "same_student":
             allowed = TYPE_A_CODES
         elif addressee == "other_student":
@@ -232,6 +244,7 @@ async def code_single_teacher_turn(client, transcript: list, target_idx: int) ->
             target, first_result,
             override_codes=final_codes,
             override_addressee=addressee,
+            override_trigger=trigger,
             confirmed=True,
             needs_review=False,
             confirm_reasoning=confirm_result.get("reasoning", "")
@@ -242,7 +255,7 @@ async def code_single_teacher_turn(client, transcript: list, target_idx: int) ->
 
 
 def _build_output(target: dict, first_result: dict, *,
-                  override_codes=None, override_addressee=None,
+                  override_codes=None, override_addressee=None, override_trigger=None,
                   confirmed: bool, needs_review: bool,
                   confirm_reasoning: str = "") -> dict:
     """统一构建输出格式"""
@@ -253,7 +266,7 @@ def _build_output(target: dict, first_result: dict, *,
         "speaker": target["speaker"],
         "utterance": target["utterance"][:120] + ("..." if len(target["utterance"]) > 120 else ""),
         "codes": codes,
-        "step1_trigger": first_result.get("step1_trigger", "unknown"),
+        "step1_trigger": override_trigger if override_trigger is not None else first_result.get("step1_trigger", "unknown"),
         "step2_addressee": addressee,
         "reasoning": first_result.get("reasoning", ""),
         "confirmed": confirmed,

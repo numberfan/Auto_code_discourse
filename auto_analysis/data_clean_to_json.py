@@ -20,6 +20,8 @@ CODE_BASE_NAMES = {
     "explain_others": ["explain others", "explain with others"],
 }
 
+CLEANING_VERSION = 2
+
 
 def clean_col_name(s: str) -> str:
     """
@@ -134,8 +136,9 @@ def clean_excel_to_json(filepath: str, file_id: str) -> dict:
         utterance = str(row.get(utterance_col, "")).strip()
         timestamp = str(row.get(timestamp_col, "")) if timestamp_col else ""
 
-        # 判断是否是教师
-        is_teacher = any(kw in speaker.lower() for kw in ["teacher", "t"])
+        # 仅匹配明确的教师标签，避免把 Patricia、Ethan 等名字误判为教师。
+        normalized_speaker = speaker.casefold()
+        is_teacher = normalized_speaker == "t" or normalized_speaker.startswith("teacher")
 
         # 提取 APT codes
         codes = []
@@ -165,6 +168,7 @@ def clean_excel_to_json(filepath: str, file_id: str) -> dict:
 
     return {
         "file_id": file_id,
+        "cleaning_version": CLEANING_VERSION,
         "language": "en",
         "total_turns": len(transcript),
         "teacher_turns": sum(1 for t in transcript if t["is_teacher"]),

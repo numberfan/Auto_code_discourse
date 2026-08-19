@@ -1,0 +1,58 @@
+## V4 CONTRASTIVE EXAMPLES
+
+### Trigger evidence is required
+[Turn 10] Student: The answer is five.
+[Turn 11] Teacher: Good. Now, what about the second paragraph?
+-> {"step1_trigger":"no", "step2_addressee":"none", "codes":[], "reasoning":"Acknowledgment followed by a new lesson question; no specific student idea is referenced."}
+
+[Turn 20] Student: They want to impress people.
+[Turn 21] Teacher: Who are 'they'?
+-> {"step1_trigger":"yes", "step2_addressee":"same_student", "codes":["say_more"], "reasoning":"The teacher asks the same student to clarify a referent in the student's specific statement."}
+
+### Revoice versus ordinary follow-up
+[Turn 30] Student: People feel bad because they compare themselves on social media.
+[Turn 31] Teacher: So you are saying social media comparison causes the anxiety?
+-> {"step1_trigger":"yes", "step2_addressee":"same_student", "codes":["revoice"], "reasoning":"The paraphrase is the primary purpose and seeks confirmation."}
+
+[Turn 32] Student: People feel bad because they compare themselves on social media.
+[Turn 33] Teacher: Social media? What happened next?
+-> {"step1_trigger":"yes", "step2_addressee":"same_student", "codes":["say_more"], "reasoning":"The repeated phrase is only a lead-in; the primary action is a follow-up question."}
+
+[Turn 34] Student: Because they are old.
+[Turn 35] Teacher: That's the reason? What evidence do you have?
+-> {"step1_trigger":"yes", "step2_addressee":"same_student", "codes":["press_for_reasoning"], "reasoning":"The question asks for evidence; the echo is not the primary action."}
+
+### Challenge requires supplied contradiction
+[Turn 40] Student: All wild animals are dangerous.
+[Turn 41] Teacher: But what about a rabbit? A wild rabbit is not necessarily dangerous.
+-> {"step1_trigger":"yes", "step2_addressee":"same_student", "codes":["challenge"], "reasoning":"The teacher supplies a specific counterexample and contradiction."}
+
+[Turn 42] Student: All wild animals are dangerous.
+[Turn 43] Teacher: Are you sure?
+-> {"step1_trigger":"yes", "step2_addressee":"same_student", "codes":["say_more"], "reasoning":"There is no supplied counter-information, so this is a generic follow-up rather than challenge."}
+
+### Add_on requires a peer anchor
+[Turn 50] Student A: The main cause is social media.
+[Turn 51] Teacher: Anyone want to add to what she said?
+-> {"step1_trigger":"yes", "step2_addressee":"other_student", "codes":["add_on"], "reasoning":"Other students are explicitly invited to build on a specific peer contribution."}
+
+[Turn 52] Student A: The main cause is social media.
+[Turn 53] Teacher: Who can answer this question: what is the main cause?
+-> {"step1_trigger":"no", "step2_addressee":"none", "codes":[], "reasoning":"The teacher is soliciting an answer to the teacher's own question, not connecting students to the peer idea."}
+
+[Turn 54] Student A: The main cause is social media.
+[Turn 55] Teacher: William, what do you think about appearance anxiety?
+-> {"step1_trigger":"no", "step2_addressee":"none", "codes":[], "reasoning":"Changing speakers is not enough; this is a new broad content question."}
+
+### Type B distinctions
+[Turn 60] Student A: I think the building is modern.
+[Turn 61] Teacher: Does anyone agree with her?
+-> {"step1_trigger":"yes", "step2_addressee":"other_student", "codes":["agree_disagree"], "reasoning":"Explicit stance request about the peer's claim."}
+
+[Turn 62] Student A: I think the building is modern.
+[Turn 63] Teacher: What did she say?
+-> {"step1_trigger":"yes", "step2_addressee":"other_student", "codes":["restate"], "reasoning":"The teacher asks another student to repeat the peer's words."}
+
+[Turn 64] Student A: I think the building is modern.
+[Turn 65] Teacher: Can someone explain what she meant in your own words?
+-> {"step1_trigger":"yes", "step2_addressee":"other_student", "codes":["explain_others"], "reasoning":"The teacher asks for interpretation rather than repetition."}
