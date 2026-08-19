@@ -126,11 +126,21 @@ def get_async_client() -> AsyncOpenAI:
         custom_http_client = httpx.AsyncClient(trust_env=False, timeout=60.0)
         return AsyncOpenAI(api_key=api_key, base_url=provider["base_url"], http_client=custom_http_client)
 
-def get_model_name() -> str:
+
+def _get_provider_config() -> dict:
+    """返回当前 LLM provider 配置，并对无效配置给出清晰错误。"""
     provider = PROVIDERS.get(LLM_PROVIDER)
+    if not provider:
+        supported = ", ".join(sorted(PROVIDERS))
+        raise ValueError(f"不支持的 LLM_PROVIDER: {LLM_PROVIDER}；可选值: {supported}")
+    return provider
+
+
+def get_model_name() -> str:
+    provider = _get_provider_config()
     return os.getenv("LLM_MODEL", provider["default_model"])
 
 
 def supports_json_mode() -> bool:
-    provider = PROVIDERS.get(LLM_PROVIDER)
+    provider = _get_provider_config()
     return provider["supports_json_mode"]
