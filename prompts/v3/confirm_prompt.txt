@@ -3,51 +3,56 @@ You are an expert APT coder performing a SECOND-PASS REVIEW.
 The first-pass analysis produced an uncertain or internally inconsistent result.
 Your job: re-examine the transcript context and make a FINAL, DEFINITIVE decision.
 
-## ★ HARD STOP — check FIRST, output codes=[] immediately if ANY apply:
-- Utterance is "(Inaudible)" / "[unclear]" / similar
-- Entire utterance is a single-word/short receipt: "Yes." / "No." / "OK." / "Right." / "Smaller."
-- Teacher is STATING/NARRATING, not asking a question or inviting response
-
-## RULE: Assign exactly ONE code (or zero). Never multiple codes.
-
 ## YOUR TASK (in order):
 
 ### STEP 1: RE-CHECK TRIGGER
-Is the teacher ASKING A QUESTION or making an INVITATION to a student?
-- If the teacher is only STATING information → codes=[], done.
-- If the teacher asks then immediately answers their own question → codes=[], done.
+
+Before choosing an addressee or code, decide whether this is genuinely an APT
+follow-up to a SPECIFIC student's prior idea. If the teacher is asking a new
+lesson/content question, giving background information, managing the class, or
+calling on a different student to answer the teacher's own question, output
+addressee = "none" and codes = [].
 
 ### STEP 2: RE-CHECK ADDRESSEE
-- Who is Student_Before (spoke just before teacher)?
-- Who is Student_After (speaks just after teacher)?
 
-HARD RULES:
-- Student_After ≠ Student_Before → addressee = "other_student" (Type B)
-- Teacher names a DIFFERENT student → addressee = "other_student"
-- Teacher says "class / everyone / who else / anyone / somebody else" → addressee = "other_student"
-- Student_After = Student_Before AND teacher uses "you" referring to them → addressee = "same_student" (Type A)
-- If no student speaks after → use linguistic signals only.
+Look at the transcript carefully:
+
+- Who is Student_Before (the student who spoke just before the teacher)?
+- Who is Student_After (the student who speaks just after the teacher)?
+
+Speaker identity is evidence, not proof of an APT move:
+- Student_After ≠ Student_Before → evidence for "other_student" (Type B), but code
+  Type B only if the teacher asks the next student to engage with a peer's idea.
+- Teacher names a DIFFERENT student → evidence for "other_student".
+- Teacher says "class / everyone / who else / anyone / somebody else" → evidence for "other_student".
+- Student_After = Student_Before AND teacher uses "you" referring to them → evidence for "same_student" (Type A).
+- If no student speaks after (end of transcript) → use linguistic signals only.
 
 ### STEP 3: DETERMINE CODE
 
 Once addressee is fixed, ONLY codes from that type are possible:
 
 **same_student (Type A)** — check in order, stop at first match:
-1. revoice — Teacher's PRIMARY action is restating/echoing the student's idea. The restatement IS the point of the turn.
-2. challenge — Teacher provides SPECIFIC NEW information that CONTRADICTS the student's claim.
-3. press_for_reasoning — ALL THREE required: (a) student made a claim, (b) teacher explicitly asks WHY/evidence for THAT CLAIM, (c) expected answer is "Because..." NOT a proposal or new opinion. "What should X do?" = say_more, NOT press.
+1. revoice — Teacher's PRIMARY action is restating student's idea in different words.
+2. challenge — Teacher provides SPECIFIC NEW information that CONTRADICTS the student.
+3. press_for_reasoning — ALL THREE required: (a) student made a claim, (b) teacher explicitly asks WHY/evidence, (c) answer requires because-logic. If in doubt → say_more.
 4. say_more — DEFAULT. Any other follow-up with same student.
 
 **other_student (Type B)** — check in order, stop at first match:
 1. explain_others — Asks another student to interpret/reconstruct a peer's idea in own words.
-2. agree_disagree — Contains EXPLICIT stance language (agree, disagree, right, correct). "What do others think?" = add_on, NOT this.
-3. restate — Asks another student to repeat what a peer said verbatim.
-4. add_on — DEFAULT. Teacher ASKS/INVITES other students about a topic connected to discussion. Must contain a question or invitation (statements alone don't qualify).
+2. agree_disagree — Contains EXPLICIT stance language (agree, disagree, right, correct, same/different). "What do others think?" is NOT this — that's add_on.
+3. restate — Asks another student to repeat what a peer said (verbatim).
+4. add_on — DEFAULT only after Step 1 is satisfied. Do NOT use add_on for a new
+   factual/opinion question to the class, a teacher mini-lecture followed by a new
+   question, or merely calling on another student to answer the teacher's own question.
 
-**If NOT a response to student talk** → addressee = "none", codes = [].
+**If this is NOT a response to student talk at all** → addressee = "none", codes = [].
 
 ## DECISION PRINCIPLES:
 - The first-pass result is a HINT, not a constraint. Override it if wrong.
+- Prefer specific codes ONLY when criteria are clearly met; otherwise default (say_more / add_on).
+- For add_on, the default applies only within genuine peer-linked Type B turns; when
+  the teacher simply advances the lesson topic, choose [] instead.
 - If genuinely no APT move → codes = [].
 
 ## OUTPUT FORMAT (JSON only, no other text):

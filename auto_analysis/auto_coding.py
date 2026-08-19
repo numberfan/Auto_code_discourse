@@ -106,7 +106,6 @@ def is_confident(result: dict) -> bool:
         return False
 
     # Case 5: 高风险代码进入复查。错误分析显示 add_on/challenge 容易自信误报，
-    # 因此即使格式一致，也要求二次确认。
     high_risk_codes = {"add_on", "challenge"}
     if codes_set & high_risk_codes:
         return False
@@ -156,11 +155,11 @@ async def predict_single(client, transcript: list, target_idx: int) -> dict:
         kwargs["response_format"] = {"type": "json_object"}
     for attempt in range(MAX_RETRIES):
         try:
-            print(f"  [预测] Turn {target_turn['turn_id']} (尝试 {attempt + 1}/{MAX_RETRIES})...")
+            print(f"[预测] Turn {target_turn['turn_id']} (尝试 {attempt + 1}/{MAX_RETRIES})...")
             response = await client.chat.completions.create(**kwargs)
             return extract_json(response.choices[0].message.content)
         except Exception as e:
-            print(f"  [失败] 尝试 {attempt + 1}: {e}")
+            print(f"[失败] 尝试 {attempt + 1}: {e}")
             if attempt < MAX_RETRIES - 1:
                 await asyncio.sleep(2 ** attempt)
             else:
@@ -199,11 +198,11 @@ async def confirm_prediction(client, transcript: list, target_idx: int, first_re
     if USE_JSON_MODE:
         kwargs["response_format"] = {"type": "json_object"}
     try:
-        print(f"  [复查] Turn {target_turn['turn_id']}...")
+        print(f"[复查] Turn {target_turn['turn_id']}...")
         response = await client.chat.completions.create(**kwargs)
         return extract_json(response.choices[0].message.content)
     except Exception as e:
-        print(f"  [复查失败] Turn {target_turn['turn_id']}: {e}")
+        print(f"[复查失败] Turn {target_turn['turn_id']}: {e}")
         return None
 
 
@@ -217,7 +216,7 @@ async def code_single_teacher_turn(client, transcript: list, target_idx: int) ->
     if is_confident(first_result):
         return _build_output(target, first_result, confirmed=False, needs_review=False)
     # Layer 2: 条件复查
-    print(f"  [不确信] Turn {target['turn_id']}，进入复查...")
+    print(f"[不确信] Turn {target['turn_id']}，进入复查...")
     confirm_result = await confirm_prediction(client, transcript, target_idx, first_result)
     if confirm_result and "codes" in confirm_result:
         # 用 confirm 返回的 addressee 做类型过滤
