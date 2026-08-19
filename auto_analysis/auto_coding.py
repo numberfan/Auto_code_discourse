@@ -22,6 +22,9 @@ SYSTEM_PROMPT = load_text_file(SYSTEM_PROMPT_PATH)
 FEW_SHOT_EXAMPLES = load_text_file(FEW_SHOT_EXAMPLES_PATH)
 CONFIRM_PROMPT_TEMPLATE = load_text_file(CONFIRM_PROMPT_PATH)
 
+TYPE_A_CODES = {"say_more", "press_for_reasoning", "revoice", "challenge"}
+TYPE_B_CODES = {"add_on", "explain_others", "agree_disagree", "restate"}
+
 
 def build_context_window(transcript: list, target_idx: int, before: int = 5, after: int = 2) -> str:
     """构建目标话轮的上下文窗口"""
@@ -137,32 +140,76 @@ async def code_single_turn(client, transcript: list, target_idx: int, temperatur
                 raise RuntimeError(f"连续 {MAX_RETRIES} 次调用 LLM 失败，放弃该话轮。")
 
 
-async def code_with_voting(client, transcript: list, target_idx: int, n_votes: int = 5) -> dict:
+def is_confident(result):
+    trigger = result.get("step1_trigger")
+    codes = result.get("codes", [])
+
+    if trigger == "no":
+        return len(codes) == 0
+    if not codes:  # 如果 trigger 是 yes 但没代码，说明模型不确定
+        return False
+
+    # 检查 addressee 与 codes 类型一致
+    addressee = result.get("step2_addressee")
+    if addressee not in ("same_student", "other_student"):
+        return False
+
+    codes_set = set(codes)
+    if addressee == "same_student" and not codes.issubset(TYPE_A_CODES):
+        return False
+    if addressee == "other_student" and not codes.issubset(TYPE_B_CODES):
+        return False
+
+    # 检查 reasoning 中是否表达不确定
+    reasoning = result.get("reasoning", "").lower()
+    uncertainty_words = ["probably", "maybe", "uncertain", "possibly", "either", "not sure", "could be"]
+    if any(w in reasoning for w in uncertainty_words):
+        return False
+    return True
+
+
+async def code_with_voting(client, transcript: list, target_idx: int, n_votes: int = 2) -> dict:
     """异步并发执行多轮投票"""
 
+    # 先单次，temperature=0
+    first_result = await code_single_turn(client, transcript, target_idx, temperature=0.0)
+
+    # 快速路径：单次结果足够自信
+    if is_confident(first_result):
+        target = transcript[target_idx]
+        return {
+            "turn_id": target["turn_id"],
+            "speaker": target["speaker"],
+            "utterance": target["utterance"][:100],
+            "codes": first_result.get("codes", []),
+            "confidence": {c: 1.0 for c in first_result.get("codes", [])} if first_result.get("codes") else {
+                "no_apt": 1.0},
+            "needs_review": False,
+            "vote_detail": {"__NONE__": 0} if not first_result.get("codes") else {c: 1 for c in
+                                                                                  first_result.get("codes", [])},
+            "none_votes": 0,
+            "step1_trigger": first_result.get("step1_trigger", "yes"),
+            "step2_addressee": first_result.get("step2_addressee", "none"),
+            "sample_reasoning": first_result.get("reasoning", "")
+        }
+
+    # 否则执行多轮投票（n_votes 可为 3）
     async def single_vote(i):
         temp = 0.0 if i == 0 else 0.3
         return await code_single_turn(client, transcript, target_idx, temperature=temp)
 
-    # 并发执行所有投票
-    vote_tasks = [single_vote(i) for i in range(n_votes)]
+    extra_votes = max(1, n_votes - 1)  # 至少再投1次
+    vote_tasks = [single_vote(i) for i in range(extra_votes)]
     all_results = await asyncio.gather(*vote_tasks, return_exceptions=True)
-
-    valid_results = []
+    valid_results = [r for r in all_results if not isinstance(r, Exception)]
 
     needs_review = False
-
-    for r in all_results:
-        if not isinstance(r, Exception):
-            valid_results.append(r)
 
     if not valid_results:
         raise RuntimeError("所有投票任务均失败")
     n = len(valid_results)
 
     # 如果模型没输出 step1_trigger / step2_addressee，从 codes 推断
-    TYPE_A_CODES = {"say_more", "press_for_reasoning", "revoice", "challenge"}
-    TYPE_B_CODES = {"add_on", "explain_others", "agree_disagree", "restate"}
     for r in valid_results:
         if "step1_trigger" not in r:
             r["step1_trigger"] = "yes" if r.get("codes") else "no"
@@ -181,11 +228,12 @@ async def code_with_voting(client, transcript: list, target_idx: int, n_votes: i
 
     if trigger_yes > n / 2:
         trigger_decision = "yes"
-    elif trigger_yes >= 2 and trigger_no > trigger_yes:  # 有一定支持但未过半
+    elif trigger_yes > 0 and trigger_yes == trigger_no:
+        trigger_decision = "uncertain"
+    elif trigger_yes >= 2 and trigger_no > trigger_yes:
         trigger_decision = "uncertain"
     else:
         trigger_decision = "no"
-
 
     if trigger_decision == "no":
         # 多数认为无 APT
@@ -212,7 +260,14 @@ async def code_with_voting(client, transcript: list, target_idx: int, n_votes: i
     if not addressee_votes_valid:
         addressee_decision = "other_student"
     else:
-        addressee_decision = max(set(addressee_votes_valid), key=addressee_votes_valid.count)
+        vote_counts = Counter(addressee_votes_valid)
+        max_count = max(vote_counts.values())
+        top_addressees = [a for a, cnt in vote_counts.items() if cnt == max_count]
+        if len(top_addressees) > 1:
+            needs_review = True
+            addressee_decision = "other_student"
+        else:
+            addressee_decision = top_addressees[0]
 
     # 根据 addressee 定义允许的 codes
     if addressee_decision == "same_student":
@@ -302,8 +357,20 @@ async def _code_full_transcript_async(transcript: list, n_votes: int = 5, max_co
                         client, transcript, array_idx, result
                     )
                     if confirm_result and "codes" in confirm_result:
-                        # 用二次确认结果覆盖
-                        result["codes"] = confirm_result["codes"]
+                        if result['step2_addressee'] == "same_student":
+                            allowed = TYPE_A_CODES
+                        elif result['step2_addressee'] == "other_student":
+                            allowed = TYPE_B_CODES
+                        else:
+                            allowed = set()
+
+                        filtered = [c for c in confirm_result['codes'] if c in allowed]
+                        if filtered:
+                            result["codes"] = filtered
+                        else:
+                            if not confirm_result["codes"]:
+                                result["codes"] = []
+
                         result["confirmed"] = True
                         result["confirm_reasoning"] = confirm_result.get("reasoning", "")
                         result["needs_review"] = False  # 已确认
@@ -381,5 +448,5 @@ async def confirm_uncertain_turn(client, transcript: list, target_idx: int, firs
         result = extract_json(response.choices[0].message.content)
         return result
     except Exception as e:
-        print(f"  [二次确认失败] Turn {target_turn['turn_id']}: {e}")
+        print(f"[二次确认失败] Turn {target_turn['turn_id']}: {e}")
         return None
