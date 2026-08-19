@@ -11,6 +11,7 @@ from auto_analysis.evaluation.error_analysis import error_analysis
 # 默认配置（可被命令行覆盖）
 DEFAULT_EXCEL_PATH = "coded_discourse/excel/chris moon video 1 transcription_susan_5_22.xlsx"
 DEFAULT_JSON_DIR = "coded_discourse/json"
+DEFAULT_EVAL_DIR = "coded_discourse/evaluation"
 DEFAULT_FILE_ID = "chris_moon_v1"
 DEFAULT_N_VOTES = 5
 
@@ -77,11 +78,11 @@ def auto_coding(excel_path: str, file_id: str, n_votes: int, json_dir: str):
 
         # 打印并保存评估报告
         print_evaluation_report(eval_result)
-        save_evaluation_report(eval_result, json_dir, file_id, timestamp)
+        save_evaluation_report(eval_result, DEFAULT_EVAL_DIR, file_id, timestamp)
 
         # 4. 错误分析与存档
         print("开始错误分析...")
-        error_analysis(gold, predictions, json_dir, file_id, timestamp)
+        error_analysis(gold, predictions, DEFAULT_EVAL_DIR, file_id, timestamp)
 
 
 if __name__ == '__main__':

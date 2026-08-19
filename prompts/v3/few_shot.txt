@@ -1,108 +1,208 @@
-## EXAMPLES BY DECISION PATH
+ ## EXAMPLES BY DECISION PATH
 
-### Path: No trigger → step1_trigger = "no"
-#### Example 1: Procedural (no APT)
+### Path: No trigger → codes = []
+#### Example 1: Procedural
 Context:
 >>> [Turn 17] Teacher: Okay, please scan the QR code. I want you to think of one to two words about why people have appearance anxiety. <<<
 
-Output: {"turn_id": 17, "step1_trigger": "no", "step2_addressee": "none", "codes": [], "reasoning": "Procedural instruction, not reacting to a specific student utterance."}
+Output: {"turn_id": 17, "step1_trigger": "no", "step2_addressee": "none", "step2_evidence": "No prior student speech this turn reacts to.", "codes": [], "reasoning": "Procedural instruction, not reacting to student utterance."}
 
 #### Example 2: Content delivery
 Context:
 >>> [Turn 30] Teacher: So today we're going to talk about the housing problem in Hong Kong. As you know, many families live in very small spaces. <<<
 
-Output: {"turn_id": 30, "step1_trigger": "no", "step2_addressee": "none", "codes": [], "reasoning": "Content delivery / lecturing, no prior student input."}
+Output: {"turn_id": 30, "step1_trigger": "no", "step2_addressee": "none", "step2_evidence": "N/A", "codes": [], "reasoning": "Content delivery / lecturing, no prior student input."}
+
+---
 
 ### Path: same_student → say_more
-#### Example 3: Clarification
+#### Example 3: Clarification request
 Context:
 [Turn 21] Taurus: They want to impress people.
 >>> [Turn 22] Teacher: Who are the they? <<<
+[Turn 23] Taurus: The teenagers.
 
-Output: {"turn_id": 22, "step1_trigger": "yes", "step2_addressee": "same_student", "codes": ["say_more"], "reasoning": "Addressing SAME student (Taurus). Asking for clarification."}
+Output: {"turn_id": 22, "step1_trigger": "yes", "step2_addressee": "same_student", "step2_evidence": "Before=Taurus, After=Taurus (same student). Teacher asking 'you' to clarify.", "codes": ["say_more"], "reasoning": "Same student (Taurus). Asking for clarification of a pronoun, not reasoning. → say_more"}
 
-#### Example 4: "Because what?" is say_more, not press
+#### Example 4: "Because what?" is say_more, NOT press
 Context:
 [Turn 8] Student: They are for now, because...
 >>> [Turn 9] Teacher: So you said they are for now, because… Because what? <<<
+[Turn 10] Student: Because they don't know.
 
-Output: {"turn_id": 9, "step1_trigger": "yes", "step2_addressee": "same_student", "codes": ["say_more"], "reasoning": "Teacher repeats incomplete reason and asks 'Because what?'. This asks student to complete thought, not provide new reasoning. → say_more, NOT press_for_reasoning."}
+Output: {"turn_id": 9, "step1_trigger": "yes", "step2_addressee": "same_student", "step2_evidence": "Before=Student, After=same Student. Continuing 1-on-1.", "codes": ["say_more"], "reasoning": "Same student. 'Because what?' asks student to COMPLETE an unfinished sentence, not provide new justification for a claim. → say_more, NOT press_for_reasoning."}
+
+#### Example 5: Detail/follow-up question is say_more, NOT press
+Context:
+[Turn 46] Student: It was in the rooftop.
+>>> [Turn 47] Teacher: Rooftop, good. Was there a cover on the roof? <<<
+[Turn 48] Student: No.
+
+Output: {"turn_id": 47, "step1_trigger": "yes", "step2_addressee": "same_student", "step2_evidence": "Before=Student, After=same Student.", "codes": ["say_more"], "reasoning": "Same student. Teacher acknowledges and asks a factual detail question about the rooftop. No reasoning demand. → say_more"}
+
+#### Example 6: "What do you mean?" is say_more
+Context:
+[Turn 44] Mia: I think social media is bad for teenagers.
+>>> [Turn 45] Teacher: Bad for teenagers? What do you mean by 'bad'? <<<
+[Turn 46] Mia: Like they compare themselves.
+
+Output: {"turn_id": 45, "step1_trigger": "yes", "step2_addressee": "same_student", "step2_evidence": "Before=Mia, After=Mia.", "codes": ["say_more"], "reasoning": "Same student (Mia). Asking for clarification of meaning, not why she thinks it's bad. → say_more, NOT press_for_reasoning. Also NOT revoice (echo is not full reformulation)."}
+
+#### Example 7: Opinion solicitation is say_more (no prior claim)
+Context:
+[Turn 12] Student: The government built new flats.
+>>> [Turn 13] Teacher: What do you think about that? What should the government have done instead? <<<
+[Turn 14] Student: Maybe they should...
+
+Output: {"turn_id": 13, "step1_trigger": "yes", "step2_addressee": "same_student", "step2_evidence": "Before=Student, After=same Student.", "codes": ["say_more"], "reasoning": "Same student. Asking for opinion/alternatives. Student stated a FACT (not a claim), so teacher is not pressing for reasoning behind a claim. → say_more"}
+
+---
 
 ### Path: same_student → press_for_reasoning
-#### Example 5: Explicit WHY
+#### Example 8: Explicit WHY after a claim
 Context:
 [Turn 9] Jessica: To keep order.
 >>> [Turn 10] Teacher: Why is it important that they keep order? <<<
+[Turn 11] Jessica: Because if they don't...
 
-Output: {"turn_id": 10, "step1_trigger": "yes", "step2_addressee": "same_student", "codes": ["press_for_reasoning"], "reasoning": "Addressing SAME student. Explicit 'Why' demands causal explanation."}
+Output: {"turn_id": 10, "step1_trigger": "yes", "step2_addressee": "same_student", "step2_evidence": "Before=Jessica, After=Jessica.", "codes": ["press_for_reasoning"], "reasoning": "Same student. Jessica made a claim ('to keep order'). Teacher explicitly asks WHY with a causal demand. Student must explain cause-effect. → press_for_reasoning"}
 
-### Path: same_student → revoice (TRUE revoice)
-#### Example 6: Genuine restatement as main purpose
+#### Example 9: Evidence demand after evaluative claim
+Context:
+[Turn 33] Amy: I think the character was brave.
+>>> [Turn 34] Teacher: What in the text makes you think she was brave? <<<
+[Turn 35] Amy: Because in chapter 3...
+
+Output: {"turn_id": 34, "step1_trigger": "yes", "step2_addressee": "same_student", "step2_evidence": "Before=Amy, After=Amy.", "codes": ["press_for_reasoning"], "reasoning": "Same student. Amy made an evaluative CLAIM ('brave'). Teacher demands textual EVIDENCE. Response requires logical justification. → press_for_reasoning"}
+
+#### Example 10: "How do you know?" after a claim
+Context:
+[Turn 20] Carlos: I think they're going to lose the game.
+>>> [Turn 21] Teacher: How do you know? What gives you that idea? <<<
+[Turn 22] Carlos: Because the other team is...
+
+Output: {"turn_id": 21, "step1_trigger": "yes", "step2_addressee": "same_student", "step2_evidence": "Before=Carlos, After=Carlos.", "codes": ["press_for_reasoning"], "reasoning": "Same student. Carlos made a PREDICTION (claim). Teacher asks 'How do you know?' demanding evidence/reasoning. → press_for_reasoning"}
+
+---
+
+### Path: same_student → revoice
+#### Example 11: Genuine restatement as main purpose
 Context:
 [Turn 33] Amy: I think people feel bad because they compare themselves on social media.
 >>> [Turn 34] Teacher: So you're saying social media comparison is the main cause of the anxiety? <<<
 [Turn 35] Amy: Yeah, exactly.
 
-Output: {"turn_id": 34, "step1_trigger": "yes", "step2_addressee": "same_student", "codes": ["revoice"], "reasoning": "Teacher rephrases Amy's idea in clearer words, and the restatement IS the primary action (seeking confirmation)."}
+Output: {"turn_id": 34, "step1_trigger": "yes", "step2_addressee": "same_student", "step2_evidence": "Before=Amy, After=Amy.", "codes": ["revoice"], "reasoning": "Same student. Teacher rephrases Amy's idea in clearer/more precise language. The reformulation IS the primary action (seeking confirmation). → revoice"}
+
+---
 
 ### Path: same_student → challenge
-#### Example 7: Specific counter-example
+#### Example 12: Specific counter-example
 Context:
 [Turn 25] Student: All wild animals are dangerous.
->>> [Turn 26] Teacher: But what about a rabbit? Is a rabbit dangerous? <<<
+>>> [Turn 26] Teacher: But what about a rabbit? A wild rabbit—is that dangerous? <<<
+[Turn 27] Student: Well, maybe not all...
 
-Output: {"turn_id": 26, "step1_trigger": "yes", "step2_addressee": "same_student", "codes": ["challenge"], "reasoning": "Teacher supplies a specific counter-example (rabbit) that contradicts the student's claim, not merely asking for reasoning."}
+Output: {"turn_id": 26, "step1_trigger": "yes", "step2_addressee": "same_student", "step2_evidence": "Before=Student, After=same Student.", "codes": ["challenge"], "reasoning": "Same student. Teacher provides a SPECIFIC counter-example (rabbit) that directly contradicts 'ALL wild animals are dangerous.' Teacher supplies new information that threatens the claim. → challenge"}
+
+---
 
 ### Path: other_student → add_on
-#### Example 8: Inviting new contributors
+#### Example 13: Inviting new contributors
 Context:
-[Turn 40] Student A: Maybe we can add a breathing exercise feature.
+[Turn 40] Student_A: Maybe we can add a breathing exercise feature.
 >>> [Turn 41] Teacher: That's interesting. Anyone else? Any other ideas? <<<
+[Turn 42] Student_B: How about a journal feature?
 
-Output: {"turn_id": 41, "step1_trigger": "yes", "step2_addressee": "other_student", "codes": ["add_on"], "reasoning": "Addressing OTHER students. Opens floor to new ideas."}
+Output: {"turn_id": 41, "step1_trigger": "yes", "step2_addressee": "other_student", "step2_evidence": "Before=Student_A, After=Student_B (DIFFERENT student). Teacher says 'Anyone else?' = class address.", "codes": ["add_on"], "reasoning": "Other students. 'Anyone else? Any other ideas?' opens the floor to new contributors. → add_on"}
 
-#### Example 9: "What do others think?" is add_on, NOT agree_disagree
+#### Example 14: "What do others think?" is add_on, NOT agree_disagree
 Context:
-[Turn 50] Student: I think the main cause is social media.
+[Turn 50] Student_A: I think the main cause is social media.
 >>> [Turn 51] Teacher: What do others think? <<<
+[Turn 52] Student_B: I think it's more about...
 
-Output: {"turn_id": 51, "step1_trigger": "yes", "step2_addressee": "other_student", "codes": ["add_on"], "reasoning": "Addressing OTHER students. Invites new ideas, does NOT explicitly ask for agreement/disagreement. → add_on, NOT agree_disagree."}
+Output: {"turn_id": 51, "step1_trigger": "yes", "step2_addressee": "other_student", "step2_evidence": "Before=Student_A, After=Student_B (DIFFERENT). 'Others' = class address.", "codes": ["add_on"], "reasoning": "Other students. 'What do others think?' invites new perspectives but does NOT explicitly ask for agree/disagree stance. → add_on, NOT agree_disagree."}
+
+#### Example 15: Named different student, open invitation
+Context:
+[Turn 60] Marco: The theme is about friendship.
+>>> [Turn 61] Teacher: OK. Sarah, do you want to add something? <<<
+[Turn 62] Sarah: Yeah, I also think...
+
+Output: {"turn_id": 61, "step1_trigger": "yes", "step2_addressee": "other_student", "step2_evidence": "Before=Marco, After=Sarah. Teacher names Sarah (different student).", "codes": ["add_on"], "reasoning": "Other student (Sarah ≠ Marco). Inviting Sarah to add her thoughts. → add_on"}
+
+---
 
 ### Path: other_student → agree_disagree
-#### Example 10: Explicit agree/disagree language
+#### Example 16: Explicit agree/disagree language
 Context:
 [Turn 3] William: It is pretty good, right?
 >>> [Turn 4] Teacher: Does anyone agree with him? <<<
+[Turn 5] Jessica: I agree because...
 
-Output: {"turn_id": 4, "step1_trigger": "yes", "step2_addressee": "other_student", "codes": ["agree_disagree"], "reasoning": "Addressing OTHER students. Explicitly asks 'agree'."}
+Output: {"turn_id": 4, "step1_trigger": "yes", "step2_addressee": "other_student", "step2_evidence": "Before=William, After=Jessica (DIFFERENT). Explicit 'agree' language.", "codes": ["agree_disagree"], "reasoning": "Other students. Explicitly asks 'agree with him' = stance-taking language. → agree_disagree"}
+
+#### Example 17: "Is she right?"
+Context:
+[Turn 70] Lisa: The answer is 42.
+>>> [Turn 71] Teacher: Is she right? What do you guys think—is Lisa correct? <<<
+[Turn 72] Tom: I don't think so because...
+
+Output: {"turn_id": 71, "step1_trigger": "yes", "step2_addressee": "other_student", "step2_evidence": "Before=Lisa, After=Tom (DIFFERENT). 'Is she right/correct' = evaluation language.", "codes": ["agree_disagree"], "reasoning": "Other students. 'Is she right?' explicitly asks for evaluation/stance on Lisa's answer. → agree_disagree"}
+
+---
 
 ### Path: other_student → restate
-#### Example 11: Ask to repeat
+#### Example 18: Ask to repeat
 Context:
-[Turn 71] Gabriel: (speaks softly)
+[Turn 71] Gabriel: (speaks softly) I think it's because of the setting.
 >>> [Turn 72] Teacher: What did Gabriel say? Did you hear what he said? <<<
+[Turn 73] Lynn: He said it's because of the setting.
 
-Output: {"turn_id": 72, "step1_trigger": "yes", "step2_addressee": "other_student", "codes": ["restate"], "reasoning": "Addressing OTHER student (Lynn). Asking her to repeat what Gabriel said."}
+Output: {"turn_id": 72, "step1_trigger": "yes", "step2_addressee": "other_student", "step2_evidence": "Before=Gabriel, After=Lynn (DIFFERENT). Teacher asks class to repeat Gabriel's words.", "codes": ["restate"], "reasoning": "Other student. Asking class to REPEAT what Gabriel said verbatim. → restate"}
+
+---
 
 ### Path: other_student → explain_others
-#### Example 12: Ask to interpret
+#### Example 19: Ask to interpret/rephrase
 Context:
-[Turn 14] Student C: I think George is going to the state school and won't see Emily.
->>> [Turn 15] Teacher: Who can rephrase what he said in your own words? <<<
+[Turn 14] Student_C: I think George is going to the state school and won't see Emily.
+>>> [Turn 15] Teacher: Who can put what he just said in your own words? <<<
+[Turn 16] Student_D: He's saying George will leave...
 
-Output: {"turn_id": 15, "step1_trigger": "yes", "step2_addressee": "other_student", "codes": ["explain_others"], "reasoning": "Addressing OTHER students. Asks them to interpret/rephrase."}
+Output: {"turn_id": 15, "step1_trigger": "yes", "step2_addressee": "other_student", "step2_evidence": "Before=Student_C, After=Student_D (DIFFERENT). 'In your own words' = interpretation.", "codes": ["explain_others"], "reasoning": "Other students. Asks class to INTERPRET what Student_C said in their own words. → explain_others"}
 
-### TRICKY CONTRAST: Same surface form, different code
-#### Example 13: Not revoice (echo + question)
-Context:
-[Turn 44] Mia: I think social media is bad for teenagers.
->>> [Turn 45] Teacher: Bad for teenagers? What do you mean by "bad"? <<<
+---
 
-Output: {"turn_id": 45, "step1_trigger": "yes", "step2_addressee": "same_student", "codes": ["say_more"], "reasoning": "Teacher echoes fragment but main function is asking for clarification. Echo is not a full reformulation. → say_more, NOT revoice."}
+## CRITICAL CONTRAST PAIRS (study these to avoid common confusions)
 
-#### Example 14: Not press_for_reasoning (opinion question)
-Context:
-[Turn 12] Student: The government built new flats.
->>> [Turn 13] Teacher: What do you think about that? What should the government have done instead? <<<
+### CONTRAST 1: say_more vs press_for_reasoning
 
-Output: {"turn_id": 13, "step1_trigger": "yes", "step2_addressee": "same_student", "codes": ["say_more"], "reasoning": "Asking for opinion/alternatives, not causal justification. → say_more, NOT press_for_reasoning."}
+| Turn | Code | Key reason |
+|------|------|-----------|
+| S: "It was on the rooftop." T: "Was there a cover?" | say_more | Detail question, no reasoning demand |
+| S: "The rooftop is the best spot." T: "Why do you think it's the best?" | press | Evaluative CLAIM + explicit WHY |
+| S: "I like the blue one." T: "Tell me more about that." | say_more | Elaboration request |
+| S: "I like the blue one." T: "Why blue and not red?" | press | Demands justification for preference |
+| S: "They moved to the city." T: "What happened after?" | say_more | Narrative continuation |
+| S: "They moved to the city." T: "Why did they move?" | press | Causal explanation demand |
+| S: "I think it's unfair." T: "What do you mean unfair?" | say_more | Clarification |
+| S: "I think it's unfair." T: "What evidence shows it's unfair?" | press | Evidence demand for claim |
+
+### CONTRAST 2: say_more (Type A) vs add_on (Type B)
+
+| Context | Code | Key reason |
+|---------|------|-----------|
+| S_A says X. T: "Tell me more." S_A continues. | say_more | Same student continues |
+| S_A says X. T: "Anyone else?" S_B responds. | add_on | Different student responds |
+| S_A says X. T: "What about you, Maria?" Maria responds. | add_on | Teacher names different student |
+| S_A says X. T: "Can you give an example?" S_A responds. | say_more | Same student, elaboration |
+
+### CONTRAST 3: press_for_reasoning (Type A) vs add_on (Type B)
+
+| Context | Code | Key reason |
+|---------|------|-----------|
+| S_A: "It's unfair." T: "Why do you say that?" S_A responds. | press | Same student, reasoning demand |
+| S_A: "It's unfair." T: "Who else has thoughts on this?" S_B responds. | add_on | Different student, new ideas |
+| S_A: "It's unfair." T: "Does anyone have evidence for or against?" S_B responds. | add_on | Different student invited |

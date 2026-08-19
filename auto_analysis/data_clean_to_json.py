@@ -135,7 +135,7 @@ def clean_excel_to_json(filepath: str, file_id: str) -> dict:
         timestamp = str(row.get(timestamp_col, "")) if timestamp_col else ""
 
         # 判断是否是教师
-        is_teacher = any(kw in speaker.lower() for kw in ["teacher", "t:"])
+        is_teacher = any(kw in speaker.lower() for kw in ["teacher", "t"])
 
         # 提取 APT codes
         codes = []

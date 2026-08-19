@@ -22,11 +22,26 @@ SYSTEM_PROMPT = load_text_file(SYSTEM_PROMPT_PATH)
 FEW_SHOT_EXAMPLES = load_text_file(FEW_SHOT_EXAMPLES_PATH)
 CONFIRM_PROMPT_TEMPLATE = load_text_file(CONFIRM_PROMPT_PATH)
 
-def build_context_window(transcript: list, target_idx: int, before: int = 5, after: int = 1) -> str:
+
+def build_context_window(transcript: list, target_idx: int, before: int = 5, after: int = 2) -> str:
     """构建目标话轮的上下文窗口"""
 
     context_lines = []
     start = max(0, target_idx - before)  # 前文
+
+    # 找到目标话轮前最后一个学生
+    student_before = None
+    for i in range(target_idx - 1, -1, -1):
+        if not transcript[i].get("is_teacher", False):
+            student_before = transcript[i]["speaker"]
+            break
+    # 找到目标话轮后第一个学生
+    student_after = None
+    for i in range(target_idx + 1, min(len(transcript), target_idx + after + 1)):
+        if not transcript[i].get("is_teacher", False):
+            student_after = transcript[i]["speaker"]
+            break
+
     for i in range(start, target_idx):
         turn = transcript[i]
         context_lines.append(
@@ -47,10 +62,23 @@ def build_context_window(transcript: list, target_idx: int, before: int = 5, aft
         context_lines.append(
             f"[Turn {turn['turn_id']}] {turn['speaker']}: {turn['utterance']}"
         )
+
+    # 添加 speaker 标注
+    context_lines.append("")
+    context_lines.append(
+        f"[SPEAKER INFO] Student_Before = {student_before or 'unknown'} | Student_After = {student_after or 'unknown'}")
+    if student_before and student_after:
+        if student_before == student_after:
+            context_lines.append(f"[SPEAKER INFO] Same student continues → likely Type A")
+        else:
+            context_lines.append(f"[SPEAKER INFO] Different student responds → likely Type B")
+
     return "\n".join(context_lines)
 
 
 MAX_RETRIES = 3
+
+
 async def code_single_turn(client, transcript: list, target_idx: int, temperature: float = 0.0) -> dict:
     """对单个教师话轮进行 APT 编码（异步）"""
     context = build_context_window(transcript, target_idx)
@@ -60,13 +88,17 @@ async def code_single_turn(client, transcript: list, target_idx: int, temperatur
         f"## CONTEXT:\n{context}\n\n"
         f"## TASK:\n"
         f"Analyze the TARGET TURN (marked with >>>) above.\n"
-        f"Follow the 3-step CODING PROCEDURE defined in the system prompt.\n"
-        f"The turn AFTER the target (if shown) is only to help you determine WHO responded. "
-        f"Do NOT use the content of the response to decide the code.\n\n"
+        f"Follow the 3-step CODING PROCEDURE defined in the system prompt.\n\n"
+        f"IMPORTANT for Step 2 (Addressee Check):\n"
+        f"- Look at [SPEAKER INFO] at the bottom of the context.\n"
+        f"- If Student_After ≠ Student_Before, the teacher is redirecting → Type B.\n"
+        f"- If Student_After = Student_Before, the teacher stays with same student → Type A.\n"
+        f"- Use the CONTENT of responses only to verify, not to determine the code.\n\n"
         f"## OUTPUT FORMAT:\n"
         f"Return ONLY a valid JSON object (no text outside JSON):\n"
         f'{{"turn_id": {target_turn["turn_id"]}, "step1_trigger": "yes"|"no", '
         f'"step2_addressee": "same_student"|"other_student"|"none", '
+        f'"step2_evidence": "...", '
         f'"codes": [], "reasoning": "..."}}\n'
     )
 
@@ -89,7 +121,8 @@ async def code_single_turn(client, transcript: list, target_idx: int, temperatur
     # 重试循环
     for attempt in range(MAX_RETRIES):
         try:
-            print(f"[调用中] 正在向 {MODEL_NAME} 发送请求 (Turn {target_turn['turn_id']}, 尝试 {attempt + 1}/{MAX_RETRIES})...")
+            print(
+                f"[调用中] 正在向 {MODEL_NAME} 发送请求 (Turn {target_turn['turn_id']}, 尝试 {attempt + 1}/{MAX_RETRIES})...")
             response = await client.chat.completions.create(**kwargs)
             print(f"[成功] 收到响应 (Turn {target_turn['turn_id']})")
             return extract_json(response.choices[0].message.content)
@@ -116,6 +149,9 @@ async def code_with_voting(client, transcript: list, target_idx: int, n_votes: i
     all_results = await asyncio.gather(*vote_tasks, return_exceptions=True)
 
     valid_results = []
+
+    needs_review = False
+
     for r in all_results:
         if not isinstance(r, Exception):
             valid_results.append(r)
@@ -140,9 +176,16 @@ async def code_with_voting(client, transcript: list, target_idx: int, n_votes: i
                 r["step2_addressee"] = "none"
 
     # Step 1: Trigger 投票
-    trigger_votes = [1 if r.get("step1_trigger") == "yes" else 0 for r in valid_results]
-    trigger_yes = sum(trigger_votes)
-    trigger_decision = "yes" if trigger_yes > n / 2 else "no"
+    trigger_yes = sum(1 for r in valid_results if r.get("step1_trigger") == "yes")
+    trigger_no = n - trigger_yes
+
+    if trigger_yes > n / 2:
+        trigger_decision = "yes"
+    elif trigger_yes >= 2 and trigger_no > trigger_yes:  # 有一定支持但未过半
+        trigger_decision = "uncertain"
+    else:
+        trigger_decision = "no"
+
 
     if trigger_decision == "no":
         # 多数认为无 APT
@@ -160,10 +203,12 @@ async def code_with_voting(client, transcript: list, target_idx: int, n_votes: i
             "step2_addressee": "none",
             "sample_reasoning": valid_results[0].get("reasoning", "")
         }
+    elif trigger_decision == "uncertain":
+        needs_review = True
 
     # Step 2: Addressee 投票
     addressee_votes = [r.get("step2_addressee", "") for r in valid_results]
-    addressee_votes_valid = [a for a in addressee_votes if a in ("same_student", "other_student")] # 过滤无效值
+    addressee_votes_valid = [a for a in addressee_votes if a in ("same_student", "other_student")]  # 过滤无效值
     if not addressee_votes_valid:
         addressee_decision = "other_student"
     else:
@@ -193,21 +238,22 @@ async def code_with_voting(client, transcript: list, target_idx: int, n_votes: i
     non_none_counts = {c: cnt for c, cnt in code_counts.items() if c != "__NONE__"}
     final_codes = []
     confidence_map = {}
-    needs_review = False
 
     # 选择出现次数最多的 codes，要求至少 2 票且超过 none_votes
     if non_none_counts:
         max_count = max(non_none_counts.values())
-        if max_count > n / 2: # 严格多数
+        if max_count > n / 2:  # 严格多数
             for code, cnt in non_none_counts.items():
                 if cnt > n / 2:
                     final_codes.append(code)
                     confidence_map[code] = round(cnt / n, 2)
-        elif max_count >= 2 and max_count > none_votes: # 相对多数
-            max_code = max(non_none_counts, key=non_none_counts.get)
-            final_codes.append(max_code)
-            confidence_map[max_code] = round(max_count / n, 2)
-            needs_review = True
+        else:  # 相对多数下，输出所有票数 >=2 且 > none_votes 的 code
+            for code, cnt in non_none_counts.items():
+                if cnt >= 2 and cnt > none_votes:
+                    final_codes.append(code)
+                    confidence_map[code] = round(cnt / n, 2)
+            if final_codes:
+                needs_review = True
     if not final_codes and non_none_counts:
         needs_review = True
     # 检查投票分歧是否过大（例如 confidence < 0.6）
