@@ -7,10 +7,9 @@ from assess_func import evaluate_predictions, print_evaluation_report
 from auto_analysis.auto_coding import code_full_transcript
 
 
-def leave_one_out_evaluation(all_files: list, n_votes: int = 3):
+def leave_one_out_evaluation(all_files: list, max_concurrency: int = 5):
     """
     留一法：每次用 1 个文件做测试，其余做 few-shot 来源
-
     all_files: [{"file_id": "...", "transcript": [...], "gold": [...]}, ...]
     """
 
@@ -26,12 +25,17 @@ def leave_one_out_evaluation(all_files: list, n_votes: int = 3):
         gold = test_file["gold"]
 
         # 编码
-        predictions = code_full_transcript(transcript, n_votes=n_votes)
+        predictions = code_full_transcript(transcript, max_concurrency=max_concurrency)
+
+        # 转为评估格式
+        pred_for_eval = [
+            {"turn_id": p["turn_id"], "codes": p["codes"]}
+            for p in predictions
+        ]
 
         # 评估
-        eval_result = evaluate_predictions(gold, predictions)
+        eval_result = evaluate_predictions(gold, pred_for_eval)
         eval_result["file_id"] = test_file["file_id"]
-
         all_results.append(eval_result)
         print_evaluation_report(eval_result)
 
@@ -42,13 +46,13 @@ def leave_one_out_evaluation(all_files: list, n_votes: int = 3):
     print(f"\n{'=' * 60}")
     print(f"OVERALL LEAVE-ONE-OUT RESULTS")
     print(f"{'=' * 60}")
-    print(f"  Average Binary F1: {avg_binary_f1:.3f}")
-    print(f"  Average Macro F1:  {avg_macro_f1:.3f}")
+    print(f"Average Binary F1: {avg_binary_f1:.3f}")
+    print(f"Average Macro F1:  {avg_macro_f1:.3f}")
 
     # 找出表现最差的文件
     worst = min(all_results, key=lambda x: x["macro_f1"])
     best = max(all_results, key=lambda x: x["macro_f1"])
-    print(f"  Best file:  {best['file_id']} (Macro F1: {best['macro_f1']:.3f})")
-    print(f"  Worst file: {worst['file_id']} (Macro F1: {worst['macro_f1']:.3f})")
+    print(f"Best file:  {best['file_id']} (Macro F1: {best['macro_f1']:.3f})")
+    print(f"Worst file: {worst['file_id']} (Macro F1: {worst['macro_f1']:.3f})")
 
     return all_results

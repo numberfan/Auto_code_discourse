@@ -2,7 +2,7 @@
   "file_id": "chris_moon_v1",
   "language": "en",
   "total_turns": 244,
-  "teacher_turns": 121,
+  "teacher_turns": 164,
   "transcript": [
     {
       "turn_id": 1,
@@ -49,7 +49,7 @@
       "timestamp": "01:13-01:15",
       "speaker": "Student 1",
       "utterance": "Yes.",
-      "is_teacher": false,
+      "is_teacher": true,
       "word_count": 1
     },
     {
@@ -65,7 +65,7 @@
       "timestamp": "01:34-01:38",
       "speaker": "Student 2",
       "utterance": "Yeah. (Inaudible)",
-      "is_teacher": false,
+      "is_teacher": true,
       "word_count": 2
     },
     {
@@ -81,7 +81,7 @@
       "timestamp": "01:41-01:47",
       "speaker": "Student 2",
       "utterance": "(Inaudible)",
-      "is_teacher": false,
+      "is_teacher": true,
       "word_count": 1
     },
     {
@@ -97,7 +97,7 @@
       "timestamp": "01:53-01:54",
       "speaker": "Student 2",
       "utterance": "What?",
-      "is_teacher": false,
+      "is_teacher": true,
       "word_count": 1
     },
     {
@@ -113,7 +113,7 @@
       "timestamp": "01:57-02:08",
       "speaker": "Student 2",
       "utterance": "They should have rebuilt slopes. Umm. Slopes they could",
-      "is_teacher": false,
+      "is_teacher": true,
       "word_count": 9
     },
     {
@@ -145,7 +145,7 @@
       "timestamp": "02:56-03:00",
       "speaker": "Student 3",
       "utterance": "I think, I think she made a really good point.",
-      "is_teacher": false,
+      "is_teacher": true,
       "word_count": 10
     },
     {
@@ -257,7 +257,7 @@
       "timestamp": "04:14-04:16",
       "speaker": "Student 4",
       "utterance": "They didn't have an iPad.",
-      "is_teacher": false,
+      "is_teacher": true,
       "word_count": 5
     },
     {
@@ -369,7 +369,7 @@
       "timestamp": "05:10-05:11",
       "speaker": "Student 5",
       "utterance": "Rooftop.",
-      "is_teacher": false,
+      "is_teacher": true,
       "word_count": 1
     },
     {
@@ -385,7 +385,7 @@
       "timestamp": "05:27-05:29",
       "speaker": "Student 5",
       "utterance": "Smaller.",
-      "is_teacher": false,
+      "is_teacher": true,
       "word_count": 1
     },
     {
@@ -401,7 +401,7 @@
       "timestamp": "05:30-05:31",
       "speaker": "Student 5",
       "utterance": "Very small.",
-      "is_teacher": false,
+      "is_teacher": true,
       "word_count": 2
     },
     {
@@ -465,7 +465,7 @@
       "timestamp": "06:23-06:28",
       "speaker": "Student 6",
       "utterance": "There was a big wooden barrel of rice instead of uh, plastic packet.",
-      "is_teacher": false,
+      "is_teacher": true,
       "word_count": 13
     },
     {
@@ -545,7 +545,7 @@
       "timestamp": "07:14-07:17",
       "speaker": "Patricia",
       "utterance": "Because he had nothing to do.",
-      "is_teacher": false,
+      "is_teacher": true,
       "word_count": 6
     },
     {
@@ -561,7 +561,7 @@
       "timestamp": "07:20-07:23",
       "speaker": "Patricia",
       "utterance": "To show how hard their life was.",
-      "is_teacher": false,
+      "is_teacher": true,
       "word_count": 7
     },
     {
@@ -577,7 +577,7 @@
       "timestamp": "07:28-07:31",
       "speaker": "Patricia",
       "utterance": "Because it is heavy.",
-      "is_teacher": false,
+      "is_teacher": true,
       "word_count": 4
     },
     {
@@ -593,7 +593,7 @@
       "timestamp": "07:35-07:37",
       "speaker": "Patricia",
       "utterance": "Oh, they need to travel with the buckets.",
-      "is_teacher": false,
+      "is_teacher": true,
       "word_count": 8
     },
     {
@@ -625,7 +625,7 @@
       "timestamp": "08:29-08:35",
       "speaker": "Student 6",
       "utterance": "The game. Like the sports game, the exercise.",
-      "is_teacher": false,
+      "is_teacher": true,
       "word_count": 8
     },
     {
@@ -641,7 +641,7 @@
       "timestamp": "08:38-08:38",
       "speaker": "Student 6",
       "utterance": "Because I lost to you.",
-      "is_teacher": false,
+      "is_teacher": true,
       "word_count": 5
     },
     {
@@ -657,7 +657,7 @@
       "timestamp": "09:12-09:13",
       "speaker": "Student 7",
       "utterance": "I think court",
-      "is_teacher": false,
+      "is_teacher": true,
       "word_count": 3
     },
     {
@@ -673,7 +673,7 @@
       "timestamp": "09:18-09:20",
       "speaker": "Student 8",
       "utterance": "800.",
-      "is_teacher": false,
+      "is_teacher": true,
       "word_count": 1
     },
     {
@@ -689,7 +689,7 @@
       "timestamp": "09:26-09:29",
       "speaker": "Student 8",
       "utterance": "Child abuse.",
-      "is_teacher": false,
+      "is_teacher": true,
       "word_count": 2
     },
     {
@@ -753,7 +753,7 @@
       "timestamp": "10:40-10:43",
       "speaker": "Ethan",
       "utterance": "That is not family planning.",
-      "is_teacher": false,
+      "is_teacher": true,
       "word_count": 5
     },
     {
@@ -769,7 +769,7 @@
       "timestamp": "10:51-11:00",
       "speaker": "Ethan",
       "utterance": "Family planning is like planning how many children you want to have. The thing you talked about was ,uh, marriage counselling.",
-      "is_teacher": false,
+      "is_teacher": true,
       "word_count": 21
     },
     {
@@ -785,7 +785,7 @@
       "timestamp": "11:00-11:03",
       "speaker": "Ethan",
       "utterance": "I would, yeah.",
-      "is_teacher": false,
+      "is_teacher": true,
       "word_count": 3
     },
     {
@@ -801,7 +801,7 @@
       "timestamp": "11:30-11:32",
       "speaker": "Student 9",
       "utterance": "Should be demolished.",
-      "is_teacher": false,
+      "is_teacher": true,
       "word_count": 3
     },
     {
@@ -817,7 +817,7 @@
       "timestamp": "11:38-11:40",
       "speaker": "Student 9",
       "utterance": "Because no one uses it.",
-      "is_teacher": false,
+      "is_teacher": true,
       "word_count": 5
     },
     {
@@ -897,7 +897,7 @@
       "timestamp": "12:35-12:36",
       "speaker": "Patricia",
       "utterance": "Supermarket.",
-      "is_teacher": false,
+      "is_teacher": true,
       "word_count": 1
     },
     {
@@ -913,7 +913,7 @@
       "timestamp": "12:42-12:43",
       "speaker": "Patricia",
       "utterance": "Yes.",
-      "is_teacher": false,
+      "is_teacher": true,
       "word_count": 1
     },
     {
@@ -929,7 +929,7 @@
       "timestamp": "12:46-12:48",
       "speaker": "Patricia",
       "utterance": "It’s useful.",
-      "is_teacher": false,
+      "is_teacher": true,
       "word_count": 2
     },
     {
@@ -945,7 +945,7 @@
       "timestamp": "13:08-13:11",
       "speaker": "Student 10",
       "utterance": "We have too many museums.",
-      "is_teacher": false,
+      "is_teacher": true,
       "word_count": 5
     },
     {
@@ -961,7 +961,7 @@
       "timestamp": "13:16-13:17",
       "speaker": "Patricia",
       "utterance": "Yes, yes.",
-      "is_teacher": false,
+      "is_teacher": true,
       "word_count": 2
     },
     {
@@ -977,7 +977,7 @@
       "timestamp": "13:18-13:24",
       "speaker": "Patricia",
       "utterance": "I don’t know which one it is.",
-      "is_teacher": false,
+      "is_teacher": true,
       "word_count": 7
     },
     {
@@ -1009,7 +1009,7 @@
       "timestamp": "14:20-14:21",
       "speaker": "Student 11",
       "utterance": "Snake",
-      "is_teacher": false,
+      "is_teacher": true,
       "word_count": 1
     },
     {
@@ -1025,7 +1025,7 @@
       "timestamp": "14:22-14:23",
       "speaker": "Student 11",
       "utterance": "A mango shop.",
-      "is_teacher": false,
+      "is_teacher": true,
       "word_count": 3
     },
     {
@@ -1041,7 +1041,7 @@
       "timestamp": "14:38-14:41",
       "speaker": "Student 11",
       "utterance": "It is supposed to bolster the economy.",
-      "is_teacher": false,
+      "is_teacher": true,
       "word_count": 7
     },
     {
@@ -1057,7 +1057,7 @@
       "timestamp": "14:43-14:55",
       "speaker": "Student 11",
       "utterance": "People are investing or pawning their items and many people enjoy pawning.",
-      "is_teacher": false,
+      "is_teacher": true,
       "word_count": 12
     },
     {
@@ -1073,7 +1073,7 @@
       "timestamp": "15:08-15:10",
       "speaker": "Student 11",
       "utterance": "We have banks           .",
-      "is_teacher": false,
+      "is_teacher": true,
       "word_count": 4
     },
     {
@@ -1089,7 +1089,7 @@
       "timestamp": "15:13-15:16",
       "speaker": "Student 11",
       "utterance": "They give us loans.",
-      "is_teacher": false,
+      "is_teacher": true,
       "word_count": 4
     },
     {
@@ -1105,7 +1105,7 @@
       "timestamp": "15:50-15:53",
       "speaker": "Student 12",
       "utterance": "Give more items.",
-      "is_teacher": false,
+      "is_teacher": true,
       "word_count": 3
     },
     {
@@ -1121,7 +1121,7 @@
       "timestamp": "15:57-16:02",
       "speaker": "Student 12",
       "utterance": "The items are gone.",
-      "is_teacher": false,
+      "is_teacher": true,
       "word_count": 4
     },
     {
@@ -1241,7 +1241,7 @@
       "timestamp": "17:44-17:45",
       "speaker": "Ethan",
       "utterance": "That’s so cool.",
-      "is_teacher": false,
+      "is_teacher": true,
       "word_count": 3
     },
     {
@@ -1257,7 +1257,7 @@
       "timestamp": "17:47-17:52",
       "speaker": "Ethan",
       "utterance": "He expressed amazing knowledge to the entire class.",
-      "is_teacher": false,
+      "is_teacher": true,
       "word_count": 8
     },
     {
@@ -1337,7 +1337,7 @@
       "timestamp": "18:53-18:56",
       "speaker": "Ethan",
       "utterance": "I like when Mr. Moon bought me some, uh, drinks.",
-      "is_teacher": false,
+      "is_teacher": true,
       "word_count": 10
     },
     {
@@ -1849,7 +1849,7 @@
       "timestamp": "26:19-26:23",
       "speaker": "Student 13",
       "utterance": "Ah, if he had done previous research on the places.",
-      "is_teacher": false,
+      "is_teacher": true,
       "word_count": 10
     },
     {
@@ -1975,16 +1975,28 @@
       ]
     },
     {
+      "turn_id": 6,
+      "codes": []
+    },
+    {
       "turn_id": 7,
       "codes": [
         "agree_disagree"
       ]
     },
     {
+      "turn_id": 8,
+      "codes": []
+    },
+    {
       "turn_id": 9,
       "codes": [
-        "say_more"
+        "press_for_reasoning"
       ]
+    },
+    {
+      "turn_id": 10,
+      "codes": []
     },
     {
       "turn_id": 11,
@@ -1993,7 +2005,15 @@
       ]
     },
     {
+      "turn_id": 12,
+      "codes": []
+    },
+    {
       "turn_id": 13,
+      "codes": []
+    },
+    {
+      "turn_id": 14,
       "codes": []
     },
     {
@@ -2007,6 +2027,10 @@
       "codes": [
         "agree_disagree"
       ]
+    },
+    {
+      "turn_id": 18,
+      "codes": []
     },
     {
       "turn_id": 19,
@@ -2047,6 +2071,10 @@
       ]
     },
     {
+      "turn_id": 32,
+      "codes": []
+    },
+    {
       "turn_id": 33,
       "codes": [
         "add_on"
@@ -2067,7 +2095,7 @@
     {
       "turn_id": 39,
       "codes": [
-        "challenge"
+        "revoice"
       ]
     },
     {
@@ -2079,7 +2107,7 @@
     {
       "turn_id": 43,
       "codes": [
-        "say_more"
+        "press_for_reasoning"
       ]
     },
     {
@@ -2089,16 +2117,28 @@
       ]
     },
     {
+      "turn_id": 46,
+      "codes": []
+    },
+    {
       "turn_id": 47,
       "codes": [
         "say_more"
       ]
     },
     {
+      "turn_id": 48,
+      "codes": []
+    },
+    {
       "turn_id": 49,
       "codes": [
         "say_more"
       ]
+    },
+    {
+      "turn_id": 50,
+      "codes": []
     },
     {
       "turn_id": 51,
@@ -2123,6 +2163,10 @@
       "codes": [
         "agree_disagree"
       ]
+    },
+    {
+      "turn_id": 58,
+      "codes": []
     },
     {
       "turn_id": 59,
@@ -2155,10 +2199,18 @@
       ]
     },
     {
+      "turn_id": 68,
+      "codes": []
+    },
+    {
       "turn_id": 69,
       "codes": [
         "challenge"
       ]
+    },
+    {
+      "turn_id": 70,
+      "codes": []
     },
     {
       "turn_id": 71,
@@ -2167,10 +2219,18 @@
       ]
     },
     {
+      "turn_id": 72,
+      "codes": []
+    },
+    {
       "turn_id": 73,
       "codes": [
         "say_more"
       ]
+    },
+    {
+      "turn_id": 74,
+      "codes": []
     },
     {
       "turn_id": 75,
@@ -2183,13 +2243,25 @@
       "codes": []
     },
     {
+      "turn_id": 78,
+      "codes": []
+    },
+    {
       "turn_id": 79,
       "codes": [
         "press_for_reasoning"
       ]
     },
     {
+      "turn_id": 80,
+      "codes": []
+    },
+    {
       "turn_id": 81,
+      "codes": []
+    },
+    {
+      "turn_id": 82,
       "codes": []
     },
     {
@@ -2199,10 +2271,18 @@
       ]
     },
     {
+      "turn_id": 84,
+      "codes": []
+    },
+    {
       "turn_id": 85,
       "codes": [
         "say_more"
       ]
+    },
+    {
+      "turn_id": 86,
+      "codes": []
     },
     {
       "turn_id": 87,
@@ -2227,10 +2307,18 @@
       "codes": []
     },
     {
+      "turn_id": 94,
+      "codes": []
+    },
+    {
       "turn_id": 95,
       "codes": [
         "say_more"
       ]
+    },
+    {
+      "turn_id": 96,
+      "codes": []
     },
     {
       "turn_id": 97,
@@ -2239,7 +2327,15 @@
       ]
     },
     {
+      "turn_id": 98,
+      "codes": []
+    },
+    {
       "turn_id": 99,
+      "codes": []
+    },
+    {
+      "turn_id": 100,
       "codes": []
     },
     {
@@ -2247,6 +2343,10 @@
       "codes": [
         "press_for_reasoning"
       ]
+    },
+    {
+      "turn_id": 102,
+      "codes": []
     },
     {
       "turn_id": 103,
@@ -2279,10 +2379,18 @@
       ]
     },
     {
+      "turn_id": 112,
+      "codes": []
+    },
+    {
       "turn_id": 113,
       "codes": [
         "revoice"
       ]
+    },
+    {
+      "turn_id": 114,
+      "codes": []
     },
     {
       "turn_id": 115,
@@ -2291,10 +2399,18 @@
       ]
     },
     {
+      "turn_id": 116,
+      "codes": []
+    },
+    {
       "turn_id": 117,
       "codes": [
         "revoice"
       ]
+    },
+    {
+      "turn_id": 118,
+      "codes": []
     },
     {
       "turn_id": 119,
@@ -2303,10 +2419,18 @@
       ]
     },
     {
+      "turn_id": 120,
+      "codes": []
+    },
+    {
       "turn_id": 121,
       "codes": [
         "say_more"
       ]
+    },
+    {
+      "turn_id": 122,
+      "codes": []
     },
     {
       "turn_id": 123,
@@ -2319,7 +2443,15 @@
       "codes": []
     },
     {
+      "turn_id": 126,
+      "codes": []
+    },
+    {
       "turn_id": 127,
+      "codes": []
+    },
+    {
+      "turn_id": 128,
       "codes": []
     },
     {
@@ -2329,10 +2461,18 @@
       ]
     },
     {
+      "turn_id": 130,
+      "codes": []
+    },
+    {
       "turn_id": 131,
       "codes": [
         "say_more"
       ]
+    },
+    {
+      "turn_id": 132,
+      "codes": []
     },
     {
       "turn_id": 133,
@@ -2341,10 +2481,18 @@
       ]
     },
     {
+      "turn_id": 134,
+      "codes": []
+    },
+    {
       "turn_id": 135,
       "codes": [
         "say_more"
       ]
+    },
+    {
+      "turn_id": 136,
+      "codes": []
     },
     {
       "turn_id": 137,
@@ -2353,10 +2501,18 @@
       ]
     },
     {
+      "turn_id": 138,
+      "codes": []
+    },
+    {
       "turn_id": 139,
       "codes": [
         "say_more"
       ]
+    },
+    {
+      "turn_id": 140,
+      "codes": []
     },
     {
       "turn_id": 141,
@@ -2399,10 +2555,18 @@
       "codes": []
     },
     {
+      "turn_id": 155,
+      "codes": []
+    },
+    {
       "turn_id": 156,
       "codes": [
         "press_for_reasoning"
       ]
+    },
+    {
+      "turn_id": 157,
+      "codes": []
     },
     {
       "turn_id": 158,
@@ -2431,6 +2595,10 @@
       "codes": [
         "add_on"
       ]
+    },
+    {
+      "turn_id": 167,
+      "codes": []
     },
     {
       "turn_id": 169,
@@ -2605,6 +2773,10 @@
       ]
     },
     {
+      "turn_id": 231,
+      "codes": []
+    },
+    {
       "turn_id": 232,
       "codes": []
     },
@@ -2643,14 +2815,14 @@
   ],
   "statistics": {
     "coded_turns": 99,
-    "uncoded_turns": 22,
+    "uncoded_turns": 65,
     "code_distribution": {
       "add_on": 27,
       "agree_disagree": 7,
-      "say_more": 39,
-      "challenge": 3,
-      "press_for_reasoning": 20,
-      "revoice": 3
+      "press_for_reasoning": 22,
+      "say_more": 37,
+      "challenge": 2,
+      "revoice": 4
     }
   }
 }

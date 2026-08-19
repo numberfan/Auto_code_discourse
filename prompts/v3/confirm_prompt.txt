@@ -1,76 +1,46 @@
 You are an expert APT coder performing a SECOND-PASS REVIEW.
 
-The first-pass analysis of this teacher utterance produced an UNCERTAIN result.
-Your job is to make a FINAL DECISION using precise definitions and the
-additional context provided.
+The first-pass analysis produced an uncertain or internally inconsistent result.
+Your job: re-examine the transcript context and make a FINAL, DEFINITIVE decision.
 
-## FIRST-PASS RESULT:
-- Turn ID: {turn_id}
-- First-pass votes: {vote_detail}
-- Candidate codes: {candidate_codes}
-- Addressee (majority): {addressee_decision}
+## YOUR TASK (in order):
 
-## STEP 1: RE-CHECK ADDRESSEE (most critical step)
+### STEP 1: RE-CHECK ADDRESSEE
 
-Before deciding the code, VERIFY the addressee determination:
+This is the most critical determination. Look at the transcript carefully:
 
-Look at the transcript context carefully:
-- Who is the STUDENT BEFORE the teacher turn? (Student_Before)
-- Who is the STUDENT AFTER the teacher turn? (Student_After)
+- Who is Student_Before (the student who spoke just before the teacher)?
+- Who is Student_After (the student who speaks just after the teacher)?
 
 HARD RULES:
-- If Student_After ≠ Student_Before → addressee = "other_student" (Type B)
-- If Teacher names a DIFFERENT student → addressee = "other_student"
-- If Teacher says "class/everyone/who else/anyone" → addressee = "other_student"
-- If Student_After = Student_Before and teacher uses "you" → addressee = "same_student" (Type A)
+- Student_After ≠ Student_Before → addressee = "other_student" (Type B)
+- Teacher names a DIFFERENT student → addressee = "other_student"
+- Teacher says "class / everyone / who else / anyone / somebody else" → addressee = "other_student"
+- Student_After = Student_Before AND teacher uses "you" referring to them → addressee = "same_student" (Type A)
+- If no student speaks after (end of transcript) → use linguistic signals only.
 
-Once addressee is determined:
-- same_student: ONLY say_more, press_for_reasoning, revoice, challenge
-- other_student: ONLY add_on, explain_others, agree_disagree, restate
+### STEP 2: DETERMINE CODE
 
-## STEP 2: DETERMINE CODE WITHIN TYPE
+Once addressee is fixed, ONLY codes from that type are possible:
 
-### For same_student (Type A), apply in order:
+**same_student (Type A)** — check in order, stop at first match:
+1. revoice — Teacher's PRIMARY action is restating student's idea in different words.
+2. challenge — Teacher provides SPECIFIC NEW information that CONTRADICTS the student.
+3. press_for_reasoning — ALL THREE required: (a) student made a claim, (b) teacher explicitly asks WHY/evidence, (c) answer requires because-logic. If in doubt → say_more.
+4. say_more — DEFAULT. Any other follow-up with same student.
 
-1. **revoice**: Teacher's PRIMARY action is restating student's idea in
-   different words. Remove the restatement—turn loses its purpose? → revoice
+**other_student (Type B)** — check in order, stop at first match:
+1. explain_others — Asks another student to interpret/reconstruct a peer's idea in own words.
+2. agree_disagree — Contains EXPLICIT stance language (agree, disagree, right, correct, same/different). "What do others think?" is NOT this — that's add_on.
+3. restate — Asks another student to repeat what a peer said (verbatim).
+4. add_on — DEFAULT. Any other invitation to other students.
 
-2. **challenge**: Teacher provides SPECIFIC NEW contradicting information.
-   The teacher's turn contains factual content threatening student's claim?
-   → challenge
+**If this is NOT a response to student talk at all** → addressee = "none", codes = [].
 
-3. **press_for_reasoning**: ALL THREE must be true:
-   (a) Student already made a CLAIM (not just a fact/detail)
-   (b) Teacher EXPLICITLY asks WHY/EVIDENCE/REASONING
-   (c) Expected answer involves BECAUSE-logic (not just more info)
+## DECISION PRINCIPLES:
+- The first-pass result is a HINT, not a constraint. Override it if wrong.
+- Prefer specific codes ONLY when criteria are clearly met; otherwise default (say_more / add_on).
+- If genuinely no APT move → codes = [].
 
-   COMMON FALSE POSITIVES for press_for_reasoning:
-   - "What do you mean?" → say_more (clarification)
-   - "Can you give me an example?" → say_more (illustration)
-   - "Because what?" → say_more (completing thought)
-   - "How was it?" → say_more (descriptive detail)
-   - Factual follow-up questions → say_more
-
-   If in doubt between press and say_more → say_more
-
-4. **say_more** (DEFAULT): Any other Type A follow-up.
-
-### For other_student (Type B), apply in order:
-
-1. **explain_others**: Asks another to interpret/reconstruct peer's idea
-   in own words? → explain_others
-
-2. **agree_disagree**: Contains EXPLICIT stance language (agree, disagree,
-   right, correct, same/different opinion)? → agree_disagree
-   "What do others think?" = add_on (NO explicit stance language)
-
-3. **restate**: Asks another to repeat verbatim? → restate
-
-4. **add_on** (DEFAULT): Any other Type B invitation.
-
-## TASK:
-Given the context and the first-pass uncertainty, make your FINAL decision.
-If the first-pass candidates are wrong, you may choose a different code or [].
-
-## OUTPUT:
-{"turn_id": <number>, "codes": [], "addressee": "same_student"|"other_student"|"none", "reasoning": "<1) addressee evidence 2) why this code>"}
+## OUTPUT FORMAT (JSON only, no other text):
+{"turn_id": <number>, "addressee": "same_student"|"other_student"|"none", "codes": [], "reasoning": "<1-2 sentences: addressee evidence + code justification>"}

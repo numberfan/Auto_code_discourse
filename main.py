@@ -13,19 +13,19 @@ DEFAULT_EXCEL_PATH = "coded_discourse/excel/chris moon video 1 transcription_sus
 DEFAULT_JSON_DIR = "coded_discourse/json"
 DEFAULT_EVAL_DIR = "coded_discourse/evaluation"
 DEFAULT_FILE_ID = "chris_moon_v1"
-DEFAULT_N_VOTES = 5
+DEFAULT_CONCURRENCY = 5
 
 
 def parse_args():
     parser = argparse.ArgumentParser(description="APT 话语自动编码工具")
     parser.add_argument("--excel", default=DEFAULT_EXCEL_PATH, help="Excel 文件路径")
     parser.add_argument("--file-id", default=DEFAULT_FILE_ID, help="输出文件标识符")
-    parser.add_argument("--votes", type=int, default=DEFAULT_N_VOTES, help="每个话轮的投票次数")
+    parser.add_argument("--concurrency", type=int, default=DEFAULT_CONCURRENCY, help="最大并发数")
     parser.add_argument("--json-dir", default=DEFAULT_JSON_DIR, help="JSON 输出目录")
     return parser.parse_args()
 
 
-def auto_coding(excel_path: str, file_id: str, n_votes: int, json_dir: str):
+def auto_coding(excel_path: str, file_id: str, max_concurrency: int, json_dir: str):
     """执行完整的自动编码流程"""
     timestamp = time.strftime("%Y%m%d_%H%M%S")
 
@@ -34,10 +34,9 @@ def auto_coding(excel_path: str, file_id: str, n_votes: int, json_dir: str):
     clean_json_path = os.path.join(json_dir, f"{file_id}.json")
     need_clean = True
     if os.path.exists(clean_json_path):
-        # 检查修改时间：只有 Excel 比 JSON 新时才重新清洗
         excel_mtime = os.path.getmtime(excel_path)
         json_mtime = os.path.getmtime(clean_json_path)
-        if json_mtime >= excel_mtime:
+        if json_mtime >= excel_mtime: # 检查修改时间：只有 Excel 比 JSON 新时才重新清洗
             print(f"发现已清洗数据 {clean_json_path}，跳过清洗步骤。")
             with open(clean_json_path, "r", encoding="utf-8") as f:
                 result = json.load(f)
@@ -52,22 +51,34 @@ def auto_coding(excel_path: str, file_id: str, n_votes: int, json_dir: str):
     # 2. 自动编码教师话轮
     transcript = result["transcript"]
     gold = result["gold"]
-
     print("开始自动编码教师话轮...")
-    predictions = code_full_transcript(transcript, n_votes=n_votes)
+    predictions = code_full_transcript(transcript, max_concurrency=max_concurrency)
 
+    # 保存预测结果
     pred_output = {
         "file_id": file_id,
+        "model": get_model_name(),
+        "method": "single_predict_with_confirm",
+        "timestamp": timestamp,
         "predictions": predictions,
-        "generated_by": get_model_name(),
-        "n_votes": n_votes,
     }
     pred_json_path = os.path.join(json_dir, f"predictions_{file_id}.json")
     with open(pred_json_path, "w", encoding="utf-8") as f:
         json.dump(pred_output, f, indent=2, ensure_ascii=False)
     print(f"预测结果已保存: {pred_json_path}")
 
-    # 3. 评估
+    # 3. 统计确认率
+    total = len(predictions)
+    confirmed_count = sum(1 for p in predictions if p.get("confirmed", False))
+    review_count = sum(1 for p in predictions if p.get("needs_review", False))
+    confident_first_pass = total - confirmed_count - review_count
+    print(f"\n--- 编码统计 ---")
+    print(f"  总教师话轮: {total}")
+    print(f"  首次确信通过: {confident_first_pass} ({confident_first_pass / total * 100:.1f}%)")
+    print(f"  经复查确认: {confirmed_count} ({confirmed_count / total * 100:.1f}%)")
+    print(f"  仍需人工复查: {review_count} ({review_count / total * 100:.1f}%)")
+
+    # 4. 评估
     if gold:
         print("开始评估...")
         pred_for_eval = [
@@ -75,17 +86,14 @@ def auto_coding(excel_path: str, file_id: str, n_votes: int, json_dir: str):
             for p in predictions
         ]
         eval_result = evaluate_predictions(gold, pred_for_eval)
-
-        # 打印并保存评估报告
         print_evaluation_report(eval_result)
         save_evaluation_report(eval_result, DEFAULT_EVAL_DIR, file_id, timestamp)
 
-        # 4. 错误分析与存档
+        # 5. 错误分析
         print("开始错误分析...")
         error_analysis(gold, predictions, DEFAULT_EVAL_DIR, file_id, timestamp)
 
 
 if __name__ == '__main__':
     args = parse_args()
-    # 调用llm进行自动分析 （清洗、编码、评估）
-    auto_coding(args.excel, args.file_id, args.votes, args.json_dir)
+    auto_coding(args.excel, args.file_id, args.concurrency, args.json_dir)
