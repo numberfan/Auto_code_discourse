@@ -4,11 +4,13 @@ utterances in English classroom transcripts and identify APT moves.
 
 ## IMPORTANT RULES:
 1. Only code TEACHER utterances. Never code student utterances.
-2. CODING BIAS: It is BETTER to assign a code than to miss one.
-   - If a teacher utterance follows up on student talk in ANY way
-     (asking for more, redirecting, rephrasing), it likely has an APT code.
-   - Only output codes=[] when you are VERY confident the utterance is
-     purely procedural, management, feedback, or content delivery.
+2. PRECISION PRINCIPLE: Only assign a code when you are CONFIDENT the
+   teacher utterance is a GENUINE follow-up move on a specific student's
+   prior contribution.
+   - APT moves are INTENTIONAL pedagogical strategies to deepen or
+     connect student thinking.
+   - NOT every teacher question after a student speaks is an APT move.
+   - When in doubt between coding and not coding → DO NOT CODE.
 3. A single teacher utterance may contain multiple APT moves.
 4. Do NOT code classroom management, procedural instructions, content
    delivery, or simple acknowledgments.
@@ -51,6 +53,28 @@ Examples of NO trigger:
 - Procedural talk ("OK let's move on")
 - Repeating your own earlier question
 - Content delivery / lecturing
+
+CRITICAL: These are NOT APT triggers (even though they follow student talk):
+- CONTENT ELICITATION: Asking a new factual/opinion question to advance the
+  lesson, even if a student just spoke. The key test: does the teacher's
+  question REFERENCE or BUILD ON what the student said? If not → no trigger.
+  × "OK. Now, what about the second paragraph?" (new topic)
+
+- ACKNOWLEDGE + NEW DIRECTION: Teacher briefly acknowledges a student ("Good",
+  "OK", "Thank you") then moves to an unrelated question or instruction.
+  × "Great, thank you. Now let's look at page 5."
+
+- GENERIC OPEN QUESTIONS not anchored to a specific student's idea:
+  × "Does anyone have any questions?" (procedural)
+
+- REPEATING/REPHRASING YOUR OWN QUESTION when no student has answered yet,
+  or echoing to confirm hearing (not to deepen thinking):
+  × Student: "The answer is 5." Teacher: "Five? OK." (simple receipt)
+
+KEY TEST for Step 1:
+Ask: "Is the teacher's utterance SPECIFICALLY ABOUT what this student just said?"
+- If the teacher could have said the same thing WITHOUT hearing the student → NO trigger.
+- If the teacher's question is only meaningful BECAUSE of what the student said → YES trigger.
 
 ### Step 2: ADDRESSEE CHECK  (CRITICAL — this step determines everything)
 Who is the teacher directing this utterance toward?
@@ -165,11 +189,23 @@ Check in this order. STOP at the first match:
   (verbatim or near-verbatim)?
 - TEST: "What did [name] say?" or "Can you repeat that?"
   → RESTATE. STOP.
-**4. ADD_ON (DEFAULT)**
-- The teacher is inviting OTHER students to contribute ideas, build on
-  the discussion, or offer new perspectives.
-- This is the CATCH-ALL for Type B when no specific code above applies.
-  → ADD_ON.
+**4. ADD_ON (DEFAULT — but still requires trigger)**
+- The teacher is inviting OTHER students to ENGAGE WITH or BUILD ON a
+  SPECIFIC idea that was just expressed by a peer.
+- CRITICAL: add_on still requires Step 1 trigger = "yes". The teacher
+  must be connecting other students to a SPECIFIC prior student contribution.
+
+  POSITIVE (genuine add_on):
+  - Student says X → Teacher: "Anyone want to add to what she said?"
+  - Student says X → Teacher: "Who has a different idea about this?"
+  - Student says X → Teacher: "What do others think about that point?"
+
+  NEGATIVE (NOT add_on — these are content elicitation, code as []):
+  - Teacher: "Who can answer this question?" (calling for response to TEACHER's question)
+
+  TEST: Remove the prior student's contribution. Does the teacher's
+  invitation still make equal sense? If YES → not add_on (no trigger).
+  If NO → add_on.
 ---
 
 ## OUTPUT FORMAT:
