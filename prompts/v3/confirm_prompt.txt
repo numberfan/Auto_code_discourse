@@ -18,16 +18,6 @@ Is the teacher ASKING A QUESTION or making an INVITATION to a student?
 - If the teacher asks then immediately answers their own question → codes=[], done.
 
 ### STEP 2: RE-CHECK ADDRESSEE
-Before choosing an addressee or code, decide whether this is genuinely an APT
-follow-up to a SPECIFIC student's prior idea. If the teacher is asking a new
-lesson/content question, giving background information, managing the class, or
-calling on a different student to answer the teacher's own question, output
-addressee = "none" and codes = [].
-
-### STEP 2: RE-CHECK ADDRESSEE
-
-Look at the transcript carefully:
-
 - Who is Student_Before (spoke just before teacher)?
 - Who is Student_After (speaks just after teacher)?
 
@@ -37,13 +27,6 @@ HARD RULES:
 - Teacher says "class / everyone / who else / anyone / somebody else" → addressee = "other_student"
 - Student_After = Student_Before AND teacher uses "you" referring to them → addressee = "same_student" (Type A)
 - If no student speaks after → use linguistic signals only.
-Speaker identity is evidence, not proof of an APT move:
-- Student_After ≠ Student_Before → evidence for "other_student" (Type B), but code
-  Type B only if the teacher asks the next student to engage with a peer's idea.
-- Teacher names a DIFFERENT student → evidence for "other_student".
-- Teacher says "class / everyone / who else / anyone / somebody else" → evidence for "other_student".
-- Student_After = Student_Before AND teacher uses "you" referring to them → evidence for "same_student" (Type A).
-- If no student speaks after (end of transcript) → use linguistic signals only.
 
 ### STEP 3: DETERMINE CODE
 
@@ -60,20 +43,11 @@ Once addressee is fixed, ONLY codes from that type are possible:
 2. agree_disagree — Contains EXPLICIT stance language (agree, disagree, right, correct). "What do others think?" = add_on, NOT this.
 3. restate — Asks another student to repeat what a peer said verbatim.
 4. add_on — DEFAULT. Teacher ASKS/INVITES other students about a topic connected to discussion. Must contain a question or invitation (statements alone don't qualify).
-2. agree_disagree — Contains EXPLICIT stance language (agree, disagree, right, correct, same/different). "What do others think?" is NOT this — that's add_on.
-3. restate — Asks another student to repeat what a peer said (verbatim).
-4. add_on — DEFAULT only after Step 1 is satisfied. Do NOT use add_on for a new
-   factual/opinion question to the class, a teacher mini-lecture followed by a new
-   question, or merely calling on another student to answer the teacher's own question.
 
 **If NOT a response to student talk** → addressee = "none", codes = [].
 
 ## DECISION PRINCIPLES:
 - The first-pass result is a HINT, not a constraint. Override it if wrong.
-- Prefer specific codes ONLY when criteria are clearly met; otherwise default.
-- Prefer specific codes ONLY when criteria are clearly met; otherwise default (say_more / add_on).
-- For add_on, the default applies only within genuine peer-linked Type B turns; when
-  the teacher simply advances the lesson topic, choose [] instead.
 - If genuinely no APT move → codes = [].
 
 ## OUTPUT FORMAT (JSON only, no other text):

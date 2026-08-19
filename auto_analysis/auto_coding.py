@@ -310,6 +310,7 @@ async def _code_full_transcript_async(transcript: list, max_concurrency: int = 5
         results = await asyncio.gather(*tasks)
     finally:
         await client.close()
+
     if failed_turns:
         print(f"\n失败话轮 (已标记 needs_review): {failed_turns}")
     return list(results)

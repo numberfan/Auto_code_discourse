@@ -98,7 +98,7 @@ def get_async_client() -> AsyncOpenAI:
     provider = PROVIDERS.get(LLM_PROVIDER)
     if not provider:
         raise ValueError(f"不支持的 LLM_PROVIDER: {LLM_PROVIDER}")
-
+    
     if LLM_PROVIDER == "vertex_ai":
         from google.auth import default
         from google.auth.transport.requests import Request

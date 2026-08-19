@@ -72,6 +72,7 @@ def auto_coding(excel_path: str, file_id: str, max_concurrency: int, json_dir: s
     total = len(predictions)
     confirmed_count = sum(1 for p in predictions if p.get("confirmed", False))
     review_count = sum(1 for p in predictions if p.get("needs_review", False))
+<<<<<<< HEAD
     confident_first_pass = total - confirmed_count - review_count    
 
     print(f"\n--- 编码统计 ---")
@@ -79,6 +80,18 @@ def auto_coding(excel_path: str, file_id: str, max_concurrency: int, json_dir: s
     print(f"  首次确信通过: {confident_first_pass} ({utils.pct(confident_first_pass):.1f}%)")
     print(f"  经复查确认: {confirmed_count} ({utils.pct(confirmed_count):.1f}%)")
     print(f"  仍需人工复查: {review_count} ({utils.pct(review_count):.1f}%)")
+=======
+    confident_first_pass = total - confirmed_count - review_count
+
+    def pct(count: int) -> float:
+        return count / total * 100 if total else 0.0
+
+    print(f"\n--- 编码统计 ---")
+    print(f"  总教师话轮: {total}")
+    print(f"  首次确信通过: {confident_first_pass} ({pct(confident_first_pass):.1f}%)")
+    print(f"  经复查确认: {confirmed_count} ({pct(confirmed_count):.1f}%)")
+    print(f"  仍需人工复查: {review_count} ({pct(review_count):.1f}%)")
+>>>>>>> 82fa97e9f6019bf5a2218d1a62a9e10093bf31d5
 
     # 4. 评估
     if gold:

@@ -90,18 +90,11 @@ Who is the teacher directing this utterance toward?
 (a) The SAME student who just spoke → Type A
 (b) A DIFFERENT student or the class → Type B
 
-#### PRIMARY EVIDENCE: Speaker Identity in Context
-Look at the STUDENT WHO SPOKE BEFORE the teacher turn (Student_Before) and
-the STUDENT WHO RESPONDS AFTER the teacher turn (Student_After, if visible).
-IMPORTANT: Speaker identity is strong evidence for addressee, but it is NOT sufficient
-by itself to assign an APT code. First confirm Step 1: the teacher must be building on
-a specific student's prior contribution rather than asking a new lesson question.
-GUIDELINES:
-- If Student_After ≠ Student_Before → this is evidence for "other_student" (Type B),
-  but only code Type B if the teacher connects the next student to a prior student's idea.
-- If Teacher explicitly names a DIFFERENT student → evidence for "other_student".
-- If Teacher says "class/everyone/who else/anyone/somebody else" → evidence for "other_student".
-- If Student_After = Student_Before AND teacher uses "you" referring to them → evidence for "same_student" (Type A).
+#### HARD RULES:
+- If Student_After ≠ Student_Before → "other_student" (Type B)
+- If Teacher names a DIFFERENT student → "other_student"
+- If Teacher says "class/everyone/who else/anyone/somebody else" → "other_student"
+- If Teacher uses "you" to the same student, 1-on-1 exchange continues → "same_student" (Type A)
 
 #### LINGUISTIC SIGNALS:
 OTHER_STUDENT: names different student, plural address, references third person's idea
@@ -226,14 +219,6 @@ If nothing clearly matches → assign the DEFAULT (say_more or add_on).
     on what student said): "What kind of things do they show in the house?"
   - Generic procedural: "Any questions?"
   - Directed at same student (→ Type A)
-  NEGATIVE (NOT add_on — these are content elicitation, code as []):
-  - Teacher: "Who can answer this question?" (calling for response to TEACHER's question)
-  - Teacher asks a new factual/opinion question to the class on the same broad topic
-    without asking students to engage with a peer's specific idea.
-  - Teacher gives background/mini-lecture and then asks the next lesson question.
-  - Teacher merely calls on a different student to answer the teacher's own question.
-  - Echoing one word from the previous answer is not enough; the new turn must use
-    that student's idea as the object of discussion.
 
 ---
 
