@@ -1,76 +1,124 @@
 ## EXAMPLES
 
-### No trigger
+### Hard stop (ALWAYS check first)
+[Turn 6] Teacher: Yes.
+→ {"step1_trigger":"no", "step2_addressee":"none", "codes":[], "reasoning":"Hard stop: single-word receipt. No code regardless of context."}
+
+[Turn 10] Teacher: (Inaudible)
+→ {"step1_trigger":"no", "step2_addressee":"none", "codes":[], "reasoning":"Hard stop: inaudible utterance. No code."}
+
+[Turn 32] Teacher: They didn't have an iPad.
+→ {"step1_trigger":"no", "step2_addressee":"none", "codes":[], "reasoning":"Hard stop: teacher is STATING, not asking/inviting. No code."}
+
+### No trigger (not a response to student)
 [Turn 17] Teacher: Okay, please scan the QR code. Think of one or two words about appearance anxiety.
-→ {"step1_trigger":"no", "step2_addressee":"none", "codes":[], "reasoning":"Procedural instruction."}
+→ {"step1_trigger":"no", "step2_addressee":"none", "codes":[], "reasoning":"Procedural instruction, not following up on student speech."}
+
+[Turn 25] Teacher: What kind of things do they show? Lynn, what kind of things do they show in the house?
+→ {"step1_trigger":"no", "step2_addressee":"none", "codes":[], "reasoning":"New content question to advance the lesson. Not building on a specific student's prior contribution."}
 
 ### same_student → say_more
 [Turn 21] Taurus: They want to impress people.
 [Turn 22] Teacher: Who are the they?
-→ {"step1_trigger":"yes", "step2_addressee":"same_student", "codes":["say_more"], "reasoning":"Same student (Taurus). Asks clarification, not reasoning."}
-
-[Turn 8] Student: They are for now, because...
-[Turn 9] Teacher: So you said they are for now, because… Because what?
-→ {"step1_trigger":"yes", "step2_addressee":"same_student", "codes":["say_more"], "reasoning":"Same student. 'Because what?' asks to complete thought, not provide new reasoning. → say_more, NOT press."}
+→ {"step1_trigger":"yes", "step2_addressee":"same_student", "codes":["say_more"], "reasoning":"Same student (Taurus). Asks clarification about referent, not causal reasoning. → say_more."}
 
 [Turn 46] Student: It was in the rooftop.
 [Turn 47] Teacher: Rooftop, good. Was there a cover on the roof?
-→ {"step1_trigger":"yes", "step2_addressee":"same_student", "codes":["say_more"], "reasoning":"Same student. Acknowledges and asks factual detail, no reasoning demand."}
+→ {"step1_trigger":"yes", "step2_addressee":"same_student", "codes":["say_more"], "reasoning":"Same student. Acknowledges then asks factual follow-up detail. → say_more."}
+
+[Turn 10] Student 2: Because it's a huge liability for the government.
+[Turn 11] Teacher: So what should the government have done instead? What do you think?
+→ {"step1_trigger":"yes", "step2_addressee":"same_student", "codes":["say_more"], "reasoning":"Same student. Asks for proposal/opinion ('what should they have done'), not reasoning for existing claim. → say_more, NOT press."}
 
 ### same_student → press_for_reasoning
 [Turn 9] Jessica: To keep order.
 [Turn 10] Teacher: Why is it important that they keep order?
-→ {"step1_trigger":"yes", "step2_addressee":"same_student", "codes":["press_for_reasoning"], "reasoning":"Same student. Explicit WHY demands causal explanation after a claim."}
+→ {"step1_trigger":"yes", "step2_addressee":"same_student", "codes":["press_for_reasoning"], "reasoning":"Same student. Explicit WHY demands causal explanation after a claim. All 3 requirements met. → press."}
 
 [Turn 33] Amy: I think the character was brave.
 [Turn 34] Teacher: What in the text makes you think she was brave?
-→ {"step1_trigger":"yes", "step2_addressee":"same_student", "codes":["press_for_reasoning"], "reasoning":"Same student. Evaluative claim + evidence request → press."}
+→ {"step1_trigger":"yes", "step2_addressee":"same_student", "codes":["press_for_reasoning"], "reasoning":"Same student. Evaluative claim + evidence request. → press."}
+
+[Turn 42] Student: Better lighting.
+[Turn 43] Teacher: What difference does better lighting make?
+→ {"step1_trigger":"yes", "step2_addressee":"same_student", "codes":["press_for_reasoning"], "reasoning":"Same student. Student stated claim (better lighting). Teacher asks for logical consequence/significance. Expects 'Because...' answer. → press."}
 
 ### same_student → revoice
 [Turn 33] Amy: I think people feel bad because they compare themselves on social media.
 [Turn 34] Teacher: So you're saying social media comparison is the main cause of the anxiety?
-→ {"step1_trigger":"yes", "step2_addressee":"same_student", "codes":["revoice"], "reasoning":"Same student. Teacher rephrases idea as primary action (seeking confirmation)."}
+→ {"step1_trigger":"yes", "step2_addressee":"same_student", "codes":["revoice"], "reasoning":"Same student. Teacher rephrases student's idea as primary action, seeking confirmation. → revoice."}
+
+[Turn 38] Andrew: Because they're old.
+[Turn 39] Teacher: That's the reason why? They're old.
+→ {"step1_trigger":"yes", "step2_addressee":"same_student", "codes":["revoice"], "reasoning":"Same student. Teacher echoes student's claim back as a question/statement for confirmation. Echoing IS the main purpose. → revoice."}
 
 ### same_student → challenge
 [Turn 25] Student: All wild animals are dangerous.
 [Turn 26] Teacher: But what about a rabbit? A wild rabbit—is that dangerous?
-→ {"step1_trigger":"yes", "step2_addressee":"same_student", "codes":["challenge"], "reasoning":"Same student. Teacher supplies specific counter-example that contradicts claim."}
+→ {"step1_trigger":"yes", "step2_addressee":"same_student", "codes":["challenge"], "reasoning":"Same student. Teacher supplies specific counter-example that contradicts the claim. → challenge."}
+
+[Turn 36] Andrew: They're old.
+[Turn 37] Teacher: They're old? Well, remember, they're from 50, 60 years ago.
+→ {"step1_trigger":"yes", "step2_addressee":"same_student", "codes":["challenge"], "reasoning":"Same student. 'Well, remember...' introduces factual context that reframes/complicates the student's judgment. → challenge."}
 
 ### other_student → add_on
 [Turn 40] Student_A: Maybe we can add a breathing exercise feature.
 [Turn 41] Teacher: That's interesting. Anyone else? Any other ideas?
-→ {"step1_trigger":"yes", "step2_addressee":"other_student", "codes":["add_on"], "reasoning":"Other students. 'Anyone else?' opens floor to new contributors."}
+→ {"step1_trigger":"yes", "step2_addressee":"other_student", "codes":["add_on"], "reasoning":"Other students. 'Anyone else?' is an explicit invitation to class on same topic. → add_on."}
 
 [Turn 50] Student_A: I think the main cause is social media.
 [Turn 51] Teacher: What do others think?
-→ {"step1_trigger":"yes", "step2_addressee":"other_student", "codes":["add_on"], "reasoning":"Other students. 'What do others think?' invites new perspectives, NOT explicit stance. → add_on, not agree."}
+→ {"step1_trigger":"yes", "step2_addressee":"other_student", "codes":["add_on"], "reasoning":"Other students. 'What do others think?' invites contributions. No explicit stance language. → add_on, not agree_disagree."}
+
+[Turn 44] Student: It is brighter.
+[Turn 45] Teacher: It is brighter. They can study better. Do you remember where the students actually studied?
+→ {"step1_trigger":"yes", "step2_addressee":"other_student", "codes":["add_on"], "reasoning":"Other students (class). Teacher echoes then ASKS class a related question on same discussion topic. Contains a question/invitation. → add_on."}
 
 ### other_student → agree_disagree
 [Turn 3] William: It is pretty good, right?
 [Turn 4] Teacher: Does anyone agree with him?
-→ {"step1_trigger":"yes", "step2_addressee":"other_student", "codes":["agree_disagree"], "reasoning":"Other students. Explicit 'agree' language → stance request."}
+→ {"step1_trigger":"yes", "step2_addressee":"other_student", "codes":["agree_disagree"], "reasoning":"Other students. Explicit 'agree' language → stance request. → agree_disagree."}
 
 ### other_student → restate
 [Turn 71] Gabriel: (speaks softly) I think it's because of the setting.
 [Turn 72] Teacher: What did Gabriel say? Did you hear what he said?
-→ {"step1_trigger":"yes", "step2_addressee":"other_student", "codes":["restate"], "reasoning":"Other student. Asks class to REPEAT Gabriel's words verbatim."}
+→ {"step1_trigger":"yes", "step2_addressee":"other_student", "codes":["restate"], "reasoning":"Other students. Asks class to REPEAT Gabriel's words verbatim. → restate."}
 
 ### other_student → explain_others
 [Turn 14] Student_C: I think George is going to the state school and won't see Emily.
 [Turn 15] Teacher: Who can put what he just said in your own words?
-→ {"step1_trigger":"yes", "step2_addressee":"other_student", "codes":["explain_others"], "reasoning":"Other students. Asks to INTERPRET peer's idea in own words."}
+→ {"step1_trigger":"yes", "step2_addressee":"other_student", "codes":["explain_others"], "reasoning":"Other students. Asks to INTERPRET peer's idea in own words. → explain_others."}
 
 ## KEY CONTRASTS
 
-**say_more vs press_for_reasoning**
-- "Was there a cover?" → say_more (detail)
-- "Why do you think that?" → press (reasoning)
-- "What do you mean?" → say_more (clarification)
-- "What's your evidence?" → press (evidence)
-- "Because what?" → say_more (complete thought)
+**Hard stop vs trigger**
+- "Yes." / "No." / "Smaller." / "Very small." → hard stop, no code
+- "(Inaudible)" → hard stop, no code
+- "They didn't have an iPad." (statement) → no trigger, no code
+- "Yes, and why do you think so?" → has question, proceed to code
 
-**say_more (Type A) vs add_on (Type B)**
-- Same student continues → say_more
-- Different student responds → add_on
-- "Tell me more" → say_more
-- "Anyone else?" → add_on
+**say_more vs press_for_reasoning**
+- "Was there a cover?" → say_more (factual detail)
+- "Who are the they?" → say_more (clarification)
+- "What should they have done instead?" → say_more (asks for PROPOSAL)
+- "What do you think about X?" → say_more (solicits new opinion)
+- "Because what?" → say_more (completing unfinished sentence)
+- "Why do you think that?" → press (asks WHY a claim is true)
+- "What's your evidence?" → press (evidence for claim)
+- "What difference does that make?" → press (logical consequence)
+- "Why is that important?" → press (causal significance)
+
+**revoice vs say_more**
+- "So you're saying X?" (rephrasing IS the purpose) → revoice
+- "That's the reason? They're old." (echoing claim back) → revoice
+- "OK, and then what?" (echo + new question) → say_more
+
+**challenge vs press**
+- "Well, remember, they're from 50 years ago." (provides counter-info) → challenge
+- "Why do you think they're old?" (asks for reasoning) → press
+
+**add_on: must contain question/invitation**
+- "Anyone else? Any other ideas?" (question) → add_on ✓
+- "Do you remember where they studied?" (question) → add_on ✓
+- "They didn't have an iPad." (statement only) → no code ✗
+- "Very small." (echo only) → no code ✗
