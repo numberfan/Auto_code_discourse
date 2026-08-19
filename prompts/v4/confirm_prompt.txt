@@ -26,4 +26,4 @@ The first-pass result may be overridden. Do not preserve a candidate code withou
 
 ## OUTPUT
 Return ONLY valid JSON:
-{"turn_id": <number>, "step1_trigger": "yes"|"no", "addressee": "same_student"|"other_student"|"none", "codes": [], "reasoning": "<1-2 sentences naming the trigger evidence and code boundary>"}
+{"turn_id": <number>, "step1_trigger": "yes"|"no", "addressee": "same_student"|"other_student"|"none", "codes": [], "reasoning": "<one short sentence>"}

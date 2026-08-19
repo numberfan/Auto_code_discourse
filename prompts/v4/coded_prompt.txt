@@ -74,4 +74,4 @@ For other_student, check in order:
 
 ## OUTPUT
 Return ONLY valid JSON:
-{"turn_id": <number>, "step1_trigger": "yes"|"no", "step2_addressee": "same_student"|"other_student"|"none", "step2_evidence": "<specific prior turn and referenced content>", "codes": [], "reasoning": "<brief evidence-based justification>"}
+{"turn_id": <number>, "step1_trigger": "yes"|"no", "step2_addressee": "same_student"|"other_student"|"none", "step2_evidence": "<turn number and 5-12 word evidence>", "codes": [], "reasoning": "<one short sentence>"}

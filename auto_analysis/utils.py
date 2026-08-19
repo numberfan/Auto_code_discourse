@@ -30,7 +30,11 @@ def extract_json(text: str) -> dict:
         return json.loads(text)
     except json.JSONDecodeError:
         pass
-    decoder = json.JSONDecoder()
+    try:
+        return json.loads(text, strict=False)
+    except json.JSONDecodeError:
+        pass
+    decoder = json.JSONDecoder(strict=False)
     for match in re.finditer(r'\{', text):
         try:
             value, _ = decoder.raw_decode(text[match.start():])
