@@ -5,21 +5,30 @@ Your job: re-examine the transcript context and make a FINAL, DEFINITIVE decisio
 
 ## YOUR TASK (in order):
 
-### STEP 1: RE-CHECK ADDRESSEE
+### STEP 1: RE-CHECK TRIGGER
 
-This is the most critical determination. Look at the transcript carefully:
+Before choosing an addressee or code, decide whether this is genuinely an APT
+follow-up to a SPECIFIC student's prior idea. If the teacher is asking a new
+lesson/content question, giving background information, managing the class, or
+calling on a different student to answer the teacher's own question, output
+addressee = "none" and codes = [].
+
+### STEP 2: RE-CHECK ADDRESSEE
+
+Look at the transcript carefully:
 
 - Who is Student_Before (the student who spoke just before the teacher)?
 - Who is Student_After (the student who speaks just after the teacher)?
 
-HARD RULES:
-- Student_After ≠ Student_Before → addressee = "other_student" (Type B)
-- Teacher names a DIFFERENT student → addressee = "other_student"
-- Teacher says "class / everyone / who else / anyone / somebody else" → addressee = "other_student"
-- Student_After = Student_Before AND teacher uses "you" referring to them → addressee = "same_student" (Type A)
+Speaker identity is evidence, not proof of an APT move:
+- Student_After ≠ Student_Before → evidence for "other_student" (Type B), but code
+  Type B only if the teacher asks the next student to engage with a peer's idea.
+- Teacher names a DIFFERENT student → evidence for "other_student".
+- Teacher says "class / everyone / who else / anyone / somebody else" → evidence for "other_student".
+- Student_After = Student_Before AND teacher uses "you" referring to them → evidence for "same_student" (Type A).
 - If no student speaks after (end of transcript) → use linguistic signals only.
 
-### STEP 2: DETERMINE CODE
+### STEP 3: DETERMINE CODE
 
 Once addressee is fixed, ONLY codes from that type are possible:
 
@@ -33,13 +42,17 @@ Once addressee is fixed, ONLY codes from that type are possible:
 1. explain_others — Asks another student to interpret/reconstruct a peer's idea in own words.
 2. agree_disagree — Contains EXPLICIT stance language (agree, disagree, right, correct, same/different). "What do others think?" is NOT this — that's add_on.
 3. restate — Asks another student to repeat what a peer said (verbatim).
-4. add_on — DEFAULT. Any other invitation to other students.
+4. add_on — DEFAULT only after Step 1 is satisfied. Do NOT use add_on for a new
+   factual/opinion question to the class, a teacher mini-lecture followed by a new
+   question, or merely calling on another student to answer the teacher's own question.
 
 **If this is NOT a response to student talk at all** → addressee = "none", codes = [].
 
 ## DECISION PRINCIPLES:
 - The first-pass result is a HINT, not a constraint. Override it if wrong.
 - Prefer specific codes ONLY when criteria are clearly met; otherwise default (say_more / add_on).
+- For add_on, the default applies only within genuine peer-linked Type B turns; when
+  the teacher simply advances the lesson topic, choose [] instead.
 - If genuinely no APT move → codes = [].
 
 ## OUTPUT FORMAT (JSON only, no other text):

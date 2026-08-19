@@ -105,7 +105,13 @@ def is_confident(result: dict) -> bool:
     if addressee == "other_student" and not codes_set.issubset(TYPE_B_CODES):
         return False
 
-    # Case 5: 推理中有犹豫词 → 不确信
+    # Case 5: 高风险代码进入复查。错误分析显示 add_on/challenge 容易自信误报，
+    # 因此即使格式一致，也要求二次确认。
+    high_risk_codes = {"add_on", "challenge"}
+    if codes_set & high_risk_codes:
+        return False
+
+    # Case 6: 推理中有犹豫词 → 不确信
     uncertainty_markers = ["probably", "maybe", "uncertain", "possibly",
                            "either", "not sure", "could be", "unclear"]
     if any(w in reasoning for w in uncertainty_markers):
@@ -126,9 +132,10 @@ async def predict_single(client, transcript: list, target_idx: int) -> dict:
         f"Follow the 3-step CODING PROCEDURE defined in the system prompt.\n\n"
         f"IMPORTANT for Step 2 (Addressee Check):\n"
         f"- Look at [SPEAKER INFO] at the bottom of the context.\n"
-        f"- If Student_After ≠ Student_Before, the teacher is redirecting → Type B.\n"
-        f"- If Student_After = Student_Before, the teacher stays with same student → Type A.\n"
-        f"- Use the CONTENT of responses only to verify, not to determine the code.\n\n"
+        f"- Student_After ≠ Student_Before is evidence for Type B, but not enough by itself.\n"
+        f"- Student_After = Student_Before is evidence for Type A, but not enough by itself.\n"
+        f"- First verify the teacher is building on a specific student's idea, not asking a new lesson question.\n"
+        f"- Use the CONTENT of responses to verify whether the turn is peer-linked or topic-advancing.\n\n"
         f"## OUTPUT FORMAT:\n"
         f"Return ONLY a valid JSON object (no text outside JSON):\n"
         f'{{"turn_id": {target_turn["turn_id"]}, "step1_trigger": "yes"|"no", '

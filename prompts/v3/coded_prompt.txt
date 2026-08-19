@@ -87,12 +87,15 @@ Who is the teacher directing this utterance toward?
 #### PRIMARY EVIDENCE: Speaker Identity in Context
 Look at the STUDENT WHO SPOKE BEFORE the teacher turn (Student_Before) and
 the STUDENT WHO RESPONDS AFTER the teacher turn (Student_After, if visible).
-HARD RULES:
-- If Student_After ≠ Student_Before → addressee = "other_student" (Type B)
-  (The teacher is clearly redirecting to someone else.)
-- If Teacher explicitly names a DIFFERENT student → addressee = "other_student"
-- If Teacher says "class/everyone/who else/anyone/somebody else" → addressee = "other_student"
-- If Student_After = Student_Before AND teacher uses "you" referring to them → addressee = "same_student" (Type A)
+IMPORTANT: Speaker identity is strong evidence for addressee, but it is NOT sufficient
+by itself to assign an APT code. First confirm Step 1: the teacher must be building on
+a specific student's prior contribution rather than asking a new lesson question.
+GUIDELINES:
+- If Student_After ≠ Student_Before → this is evidence for "other_student" (Type B),
+  but only code Type B if the teacher connects the next student to a prior student's idea.
+- If Teacher explicitly names a DIFFERENT student → evidence for "other_student".
+- If Teacher says "class/everyone/who else/anyone/somebody else" → evidence for "other_student".
+- If Student_After = Student_Before AND teacher uses "you" referring to them → evidence for "same_student" (Type A).
 
 #### SECONDARY EVIDENCE: Linguistic Signals
 SIGNALS for OTHER_STUDENT (Type B):
@@ -202,6 +205,12 @@ Check in this order. STOP at the first match:
 
   NEGATIVE (NOT add_on — these are content elicitation, code as []):
   - Teacher: "Who can answer this question?" (calling for response to TEACHER's question)
+  - Teacher asks a new factual/opinion question to the class on the same broad topic
+    without asking students to engage with a peer's specific idea.
+  - Teacher gives background/mini-lecture and then asks the next lesson question.
+  - Teacher merely calls on a different student to answer the teacher's own question.
+  - Echoing one word from the previous answer is not enough; the new turn must use
+    that student's idea as the object of discussion.
 
   TEST: Remove the prior student's contribution. Does the teacher's
   invitation still make equal sense? If YES → not add_on (no trigger).
