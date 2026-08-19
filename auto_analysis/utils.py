@@ -5,6 +5,8 @@
 import json
 import re
 
+def pct(count: int) -> float:
+    return count / total * 100 if total else 0.0
 
 def load_text_file(filepath):
     """读取文本文件，若失败则返回空字符串"""

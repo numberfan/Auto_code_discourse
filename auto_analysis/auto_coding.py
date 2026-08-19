@@ -259,6 +259,10 @@ def _build_output(target: dict, first_result: dict, *,
 # 编码入口
 async def _code_full_transcript_async(transcript: list, max_concurrency: int = 5) -> list:
     """对所有教师话轮并发编码"""
+
+    if max_concurrency < 1:
+        raise ValueError("max_concurrency 必须大于等于 1")
+
     client = llm_config.get_async_client()
     semaphore = asyncio.Semaphore(max_concurrency)
     teacher_turns = [
@@ -296,7 +300,11 @@ async def _code_full_transcript_async(transcript: list, max_concurrency: int = 5
         _process(idx, array_idx, turn)
         for idx, (array_idx, turn) in enumerate(teacher_turns)
     ]
-    results = await asyncio.gather(*tasks)
+    try:
+        results = await asyncio.gather(*tasks)
+    finally:
+        await client.close()
+        
     if failed_turns:
         print(f"\n失败话轮 (已标记 needs_review): {failed_turns}")
     return list(results)

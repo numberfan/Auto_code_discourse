@@ -7,6 +7,7 @@ from auto_analysis.auto_coding import code_full_transcript
 from auto_analysis.data_clean_to_json import clean_excel_to_json
 from auto_analysis.llm_config import get_model_name
 from auto_analysis.evaluation.error_analysis import error_analysis
+import auto_analysis.utils as utils
 
 # 默认配置（可被命令行覆盖）
 DEFAULT_EXCEL_PATH = "coded_discourse/excel/chris moon video 1 transcription_susan_5_22.xlsx"
@@ -71,12 +72,13 @@ def auto_coding(excel_path: str, file_id: str, max_concurrency: int, json_dir: s
     total = len(predictions)
     confirmed_count = sum(1 for p in predictions if p.get("confirmed", False))
     review_count = sum(1 for p in predictions if p.get("needs_review", False))
-    confident_first_pass = total - confirmed_count - review_count
+    confident_first_pass = total - confirmed_count - review_count    
+
     print(f"\n--- 编码统计 ---")
     print(f"  总教师话轮: {total}")
-    print(f"  首次确信通过: {confident_first_pass} ({confident_first_pass / total * 100:.1f}%)")
-    print(f"  经复查确认: {confirmed_count} ({confirmed_count / total * 100:.1f}%)")
-    print(f"  仍需人工复查: {review_count} ({review_count / total * 100:.1f}%)")
+    print(f"  首次确信通过: {confident_first_pass} ({utils.pct(confident_first_pass):.1f}%)")
+    print(f"  经复查确认: {confirmed_count} ({utils.pct(confirmed_count):.1f}%)")
+    print(f"  仍需人工复查: {review_count} ({utils.pct(review_count):.1f}%)")
 
     # 4. 评估
     if gold:
