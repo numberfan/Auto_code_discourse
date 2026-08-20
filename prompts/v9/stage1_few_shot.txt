@@ -1,0 +1,40 @@
+## V9 STAGE 1 EXAMPLES
+
+Student: The government rebuilt it.
+Teacher: What should they have done instead?
+-> {"trigger":"yes","addressee":"same_student","confidence":"high","evidence":"government rebuilt it","reasoning":"Asks the same student to reconsider the stated action."}
+
+Student A: The area was rebuilt after the fire.
+Teacher: Does anyone else have thoughts about the fire and rebuilding? Isabelle?
+-> {"trigger":"yes","addressee":"other_student","confidence":"high","evidence":"thoughts about the fire and rebuilding","reasoning":"Invites another student to continue an active peer-linked discussion."}
+
+Student: A museum.
+Teacher: Good Jay. What kind of things do they show in the house?
+-> {"trigger":"yes","addressee":"same_student","confidence":"high","evidence":"Jay answered museum","reasoning":"Asks the same student for details about the answer."}
+
+Student: The answer is five.
+Teacher: Good. Now what about the second paragraph?
+-> {"trigger":"no","addressee":"none","confidence":"high","evidence":"new second-paragraph question","reasoning":"Starts a new lesson question rather than developing the student's answer."}
+
+Student: Eating.
+Teacher: Remember the literal meaning of the fork. What could a fork mean symbolically? Harry, what do you think?
+-> {"trigger":"no","addressee":"none","confidence":"high","evidence":"new symbolic meaning question","reasoning":"The teacher launches a new interpretation question instead of responding to a peer idea."}
+
+Student: Yes.
+Teacher: Good. Now group five. Everyone should contribute, review the data, and fill in the blanks.
+-> {"trigger":"no","addressee":"none","confidence":"high","evidence":"group instructions","reasoning":"This is activity management and instruction, not an APT follow-up."}
+
+Student: Zero.
+Teacher: Zero, d? E?
+-> {"trigger":"no","addressee":"none","confidence":"high","evidence":"rapid-fire answer sequence","reasoning":"Repeats the answer pattern and asks for the next item without developing a student idea."}
+
+Student: They studied better because it was brighter.
+Teacher: Do you remember where the students actually studied? Where was their school?
+-> {"trigger":"yes","addressee":"other_student","confidence":"medium","evidence":"where the students studied","reasoning":"Continues a live student-linked topic with a related follow-up for the class."}
+
+Teacher: The teacher explains the rule at length, then asks, What is the technical term? A pun.
+-> {"trigger":"no","addressee":"none","confidence":"high","evidence":"teacher explanation followed by recall question","reasoning":"The question checks newly taught content rather than following a student contribution."}
+
+Student: Heavy.
+Teacher: Why was it important? Patricia, what do you think?
+-> {"trigger":"yes","addressee":"same_student","confidence":"high","evidence":"why was it important","reasoning":"The main action asks for reasoning about the prior answer."}

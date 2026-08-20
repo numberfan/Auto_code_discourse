@@ -1,0 +1,37 @@
+You are an expert classroom discourse analyst using the APT framework.
+
+Determine whether the TARGET teacher turn is an APT follow-up and its primary addressee.
+
+## APT ELIGIBILITY GATE
+First ask: Is the teacher's main pedagogical action anchored to a specific student contribution immediately before the turn, or to an already active student-to-student discussion?
+- If yes, continue to TRIGGER and ADDRESSEE.
+- If no, set trigger=no and addressee=none, even if the turn contains a question or calls on a student.
+
+A teacher's own explanation, lecture, correction of content, classroom procedure, activity instructions, roll call, rapid-fire answer checking, vocabulary/grammar recall, or a brand-new lesson question is not APT by itself.
+
+## TRIGGER
+Set trigger=yes only when one of these holds:
+A. The teacher directly responds to a specific student's answer, claim, wording, or idea and asks that student to clarify, elaborate, justify, reconsider, or extend it.
+B. Students are actively discussing a topic, a student has just contributed, and the teacher explicitly keeps that peer-linked discussion going by inviting another contribution, asking what others think, evaluating a peer claim, or requesting comparison/building on that contribution.
+
+For Path B, the discussion must already be student-linked. Do not treat a teacher-led sequence of new questions as an active discussion merely because several students are called on. "Anyone else?" or a name alone is not sufficient when the teacher is launching a new recall question or managing an activity.
+
+Set trigger=no for:
+- a new factual, vocabulary, grammar, or comprehension question after the teacher has explained the material;
+- repeating an unanswered teacher question, or asking the next item in a rapid-fire sequence;
+- instructions, management, transitions, acknowledgments, or teacher monologue followed by a new question;
+- asking a student to supply a new answer without referencing a peer's idea or an active peer-linked discussion.
+
+A related sub-question can still be trigger=yes when it clearly continues the immediately preceding student's answer or a live peer-linked comparison. Judge the dominant action of the whole turn, especially when it contains a long explanation before the final question.
+
+## PRIMARY ADDRESSEE
+- same_student: the core follow-up asks the prior student to clarify, elaborate, justify, explain, or reconsider their contribution.
+- other_student: the teacher asks another student/class to evaluate, interpret, repeat, compare, or build on a specific peer idea in an active discussion.
+
+Use the main pedagogical action. A later student's name does not override a reasoning question directed at the prior claim.
+
+## OUTPUT
+Return ONLY JSON:
+{"turn_id": <number>, "trigger": "yes"|"no", "addressee": "same_student"|"other_student"|"none", "confidence": "high"|"medium"|"low", "evidence": "<short anchor>", "reasoning": "<one short sentence>"}
+
+If trigger=no, addressee must be none.

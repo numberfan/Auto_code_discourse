@@ -42,4 +42,52 @@ def extract_json(text: str) -> dict:
                 return value
         except json.JSONDecodeError:
             continue
+
+    repaired = _repair_truncated_json(text)
+    if repaired is not None:
+        return repaired
     raise ValueError(f"无法从模型输出中解析 JSON: {text[:200]}...")
+
+
+def _repair_truncated_json(text: str):
+    """Close a JSON object cut off at the end of a model response."""
+    start = text.find("{")
+    if start < 0:
+        return None
+
+    candidate = text[start:]
+    stack = []
+    in_string = False
+    escaped = False
+    for char in candidate:
+        if in_string:
+            if escaped:
+                escaped = False
+            elif char == "\\":
+                escaped = True
+            elif char == '"':
+                in_string = False
+            continue
+        if char == '"':
+            in_string = True
+        elif char in "[{":
+            stack.append(char)
+        elif char in "]}":
+            if not stack or (char == "]" and stack[-1] != "[") or (char == "}" and stack[-1] != "{"):
+                return None
+            stack.pop()
+
+    # A response ending after a key/value separator cannot be repaired safely.
+    stripped = candidate.rstrip()
+    if stripped.endswith((":", ",")):
+        if stripped.endswith(":"):
+            return None
+        candidate = stripped[:-1]
+    if in_string:
+        candidate += '"'
+    candidate += "".join("}" if item == "{" else "]" for item in reversed(stack))
+    try:
+        value = json.loads(candidate, strict=False)
+    except json.JSONDecodeError:
+        return None
+    return value if isinstance(value, dict) else None

@@ -80,3 +80,12 @@
 * **v7**：恢复了部分 active discussion 逻辑，并加入 Stage 3 失败时保留 Stage 2 结果的兜底。错误话轮降至 38，Macro F1 回升至 0.598，但仍未超过 v5。
 
 当前后续优化方向是以 v5 的高召回 trigger 判断为基础，保留 v7 的多 code 和失败兜底，同时针对 `add_on`、echo-confirmation 类型 `revoice`、`press_for_reasoning` 的 reasoning 问句进行局部修正。
+
+### v8泛化表现
+四个文件已经全部完成 v8 评估。结果说明：v8 在 Chris Moon 上表现不错，但跨课堂泛化明显下降。
+文件	教师话轮	Binary F1	Macro F1	错误话轮
+Paper 1 Marking Conference	82	0.615	0.324	27
+Natalie Chan Lesson 1	82	0.807	0.669	15
+STFACYTSS Charity	30	0.526	0.214	11
+Timothy Lim Lesson 1	26	0.720	0.403	
+

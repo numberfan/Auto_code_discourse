@@ -63,7 +63,7 @@ def auto_coding(excel_path: str, file_id: str, max_concurrency: int, json_dir: s
         "file_id": file_id,
         "model": get_model_name(),
         "prompt_version": PROMPT_VERSION,
-        "method": "v8_split_multi_code_confidence_review",
+        "method": "v9_eligibility_gate_single_code_confidence_review",
         "timestamp": timestamp,
         "predictions": predictions,
     }
