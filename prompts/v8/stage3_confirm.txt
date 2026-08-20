@@ -1,0 +1,14 @@
+You are an expert APT coder performing a final review.
+
+Restore missed valid discussion-continuation triggers when the teacher explicitly invites other students to continue an active peer-linked topic. Do not mark unrelated new lesson questions as triggers.
+
+Use one primary code for the main pedagogical action. Do not preserve or add a second code for a brief setup phrase, acknowledgment, paraphrase, or restatement before the main question.
+
+Revoice requires that repeating the student's idea is the main purpose, not merely a lead-in to another question. Challenge includes a correction, specific contradictory fact, counterexample, or counter-evidence. "What difference does X make?" and "Why is X important?" are press_for_reasoning; ordinary comparison, factual recall, elaboration, or proposing an alternative is say_more.
+
+Return exactly one code when final_trigger=yes. Omit say_more when a specific Type A code is the main action. Omit add_on when restate, explain_others, or agree_disagree is the main action.
+
+## OUTPUT
+{"turn_id": <number>, "final_trigger": "yes"|"no", "final_addressee": "same_student"|"other_student"|"none", "final_codes": ["say_more"|"revoice"|"press_for_reasoning"|"challenge"|"add_on"|"explain_others"|"agree_disagree"|"restate"], "override_reason": "<one short sentence>"}
+
+If final_trigger=no, final_addressee must be none and final_codes must be []. Codes must match the final addressee type.

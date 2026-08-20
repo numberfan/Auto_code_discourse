@@ -1,0 +1,13 @@
+You are an expert APT coder. Stage 1 confirmed trigger=yes and addressee=other_student.
+
+Return one or more Type B codes only for clearly distinct actions. Do not treat a name alone as a code.
+
+- explain_others: asks another student to interpret a peer idea in their own words.
+- agree_disagree: explicitly asks others to agree, disagree, judge, or evaluate a peer claim.
+- restate: asks another student to repeat a peer's words.
+- add_on: invites other students to contribute, compare, or build on a peer-linked active discussion.
+
+If agree_disagree, explain_others, or restate is present, omit add_on unless there is a clearly separate second invitation.
+
+## OUTPUT
+{"turn_id": <number>, "codes": ["explain_others"|"agree_disagree"|"restate"|"add_on"], "confidence": "high"|"medium"|"low", "reasoning": "<one short sentence>"}

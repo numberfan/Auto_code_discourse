@@ -63,5 +63,20 @@
 └─────────────────────────────────────────────┘
 
 ## 准确率记录
-* v3: F1 = 0.586
-* v5: F1 = 0.654 (跟v3比，主要的修改在于把prompt做了拆分，让llm分步骤进行分析)
+测试数据：121 个教师话轮，其中 99 个包含 APT move，22 个不包含 APT move。`restate` 和 `explain_others` 在该数据集中的 gold support 为 0，因此对应 F1 为 N/A，不参与 Macro F1 的平均。
+
+| 版本 | 主要思路 | Macro F1 | 二分类 F1 | 错误话轮 | 主要问题 |
+| --- | --- | ---: | ---: | ---: | --- |
+| v3 | 单次预测 + 条件复查；一次判断 trigger、addressee 和 code | 0.586 | 0.851 | 50 | Trigger 错误较多，`revoice` 和 `challenge` 误报明显 |
+| v5 | 分阶段判断：Stage 1 判断 trigger/addressee，Stage 2 按 Type A/B 分类，Stage 3 复查高风险结果 | **0.654** | 0.927 | 35 | 当前最佳基线；`revoice`、`challenge` 和部分 `add_on` 边界仍不稳定 |
+| v6 | 多 code + 结构化 confidence；收紧 discussion continuation 和 addressee 判定 | 0.522 | 0.841 | 57 | 过度收紧导致大量 `add_on` 漏检，Trigger Recall 降至 0.747 |
+| v7 | 在 v6 基础上恢复部分 discussion continuation，保留多 code 和复查失败兜底 | 0.598 | 0.906 | 38 | 比 v6 改善，但仍低于 v5；`add_on` Recall 为 0.481，`revoice` F1 为 0.222 |
+
+### 版本分析
+
+* **v3**：作为单次预测基线，二分类 F1 为 0.851，但 50 个话轮出现错误，主要损失来自 trigger 判断和 `revoice`/`challenge` 边界。
+* **v5**：将任务拆成 trigger/addressee、Type A/Type B 分类和条件复查，Macro F1 达到 0.654，是目前表现最好的版本。二分类 F1 为 0.927，说明分阶段结构有效改善了整体触发判断。
+* **v6**：首次正式支持多个 code，并使用结构化 confidence 控制复查；但 Stage 1 对 discussion continuation 过于严格，`add_on` Recall 只有 0.222，导致 Macro F1 降至 0.522。
+* **v7**：恢复了部分 active discussion 逻辑，并加入 Stage 3 失败时保留 Stage 2 结果的兜底。错误话轮降至 38，Macro F1 回升至 0.598，但仍未超过 v5。
+
+当前后续优化方向是以 v5 的高召回 trigger 判断为基础，保留 v7 的多 code 和失败兜底，同时针对 `add_on`、echo-confirmation 类型 `revoice`、`press_for_reasoning` 的 reasoning 问句进行局部修正。

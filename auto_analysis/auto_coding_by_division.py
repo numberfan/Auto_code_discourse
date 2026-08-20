@@ -11,7 +11,7 @@ MODEL_NAME = llm_config.get_model_name()
 USE_JSON_MODE = llm_config.supports_json_mode()
 llm_config.print_status()
 
-PROMPT_VERSION = "v7"
+PROMPT_VERSION = "v8"
 STAGE1_PROMPT = load_text_file(f"prompts/{PROMPT_VERSION}/stage1_trigger_addressee.txt")
 STAGE1_FEW_SHOT = load_text_file(f"prompts/{PROMPT_VERSION}/stage1_few_shot.txt")
 STAGE2A_PROMPT = load_text_file(f"prompts/{PROMPT_VERSION}/stage2a_type_a.txt")
@@ -29,7 +29,7 @@ TYPE_B_CODES = {"add_on", "explain_others", "agree_disagree", "restate"}
 ALL_VALID_CODES = TYPE_A_CODES | TYPE_B_CODES
 MAX_RETRIES = 3
 STAGE1_MAX_OUTPUT_TOKENS = 2048
-STAGE2_MAX_OUTPUT_TOKENS = 2048
+STAGE2_MAX_OUTPUT_TOKENS = 4096
 STAGE3_MAX_OUTPUT_TOKENS = 4096
 
 
@@ -130,8 +130,8 @@ def _validate_stage2(result, turn_id, allowed_codes):
         raise ValueError(f"Stage 2: turn_id 不匹配: {result.get('turn_id')!r}")
     _require_string(result, "confidence", {"high", "medium", "low"}, "Stage 2")
     codes = result.get("codes")
-    if not isinstance(codes, list) or not codes:
-        raise ValueError("Stage 2: codes 必须是至少包含一个代码的数组")
+    if not isinstance(codes, list) or len(codes) != 1:
+        raise ValueError("Stage 2: codes 必须是只包含一个主代码的数组")
     if len(set(codes)) != len(codes) or any(code not in allowed_codes for code in codes):
         raise ValueError(f"Stage 2: codes={codes!r} 不属于当前分支或包含重复代码")
     result["codes"] = _normalize_codes(codes, allowed_codes)
@@ -146,8 +146,8 @@ def _validate_stage3(result, turn_id):
         result, "final_addressee", {"same_student", "other_student", "none"}, "Stage 3"
     )
     codes = result.get("final_codes")
-    if not isinstance(codes, list) or len(set(codes)) != len(codes) or any(code not in ALL_VALID_CODES for code in codes):
-        raise ValueError("Stage 3: final_codes 必须是合法且不重复的代码数组")
+    if not isinstance(codes, list) or len(codes) > 1 or any(code not in ALL_VALID_CODES for code in codes):
+        raise ValueError("Stage 3: final_codes 最多只能包含一个合法主代码")
     allowed_codes = (
         TYPE_A_CODES if addressee == "same_student"
         else TYPE_B_CODES if addressee == "other_student"
@@ -158,6 +158,8 @@ def _validate_stage3(result, turn_id):
         raise ValueError("Stage 3: trigger=no 时不能有 addressee 或 code")
     if trigger == "yes" and addressee == "none":
         raise ValueError("Stage 3: trigger=yes 时必须给出 addressee")
+    if trigger == "yes" and not codes:
+        raise ValueError("Stage 3: trigger=yes 时必须至少给出一个 code")
     if addressee == "same_student" and any(code not in TYPE_A_CODES for code in codes):
         raise ValueError("Stage 3: same_student 与 Type B code 不匹配")
     if addressee == "other_student" and any(code not in TYPE_B_CODES for code in codes):
@@ -254,7 +256,8 @@ def need_review(stage1_result, stage2_result):
 
 def _build_output(target, *, trigger, addressee, codes, reasoning, confirmed,
                   needs_review, stage1_evidence="", stage1_confidence="",
-                  stage2_reasoning="", stage2_confidence="", confirm_reasoning=""):
+                  stage2_reasoning="", stage2_confidence="", confirm_reasoning="",
+                  reviewed=False):
     return {
         "turn_id": target["turn_id"],
         "speaker": target["speaker"],
@@ -269,6 +272,7 @@ def _build_output(target, *, trigger, addressee, codes, reasoning, confirmed,
         "stage2_reasoning": stage2_reasoning,
         "stage2_confidence": stage2_confidence,
         "confirmed": confirmed,
+        "reviewed": reviewed,
         "confirm_reasoning": confirm_reasoning,
         "needs_review": needs_review,
     }
@@ -308,6 +312,7 @@ async def code_single_teacher_turn(client, transcript, target_idx):
                     stage2_confidence=stage2.get("confidence", ""),
                     confirmed=True,
                     needs_review=False,
+                    reviewed=True,
                     confirm_reasoning=stage3.get("override_reason", ""),
                 )
             except Exception as exc:

@@ -63,7 +63,7 @@ def auto_coding(excel_path: str, file_id: str, max_concurrency: int, json_dir: s
         "file_id": file_id,
         "model": get_model_name(),
         "prompt_version": PROMPT_VERSION,
-        "method": "v7_split_multi_code_confidence_review",
+        "method": "v8_split_multi_code_confidence_review",
         "timestamp": timestamp,
         "predictions": predictions,
     }
@@ -76,14 +76,14 @@ def auto_coding(excel_path: str, file_id: str, max_concurrency: int, json_dir: s
 
     # 3. 统计确认率
     total = len(predictions)
-    confirmed_count = sum(1 for p in predictions if p.get("confirmed", False))
+    reviewed_count = sum(1 for p in predictions if p.get("reviewed", False))
     review_count = sum(1 for p in predictions if p.get("needs_review", False))
-    confident_first_pass = total - confirmed_count - review_count    
+    first_pass_count = total - reviewed_count - review_count
 
     print(f"\n--- 编码统计 ---")
     print(f"总教师话轮: {total}")
-    print(f"首次确信通过: {confident_first_pass} ({pct(confident_first_pass, total):.1f}%)")
-    print(f"经复查确认: {confirmed_count} ({pct(confirmed_count, total):.1f}%)")
+    print(f"首次确信通过: {first_pass_count} ({pct(first_pass_count, total):.1f}%)")
+    print(f"经复查确认: {reviewed_count} ({pct(reviewed_count, total):.1f}%)")
     print(f"仍需人工复查: {review_count} ({pct(review_count, total):.1f}%)")
 
     # 4. 评估
