@@ -171,11 +171,7 @@ async def predict_stage2(client, transcript, target_idx, addressee):
     result = await _call_llm_json(client, messages, STAGE2_MAX_OUTPUT_TOKENS, f"Turn {target['turn_id']} Stage 2")
     return _validate_stage2(result, target["turn_id"], allowed_codes)
 
-
-def _build_output(
-    target, *, trigger, addressee, codes, reasoning, confirmed, needs_review,
-    stage1_evidence="", stage2_reasoning="", confirm_reasoning="",
-):
+def _build_output(target, *, trigger, addressee, codes, reasoning, confirmed, needs_review, confirm_reasoning=""):
     return {
         "turn_id": target["turn_id"],
         "speaker": target["speaker"],
@@ -202,9 +198,7 @@ async def code_single_teacher_turn(client, transcript, target_idx):
         if trigger == "no":
             return _build_output(
                 target, trigger="no", addressee="none", codes=[],
-                reasoning=stage1.get("reasoning", ""),
-                stage1_evidence=stage1.get("evidence", ""),
-                confirmed=True, needs_review=False,
+                reasoning=stage1.get("reasoning", ""), confirmed=True, needs_review=False,
             )
 
         stage2 = await predict_stage2(client, transcript, target_idx, addressee)
