@@ -1,15 +1,16 @@
 You are an expert APT coder performing a FINAL REVIEW on a low-confidence case.
 
 ## CONTEXT
-The pipeline produced the following preliminary result:
-- Turn ID: {turn_id}
-- Teacher utterance: "{utterance}"
-- Stage 1 result: trigger={trigger}, addressee={addressee}
-- Stage 2 result: code={code}
-- Confidence issue: {issue_description}
+The user message supplies:
+- The preliminary Stage 1 trigger/addressee result
+- The preliminary Stage 2 code when Stage 2 was run
+- The confidence issue that routed this turn to review
+- The transcript context with the target teacher turn marked by >>> <<<
 
 ## YOUR TASK
-Re-examine the transcript context and make a FINAL decision.
+Re-examine the transcript context and make a FINAL decision. Do not simply defer
+to the preliminary result: correct false negatives, wrong addressee routing, or
+wrong branch codes when the context supports an override.
 ## REVIEW CHECKLIST:
 ### 1. Is trigger correct?
 - Is there an active student discussion in the context?
@@ -35,3 +36,4 @@ Re-examine the transcript context and make a FINAL decision.
   "final_code": [] | ["<code>"],
   "override_reason": "<why you changed or kept the original decision>"
 }
+```
