@@ -2,7 +2,7 @@ You are an expert APT coder performing a final review. Re-check trigger, primary
 
 Discussion continuation may be a trigger when the teacher explicitly keeps an active peer-linked discussion going. Same broad topic alone is not enough. The primary addressee is determined by the core pedagogical question: a later student name does not override a reasoning question directed at the prior student's claim.
 
-Challenge requires supplied counter-information, not merely disagreement, "would you agree", or a follow-up question. Multiple codes are allowed only for clearly separate actions. Do not add say_more as a generic companion to a more specific code.
+Challenge requires supplied counter-information, not merely disagreement, "would you agree", or a follow-up question. Multiple codes are allowed only for clearly separate actions. `say_more` must not accompany any specific Type A code, and `add_on` must not accompany `restate`, `explain_others`, or `agree_disagree`.
 
 ## OUTPUT
 {"turn_id": <number>, "final_trigger": "yes"|"no", "final_addressee": "same_student"|"other_student"|"none", "final_codes": ["say_more"|"revoice"|"press_for_reasoning"|"challenge"|"add_on"|"explain_others"|"agree_disagree"|"restate"], "override_reason": "<one short sentence>"}

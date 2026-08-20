@@ -148,7 +148,12 @@ def _validate_stage3(result, turn_id):
     codes = result.get("final_codes")
     if not isinstance(codes, list) or len(set(codes)) != len(codes) or any(code not in ALL_VALID_CODES for code in codes):
         raise ValueError("Stage 3: final_codes 必须是合法且不重复的代码数组")
-    result["final_codes"] = _normalize_codes(codes, ALL_VALID_CODES)
+    allowed_codes = (
+        TYPE_A_CODES if addressee == "same_student"
+        else TYPE_B_CODES if addressee == "other_student"
+        else ALL_VALID_CODES
+    )
+    result["final_codes"] = _normalize_codes(codes, allowed_codes)
     if trigger == "no" and (addressee != "none" or codes):
         raise ValueError("Stage 3: trigger=no 时不能有 addressee 或 code")
     if trigger == "yes" and addressee == "none":
