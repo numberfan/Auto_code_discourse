@@ -8,7 +8,13 @@ Return exactly one primary code in the codes array. Use the main pedagogical act
 - restate: asks another student to repeat a peer's words.
 - add_on: invites other students to contribute, compare, or build on a specific peer-linked active discussion.
 
-Use add_on only when there is a specific peer idea or an already active student discussion. A teacher's new recall question, a name after a long explanation, or an activity prompt is not add_on.
+## PRIORITY
+1. Use explain_others when the teacher asks another student to explain the meaning or reasoning of a peer idea.
+2. Use restate when the teacher asks another student to repeat the peer's words or reason.
+3. Use agree_disagree when the teacher explicitly asks whether students agree, disagree, or evaluate the peer claim.
+4. Use add_on when the teacher asks another student to respond or contribute without an explicit explanation, repetition, or agreement judgment.
+
+Use add_on only when there is a specific peer idea or an already active student discussion. Phrases such as "what do you say?" and "how would you respond to what they have said?" are add_on when they invite a response to a peer contribution. A teacher's new recall question, a name after a long explanation, or an activity prompt is not add_on.
 
 ## OUTPUT
 {"turn_id": <number>, "codes": ["explain_others"|"agree_disagree"|"restate"|"add_on"], "confidence": "high"|"medium"|"low", "reasoning": "<one short sentence>"}

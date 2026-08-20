@@ -3,8 +3,8 @@
 # @Time         : 2026/8/17 10:59
 # @Description  : 单次预测+条件复查
 import asyncio
-from auto_analysis import llm_config
-from auto_analysis.utils import load_text_file, extract_json
+from llm_analysis_python import llm_config
+from llm_analysis_python.utils import load_text_file, extract_json
 
 # 初始化llm
 MODEL_NAME = llm_config.get_model_name()

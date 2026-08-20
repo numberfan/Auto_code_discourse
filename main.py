@@ -2,13 +2,13 @@ import json
 import os
 import argparse
 import time
-from auto_analysis.evaluation.assess_func import evaluate_predictions, print_evaluation_report, save_evaluation_report
-from auto_analysis.auto_coding_by_division import code_full_transcript, PROMPT_VERSION
-from auto_analysis.data_clean_to_json import clean_excel_to_json
-from auto_analysis.data_clean_to_json import CLEANING_VERSION
-from auto_analysis.llm_config import get_model_name
-from auto_analysis.evaluation.error_analysis import error_analysis
-from auto_analysis.utils import pct
+from llm_analysis_python.evaluation.assess_func import evaluate_predictions, print_evaluation_report, save_evaluation_report
+from llm_analysis_python.auto_coding_by_division import code_full_transcript, PROMPT_VERSION
+from llm_analysis_python.data_clean_to_json import clean_excel_to_json
+from llm_analysis_python.data_clean_to_json import CLEANING_VERSION
+from llm_analysis_python.llm_config import get_model_name
+from llm_analysis_python.evaluation.error_analysis import error_analysis
+from llm_analysis_python.utils import pct
 
 # 默认配置（可被命令行覆盖）
 DEFAULT_EXCEL_PATH = "coded_discourse/excel/chris moon video 1 transcription_susan_5_22.xlsx"
@@ -63,7 +63,7 @@ def auto_coding(excel_path: str, file_id: str, max_concurrency: int, json_dir: s
         "file_id": file_id,
         "model": get_model_name(),
         "prompt_version": PROMPT_VERSION,
-        "method": "v9_eligibility_gate_single_code_confidence_review",
+        "method": "v10_immediate_response_aware_single_code_review",
         "timestamp": timestamp,
         "predictions": predictions,
     }

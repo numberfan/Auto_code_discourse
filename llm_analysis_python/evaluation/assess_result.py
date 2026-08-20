@@ -3,8 +3,8 @@
 # @Time         : 2026/8/17 11:16
 # @Description  : 留一法交叉验证
 import numpy as np
-from auto_analysis.evaluation.assess_func import evaluate_predictions, print_evaluation_report
-from auto_analysis.auto_coding_by_division import code_full_transcript
+from llm_analysis_python.evaluation.assess_func import evaluate_predictions, print_evaluation_report
+from llm_analysis_python.auto_coding_by_division import code_full_transcript
 
 
 def leave_one_out_evaluation(all_files: list, max_concurrency: int = 5):

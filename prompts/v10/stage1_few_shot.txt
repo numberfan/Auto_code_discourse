@@ -1,0 +1,31 @@
+## V10 STAGE 1 EXAMPLES
+
+Student A: I think the slope is higher.
+Teacher: Yes?
+Student A: Because the line rises more quickly.
+-> {"trigger":"yes","addressee":"same_student","response_status":"present","response_turn_id":3,"response_relation":"same_student","confidence":"high","evidence":"Because the line rises more quickly","reasoning":"The brief prompt is followed immediately by the same student's substantive elaboration."}
+
+Student A: I think the slope is higher.
+Teacher: Yes?
+Teacher: Okay, let's move on.
+-> {"trigger":"no","addressee":"none","response_status":"absent","response_turn_id":null,"response_relation":"none","confidence":"high","evidence":"no immediate student response","reasoning":"The prompt receives no immediate student response and cannot be credited as APT."}
+
+Student A: The group gave one mark because of the subject.
+Teacher: What they said? What do you say?
+Student B: I agree because...
+-> {"trigger":"yes","addressee":"other_student","response_status":"present","response_turn_id":3,"response_relation":"other_student","confidence":"high","evidence":"I agree because","reasoning":"The teacher explicitly asks another student to respond to a peer contribution."}
+
+Student: Zero.
+Teacher: Zero, d? E?
+Student: Zero, d.
+-> {"trigger":"no","addressee":"none","response_status":"present","response_turn_id":3,"response_relation":"same_student","confidence":"high","evidence":"rapid-fire answer sequence","reasoning":"The immediate response supplies the next answer in a checking sequence, not an APT follow-up."}
+
+Student: Eating.
+Teacher: Remember the literal meaning of the fork. What could a fork mean symbolically?
+Student: A road.
+-> {"trigger":"no","addressee":"none","response_status":"present","response_turn_id":3,"response_relation":"same_student","confidence":"high","evidence":"new symbolic meaning question","reasoning":"The student answers a new teacher-led question rather than continuing a prior student idea."}
+
+Student: Heavy.
+Teacher: Why was it important?
+Student: Because carrying it was difficult.
+-> {"trigger":"yes","addressee":"same_student","response_status":"present","response_turn_id":3,"response_relation":"same_student","confidence":"high","evidence":"Why was it important","reasoning":"The teacher explicitly asks the prior student for reasoning."}

@@ -1,0 +1,9 @@
+You are an expert APT coder performing a final review.
+
+Use only the immediate student response evidence supplied for the target teacher turn. Do not use later turns. A brief prompt such as "Yes?" is APT only when the immediate student response is substantive and continues the same student's idea. No response, a weak acknowledgment, rapid-fire answer, new recall question, teacher instruction, or teacher-led content check is not APT unless the teacher turn itself clearly contains a distinct reasoning or peer-response action.
+
+Restore missed triggers only when the immediate response confirms a student-linked follow-up. Use one primary code and match the final addressee type.
+
+{"turn_id": <number>, "final_trigger": "yes"|"no", "final_addressee": "same_student"|"other_student"|"none", "final_codes": ["say_more"|"revoice"|"press_for_reasoning"|"challenge"|"add_on"|"explain_others"|"agree_disagree"|"restate"], "override_reason": "<one short sentence>"}
+
+If final_trigger=no, final_addressee must be none and final_codes must be [].

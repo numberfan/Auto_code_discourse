@@ -4,14 +4,14 @@
 # @Description  : APT coding pipeline with separate trigger, code, and review stages.
 
 import asyncio
-from auto_analysis import llm_config
-from auto_analysis.utils import extract_json, load_text_file
+from llm_analysis_python import llm_config
+from llm_analysis_python.utils import extract_json, load_text_file
 
 MODEL_NAME = llm_config.get_model_name()
 USE_JSON_MODE = llm_config.supports_json_mode()
 llm_config.print_status()
 
-PROMPT_VERSION = "v9"
+PROMPT_VERSION = "v10"
 STAGE1_PROMPT = load_text_file(f"prompts/{PROMPT_VERSION}/stage1_trigger_addressee.txt")
 STAGE1_FEW_SHOT = load_text_file(f"prompts/{PROMPT_VERSION}/stage1_few_shot.txt")
 STAGE2A_PROMPT = load_text_file(f"prompts/{PROMPT_VERSION}/stage2a_type_a.txt")
@@ -73,6 +73,17 @@ def _build_context_window(transcript, target_idx, before=5, after=2):
     return "\n".join(context_lines)
 
 
+def _get_immediate_student_response(transcript, target_idx):
+    """Return only the first turn after the target, if it is a student turn."""
+    response_idx = target_idx + 1
+    if response_idx >= len(transcript):
+        return None
+    response = transcript[response_idx]
+    if response.get("is_teacher", False):
+        return None
+    return response
+
+
 def _request_kwargs(messages, max_tokens):
     kwargs = {
         "model": MODEL_NAME,
@@ -118,6 +129,16 @@ def _validate_stage1(result, turn_id):
     addressee = _require_string(
         result, "addressee", {"same_student", "other_student", "none"}, "Stage 1"
     )
+    response_status = _require_string(
+        result, "response_status", {"present", "absent", "weak", "unclear"}, "Stage 1"
+    )
+    response_relation = _require_string(
+        result, "response_relation", {"same_student", "other_student", "none", "unknown"}, "Stage 1"
+    )
+    if response_status == "absent" and response_relation != "none":
+        raise ValueError("Stage 1: response_status=absent 时 response_relation 必须为 none")
+    if response_status == "present" and response_relation == "none":
+        raise ValueError("Stage 1: response_status=present 时必须标注 response_relation")
     if trigger == "no" and addressee != "none":
         raise ValueError("Stage 1: trigger=no 时 addressee 必须为 none")
     if trigger == "yes" and addressee == "none":
@@ -165,12 +186,8 @@ def _validate_stage3(result, turn_id):
         raise ValueError("Stage 3: trigger=no 时不能有 addressee 或 code")
     if trigger == "yes" and addressee == "none":
         raise ValueError("Stage 3: trigger=yes 时必须给出 addressee")
-    if trigger == "yes" and not codes:
+    if trigger == "yes" and not result["final_codes"]:
         raise ValueError("Stage 3: trigger=yes 时必须至少给出一个 code")
-    if addressee == "same_student" and any(code not in TYPE_A_CODES for code in codes):
-        raise ValueError("Stage 3: same_student 与 Type B code 不匹配")
-    if addressee == "other_student" and any(code not in TYPE_B_CODES for code in codes):
-        raise ValueError("Stage 3: other_student 与 Type A code 不匹配")
     return result
 
 
@@ -190,13 +207,26 @@ def _normalize_codes(codes, allowed_codes):
 
 async def predict_stage1(client, transcript, target_idx):
     target = transcript[target_idx]
-    context = _build_context_window(transcript, target_idx)
+    context = _build_context_window(transcript, target_idx, after=1)
+    response = _get_immediate_student_response(transcript, target_idx)
+    if response:
+        response_evidence = (
+            f"[RESPONSE EVIDENCE] Immediate next student turn only: "
+            f"[Turn {response['turn_id']}] {response['speaker']}: {response['utterance']}"
+        )
+    else:
+        response_evidence = (
+            "[RESPONSE EVIDENCE] No immediate student response follows this teacher turn. "
+            "Do not use later turns as evidence."
+        )
     user_prompt = (
         f"## CONTEXT:\n{context}\n\n"
         f"## TARGET TURN (marked with >>>):\n"
         f">>> [{target['turn_id']}] {target['speaker']}: {target['utterance']} <<<\n\n"
+        f"## RESPONSE EVIDENCE:\n{response_evidence}\n\n"
         "Determine trigger and addressee. Return ONLY JSON with keys: "
-        "turn_id, trigger, addressee, confidence, evidence, reasoning."
+        "turn_id, trigger, addressee, response_status, response_turn_id, "
+        "response_relation, confidence, evidence, reasoning."
     )
     messages = [
         {"role": "system", "content": STAGE1_PROMPT + "\n\n" + STAGE1_FEW_SHOT},
@@ -232,7 +262,7 @@ async def predict_stage2(client, transcript, target_idx, addressee):
 
 async def predict_stage3(client, transcript, target_idx, stage1_result, stage2_result, issue_description):
     target = transcript[target_idx]
-    context = _build_context_window(transcript, target_idx, before=7, after=3)
+    context = _build_context_window(transcript, target_idx, before=7, after=1)
     user_prompt = (
         f"## FIRST-PASS RESULT:\n"
         f"Stage 1: trigger={stage1_result.get('trigger')}, addressee={stage1_result.get('addressee')}\n"
@@ -264,6 +294,8 @@ def need_review(stage1_result, stage2_result):
 def _build_output(target, *, trigger, addressee, codes, reasoning, confirmed,
                   needs_review, stage1_evidence="", stage1_confidence="",
                   stage2_reasoning="", stage2_confidence="", confirm_reasoning="",
+                  response_status="unknown", response_turn_id=None,
+                  response_relation="unknown",
                   reviewed=False):
     return {
         "turn_id": target["turn_id"],
@@ -276,6 +308,9 @@ def _build_output(target, *, trigger, addressee, codes, reasoning, confirmed,
         "reasoning": reasoning,
         "stage1_evidence": stage1_evidence,
         "stage1_confidence": stage1_confidence,
+        "response_status": response_status,
+        "response_turn_id": response_turn_id,
+        "response_relation": response_relation,
         "stage2_reasoning": stage2_reasoning,
         "stage2_confidence": stage2_confidence,
         "confirmed": confirmed,
@@ -297,6 +332,9 @@ async def code_single_teacher_turn(client, transcript, target_idx):
                 reasoning=stage1.get("reasoning", ""),
                 stage1_evidence=stage1.get("evidence", ""),
                 stage1_confidence=stage1.get("confidence", ""),
+                response_status=stage1.get("response_status", "unknown"),
+                response_turn_id=stage1.get("response_turn_id"),
+                response_relation=stage1.get("response_relation", "unknown"),
                 confirmed=True, needs_review=False,
             )
 
@@ -315,6 +353,9 @@ async def code_single_teacher_turn(client, transcript, target_idx):
                     reasoning=stage1.get("reasoning", ""),
                     stage1_evidence=stage1.get("evidence", ""),
                     stage1_confidence=stage1.get("confidence", ""),
+                    response_status=stage1.get("response_status", "unknown"),
+                    response_turn_id=stage1.get("response_turn_id"),
+                    response_relation=stage1.get("response_relation", "unknown"),
                     stage2_reasoning=stage2.get("reasoning", ""),
                     stage2_confidence=stage2.get("confidence", ""),
                     confirmed=True,
@@ -329,6 +370,9 @@ async def code_single_teacher_turn(client, transcript, target_idx):
                     codes=stage2["codes"], reasoning=stage1.get("reasoning", ""),
                     stage1_evidence=stage1.get("evidence", ""),
                     stage1_confidence=stage1.get("confidence", ""),
+                    response_status=stage1.get("response_status", "unknown"),
+                    response_turn_id=stage1.get("response_turn_id"),
+                    response_relation=stage1.get("response_relation", "unknown"),
                     stage2_reasoning=stage2.get("reasoning", ""),
                     stage2_confidence=stage2.get("confidence", ""),
                     confirmed=False, needs_review=True,
@@ -339,6 +383,9 @@ async def code_single_teacher_turn(client, transcript, target_idx):
             reasoning=stage1.get("reasoning", ""),
             stage1_evidence=stage1.get("evidence", ""),
             stage1_confidence=stage1.get("confidence", ""),
+            response_status=stage1.get("response_status", "unknown"),
+            response_turn_id=stage1.get("response_turn_id"),
+            response_relation=stage1.get("response_relation", "unknown"),
             stage2_reasoning=stage2.get("reasoning", ""),
             stage2_confidence=stage2.get("confidence", ""),
             confirmed=True, needs_review=False,

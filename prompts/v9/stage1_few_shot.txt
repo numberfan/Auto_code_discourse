@@ -32,6 +32,14 @@ Student: They studied better because it was brighter.
 Teacher: Do you remember where the students actually studied? Where was their school?
 -> {"trigger":"yes","addressee":"other_student","confidence":"medium","evidence":"where the students studied","reasoning":"Continues a live student-linked topic with a related follow-up for the class."}
 
+Student: The answer is one because of the subject.
+Teacher: What they said? What do you say?
+-> {"trigger":"yes","addressee":"other_student","confidence":"high","evidence":"what they said","reasoning":"Explicitly asks another student to respond to a peer contribution."}
+
+Student: The group gave a different reason.
+Teacher: How would you respond to what they have said?
+-> {"trigger":"yes","addressee":"other_student","confidence":"high","evidence":"respond to what they have said","reasoning":"Invites a response to a specific peer-linked contribution."}
+
 Teacher: The teacher explains the rule at length, then asks, What is the technical term? A pun.
 -> {"trigger":"no","addressee":"none","confidence":"high","evidence":"teacher explanation followed by recall question","reasoning":"The question checks newly taught content rather than following a student contribution."}
 
