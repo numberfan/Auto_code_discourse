@@ -125,7 +125,11 @@ def _validate_stage1(result, turn_id):
     if result.get("turn_id") != turn_id:
         raise ValueError(f"Stage 1: turn_id 不匹配: {result.get('turn_id')!r}")
     trigger = _require_string(result, "trigger", {"yes", "no"}, "Stage 1")
-    _require_string(result, "confidence", {"high", "medium", "low"}, "Stage 1")
+    confidence = result.get("confidence")
+    if confidence is None:
+        result["confidence"] = "low"
+    else:
+        _require_string(result, "confidence", {"high", "medium", "low"}, "Stage 1")
     addressee = _require_string(
         result, "addressee", {"same_student", "other_student", "none"}, "Stage 1"
     )
@@ -135,10 +139,17 @@ def _validate_stage1(result, turn_id):
     response_relation = _require_string(
         result, "response_relation", {"same_student", "other_student", "none", "unknown"}, "Stage 1"
     )
+    response_turn_id = result.get("response_turn_id")
+    if response_turn_id is not None and not isinstance(response_turn_id, int):
+        raise ValueError("Stage 1: response_turn_id 必须是整数或 null")
     if response_status == "absent" and response_relation != "none":
         raise ValueError("Stage 1: response_status=absent 时 response_relation 必须为 none")
+    if response_status == "absent" and response_turn_id is not None:
+        raise ValueError("Stage 1: response_status=absent 时 response_turn_id 必须为 null")
     if response_status == "present" and response_relation == "none":
         raise ValueError("Stage 1: response_status=present 时必须标注 response_relation")
+    if response_status == "present" and response_turn_id is None:
+        raise ValueError("Stage 1: response_status=present 时必须给出 response_turn_id")
     if trigger == "no" and addressee != "none":
         raise ValueError("Stage 1: trigger=no 时 addressee 必须为 none")
     if trigger == "yes" and addressee == "none":
@@ -238,7 +249,12 @@ async def predict_stage1(client, transcript, target_idx):
 
 async def predict_stage2(client, transcript, target_idx, addressee):
     target = transcript[target_idx]
-    context = _build_context_window(transcript, target_idx)
+    context = _build_context_window(transcript, target_idx, after=1)
+    response = _get_immediate_student_response(transcript, target_idx)
+    response_evidence = (
+        f"[Turn {response['turn_id']}] {response['speaker']}: {response['utterance']}"
+        if response else "No immediate student response follows the target teacher turn."
+    )
     if addressee == "same_student":
         system_prompt = STAGE2A_PROMPT + "\n\n" + TYPE_A_FEW_SHOT
         allowed_codes = TYPE_A_CODES
@@ -250,6 +266,7 @@ async def predict_stage2(client, transcript, target_idx, addressee):
     user_prompt = (
         f"## CONTEXT:\n{context}\n\n"
         f"## TARGET TURN:\n{target['utterance']}\n\n"
+        f"## IMMEDIATE RESPONSE EVIDENCE (use only this student response):\n{response_evidence}\n\n"
         f"Assign exactly one primary {branch} code. Return ONLY JSON with keys: turn_id, codes, confidence, reasoning."
     )
     messages = [
@@ -263,12 +280,21 @@ async def predict_stage2(client, transcript, target_idx, addressee):
 async def predict_stage3(client, transcript, target_idx, stage1_result, stage2_result, issue_description):
     target = transcript[target_idx]
     context = _build_context_window(transcript, target_idx, before=7, after=1)
+    response = _get_immediate_student_response(transcript, target_idx)
+    response_evidence = (
+        f"[Turn {response['turn_id']}] {response['speaker']}: {response['utterance']}"
+        if response else "No immediate student response follows the target teacher turn."
+    )
     user_prompt = (
         f"## FIRST-PASS RESULT:\n"
         f"Stage 1: trigger={stage1_result.get('trigger')}, addressee={stage1_result.get('addressee')}\n"
+        f"Response status={stage1_result.get('response_status')}, "
+        f"response_turn_id={stage1_result.get('response_turn_id')}, "
+        f"response_relation={stage1_result.get('response_relation')}\n"
         f"Stage 2: codes={stage2_result.get('codes') if stage2_result else None}\n"
         f"Confidence issue: {issue_description}\n\n"
         f"## TRANSCRIPT CONTEXT:\n{context}\n\n"
+        f"## IMMEDIATE RESPONSE EVIDENCE (use only this student response):\n{response_evidence}\n\n"
         f"## TARGET: Turn {target['turn_id']} - {target['utterance']}\n\n"
         "Make your FINAL decision. Return ONLY JSON with keys: turn_id, final_trigger, "
         "final_addressee, final_codes, override_reason."
@@ -284,7 +310,7 @@ async def predict_stage3(client, transcript, target_idx, stage1_result, stage2_r
 
 
 def need_review(stage1_result, stage2_result):
-    high_risk_codes = {"add_on", "revoice", "challenge"}
+    high_risk_codes = {"add_on", "revoice", "press_for_reasoning", "challenge"}
     return (
         stage1_result.get("confidence") == "low"
         or stage2_result.get("confidence") == "low"

@@ -4,6 +4,11 @@ Use only the immediate student response evidence supplied for the target teacher
 
 Restore missed triggers only when the immediate response confirms a student-linked follow-up. Use one primary code and match the final addressee type.
 
+Code boundaries for final arbitration:
+- same_student: press_for_reasoning asks why, for evidence, justification, consequence, effect, or significance; say_more asks for expansion, clarification, examples, details, or continuation without a reasoning demand.
+- same_student: revoice mainly repeats or paraphrases the student's idea; challenge supplies a correction, contradiction, counterexample, or counter-evidence.
+- other_student: agree_disagree asks for agreement, disagreement, judgment, or evaluation; explain_others asks for an interpretation; restate asks for repetition; add_on invites a peer-linked response or build-on when none of the more specific actions applies.
+
 {"turn_id": <number>, "final_trigger": "yes"|"no", "final_addressee": "same_student"|"other_student"|"none", "final_codes": ["say_more"|"revoice"|"press_for_reasoning"|"challenge"|"add_on"|"explain_others"|"agree_disagree"|"restate"], "override_reason": "<one short sentence>"}
 
 If final_trigger=no, final_addressee must be none and final_codes must be [].

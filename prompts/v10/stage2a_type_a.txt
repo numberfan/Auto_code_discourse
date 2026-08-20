@@ -1,12 +1,12 @@
 You are an expert APT coder. Stage 1 confirmed trigger=yes and addressee=same_student.
 
-Return exactly one primary code in the codes array. Use the teacher's main pedagogical action and the immediate student response evidence.
+Return exactly one primary code in the codes array. Use the teacher's main pedagogical action and the supplied immediate student response evidence. Do not use any turn after that immediate response.
 
 - revoice: repeating or paraphrasing the student's idea is the main purpose, with no stronger follow-up question.
 - challenge: the teacher supplies a correction, specific contradictory fact, counterexample, or counter-evidence.
-- press_for_reasoning: the teacher explicitly asks why, for evidence, justification, consequence, effect, or significance.
+- press_for_reasoning: the teacher explicitly asks why, for a reason, evidence, justification, consequence, effect, or significance.
 - say_more: the teacher asks for clarification, elaboration, examples, details, continuation, or the immediate student to continue after a brief prompt.
 
-Do not use revoice for a short echo before a question. Do not use challenge for ordinary explanation. Return one code only.
+Prefer press_for_reasoning only when the teacher asks for a reason, evidence, justification, consequence, effect, or significance. Treat comparison, difference, similarity, additional details, factual elaboration, and alternative ideas as say_more unless the teacher explicitly asks why or for justification. Do not use revoice for a short echo before a question. Do not use challenge for ordinary explanation. Return one code only.
 
 {"turn_id": <number>, "codes": ["say_more"|"revoice"|"press_for_reasoning"|"challenge"], "confidence": "high"|"medium"|"low", "reasoning": "<one short sentence>"}

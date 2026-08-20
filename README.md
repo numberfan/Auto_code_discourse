@@ -74,12 +74,10 @@
 
 ### 版本分析
 
-* **v3**：作为单次预测基线，二分类 F1 为 0.851，但 50 个话轮出现错误，主要损失来自 trigger 判断和 `revoice`/`challenge` 边界。
-* **v5**：将任务拆成 trigger/addressee、Type A/Type B 分类和条件复查，Macro F1 达到 0.654，是目前表现最好的版本。二分类 F1 为 0.927，说明分阶段结构有效改善了整体触发判断。
-* **v6**：首次正式支持多个 code，并使用结构化 confidence 控制复查；但 Stage 1 对 discussion continuation 过于严格，`add_on` Recall 只有 0.222，导致 Macro F1 降至 0.522。
-* **v7**：恢复了部分 active discussion 逻辑，并加入 Stage 3 失败时保留 Stage 2 结果的兜底。错误话轮降至 38，Macro F1 回升至 0.598，但仍未超过 v5。
-
-当前后续优化方向是以 v5 的高召回 trigger 判断为基础，保留 v7 的多 code 和失败兜底，同时针对 `add_on`、echo-confirmation 类型 `revoice`、`press_for_reasoning` 的 reasoning 问句进行局部修正。
+* v3：作为单次预测基线，二分类 F1 为 0.851
+* v5：将任务拆成 trigger/addressee、Type A/Type B 分类和条件复查，Macro F1 达到 0.654，是目前表现最好的版本。二分类 F1 为 0.927，说明分阶段结构有效改善了整体触发判断。
+* v6：首次正式支持多个 code，并使用结构化 confidence 控制复查；Macro F1 降至 0.522。
+* v7：恢复了部分 active discussion 逻辑，并加入 Stage 3 失败时保留 Stage 2 结果的兜底。错误话轮降至 38，Macro F1 回升至 0.598，但仍未超过 v5。
 
 ### v8泛化表现
 四个文件已经全部完成 v8 评估。结果说明：v8 在 Chris Moon 上表现不错，但跨课堂泛化明显下降。

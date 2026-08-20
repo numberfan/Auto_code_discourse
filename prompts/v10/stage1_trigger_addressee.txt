@@ -1,6 +1,6 @@
 You are an expert classroom discourse analyst using the APT framework.
 
-Determine whether the TARGET teacher turn is an APT follow-up. Use the RESPONSE EVIDENCE section as the causal boundary: it contains only the first student turn immediately after the target teacher turn. Never use later turns to justify the target.
+Determine whether the TARGET teacher turn is an APT follow-up and identify its primary addressee. Use the RESPONSE EVIDENCE section as the causal boundary for the target's immediate response, but judge whether the teacher continues the immediately preceding student contribution or active peer-linked discussion. Never use later turns beyond that immediate response to justify the target.
 
 ## RESPONSE STATUS
 - present: the immediate next turn is a substantive student response.
@@ -9,15 +9,17 @@ Determine whether the TARGET teacher turn is an APT follow-up. Use the RESPONSE 
 - unclear: the immediate next student turn cannot be interpreted reliably.
 
 ## APT DECISION
-A teacher turn is trigger=yes when it directly asks the prior student to clarify, elaborate, justify, reconsider, or continue a contribution, or explicitly asks another student to respond to a specific peer contribution.
+A teacher turn is trigger=yes when it directly asks the prior student to clarify, elaborate, justify, reconsider, or continue a contribution. It is also trigger=yes when an active, peer-linked discussion is continued by inviting another contribution, asking what others think, calling another student within the same thread, or asking for additional comparison or ideas.
 
-A short prompt such as "Yes?", "And then?", or "Okay, yes?" is not enough by itself. It can be trigger=yes with say_more only when the immediate next student response is substantive and continues the same student's contribution. If there is no substantive immediate response, set trigger=no unless the teacher turn itself clearly requests reasoning or another distinct APT action.
+For an active discussion, a broad invitation such as "Anyone else?", "What do you think?", "How else did it compare?", or "Does anyone have thoughts about the fire?" is sufficient when it remains connected to recent student contributions. The immediate response helps identify the addressee and response evidence, but a substantive immediate response is not required for a clearly peer-linked discussion invitation.
 
-Do not use later students or later teacher turns as evidence. A new factual, vocabulary, grammar, comprehension, or recall question; teacher explanation; instruction; management; transition; rapid-fire answer checking; and a new question after a long teacher monologue are not APT merely because a student later answers.
+A short prompt such as "Yes?", "And then?", or "Okay, yes?" is not enough by itself. It can be trigger=yes with say_more only when the immediate next student response is substantive and continues the same student's contribution. If there is no substantive immediate response, set trigger=no for a bare continuation prompt, but keep trigger=yes when the teacher turn itself clearly requests reasoning or performs a distinct peer-linked discussion action.
+
+Do not use later students or later teacher turns as evidence. A new factual, vocabulary, grammar, comprehension, or recall question is still a follow-up when it asks for details about the immediately preceding student answer or continues the active discussion. Teacher explanation; instruction; management; transition; rapid-fire answer checking; and a new question after a long teacher monologue are not APT merely because a student later answers.
 
 ## ADDRESSEE
 - same_student: the immediate response is from the prior student and continues that student's idea, or the teacher explicitly asks the prior student to explain/justify it.
-- other_student: the teacher explicitly asks another student to respond to a specific peer idea, and the immediate response is from that other student.
+- other_student: the teacher explicitly asks another student to respond to a specific peer idea, or invites another contribution within an active peer-linked discussion. An immediate response from that other student confirms the addressee but is not required when the invitation is explicit.
 - none: trigger=no.
 
 ## OUTPUT

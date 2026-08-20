@@ -29,3 +29,26 @@ Student: Heavy.
 Teacher: Why was it important?
 Student: Because carrying it was difficult.
 -> {"trigger":"yes","addressee":"same_student","response_status":"present","response_turn_id":3,"response_relation":"same_student","confidence":"high","evidence":"Why was it important","reasoning":"The teacher explicitly asks the prior student for reasoning."}
+
+Student: The government rebuilt it.
+Teacher: What should they have done instead?
+-> {"trigger":"yes","addressee":"same_student","response_status":"absent","response_turn_id":null,"response_relation":"none","confidence":"high","evidence":"What should they have done instead","reasoning":"The teacher asks the prior student for an alternative to the stated action."}
+
+Student: They did not have iPads.
+Teacher: Okay. How else did what you see in the museum compare to how you live now?
+-> {"trigger":"yes","addressee":"other_student","response_status":"absent","response_turn_id":null,"response_relation":"none","confidence":"high","evidence":"How else did the museum compare","reasoning":"The teacher invites additional contributions within the active comparison discussion."}
+
+Student: The answer is one because of the subject.
+Teacher: What they said? What do you say?
+Student: I think it is one because...
+-> {"trigger":"yes","addressee":"other_student","response_status":"present","response_turn_id":3,"response_relation":"other_student","confidence":"high","evidence":"I think it is one because","reasoning":"The teacher asks another student to build on a peer-linked contribution."}
+
+Student A: The area was rebuilt after the fire.
+Teacher: Does anyone else have thoughts about the fire and rebuilding? Isabelle?
+Teacher: Let's hear from someone else.
+-> {"trigger":"yes","addressee":"other_student","response_status":"absent","response_turn_id":null,"response_relation":"none","confidence":"high","evidence":"thoughts about the fire and rebuilding","reasoning":"The teacher continues an active peer-linked discussion by inviting another contribution, even before a response is recorded."}
+
+Student: A museum.
+Teacher: Good Jay. What kind of things do they show in the house?
+Student: Shops and homes from the past.
+-> {"trigger":"yes","addressee":"same_student","response_status":"present","response_turn_id":3,"response_relation":"same_student","confidence":"high","evidence":"What kind of things do they show","reasoning":"The teacher asks the prior student to elaborate on a just-given answer."}
