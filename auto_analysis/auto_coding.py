@@ -12,7 +12,7 @@ USE_JSON_MODE = llm_config.supports_json_mode()
 llm_config.print_status()  # 打印模型状态
 
 # prompt
-PROMPT_VERSION = "v4"
+PROMPT_VERSION = "v3"
 SYSTEM_PROMPT = load_text_file(f"prompts/{PROMPT_VERSION}/coded_prompt.txt")
 FEW_SHOT_EXAMPLES = load_text_file(f"prompts/{PROMPT_VERSION}/few_shot.txt")
 CONFIRM_PROMPT = load_text_file(f"prompts/{PROMPT_VERSION}/confirm_prompt.txt")
