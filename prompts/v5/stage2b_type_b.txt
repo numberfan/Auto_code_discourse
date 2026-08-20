@@ -1,0 +1,111 @@
+You are an expert APT coder. A previous analysis has confirmed:
+- This teacher turn IS a follow-up on a student's contribution (trigger = yes)
+- The teacher is addressing OTHER STUDENT(S) or the class (addressee = other_student)
+## YOUR TASK
+Assign exactly ONE code from the Type B set:
+- **explain_others**
+- **agree_disagree**
+- **restate**
+- **add_on** (default)
+## IMPORTANT PRINCIPLE
+Since trigger and addressee are ALREADY CONFIRMED, your job is straightforward:
+check the three specific codes first, and if none clearly apply, the answer
+is **add_on**. Do not second-guess the trigger decision.
+---
+## DECISION TREE (check in order, STOP at first match)
+### 1. EXPLAIN_OTHERS?
+The teacher asks another student to EXPLAIN, INTERPRET, or RECONSTRUCT
+a peer's idea IN THEIR OWN WORDS.
+STRICT CRITERIA:
+- The teacher explicitly asks a student to demonstrate UNDERSTANDING of
+  what another student said
+- Must require INTERPRETATION, not just repetition
+- Signals: "put that in your own words", "explain what she meant",
+  "what do you think he was trying to say?"
+POSITIVE:
+- "Who can put what he just said in your own words?"
+- "Can you explain what Maria meant by that?"
+- "What do you think she was trying to say?"
+NEGATIVE (not explain_others):
+- "What do you think?" (asking for own opinion → add_on)
+- "Do you agree?" (asking for stance → agree_disagree)
+- "What did he say?" (asking for repetition → restate)
+If EXPLAIN_OTHERS → output ["explain_others"]. STOP.
+---
+### 2. AGREE_DISAGREE?
+The teacher EXPLICITLY asks students to take a STANCE or POSITION on
+what another student said, using evaluation/judgment language.
+STRICT CRITERIA — must contain EXPLICIT stance language:
+- "agree" / "disagree"
+- "right" / "wrong" / "correct"
+- "same idea" / "different opinion"
+- "whose side" / "is he/she right?"
+- "do you think that's true?"
+- "is that correct?"
+POSITIVE:
+- "Does anyone agree with him?"
+- "Do you agree or disagree with what she said?"
+- "Is he right about that?"
+- "Do you think that's correct?"
+- "Whose side are you on?"
+- "Does anyone disagree?"
+NEGATIVE (these are add_on, NOT agree_disagree):
+- "What do others think?" (no explicit stance language)
+- "Does anyone have a different idea?" (inviting contribution, not evaluation)
+- "What about you?" (soliciting participation, not stance)
+- "Anyone else?" (invitation, not evaluation)
+- "Do you have something to add?" (extension, not judgment)
+THE TEST: Does the teacher's language REQUIRE students to EVALUATE
+(right/wrong/agree/disagree) rather than just CONTRIBUTE?
+- If evaluation required → agree_disagree
+- If contribution invited → add_on
+If AGREE_DISAGREE → output ["agree_disagree"]. STOP.
+---
+### 3. RESTATE?
+The teacher asks another student to REPEAT what a peer said (verbatim
+or near-verbatim).
+STRICT CRITERIA:
+- Asks for REPETITION, not interpretation
+- Signals: "What did [name] say?", "Can you repeat that?",
+  "Did you hear what he said?"
+- Usually occurs when a student spoke too softly
+POSITIVE:
+- "What did Gabriel say? Did you hear what he said?"
+- "Can someone repeat what she just said?"
+- "Tell us what he said."
+NEGATIVE:
+- "Can you put that in your own words?" (interpretation → explain_others)
+- "What do you think about what he said?" (reaction → add_on)
+If RESTATE → output ["restate"]. STOP.
+---
+### 4. ADD_ON (DEFAULT)
+None of the specific codes above apply. The teacher is inviting other
+students to ENGAGE WITH, BUILD ON, EXTEND, or CONTRIBUTE TO the ongoing
+discussion that a peer started.
+Since trigger = yes and addressee = other_student are ALREADY CONFIRMED,
+add_on is the natural default. This includes:
+- "Anyone else?" / "Any other ideas?"
+- "What do others think?"
+- "Who else noticed something?"
+- "[Name], what do you think?"
+- "How about you?" (to different student)
+- "Does anyone want to add to that?"
+- "What else?" (directed at class)
+- "How else did [topic]...?"
+- Calling on a new student to continue the same discussion
+- Any question to the class that continues the active discussion thread
+- Teacher extends/reframes and then invites others to respond within same topic
+- **Teacher provides substantive elaboration or summary of the discussion
+  topic for the class, even if no explicit question is posed.** The
+  elaboration itself is a move that adds to the collective knowledge and
+  keeps the discussion alive. Example: "Yeah, so it shows how different
+  homes look in the past..." after a student says "A museum."
+→ output ["add_on"].
+---
+## OUTPUT FORMAT (JSON only):
+```json
+{
+  "turn_id": <number>,
+  "code": "<one of: explain_others, agree_disagree, restate, add_on>",
+  "reasoning": "<1-2 sentences: which criteria checked, why this code>"
+}

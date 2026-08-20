@@ -1,0 +1,67 @@
+## say_more
+[Turn 21] Student: "They want to impress people."
+[Turn 22] Teacher: "Who are the they?"
+→ {"turn_id":22, "code":"say_more", "reasoning":"Asks clarification about referent. Not WHY, not restatement, not contradiction. → say_more."}
+
+[Turn 46] Student: "It was in the rooftop."
+[Turn 47] Teacher: "Rooftop, good. Was there a cover on the roof?"
+→ {"turn_id":47, "code":"say_more", "reasoning":"Asks factual detail follow-up about the rooftop. Not reasoning, not restatement, not challenge. → say_more."}
+
+[Turn 10] Student: "Because it's a huge liability for the government."
+[Turn 11] Teacher: "So what should the government have done instead? What do you think?"
+→ {"turn_id":11, "code":"say_more", "reasoning":"Asks for a proposal/opinion, not WHY the claim is true. → say_more."}
+
+[Turn 5] Student: "The character felt sad."
+[Turn 6] Teacher: "Can you give me an example from the text?"
+→ {"turn_id":6, "code":"say_more", "reasoning":"Asks for illustration/example, not causal reasoning. → say_more."}
+
+[Turn 30] Student: "They used candles."
+[Turn 31] Teacher: "What kind of candles? What did they look like?"
+→ {"turn_id":31, "code":"say_more", "reasoning":"Asks for descriptive detail. → say_more."}
+
+## press_for_reasoning
+[Turn 9] Student: "To keep order."
+[Turn 10] Teacher: "Why is it important that they keep order?"
+→ {"turn_id":10, "code":"press_for_reasoning", "reasoning":"Student made claim (to keep order). Teacher asks WHY that matters (causal significance). All 3 requirements met. → press."}
+
+[Turn 33] Student: "I think the character was brave."
+[Turn 34] Teacher: "What in the text makes you think she was brave?"
+→ {"turn_id":34, "code":"press_for_reasoning", "reasoning":"Evaluative claim + evidence request. All 3 requirements met. → press."}
+
+[Turn 42] Student: "Better lighting."
+[Turn 43] Teacher: "What difference does better lighting make?"
+→ {"turn_id":43, "code":"press_for_reasoning", "reasoning":"Student stated observation/claim. Teacher asks for logical consequence (what difference does it make). Expects because-type answer. → press."}
+
+[Turn 55] Student: "I think social media is the cause."
+[Turn 56] Teacher: "Why do you think it's social media specifically?"
+→ {"turn_id":56, "code":"press_for_reasoning", "reasoning":"Evaluative claim. Explicit 'why'. Expects reasoning/evidence. → press."}
+
+[Turn 70] Student: "Water was really important to them."
+[Turn 71] Teacher: "Why were they so important? Why was water so key?"
+→ {"turn_id":71, "code":"press_for_reasoning", "reasoning":"Student's claim about importance. Teacher asks WHY. Causal reasoning expected. → press."}
+
+## revoice
+[Turn 33] Student: "I think people feel bad because they compare themselves on social media."
+[Turn 34] Teacher: "So you're saying social media comparison is the main cause of the anxiety?"
+→ {"turn_id":34, "code":"revoice", "reasoning":"Teacher rephrases student's idea in more precise terms. Restatement IS the main purpose. → revoice."}
+
+[Turn 38] Student: "Because they're old."
+[Turn 39] Teacher: "That's the reason why? They're old."
+→ {"turn_id":39, "code":"revoice", "reasoning":"Teacher echoes student's claim back as confirmation question. The echo IS the entire turn's purpose. → revoice."}
+
+[Turn 15] Student: "I think it means the country was divided."
+[Turn 16] Teacher: "So the country was split into two separate groups, is that what you're saying?"
+→ {"turn_id":16, "code":"revoice", "reasoning":"Teacher rephrases 'divided' as 'split into two groups' and checks understanding. Primary purpose is restatement. → revoice."}
+
+## challenge
+[Turn 25] Student: "All wild animals are dangerous."
+[Turn 26] Teacher: "But what about a rabbit? A wild rabbit—is that dangerous?"
+→ {"turn_id":26, "code":"challenge", "reasoning":"Provides specific counter-example (rabbit) that contradicts 'all wild animals are dangerous.' → challenge."}
+
+[Turn 36] Student: "They're old."
+[Turn 37] Teacher: "They're old? Well, remember, they're from 50, 60 years ago."
+→ {"turn_id":37, "code":"challenge", "reasoning":"'Well, remember' introduces factual context (50-60 years) that reframes/complicates the student's vague judgment 'old'. Provides counter-information. → challenge."}
+
+[Turn 44] Student: "Everyone agrees with me."
+[Turn 45] Teacher: "Well, actually, Maria said something quite different earlier, didn't she?"
+→ {"turn_id":45, "code":"challenge", "reasoning":"Introduces specific counter-evidence (Maria's different view) contradicting student's claim of universal agreement. → challenge."}

@@ -1,0 +1,114 @@
+## HARD STOPS
+[Turn 6] Teacher: Yes.
+→ {"turn_id":6, "trigger":"no", "addressee":"none", "discussion_active":false, "evidence":"Single-word receipt", "reasoning":"Hard stop: minimal acknowledgment, no follow-up."}
+
+[Turn 10] Teacher: (Inaudible)
+→ {"turn_id":10, "trigger":"no", "addressee":"none", "discussion_active":false, "evidence":"Inaudible", "reasoning":"Hard stop: cannot determine content."}
+
+## TRIGGER = NO (not a follow-up)
+[Context: Teacher opening a new segment]
+Turn 16 - Student_A: (finishes previous answer)
+Turn 17 - Teacher: "Okay, please scan the QR code. Think of one or two words about appearance anxiety."
+→ {"turn_id":17, "trigger":"no", "addressee":"none", "discussion_active":false, "evidence":"Student_A spoke before, but teacher gives procedural instruction.", "reasoning":"New activity instruction. Not responding to student's contribution."}
+
+[Context: Teacher asks brand-new content question]
+Turn 24 - Student_B: (answers about museum exhibits)
+Turn 25 - Teacher: "What kind of things do they show? Lynn, what kind of things do they show in the house?"
+→ {"turn_id":25, "trigger":"no", "addressee":"none", "discussion_active":false, "evidence":"Teacher calls on Lynn with a new question from the lesson plan.", "reasoning":"Content elicitation. Teacher introduces a new question to advance the lesson, not building on Student_B's contribution."}
+
+[Context: Teacher finishes acknowledging, starts new activity]
+Turn 50 - Student: (finishes answer)
+Turn 51 - Teacher: "Great, thank you. Now let's look at page 5."
+→ {"turn_id":51, "trigger":"no", "addressee":"none", "discussion_active":false, "evidence":"Teacher transitions to new activity.", "reasoning":"Acknowledge + topic change to new lesson segment. Not a follow-up."}
+
+## TRIGGER = YES, ADDRESSEE = SAME_STUDENT (Path A: Direct follow-up)
+[Context: 1-on-1 exchange]
+Turn 20 - Taurus: "They want to impress people."
+Turn 21 - Teacher: "Who are the they?"
+Turn 22 - Taurus: (responds)
+→ {"turn_id":21, "trigger":"yes", "addressee":"same_student", "discussion_active":true, "evidence":"Student_Before=Taurus, Student_After=Taurus. Teacher asks 'you' clarification.", "reasoning":"Direct follow-up asking Taurus to clarify referent in their own statement."}
+
+[Context: Teacher echoes and questions student]
+Turn 36 - Andrew: "Because they're old."
+Turn 37 - Teacher: "They're old? Well, remember, they're from 50, 60 years ago."
+Turn 38 - Andrew: (responds)
+→ {"turn_id":37, "trigger":"yes", "addressee":"same_student", "discussion_active":true, "evidence":"Student_Before=Andrew, Student_After=Andrew. Teacher echoes Andrew's words back.", "reasoning":"Teacher directly responds to Andrew's claim with additional information."}
+
+[Context: Teacher echoes student's claim back]
+Turn 38 - Andrew: "Because they're old."
+Turn 39 - Teacher: "That's the reason why? They're old."
+Turn 40 - Andrew: (responds)
+→ {"turn_id":39, "trigger":"yes", "addressee":"same_student", "discussion_active":true, "evidence":"Student_Before=Andrew, Student_After=Andrew. Teacher echoes exact phrase.", "reasoning":"Teacher restates Andrew's claim as a question, directed back at Andrew."}
+
+[Context: Teacher presses for reasoning]
+Turn 8 - Jessica: "To keep order."
+Turn 9 - Teacher: "Why is it important that they keep order?"
+Turn 10 - Jessica: (responds)
+→ {"turn_id":9, "trigger":"yes", "addressee":"same_student", "discussion_active":true, "evidence":"Student_Before=Jessica, Student_After=Jessica. 'Why' question about her claim.", "reasoning":"Directly asks Jessica to explain reasoning behind her stated claim."}
+
+[Context: Student states observation, teacher asks about significance]
+Turn 42 - Student: "Better lighting."
+Turn 43 - Teacher: "What difference does better lighting make?"
+Turn 44 - Student: (responds)
+→ {"turn_id":43, "trigger":"yes", "addressee":"same_student", "discussion_active":true, "evidence":"Student_Before=Student, Student_After=same Student. Teacher asks about their point.", "reasoning":"Follows up directly on student's observation, asking them to explain its significance."}
+
+[Context: Teacher acknowledging student's answer]
+Turn 46 - Student: "It was on the rooftop."
+Turn 47 - Teacher: "Rooftop, good. Uh, it was on the rooftop. Was there a cover on the roof? No? No. It didn't matter what the weather, the kids were up on the roof. Now, what else can you tell me about the old days?"
+Turn 48 - Same Student: (responds)
+→ {"turn_id":47, "trigger":"yes", "addressee":"same_student", "discussion_active":true, "evidence":"Student_Before=Student, Student_After=same Student. Teacher acknowledges and asks follow-up detail question.", "reasoning":"Teacher directly follows up on student's rooftop answer with a detail question. The turn continues with the same student."}
+
+## TRIGGER = YES, ADDRESSEE = OTHER_STUDENT (Path B: Discussion continuation)
+[Context: Active discussion about museum vs. modern life. Multiple students contributing.]
+Turn 30 - Student_C: "They didn't have an iPad."
+Turn 31 - Teacher: "Okay. How else did what you see in the museum compare to how you live now?"
+Turn 32 - Student_D: (different student responds)
+→ {"turn_id":31, "trigger":"yes", "addressee":"other_student", "discussion_active":true, "evidence":"Student_Before=Student_C, Student_After=Student_D (different). 'How else' signals continuation.", "reasoning":"Active discussion about museum/modern comparison. Student_C contributed. Teacher asks 'how else' — continuing the thread, inviting others."}
+
+[Context: Ongoing discussion. Teacher calls on new student within same topic.]
+Turn 32 - Student_C: "They don't have iPads."
+Turn 33 - Teacher: "They didn't have an iPad. That's true. Andrew, what do you think? How does what you saw in the museum compare to things today?"
+Turn 34 - Andrew: (responds)
+→ {"turn_id":33, "trigger":"yes", "addressee":"other_student", "discussion_active":true, "evidence":"Student_Before=Student_C, Student_After=Andrew (different). Teacher names Andrew explicitly.", "reasoning":"Acknowledges Student_C, then redirects same discussion topic to Andrew. Discussion continuation."}
+
+[Context: Discussion about school conditions in the past]
+Turn 44 - Student: "The lighting is brighter."
+Turn 45 - Teacher: "It is brighter. They can study better. Do you remember where the students actually studied? Where was their school?"
+Turn 46 - Student_E: (different student responds)
+→ {"turn_id":45, "trigger":"yes", "addressee":"other_student", "discussion_active":true, "evidence":"Student_Before=Student, Student_After=Student_E (different). Question to class.", "reasoning":"Echoes student's contribution, then extends the same discussion thread (school conditions) to the class."}
+
+[Context: Discussion about a fire. Student mentioned it.]
+Turn 14 - Student_A: (mentions the fire)
+Turn 15 - Teacher: "Okay. So good point. Good point. Does anyone else have any thought over the fire that devastated the area of Shek Kip Mei?"
+Turn 16 - Student_B: (different student responds)
+→ {"turn_id":15, "trigger":"yes", "addressee":"other_student", "discussion_active":true, "evidence":"Student_Before=Student_A, Student_After=Student_B. 'Anyone else' = class address.", "reasoning":"Student just mentioned the fire. Teacher invites other students to contribute thoughts on the same topic. 'Anyone else' = other_student."}
+
+[Context: Discussion about water buckets at museum]
+Turn 58 - Student_A: (mentions water buckets)
+Turn 59 - Teacher: "Yeah, there's a big wooden barrel. We, Ryan, you mentioned water buckets. Um, what was key about the water buckets? Why were they so important?"
+Turn 60 - Ryan: (responds)
+→ {"turn_id":59, "trigger":"yes", "addressee":"other_student", "discussion_active":true, "evidence":"Student_Before=Student_A, Teacher calls on Ryan (different student). References Ryan's earlier contribution.", "reasoning":"Teacher explicitly calls on Ryan (different student) and references his earlier mention of water buckets. Redirecting discussion."}
+
+[Context: Discussion about carrying water buckets]
+Turn 64 - Student: (talking about water)
+Turn 65 - Teacher: "For those of you that did carry the buckets, were they light or were they heavy?"
+Turn 66 - Student_F: (different student responds)
+→ {"turn_id":65, "trigger":"yes", "addressee":"other_student", "discussion_active":true, "evidence":"Student_Before=Student, Student_After=Student_F. 'Those of you' = class address.", "reasoning":"Ongoing discussion about water buckets. 'Those of you' addresses the class. Continues the same discussion thread."}
+
+[Context: Student contributes, teacher asks class]
+Turn 40 - Student_A: "Maybe we can add a breathing exercise feature."
+Turn 41 - Teacher: "That's interesting. Anyone else? Any other ideas?"
+Turn 42 - Student_B: (responds)
+→ {"turn_id":41, "trigger":"yes", "addressee":"other_student", "discussion_active":true, "evidence":"Student_Before=Student_A, Student_After=Student_B. 'Anyone else' = class.", "reasoning":"Acknowledges Student_A, invites class to continue with more ideas on same topic."}
+
+[Context: Teacher gives substantive elaboration, no question]
+Turn 26 - Student: "A museum."
+Turn 27 - Teacher: "Yeah, so it shows how different homes look in the past, different shops look in the past, how things were put together. Very interesting."
+Turn 28 - (class or different student continues)
+→ {"turn_id":27, "trigger":"yes", "addressee":"other_student", "discussion_active":true, "evidence":"Student_Before=Student, Student_After likely different. Teacher elaborates on brief student answer, addressing class.", "reasoning":"Teacher extends student's brief answer into a substantive explanation for the class, continuing the discussion thread even without a question."}
+
+[Context: Teacher asks about discussion topic change]
+Turn 46 - Student: "It was on the rooftop."
+Turn 47 - Teacher: "Rooftop, good. Uh, it was on the rooftop. Was there a cover on the roof? No? No. It didn't matter what the weather, the kids were up on the roof. Now, what else can you tell me about the old days?"
+Turn 48 - Student_G: (different student responds)
+→ {"turn_id":47, "trigger":"yes", "addressee":"other_student", "discussion_active":true, "evidence":"Student_Before=Student, Student_After=Student_G. Earlier part addresses same student, but later 'what else can you tell me' opens to class.", "reasoning":"Teacher starts by following up with the same student, then shifts to class with 'what else can you tell me'. The turn ends as a discussion continuation for other students."}

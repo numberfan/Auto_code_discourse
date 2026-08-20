@@ -1,0 +1,71 @@
+## add_on (most common)
+[Turn 14] Student_A: (mentions the fire)
+[Turn 15] Teacher: "Okay. So good point. Good point. Does anyone else have any thought over the fire that devastated the area of Shek Kip Mei?"
+→ {"turn_id":15, "code":"add_on", "reasoning":"'Anyone else' invites class to contribute. No stance language, no repeat/interpret request. → add_on."}
+
+[Turn 30] Student_C: "They didn't have an iPad."
+[Turn 31] Teacher: "Okay. How else did what you see in the museum compare to how you live now?"
+→ {"turn_id":31, "code":"add_on", "reasoning":"'How else' invites additional contributions from class on same topic. No specific code criteria met. → add_on."}
+
+[Turn 32] Student_C: "They don't have iPads."
+[Turn 33] Teacher: "They didn't have an iPad. That's true. Andrew, what do you think? How does what you saw in the museum compare to things today?"
+→ {"turn_id":33, "code":"add_on", "reasoning":"Calls on Andrew to contribute to ongoing discussion. No stance/repeat/interpret language. → add_on."}
+
+[Turn 44] Student: "The lighting is brighter."
+[Turn 45] Teacher: "It is brighter. They can study better. Do you remember where the students actually studied? Where was their school?"
+→ {"turn_id":45, "code":"add_on", "reasoning":"Extends discussion about school conditions to class. No specific criteria met. → add_on."}
+
+[Turn 46] Student: "It was on the rooftop."
+[Turn 47] Teacher: "Rooftop, good. Was there a cover on the roof? No? No. It didn't matter what the weather, the kids were up on the roof. Now, what else can you tell me about the old days?"
+→ {"turn_id":47, "code":"add_on", "reasoning":"'What else can you tell me' invites class contributions. Continues discussion. → add_on."}
+
+[Turn 58] Student_A: (mentions barrels)
+[Turn 59] Teacher: "Yeah, there's a big wooden barrel. Ryan, you mentioned water buckets. What was key about the water buckets? Why were they so important?"
+→ {"turn_id":59, "code":"add_on", "reasoning":"Redirects to Ryan (different student) within same discussion. No stance/repeat/interpret. → add_on."}
+
+[Turn 64] Student: (talking about water)
+[Turn 65] Teacher: "For those of you that did carry the buckets, were they light or were they heavy?"
+→ {"turn_id":65, "code":"add_on", "reasoning":"'Those of you' = class address within ongoing discussion. No specific criteria met. → add_on."}
+
+[Turn 40] Student_A: "Maybe we can add a breathing exercise feature."
+[Turn 41] Teacher: "That's interesting. Anyone else? Any other ideas?"
+→ {"turn_id":41, "code":"add_on", "reasoning":"'Anyone else? Any other ideas?' = inviting further contributions. → add_on."}
+
+[Turn 50] Student_A: "I think the main cause is social media."
+[Turn 51] Teacher: "What do others think?"
+→ {"turn_id":51, "code":"add_on", "reasoning":"'What do others think?' = inviting contributions. No explicit agree/disagree language. → add_on."}
+
+[Turn 26] Student: "A museum."
+[Turn 27] Teacher: "Yeah, so it shows how different homes look in the past, different shops look in the past, how things were put together. Very interesting."
+→ {"turn_id":27, "code":"add_on", "reasoning":"Teacher responds to student's brief answer by elaborating on the topic for the class. No special criteria met, so default add_on."}
+
+## agree_disagree
+[Turn 3] Student_A: "It is pretty good, right?"
+[Turn 4] Teacher: "Does anyone agree with him?"
+→ {"turn_id":4, "code":"agree_disagree", "reasoning":"Explicit 'agree' language. Asks students to take a stance. → agree_disagree."}
+
+[Turn 20] Student: "I think the answer is definitely B."
+[Turn 21] Teacher: "Is she right? Do you agree with that?"
+→ {"turn_id":21, "code":"agree_disagree", "reasoning":"'Right' + 'agree' = explicit stance language. → agree_disagree."}
+
+[Turn 35] Student: "The character was being selfish."
+[Turn 36] Teacher: "Do you agree or disagree? Was the character being selfish?"
+→ {"turn_id":36, "code":"agree_disagree", "reasoning":"Explicit 'agree or disagree'. Asks class to evaluate peer's claim. → agree_disagree."}
+
+## restate
+[Turn 71] Student_A: (speaks softly) "I think it's because of the setting."
+[Turn 72] Teacher: "What did Gabriel say? Did you hear what he said?"
+→ {"turn_id":72, "code":"restate", "reasoning":"'What did he say?' = asking class to repeat peer's words. → restate."}
+
+[Turn 15] Student: (mumbles answer)
+[Turn 16] Teacher: "Can someone repeat what she just said? I don't think everyone heard."
+→ {"turn_id":16, "code":"restate", "reasoning":"Explicitly asks for repetition. → restate."}
+
+## explain_others
+[Turn 14] Student_C: "I think George is going to the state school and won't see Emily."
+[Turn 15] Teacher: "Who can put what he just said in your own words?"
+→ {"turn_id":15, "code":"explain_others", "reasoning":"'Put in your own words' = interpretation/reconstruction of peer's idea. → explain_others."}
+
+[Turn 30] Student: "The theme is about sacrifice and duty."
+[Turn 31] Teacher: "Can someone explain what she means by 'sacrifice and duty' in this context?"
+→ {"turn_id":31, "code":"explain_others", "reasoning":"'Explain what she means' = interpret peer's idea. → explain_others."}

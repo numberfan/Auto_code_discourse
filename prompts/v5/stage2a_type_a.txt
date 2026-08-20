@@ -1,0 +1,126 @@
+You are an expert APT coder. A previous analysis has confirmed:
+- This teacher turn IS a follow-up on a student's contribution (trigger = yes)
+- The teacher is addressing the SAME STUDENT who just spoke (addressee = same_student)
+## YOUR TASK
+Assign exactly ONE code from the Type A set:
+- **revoice**
+- **challenge**
+- **press_for_reasoning**
+- **say_more** (default)
+---
+## DECISION TREE (check in order, STOP at first match)
+### 1. REVOICE?
+The teacher's PRIMARY ACTION in this turn is restating/rephrasing the student's
+idea in different or clearer words.
+STRICT CRITERIA (ALL must be met):
+- The teacher puts the student's idea into new words (not just echoing verbatim)
+- This restatement IS the main purpose of the turn (not a lead-in to something else)
+- The teacher is checking: "Is this what you meant?"
+TEST: Remove the restatement — does the turn lose its main purpose?
+- If YES → revoice
+- If the turn still has a substantial question beyond the restatement → NOT revoice
+POSITIVE examples:
+- "So you're saying that social media comparison is the main cause?"
+- "In other words, you think the government should have acted sooner?"
+- "That's the reason why? They're old." (echoing claim back for confirmation,
+  and that IS the whole turn)
+NEGATIVE (not revoice):
+- "OK so you said X. But why do you think that?" (restatement is a lead-in → press or say_more)
+- "Five?" (single-word echo → not substantial enough)
+- "Good point. Now..." (acknowledgment → not revoice)
+If REVOICE → output ["revoice"]. STOP.
+---
+### 2. CHALLENGE?
+The teacher provides SPECIFIC NEW INFORMATION that CONTRADICTS, COMPLICATES,
+or THREATENS the student's claim.
+STRICT CRITERIA (ALL must be met):
+- The student has made a claim or statement
+- The teacher introduces FACTUAL CONTENT (counter-example, counter-evidence,
+  contextual information) that puts pressure on that claim
+- This is not merely questioning — it's providing ammunition AGAINST the student's position
+KEY SIGNALS:
+- "Well, remember..." + contradicting fact
+- "But what about...?" + counter-example
+- "Actually..." + correction
+- "But [fact that contradicts student]"
+- Providing temporal/contextual information that reframes the student's judgment
+POSITIVE examples:
+- Student: "All wild animals are dangerous." → Teacher: "But what about a rabbit?"
+- Student: "They're old." → Teacher: "They're old? Well, remember, they're from
+  50, 60 years ago." (reframes "old" by providing context that challenges the
+  student's implied evaluation)
+- Student: "The earth is flat." → Teacher: "But we've seen photos from space showing curvature."
+NEGATIVE (not challenge):
+- "Why do you think that?" (no new info, just asking for reasoning → press)
+- "Are you sure?" (no counter-evidence → say_more)
+- "Hmm, interesting." (no contradiction → not challenge)
+- "Can you think of another possibility?" (invitation, not contradiction → say_more)
+If CHALLENGE → output ["challenge"]. STOP.
+---
+### 3. PRESS_FOR_REASONING?
+The teacher demands the student explain WHY or provide EVIDENCE/JUSTIFICATION
+for a claim they have already made.
+THREE STRICT REQUIREMENTS (ALL must be met):
+(a) The student has stated a CLAIM, POSITION, or EVALUATIVE STATEMENT
+    (not merely a factual answer or a single word)
+(b) The teacher's question EXPLICITLY asks for CAUSE, REASON, EVIDENCE,
+    or LOGICAL JUSTIFICATION
+(c) The expected answer requires a BECAUSE-RELATIONSHIP or logical argument
+KEY SIGNALS (positive):
+- "Why do you think that?"
+- "What's your evidence?"
+- "How do you know?"
+- "What makes you say that?"
+- "Can you prove it?"
+- "What's your reasoning?"
+- "Why is that important?" (asking for significance = causal)
+- "What difference does X make?" (asking for logical consequence)
+- "Why?" (when student has made a clear claim)
+NEGATIVE (these are say_more, NOT press):
+- "What do you mean?" → clarification
+- "Can you give an example?" → illustration
+- "Tell me more" → elaboration
+- "Like what?" → specifics
+- "What else?" → extension
+- "What happened next?" → narrative
+- "How was it?" → description
+- "What should they do?" → proposal (not explaining existing claim)
+- "Was there a cover on the roof?" → factual detail
+- "Who are the they?" → referent clarification
+BOUNDARY CASES:
+- Student: "Better lighting." Teacher: "What difference does better lighting
+  make?" → YES: asks for logical consequence of student's claim. Press.
+- Student: "The government should help." Teacher: "What should they do
+  specifically?" → NO: asks for detail/proposal, not WHY. Say_more.
+- Student: "It's important." Teacher: "Why is it important?" → YES: asks
+  for causal reasoning. Press.
+- Student: "It's important." Teacher: "Important for whom?" → NO: asks
+  for specification, not reasoning. Say_more.
+If ALL THREE requirements are met → output ["press_for_reasoning"]. STOP.
+---
+### 4. SAY_MORE (DEFAULT)
+If none of the above clearly apply, the teacher is asking the same student
+to continue, elaborate, clarify, specify, extend, or complete their thought.
+This is the CATCH-ALL. Any follow-up to the same student that doesn't meet
+the strict criteria above falls here.
+Common forms:
+- "Tell me more"
+- "What do you mean by that?"
+- "Can you explain?"
+- "Like what?"
+- "And then what happened?"
+- "Can you give an example?"
+- "What else?"
+- "Go on..."
+- Any factual follow-up question about details of what they said
+- "Was there a cover on the roof?" (asks for detail within their topic)
+- "Who are the they?" (asks for clarification of referent)
+→ output ["say_more"].
+---
+## OUTPUT FORMAT (JSON only):
+```json
+{
+  "turn_id": <number>,
+  "code": "<one of: revoice, challenge, press_for_reasoning, say_more>",
+  "reasoning": "<1-2 sentences: which criteria checked, why this code>"
+}

@@ -3,7 +3,7 @@ import os
 import argparse
 import time
 from auto_analysis.evaluation.assess_func import evaluate_predictions, print_evaluation_report, save_evaluation_report
-from auto_analysis.auto_coding import code_full_transcript, PROMPT_VERSION
+from auto_analysis.auto_coding_by_division import code_full_transcript, PROMPT_VERSION
 from auto_analysis.data_clean_to_json import clean_excel_to_json
 from auto_analysis.data_clean_to_json import CLEANING_VERSION
 from auto_analysis.llm_config import get_model_name
@@ -14,8 +14,10 @@ from auto_analysis.utils import pct
 DEFAULT_EXCEL_PATH = "coded_discourse/excel/chris moon video 1 transcription_susan_5_22.xlsx"
 DEFAULT_JSON_DIR = "coded_discourse/json"
 DEFAULT_EVAL_DIR = "coded_discourse/evaluation"
+DEFAULT_ERROR_DIR = "coded_discourse/error_analysis"
 DEFAULT_FILE_ID = "chris_moon_v1"
 DEFAULT_CONCURRENCY = 3
+
 
 
 def parse_args():
@@ -63,7 +65,7 @@ def auto_coding(excel_path: str, file_id: str, max_concurrency: int, json_dir: s
         "file_id": file_id,
         "model": get_model_name(),
         "prompt_version": PROMPT_VERSION,
-        "method": "single_predict_with_confirm",
+        "method": "split_trigger_addressee_code_review",
         "timestamp": timestamp,
         "predictions": predictions,
     }
@@ -97,7 +99,7 @@ def auto_coding(excel_path: str, file_id: str, max_concurrency: int, json_dir: s
         eval_result["prompt_version"] = PROMPT_VERSION
         print_evaluation_report(eval_result)
         evaluation_dir = os.path.join(DEFAULT_EVAL_DIR, PROMPT_VERSION)
-        error_analysis_dir = os.path.join(DEFAULT_EVAL_DIR, PROMPT_VERSION)
+        error_analysis_dir = os.path.join(DEFAULT_ERROR_DIR, PROMPT_VERSION)
         save_evaluation_report(eval_result, evaluation_dir, file_id, timestamp)
 
         # 5. 错误分析
