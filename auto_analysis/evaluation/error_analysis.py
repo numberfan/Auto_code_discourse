@@ -50,10 +50,12 @@ def error_analysis(
                 "pred": sorted(pred_codes),
                 "false_positives": sorted(pred_codes - gold_codes),
                 "false_negatives": sorted(gold_codes - pred_codes),
-                "utterance": pred_item.get("utterance", ""),
+                "utterance": pred_item.get("utterance_full") or pred_item.get("utterance", ""),
                 "pred_addressee": pred_item.get("step2_addressee", ""),
                 "pred_trigger": pred_item.get("step1_trigger", ""),
                 "reasoning": pred_item.get("reasoning", ""),
+                "stage1_evidence": pred_item.get("stage1_evidence", ""),
+                "stage2_reasoning": pred_item.get("stage2_reasoning", ""),
                 "confirmed": pred_item.get("confirmed", False),
                 "type_mismatch": type_mismatch,
                 "trigger_error": is_trigger_error,
@@ -78,7 +80,9 @@ def error_analysis(
             tag = "[ADDRESSEE]"
         print(f"Turn {c['turn_id']}{tag}: \"{c['utterance']}\"")
         print(f"Gold: {c['gold']}  |  Pred: {c['pred']}")
-        print(f"Pred addressee: {c['pred_addressee']} | Reasoning: {c['reasoning'][:80]}")
+        print(f"Pred addressee: {c['pred_addressee']} | Stage1: {c['reasoning'][:80]}")
+        if c["stage2_reasoning"]:
+            print(f"Stage2: {c['stage2_reasoning'][:80]}")
         print()
     # 混淆模式
     confusion_pairs = {}

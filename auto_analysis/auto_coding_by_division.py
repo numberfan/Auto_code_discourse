@@ -171,16 +171,18 @@ async def predict_stage2(client, transcript, target_idx, addressee):
     result = await _call_llm_json(client, messages, STAGE2_MAX_OUTPUT_TOKENS, f"Turn {target['turn_id']} Stage 2")
     return _validate_stage2(result, target["turn_id"], allowed_codes)
 
-
 def _build_output(target, *, trigger, addressee, codes, reasoning, confirmed, needs_review, confirm_reasoning=""):
     return {
         "turn_id": target["turn_id"],
         "speaker": target["speaker"],
         "utterance": target["utterance"][:120] + ("..." if len(target["utterance"]) > 120 else ""),
+        "utterance_full": target["utterance"],
         "codes": codes,
         "step1_trigger": trigger,
         "step2_addressee": addressee,
         "reasoning": reasoning,
+        "stage1_evidence": stage1_evidence,
+        "stage2_reasoning": stage2_reasoning,
         "confirmed": confirmed,
         "confirm_reasoning": confirm_reasoning,
         "needs_review": needs_review,
@@ -202,7 +204,10 @@ async def code_single_teacher_turn(client, transcript, target_idx):
         stage2 = await predict_stage2(client, transcript, target_idx, addressee)
         return _build_output(
             target, trigger=trigger, addressee=addressee, codes=[stage2["code"]],
-            reasoning=stage1.get("reasoning", ""), confirmed=True, needs_review=False,
+            reasoning=stage1.get("reasoning", ""),
+            stage1_evidence=stage1.get("evidence", ""),
+            stage2_reasoning=stage2.get("reasoning", ""),
+            confirmed=True, needs_review=False,
         )
     except Exception as exc:
         print(f"[错误] Turn {target['turn_id']}: {exc}")
