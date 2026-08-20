@@ -18,8 +18,6 @@ DEFAULT_ERROR_DIR = "coded_discourse/error_analysis"
 DEFAULT_FILE_ID = "chris_moon_v1"
 DEFAULT_CONCURRENCY = 3
 
-
-
 def parse_args():
     parser = argparse.ArgumentParser(description="APT 话语自动编码工具")
     parser.add_argument("--excel", default=DEFAULT_EXCEL_PATH, help="Excel 文件路径")
@@ -65,7 +63,7 @@ def auto_coding(excel_path: str, file_id: str, max_concurrency: int, json_dir: s
         "file_id": file_id,
         "model": get_model_name(),
         "prompt_version": PROMPT_VERSION,
-        "method": "split_trigger_addressee_code_review",
+        "method": "v7_split_multi_code_confidence_review",
         "timestamp": timestamp,
         "predictions": predictions,
     }
@@ -99,7 +97,7 @@ def auto_coding(excel_path: str, file_id: str, max_concurrency: int, json_dir: s
         eval_result["prompt_version"] = PROMPT_VERSION
         print_evaluation_report(eval_result)
         evaluation_dir = os.path.join(DEFAULT_EVAL_DIR, PROMPT_VERSION)
-        error_analysis_dir = os.path.join(DEFAULT_ERROR_DIR, PROMPT_VERSION)
+        error_analysis_dir = evaluation_dir
         save_evaluation_report(eval_result, evaluation_dir, file_id, timestamp)
 
         # 5. 错误分析

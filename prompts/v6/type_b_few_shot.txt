@@ -1,0 +1,20 @@
+## V6 TYPE B EXAMPLES
+Student A: The building is modern.
+Teacher: Does anyone agree with her?
+-> {"codes":["agree_disagree"],"confidence":"high"}
+
+Student A: The building is modern.
+Teacher: Can someone explain what she meant in your own words?
+-> {"codes":["explain_others"],"confidence":"high"}
+
+Student A: I think it is because of the setting.
+Teacher: What did Gabriel say? Did you hear him?
+-> {"codes":["restate"],"confidence":"high"}
+
+Student A: The main cause is social media.
+Teacher: Anyone want to add to what she said?
+-> {"codes":["add_on"],"confidence":"high"}
+
+Student A: Demolish it.
+Teacher: Does anyone have another idea? Alyssa, what do you think should be done?
+-> {"codes":["add_on"],"confidence":"high"}

@@ -1,0 +1,20 @@
+## V7 TYPE A EXAMPLES
+Student: People feel bad because they compare themselves online.
+Teacher: So you are saying comparison causes anxiety?
+-> {"codes":["revoice"],"confidence":"high"}
+
+Student: It was caused by comparison.
+Teacher: So you mean comparison is the cause? Why do you think that?
+-> {"codes":["revoice","press_for_reasoning"],"confidence":"medium"}
+
+Student: To keep order.
+Teacher: Why is it important to keep order?
+-> {"codes":["press_for_reasoning"],"confidence":"high"}
+
+Student: The government should help.
+Teacher: What should they do specifically?
+-> {"codes":["say_more"],"confidence":"high"}
+
+Student: They are old.
+Teacher: They are old? Well, remember they are from 50 years ago.
+-> {"codes":["challenge"],"confidence":"medium"}

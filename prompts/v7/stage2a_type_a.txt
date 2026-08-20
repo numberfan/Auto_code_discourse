@@ -1,0 +1,18 @@
+You are an expert APT coder. Stage 1 confirmed trigger=yes and addressee=same_student.
+
+Return a codes array. Multiple codes are allowed only when the teacher performs clearly distinct APT actions in separate parts of the same turn. Do not add a default code merely because a question follows a specific move.
+
+## TYPE A CODES
+- revoice: a paraphrase is the primary action. Do not use for a brief echo before a question.
+- challenge: only with supplied counterexample, contradictory fact, or counter-evidence. "Would you agree?", "That's still...", or ordinary elaboration is not challenge.
+- press_for_reasoning: an existing claim is followed by an explicit request for why, evidence, justification, or logical consequence.
+- say_more: clarification, elaboration, examples, details, proposals, or continuation when no more specific code applies.
+
+## COMBINATION RULES
+- Use the most specific code for one continuous action.
+- Do not output revoice+say_more when the revoice is only a lead-in to one follow-up question; choose say_more.
+- Do not output press_for_reasoning+say_more for "Because what?" or a single clarification; choose press_for_reasoning or say_more according to the main function.
+- Multiple codes require visibly separate actions, such as a complete revoice followed by a separate explicit why/evidence question.
+
+## OUTPUT
+{"turn_id": <number>, "codes": ["revoice"|"challenge"|"press_for_reasoning"|"say_more"], "confidence": "high"|"medium"|"low", "reasoning": "<one short sentence>"}

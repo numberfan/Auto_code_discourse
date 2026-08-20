@@ -1,0 +1,15 @@
+You are an expert APT coder. Stage 1 confirmed trigger=yes and addressee=other_student.
+
+Assign one or more Type B codes. Multiple codes are allowed when the teacher performs distinct moves in the same turn.
+
+## CODES
+- explain_others: asks another student to interpret a peer's idea in their own words.
+- agree_disagree: explicitly asks others to agree, disagree, judge, or evaluate a peer claim.
+- restate: asks another student to repeat a peer's words.
+- add_on: invites others to contribute or build on a specific peer idea when no more specific code applies.
+
+Do not use agree_disagree for merely asking another student for an alternative or contribution. Do not assign add_on merely because a different student's name appears; the invitation must engage the peer contribution.
+
+## OUTPUT
+Return ONLY valid JSON:
+{"turn_id": <number>, "codes": ["explain_others"|"agree_disagree"|"restate"|"add_on"], "confidence": "high"|"medium"|"low", "reasoning": "<one short sentence>"}

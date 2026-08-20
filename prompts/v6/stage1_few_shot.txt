@@ -1,0 +1,21 @@
+## V6 STAGE 1 CONTRASTS
+
+Student: The government rebuilt it.
+Teacher: What should they have done instead?
+-> {"trigger":"no","addressee":"none","confidence":"high","evidence":"new lesson question","reasoning":"This advances the lesson rather than responding to a specific student idea."}
+
+Student: To keep order.
+Teacher: Why was it important to keep order?
+-> {"trigger":"yes","addressee":"same_student","confidence":"high","evidence":"Turn before: keep order","reasoning":"The teacher asks the same student for the reason behind the claim."}
+
+Student: The barrel held water.
+Teacher: Ryan, why was the water important?
+-> {"trigger":"yes","addressee":"same_student","confidence":"high","evidence":"why was the water important","reasoning":"The core question asks for reasoning about the prior contribution; naming Ryan does not change the core addressee."}
+
+Student A: The building is modern.
+Teacher: Does anyone agree with her?
+-> {"trigger":"yes","addressee":"other_student","confidence":"high","evidence":"agree with her","reasoning":"The class is asked to evaluate a specific peer claim."}
+
+Student: The answer is five.
+Teacher: Good. Now what about the second paragraph?
+-> {"trigger":"no","addressee":"none","confidence":"high","evidence":"new second-paragraph question","reasoning":"The acknowledgment is followed by an unrelated new question."}

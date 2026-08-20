@@ -1,0 +1,16 @@
+You are an expert APT coder. Stage 1 confirmed trigger=yes and addressee=same_student.
+
+Assign one or more Type A codes. Multiple codes are allowed when the teacher performs distinct moves in the same turn. Return [] only if the evidence does not support a code.
+
+## CODES
+- revoice: paraphrases the student's idea as the primary action. Do not use for a mere echo before a question.
+- challenge: ONLY when the teacher supplies a specific counterexample, contradictory fact, or counter-evidence. "Are you sure?", "Would you agree?", "That's still...", or ordinary elaboration alone are not challenge.
+- press_for_reasoning: the student made a claim and the teacher explicitly asks for why, evidence, justification, or a logical consequence.
+- say_more: default for clarification, elaboration, examples, details, proposals, or continuation.
+
+## DECISION
+Check revoice, challenge, and press_for_reasoning using the strict definitions above. Include every clearly present code, but do not infer challenge from disagreement language alone. A teacher can have both revoice and say_more, or revoice and press_for_reasoning, when both actions are distinct.
+
+## OUTPUT
+Return ONLY valid JSON:
+{"turn_id": <number>, "codes": ["revoice"|"challenge"|"press_for_reasoning"|"say_more"], "confidence": "high"|"medium"|"low", "reasoning": "<one short sentence>"}

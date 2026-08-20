@@ -1,0 +1,21 @@
+## V7 STAGE 1 EXAMPLES
+
+Student: The government rebuilt it.
+Teacher: What should they have done instead?
+-> {"trigger":"yes","addressee":"same_student","confidence":"high","evidence":"government rebuilt it","reasoning":"The question follows up on the student's answer and asks for an alternative."}
+
+Student: A museum.
+Teacher: Good Jay. What kind of things do they show in the house?
+-> {"trigger":"yes","addressee":"same_student","confidence":"high","evidence":"Jay answered museum","reasoning":"The teacher asks the responding student for details about the answer."}
+
+Student A: The area was rebuilt after the fire.
+Teacher: Does anyone else have any thoughts about the fire and rebuilding? Isabelle?
+-> {"trigger":"yes","addressee":"other_student","confidence":"high","evidence":"anyone else about fire and rebuilding","reasoning":"The teacher opens the active discussion to other students."}
+
+Student: The answer is five.
+Teacher: Good. Now what about the second paragraph?
+-> {"trigger":"no","addressee":"none","confidence":"high","evidence":"new second-paragraph question","reasoning":"The teacher moves to a new question rather than building on the answer."}
+
+Student: Heavy.
+Teacher: Why was it important? Patricia, what do you think?
+-> {"trigger":"yes","addressee":"same_student","confidence":"high","evidence":"why was it important","reasoning":"The core question asks for reasoning about the prior answer; the later name is secondary."}
