@@ -18,19 +18,16 @@ STAGE2A_PROMPT = load_text_file(f"prompts/{PROMPT_VERSION}/stage2a_type_a.txt")
 TYPE_A_FEW_SHOT = load_text_file(f"prompts/{PROMPT_VERSION}/type_a_few_shot.txt")
 STAGE2B_PROMPT = load_text_file(f"prompts/{PROMPT_VERSION}/stage2b_type_b.txt")
 TYPE_B_FEW_SHOT = load_text_file(f"prompts/{PROMPT_VERSION}/type_b_few_shot.txt")
-STAGE3_PROMPT = load_text_file(f"prompts/{PROMPT_VERSION}/stage3_confirm.txt")
 
 if not all((STAGE1_PROMPT, STAGE1_FEW_SHOT, STAGE2A_PROMPT, TYPE_A_FEW_SHOT,
-            STAGE2B_PROMPT, TYPE_B_FEW_SHOT, STAGE3_PROMPT)):
+            STAGE2B_PROMPT, TYPE_B_FEW_SHOT)):
     raise RuntimeError(f"未能完整加载 {PROMPT_VERSION} 分阶段 Prompt 文件")
 
 TYPE_A_CODES = {"say_more", "press_for_reasoning", "revoice", "challenge"}
 TYPE_B_CODES = {"add_on", "explain_others", "agree_disagree", "restate"}
-ALL_VALID_CODES = TYPE_A_CODES | TYPE_B_CODES
 MAX_RETRIES = 3
 STAGE1_MAX_OUTPUT_TOKENS = 2048
 STAGE2_MAX_OUTPUT_TOKENS = 2048
-STAGE3_MAX_OUTPUT_TOKENS = 4096
 
 
 def _build_context_window(transcript, target_idx, before=5, after=2):
@@ -133,27 +130,6 @@ def _validate_stage2(result, turn_id, allowed_codes):
     return result
 
 
-def _validate_stage3(result, turn_id):
-    if result.get("turn_id") != turn_id:
-        raise ValueError(f"Stage 3: turn_id 不匹配: {result.get('turn_id')!r}")
-    trigger = _require_string(result, "final_trigger", {"yes", "no"}, "Stage 3")
-    addressee = _require_string(
-        result, "final_addressee", {"same_student", "other_student", "none"}, "Stage 3"
-    )
-    codes = result.get("final_code")
-    if not isinstance(codes, list) or len(codes) > 1 or any(code not in ALL_VALID_CODES for code in codes):
-        raise ValueError("Stage 3: final_code 必须是至多一个合法代码的数组")
-    if trigger == "no" and (addressee != "none" or codes):
-        raise ValueError("Stage 3: trigger=no 时不能有 addressee 或 code")
-    if trigger == "yes" and addressee == "none":
-        raise ValueError("Stage 3: trigger=yes 时必须给出 addressee")
-    if addressee == "same_student" and any(code not in TYPE_A_CODES for code in codes):
-        raise ValueError("Stage 3: same_student 与 Type B code 不匹配")
-    if addressee == "other_student" and any(code not in TYPE_B_CODES for code in codes):
-        raise ValueError("Stage 3: other_student 与 Type A code 不匹配")
-    return result
-
-
 async def predict_stage1(client, transcript, target_idx):
     target = transcript[target_idx]
     context = _build_context_window(transcript, target_idx)
@@ -196,48 +172,21 @@ async def predict_stage2(client, transcript, target_idx, addressee):
     return _validate_stage2(result, target["turn_id"], allowed_codes)
 
 
-async def predict_stage3(client, transcript, target_idx, stage1_result, stage2_result, issue_description):
-    target = transcript[target_idx]
-    context = _build_context_window(transcript, target_idx, before=7, after=3)
-    user_prompt = (
-        f"## FIRST-PASS RESULT:\n"
-        f"Stage 1: trigger={stage1_result.get('trigger')}, addressee={stage1_result.get('addressee')}\n"
-        f"Stage 2: code={stage2_result.get('code') if stage2_result else None}\n"
-        f"Confidence issue: {issue_description}\n\n"
-        f"## TRANSCRIPT CONTEXT:\n{context}\n\n"
-        f"## TARGET: Turn {target['turn_id']} - {target['utterance']}\n\n"
-        "Make your FINAL decision. Return ONLY JSON with keys: turn_id, final_trigger, "
-        "final_addressee, final_code, override_reason."
-    )
-    messages = [
-        {"role": "system", "content": STAGE3_PROMPT},
-        {"role": "user", "content": user_prompt},
-    ]
-    result = await _call_llm_json(client, messages, STAGE3_MAX_OUTPUT_TOKENS, f"Turn {target['turn_id']} Stage 3")
-    return _validate_stage3(result, target["turn_id"])
-
-
-def need_review(stage1_result, stage2_result):
-    uncertainty_markers = ["probably", "maybe", "uncertain", "possibly", "either", "not sure", "could be", "unclear"]
-    stage1_reasoning = stage1_result.get("reasoning", "").lower()
-    stage2_reasoning = stage2_result.get("reasoning", "").lower()
-    high_risk_codes = {"add_on", "revoice", "challenge"}
-    return (
-        any(marker in stage1_reasoning for marker in uncertainty_markers)
-        or any(marker in stage2_reasoning for marker in uncertainty_markers)
-        or stage2_result.get("code") in high_risk_codes
-    )
-
-
-def _build_output(target, *, trigger, addressee, codes, reasoning, confirmed, needs_review, confirm_reasoning=""):
+def _build_output(
+    target, *, trigger, addressee, codes, reasoning, confirmed, needs_review,
+    stage1_evidence="", stage2_reasoning="", confirm_reasoning="",
+):
     return {
         "turn_id": target["turn_id"],
         "speaker": target["speaker"],
         "utterance": target["utterance"][:120] + ("..." if len(target["utterance"]) > 120 else ""),
+        "utterance_full": target["utterance"],
         "codes": codes,
         "step1_trigger": trigger,
         "step2_addressee": addressee,
         "reasoning": reasoning,
+        "stage1_evidence": stage1_evidence,
+        "stage2_reasoning": stage2_reasoning,
         "confirmed": confirmed,
         "confirm_reasoning": confirm_reasoning,
         "needs_review": needs_review,
@@ -251,25 +200,20 @@ async def code_single_teacher_turn(client, transcript, target_idx):
         trigger = stage1["trigger"]
         addressee = stage1["addressee"]
         if trigger == "no":
-            return _build_output(target, trigger="no", addressee="none", codes=[], reasoning=stage1.get("reasoning", ""), confirmed=True, needs_review=False)
-
-        stage2 = await predict_stage2(client, transcript, target_idx, addressee)
-        if need_review(stage1, stage2):
-            stage3 = await predict_stage3(client, transcript, target_idx, stage1, stage2, "low confidence or high-risk code")
             return _build_output(
-                target,
-                trigger=stage3["final_trigger"],
-                addressee=stage3["final_addressee"],
-                codes=stage3["final_code"],
+                target, trigger="no", addressee="none", codes=[],
                 reasoning=stage1.get("reasoning", ""),
-                confirmed=True,
-                needs_review=False,
-                confirm_reasoning=stage3.get("override_reason", ""),
+                stage1_evidence=stage1.get("evidence", ""),
+                confirmed=True, needs_review=False,
             )
 
+        stage2 = await predict_stage2(client, transcript, target_idx, addressee)
         return _build_output(
             target, trigger=trigger, addressee=addressee, codes=[stage2["code"]],
-            reasoning=stage1.get("reasoning", ""), confirmed=True, needs_review=False,
+            reasoning=stage1.get("reasoning", ""),
+            stage1_evidence=stage1.get("evidence", ""),
+            stage2_reasoning=stage2.get("reasoning", ""),
+            confirmed=True, needs_review=False,
         )
     except Exception as exc:
         print(f"[错误] Turn {target['turn_id']}: {exc}")

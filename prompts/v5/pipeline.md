@@ -15,12 +15,8 @@ For each teacher turn:
 │       └─► Stage 2B (stage2b_type_b.txt)
 │           └─ Output: one of [explain_others, agree_disagree, restate, add_on]
 │
-└─► (Optional) Stage 3: Review (stage3_review.txt)
-└─ Only triggered when Stage 1 or Stage 2 confidence is low
-
-## Confidence Thresholds (for Stage 3 routing):
-- Stage 1: If model expresses uncertainty in reasoning → route to review
-- Stage 2: If reasoning mentions multiple possible codes → route to review
+└─► Stage 3 is kept as a manual/offline review prompt, not part of the default
+    automatic path. Re-enable it only after an ablation shows higher F1.
 
 ## Context Window:
 - Input to all stages: 5 turns before + target turn + 2 turns after
@@ -29,5 +25,5 @@ For each teacher turn:
 ## Token Estimation per turn:
 - Stage 1: ~800 tokens prompt + ~200 context + ~150 output ≈ 1150 tokens
 - Stage 2A/2B: ~600 tokens prompt + ~200 context + ~100 output ≈ 900 tokens
-- Total per coded turn: ~2050 tokens (vs current ~2500)
-- Savings: ~18% fewer tokens overall, with better accuracy
+- Total per coded turn: ~2050 tokens for trigger=yes turns
+- Trigger=no turns stop after Stage 1 to keep the default path simple
