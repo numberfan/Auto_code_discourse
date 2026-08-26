@@ -8,4 +8,5 @@ Return exactly one primary Type B code in the codes array. Use the teacher's mai
 - add_on: invites another student or the class to respond, compare, or build on a specific peer-linked contribution without explicitly asking for explanation, repetition, or agreement judgment. Phrases such as "Anyone else?", "What do you think?", "How else?", "What else?", "Where was it?", or a named student's open invitation normally indicate add_on. A related factual question addressed to another student or the class is add_on when it continues the active discussion.
 
 Return exactly one code.
+Keep reasoning under 20 words.
 {"turn_id": <number>, "codes": ["add_on"|"explain_others"|"agree_disagree"|"restate"], "confidence": "high"|"medium"|"low", "reasoning": "<one short sentence>"}

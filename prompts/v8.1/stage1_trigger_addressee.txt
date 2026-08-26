@@ -11,7 +11,7 @@ For Path B, an explicit invitation to continue the active student discussion is 
 
 Set trigger=no for procedure, management, lecture, simple acknowledgment, or repeating the teacher's own unanswered question without adding a new follow-up action. Do not reject a turn merely because it advances the lesson: judge whether it remains anchored to the immediately preceding student contribution or active discussion.
 
-When a teacher turn contains several sentences, use the strongest connected follow-up action. A reasoning request remains a trigger even when another student is named later in the same turn. An explicit open invitation to another student or the class remains trigger=yes even when the immediate response is absent or weak.
+When a teacher turn contains several sentences, use the strongest connected follow-up action. A reasoning request directed at the prior claim remains same_student even when another student is named later in the same turn. An explicit open invitation to another student or the class remains trigger=yes even when the immediate response is absent or weak.
 
 ## RESPONSE EVIDENCE
 The response evidence contains only the first student turn immediately after the target. Use it to identify whether a response is present and whether it comes from the same or another student. It is supporting evidence, not a required condition for an explicit peer-linked discussion invitation.
@@ -22,6 +22,8 @@ The response evidence contains only the first student turn immediately after the
 - none: trigger=no.
 
 Return ONLY JSON:
-{"turn_id": <number>, "trigger": "yes"|"no", "addressee": "same_student"|"other_student"|"none", "response_status": "present"|"absent"|"weak"|"unclear", "response_turn_id": <number>|null, "response_relation": "same_student"|"other_student"|"none"|"unknown", "confidence": "high"|"medium"|"low", "evidence": "<short anchor>", "reasoning": "<one short sentence>"}
+Evidence must be at most 12 words and reasoning must be at most 20 words.
+
+{"turn_id": <number>, "trigger": "yes"|"no", "addressee": "same_student"|"other_student"|"none", "response_status": "present"|"absent"|"weak"|"unclear", "response_turn_id": <number>|null, "response_relation": "same_student"|"other_student"|"none"|"unknown", "confidence": "high"|"medium"|"low", "evidence": "<short anchor>", "reasoning": "<short sentence>"}
 
 If trigger=no, addressee must be none. If response_status=absent, response_relation must be none.

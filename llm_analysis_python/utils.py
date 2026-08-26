@@ -77,7 +77,7 @@ def _repair_truncated_json(text: str):
                 return None
             stack.pop()
 
-    # Complete a truncated scalar so validation can downgrade missing confidence to review.
+    # Complete a truncated scalar so validation can downgrade missing fields to review.
     stripped = candidate.rstrip()
     if stripped.endswith((":", ",")):
         if stripped.endswith(":"):

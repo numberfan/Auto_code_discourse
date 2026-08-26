@@ -9,8 +9,10 @@ Code boundaries:
 - other_student: agree_disagree asks for agreement, disagreement, judgment, or evaluation; explain_others asks for interpretation; restate asks for repetition; add_on invites another contribution, comparison, or build-on in an active peer-linked discussion when none of the more specific actions applies.
 - If a teacher asks why or for a reason as the main action, prefer press_for_reasoning even if another student is named later. If the teacher mainly repeats or reformulates the student's words, prefer revoice even when the intonation is questioning.
 - An open invitation such as "What do you think?", "How else?", "What else?", or a related factual question to another student/class is add_on when it continues an active peer-linked discussion. Do not use agree_disagree unless the teacher explicitly asks for agreement or disagreement.
+- A questioning echo such as "The system?" is say_more when it asks the student to clarify an isolated word. A questioning echo followed by a specific factual correction, such as "They are old? Well, remember, they are from 50 or 60 years ago", is challenge. A reformulation that checks the student's idea, such as "Do you think a supermarket is the best use...", is revoice unless the teacher supplies counter-evidence.
 
 Return exactly one code when final_trigger=yes.
+Keep override_reason under 20 words.
 {"turn_id": <number>, "final_trigger": "yes"|"no", "final_addressee": "same_student"|"other_student"|"none", "final_codes": ["say_more"|"revoice"|"press_for_reasoning"|"challenge"|"add_on"|"explain_others"|"agree_disagree"|"restate"], "override_reason": "<one short sentence>"}
 
 If final_trigger=no, final_addressee must be none and final_codes must be []. Codes must match the final addressee type.

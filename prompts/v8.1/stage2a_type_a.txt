@@ -14,4 +14,5 @@ Return exactly one primary code in the codes array. Use the teacher's main pedag
 - "Because what?" usually completes an unfinished thought; use say_more unless the main action explicitly demands reasoning for a completed claim.
 
 Return exactly one code.
+Keep reasoning under 20 words.
 {"turn_id": <number>, "codes": ["revoice"|"challenge"|"press_for_reasoning"|"say_more"], "confidence": "high"|"medium"|"low", "reasoning": "<one short sentence>"}

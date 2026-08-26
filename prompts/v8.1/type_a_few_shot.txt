@@ -23,3 +23,15 @@ Teacher: Were the rooms bigger or smaller than now?
 Student: All wild animals are dangerous.
 Teacher: But what about a rabbit? That is a counterexample.
 -> {"codes":["challenge"],"confidence":"high"}
+
+Student: They are old.
+Teacher: They are old? Well, remember, they are from 50 or 60 years ago.
+-> {"codes":["challenge"],"confidence":"high"}
+
+Student: The system helps people.
+Teacher: The system?
+-> {"codes":["say_more"],"confidence":"high"}
+
+Student: Supermarket.
+Teacher: Do you think a supermarket is the best use for a historic building?
+-> {"codes":["revoice"],"confidence":"high"}

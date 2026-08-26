@@ -40,3 +40,7 @@ Teacher: Do you remember where the students actually studied? Where was their sc
 Student: Used for courts.
 Teacher: Do you remember how many people they roughly saw there every day?
 -> {"trigger":"yes","addressee":"other_student","response_status":"absent","response_turn_id":null,"response_relation":"none","confidence":"high","evidence":"how many people they saw there","reasoning":"The teacher invites another contribution about the same active topic."}
+
+Student: Heavy.
+Teacher: And why was he pointing out how heavy the water buckets were? Patricia, what do you think? Why was he pointing out how heavy the water buckets were?
+-> {"trigger":"yes","addressee":"same_student","response_status":"absent","response_turn_id":null,"response_relation":"none","confidence":"high","evidence":"why was he pointing out","reasoning":"The main action is a reasoning question about the prior claim; the later student name does not change the primary addressee."}
