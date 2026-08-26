@@ -11,7 +11,7 @@ MODEL_NAME = llm_config.get_model_name()
 USE_JSON_MODE = llm_config.supports_json_mode()
 llm_config.print_status()
 
-PROMPT_VERSION = "v10"
+PROMPT_VERSION = "v8.1"
 STAGE1_PROMPT = load_text_file(f"prompts/{PROMPT_VERSION}/stage1_trigger_addressee.txt")
 STAGE1_FEW_SHOT = load_text_file(f"prompts/{PROMPT_VERSION}/stage1_few_shot.txt")
 STAGE2A_PROMPT = load_text_file(f"prompts/{PROMPT_VERSION}/stage2a_type_a.txt")

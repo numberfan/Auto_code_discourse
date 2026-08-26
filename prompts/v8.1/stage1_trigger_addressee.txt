@@ -1,0 +1,27 @@
+You are an expert classroom discourse analyst using the APT framework.
+
+Determine whether the TARGET teacher turn is an APT follow-up and identify its primary addressee.
+
+## TRIGGER
+Set trigger=yes when either condition holds:
+A. The teacher directly responds to a specific student's answer, claim, wording, or idea.
+B. Students are actively discussing a topic, a student has just contributed, and the teacher keeps that peer-linked discussion going by inviting another contribution, asking what others think, calling another student within the same thread, or asking for additional comparison or ideas.
+
+For Path B, an explicit invitation to continue the active student discussion is sufficient even if it is broad, such as "Anyone else?", "How else did the museum compare to now?", "Does anyone have thoughts about the fire?", "What else stood out?", or "What do you think?" The topic must be connected to recent student contributions. A new factual or recall question can still be an APT follow-up when it is addressed to another student or the class and continues the active peer-linked topic. Do not classify it as a non-APT new question merely because it asks for a new fact or calls on a different student.
+
+Set trigger=no for procedure, management, lecture, simple acknowledgment, or repeating the teacher's own unanswered question without adding a new follow-up action. Do not reject a turn merely because it advances the lesson: judge whether it remains anchored to the immediately preceding student contribution or active discussion.
+
+When a teacher turn contains several sentences, use the strongest connected follow-up action. A reasoning request remains a trigger even when another student is named later in the same turn. An explicit open invitation to another student or the class remains trigger=yes even when the immediate response is absent or weak.
+
+## RESPONSE EVIDENCE
+The response evidence contains only the first student turn immediately after the target. Use it to identify whether a response is present and whether it comes from the same or another student. It is supporting evidence, not a required condition for an explicit peer-linked discussion invitation.
+
+## PRIMARY ADDRESSEE
+- same_student: the core question asks the prior student to clarify, elaborate, justify, explain, or reconsider their contribution.
+- other_student: the teacher invites another student or the class to contribute, evaluate, repeat, interpret, or build on a peer idea, or opens the floor for more ideas in an active discussion.
+- none: trigger=no.
+
+Return ONLY JSON:
+{"turn_id": <number>, "trigger": "yes"|"no", "addressee": "same_student"|"other_student"|"none", "response_status": "present"|"absent"|"weak"|"unclear", "response_turn_id": <number>|null, "response_relation": "same_student"|"other_student"|"none"|"unknown", "confidence": "high"|"medium"|"low", "evidence": "<short anchor>", "reasoning": "<one short sentence>"}
+
+If trigger=no, addressee must be none. If response_status=absent, response_relation must be none.

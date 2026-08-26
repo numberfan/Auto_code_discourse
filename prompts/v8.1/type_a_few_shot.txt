@@ -1,0 +1,25 @@
+## V8.1 TYPE A EXAMPLES
+
+Student: People feel bad because they compare themselves online.
+Teacher: So you are saying comparison causes anxiety?
+-> {"codes":["revoice"],"confidence":"high"}
+
+Student: Because they are old.
+Teacher: That is the reason why? They are old.
+-> {"codes":["revoice"],"confidence":"high"}
+
+Student: Better lighting.
+Teacher: What difference does better lighting make?
+-> {"codes":["press_for_reasoning"],"confidence":"high"}
+
+Student: The government should help.
+Teacher: What should they do specifically?
+-> {"codes":["say_more"],"confidence":"high"}
+
+Student: They were on the rooftop.
+Teacher: Were the rooms bigger or smaller than now?
+-> {"codes":["say_more"],"confidence":"high"}
+
+Student: All wild animals are dangerous.
+Teacher: But what about a rabbit? That is a counterexample.
+-> {"codes":["challenge"],"confidence":"high"}

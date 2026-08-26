@@ -63,7 +63,7 @@ def auto_coding(excel_path: str, file_id: str, max_concurrency: int, json_dir: s
         "file_id": file_id,
         "model": get_model_name(),
         "prompt_version": PROMPT_VERSION,
-        "method": "v10_immediate_response_aware_single_code_review",
+        "method": "v8.1_high_recall_single_code_response_evidence_review",
         "timestamp": timestamp,
         "predictions": predictions,
     }

@@ -1,0 +1,42 @@
+## V8.1 STAGE 1 EXAMPLES
+
+Student: The government rebuilt it.
+Teacher: What should they have done instead?
+-> {"trigger":"yes","addressee":"same_student","response_status":"absent","response_turn_id":null,"response_relation":"none","confidence":"high","evidence":"What should they have done instead","reasoning":"Asks the same student for an alternative to the stated action."}
+
+Student A: The area was rebuilt after the fire.
+Teacher: Does anyone else have thoughts about the fire and rebuilding? Isabelle?
+-> {"trigger":"yes","addressee":"other_student","response_status":"absent","response_turn_id":null,"response_relation":"none","confidence":"high","evidence":"anyone else about fire and rebuilding","reasoning":"Invites other students to continue the active peer-linked discussion."}
+
+Student: A museum.
+Teacher: Good Jay. What kind of things do they show in the house?
+Student: Shops and homes from the past.
+-> {"trigger":"yes","addressee":"same_student","response_status":"present","response_turn_id":3,"response_relation":"same_student","confidence":"high","evidence":"What kind of things do they show","reasoning":"Asks for details about the student's answer."}
+
+Student: The answer is five.
+Teacher: Good. Now what about the second paragraph?
+-> {"trigger":"no","addressee":"none","response_status":"absent","response_turn_id":null,"response_relation":"none","confidence":"high","evidence":"new second-paragraph question","reasoning":"Moves to a new lesson question."}
+
+Student: Heavy.
+Teacher: Why was it important? Patricia, what do you think?
+-> {"trigger":"yes","addressee":"same_student","response_status":"absent","response_turn_id":null,"response_relation":"none","confidence":"high","evidence":"why was it important","reasoning":"The core action asks for reasoning about the prior answer."}
+
+Student: They did not have iPads.
+Teacher: Okay. How else did what you see in the museum compare to how you live now?
+-> {"trigger":"yes","addressee":"other_student","response_status":"absent","response_turn_id":null,"response_relation":"none","confidence":"high","evidence":"how else compare to now","reasoning":"Invites additional contributions within the active discussion."}
+
+Student: They studied better because it was brighter.
+Teacher: Do you remember where the students actually studied? Where was their school?
+-> {"trigger":"yes","addressee":"other_student","response_status":"absent","response_turn_id":null,"response_relation":"none","confidence":"high","evidence":"where the students studied","reasoning":"Keeps the class discussion going with a related factual follow-up for additional contributions."}
+
+Student: They were on the rooftop.
+Teacher: Was there a cover on the roof? No? No. It did not matter what the weather, they would be on the roof. So were the rooms bigger or smaller than now?
+-> {"trigger":"yes","addressee":"same_student","response_status":"absent","response_turn_id":null,"response_relation":"none","confidence":"high","evidence":"rooms bigger or smaller","reasoning":"The teacher continues the related comparison thread after responding to the student's answer."}
+
+Student: It is brighter. They can study better.
+Teacher: Do you remember where the students actually studied? Where was their school?
+-> {"trigger":"yes","addressee":"other_student","response_status":"absent","response_turn_id":null,"response_relation":"none","confidence":"high","evidence":"where the students actually studied","reasoning":"The teacher asks the class for a related factual contribution within the active discussion."}
+
+Student: Used for courts.
+Teacher: Do you remember how many people they roughly saw there every day?
+-> {"trigger":"yes","addressee":"other_student","response_status":"absent","response_turn_id":null,"response_relation":"none","confidence":"high","evidence":"how many people they saw there","reasoning":"The teacher invites another contribution about the same active topic."}

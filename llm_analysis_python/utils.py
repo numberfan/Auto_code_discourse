@@ -77,12 +77,13 @@ def _repair_truncated_json(text: str):
                 return None
             stack.pop()
 
-    # A response ending after a key/value separator cannot be repaired safely.
+    # Complete a truncated scalar so validation can downgrade missing confidence to review.
     stripped = candidate.rstrip()
     if stripped.endswith((":", ",")):
         if stripped.endswith(":"):
-            return None
-        candidate = stripped[:-1]
+            candidate = stripped + " null"
+        else:
+            candidate = stripped[:-1]
     if in_string:
         candidate += '"'
     candidate += "".join("}" if item == "{" else "]" for item in reversed(stack))
