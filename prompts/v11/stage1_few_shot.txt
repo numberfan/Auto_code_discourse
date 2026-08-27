@@ -1,0 +1,30 @@
+## V11 STAGE 1 EXAMPLES
+
+Student: The government rebuilt it.
+Teacher: What should they have done instead?
+-> {"trigger":"yes","addressee":"same_student","response_status":"absent","response_turn_id":null,"response_relation":"none","trigger_basis":"direct_follow_up","addressee_basis":"asks the prior student for an alternative","evidence_mode":"response_based","invitation_status":"none","confidence":"high","evidence":"what should they have done instead","reasoning":"Directly follows the student's claim with an alternative request."}
+
+Student A: The area was rebuilt after the fire.
+Teacher: Does anyone else have thoughts about the fire and rebuilding? Isabelle?
+-> {"trigger":"yes","addressee":"other_student","response_status":"absent","response_turn_id":null,"response_relation":"none","trigger_basis":"peer_linked_invitation","addressee_basis":"invites another student into the same discussion thread","evidence_mode":"invitation_based","invitation_status":"explicit_peer_linked","confidence":"high","evidence":"anyone else about fire and rebuilding","reasoning":"Explicitly continues the peer-linked discussion with another student."}
+
+Student: A museum.
+Teacher: Good Jay. What kind of things do they show in the house?
+Student: Shops and homes from the past.
+-> {"trigger":"yes","addressee":"same_student","response_status":"present","response_turn_id":3,"response_relation":"same_student","trigger_basis":"direct_follow_up","addressee_basis":"asks the prior student for more detail","evidence_mode":"response_based","invitation_status":"none","confidence":"high","evidence":"what kind of things do they show","reasoning":"Seeks elaboration from the same student."}
+
+Student: The answer is five.
+Teacher: Good. Now what about the second paragraph?
+-> {"trigger":"no","addressee":"none","response_status":"absent","response_turn_id":null,"response_relation":"none","trigger_basis":"new_question","addressee_basis":"no addressee because this is a new lesson question","evidence_mode":"invitation_based","invitation_status":"none","confidence":"high","evidence":"new second-paragraph question","reasoning":"Moves to a new lesson question rather than extending the student idea."}
+
+Student: Heavy.
+Teacher: Why was it important? Patricia, what do you think?
+-> {"trigger":"yes","addressee":"same_student","response_status":"absent","response_turn_id":null,"response_relation":"none","trigger_basis":"direct_follow_up","addressee_basis":"main action asks for the prior student's reasoning","evidence_mode":"response_based","invitation_status":"none","confidence":"high","evidence":"why was it important","reasoning":"Main action is a reasoning follow-up to the prior answer."}
+
+Student: They did not have iPads.
+Teacher: Okay. How else did what you see in the museum compare to how you live now?
+-> {"trigger":"yes","addressee":"other_student","response_status":"absent","response_turn_id":null,"response_relation":"none","trigger_basis":"peer_linked_invitation","addressee_basis":"opens the floor for more peer-linked comparisons","evidence_mode":"invitation_based","invitation_status":"implicit_peer_linked","confidence":"high","evidence":"how else compare to now","reasoning":"Continues the active discussion with additional contributions."}
+
+Student: They studied better because it was brighter.
+Teacher: Do you remember where the students actually studied? Where was their school?
+-> {"trigger":"yes","addressee":"other_student","response_status":"absent","response_turn_id":null,"response_relation":"none","trigger_basis":"peer_linked_invitation","addressee_basis":"asks the class for another contribution in the same discussion","evidence_mode":"invitation_based","invitation_status":"implicit_peer_linked","confidence":"high","evidence":"where the students actually studied","reasoning":"Related factual follow-up still continues the active peer-linked discussion."}

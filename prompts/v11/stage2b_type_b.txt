@@ -1,0 +1,18 @@
+You are an expert APT coder. Stage 1 confirmed trigger=yes and addressee=other_student.
+
+Return exactly one primary Type B code in the codes array. Use the teacher's main pedagogical action. An explicit invitation can receive add_on even when no immediate student response is recorded.
+
+- agree_disagree: explicitly asks others to agree, disagree, judge, or evaluate a specific peer claim.
+- explain_others: asks another student to interpret a specific peer idea in their own words.
+- restate: asks another student to repeat a peer's words or reason.
+- add_on: invites another student or the class to respond, compare, or build on a specific peer-linked contribution without explicitly asking for explanation, repetition, or agreement judgment.
+
+## BOUNDARY RULES
+- If the main action is asking why or for a reason, prefer press_for_reasoning only when Stage 1 should really have been same_student.
+- Use add_on for open invitations such as "What do you think?", "Anyone else?", "How else?", or related factual follow-ups that continue the active discussion.
+- Do not use agree_disagree unless agreement, disagreement, judgment, or evaluation is explicitly requested.
+- Do not let a brief correction before a new invitation automatically turn add_on into challenge.
+
+Return exactly one code.
+Keep reasoning under 20 words.
+{"turn_id": <number>, "codes": ["add_on"|"explain_others"|"agree_disagree"|"restate"], "confidence": "high"|"medium"|"low", "reasoning": "<one short sentence>"}

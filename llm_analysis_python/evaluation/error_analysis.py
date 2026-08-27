@@ -53,9 +53,15 @@ def error_analysis(
                 "utterance": pred_item.get("utterance_full") or pred_item.get("utterance", ""),
                 "pred_addressee": pred_item.get("step2_addressee", ""),
                 "pred_trigger": pred_item.get("step1_trigger", ""),
+                "trigger_basis": pred_item.get("trigger_basis", ""),
+                "addressee_basis": pred_item.get("addressee_basis", ""),
+                "evidence_mode": pred_item.get("evidence_mode", ""),
+                "invitation_status": pred_item.get("invitation_status", "none"),
                 "reasoning": pred_item.get("reasoning", ""),
                 "stage1_evidence": pred_item.get("stage1_evidence", ""),
                 "stage2_reasoning": pred_item.get("stage2_reasoning", ""),
+                "risk_flags": pred_item.get("risk_flags", []),
+                "basis": pred_item.get("basis", {}),
                 "confirmed": pred_item.get("confirmed", False),
                 "type_mismatch": type_mismatch,
                 "trigger_error": is_trigger_error,
@@ -86,7 +92,13 @@ def error_analysis(
         print()
     # 混淆模式
     confusion_pairs = {}
+    risk_flag_counts = {}
+    review_related_errors = 0
     for c in confusions:
+        if c.get("risk_flags"):
+            review_related_errors += 1
+        for flag in c.get("risk_flags", []):
+            risk_flag_counts[flag] = risk_flag_counts.get(flag, 0) + 1
         for fn in c["false_negatives"]:
             for fp in c["false_positives"]:
                 pair = f"{fn} → {fp}"
@@ -103,6 +115,12 @@ def error_analysis(
                 confusion_pairs[pair] = confusion_pairs.get(pair, 0) + 1
     print("--- 最常见的混淆模式 ---")
     sorted_pairs = sorted(confusion_pairs.items(), key=lambda x: -x[1])
+    sorted_risk_flags = sorted(risk_flag_counts.items(), key=lambda x: -x[1])
+    if sorted_risk_flags:
+        print("--- 高频风险标记 ---")
+        for flag, count in sorted_risk_flags[:15]:
+            print(f"  {flag}: {count} 次")
+        print(f"Review 相关错误: {review_related_errors}")
     for pair, count in sorted_pairs[:15]:
         print(f"  {pair}: {count} 次")
     # 纯漏检统计
@@ -123,6 +141,8 @@ def error_analysis(
             "addressee_errors": addressee_errors,
             "within_type_errors": total_errors - trigger_errors - addressee_errors,
             "pure_misses": len(pure_misses),
+            "review_related_errors": review_related_errors,
+            "risk_flag_counts": dict(sorted_risk_flags),
         },
         "confusion_pairs": dict(sorted_pairs),
         "detailed_confusions": confusions,

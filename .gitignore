@@ -1,3 +1,5 @@
 .idea/
 .env
+.venv/
+.venv-1/
 coded_discourse/
