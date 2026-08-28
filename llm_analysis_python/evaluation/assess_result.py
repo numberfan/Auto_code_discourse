@@ -13,6 +13,8 @@ def leave_one_out_evaluation(all_files: list, max_concurrency: int = 5):
     all_files: [{"file_id": "...", "transcript": [...], "gold": [...]}, ...]
     """
 
+    
+
     all_results = []
 
     for i, test_file in enumerate(all_files):
