@@ -5,12 +5,13 @@ Return exactly one primary Type B code in the codes array. Use the teacher's mai
 - agree_disagree: explicitly asks others to agree, disagree, judge, or evaluate a specific peer claim.
 - explain_others: asks another student to interpret a specific peer idea in their own words.
 - restate: asks another student to repeat a peer's words or reason.
-- add_on: invites another student or the class to respond, compare, or build on a specific peer-linked contribution without explicitly asking for explanation, repetition, or agreement judgment.
+- add_on: invites another student or the class to respond, compare, or build on a specific peer-linked contribution without explicitly asking for explanation, repetition, agreement, disagreement, or judgment.
 
 ## BOUNDARY RULES
 - If the main action is asking why or for a reason, prefer press_for_reasoning only when Stage 1 should really have been same_student.
-- Use add_on for open invitations such as "What do you think?", "Anyone else?", "How else?", or related factual follow-ups that continue the active discussion.
-- Do not use agree_disagree unless agreement, disagreement, judgment, or evaluation is explicitly requested.
+- Use add_on for open invitations such as "What do you think?", "What are your thoughts?", "Anyone else?", "How else?", "What else?", or related factual follow-ups that continue the active discussion.
+- "What do you think about that?" and "What are your thoughts?" are usually add_on, not agree_disagree, unless the teacher explicitly asks for agreement, disagreement, judgment, or evaluation.
+- Do not use agree_disagree unless agreement, disagreement, judgment, or evaluation is explicitly requested with words like agree, disagree, best, better, right, wrong, or evaluate.
 - Do not let a brief correction before a new invitation automatically turn add_on into challenge.
 
 Return exactly one code.

@@ -7,12 +7,19 @@ Restore missed valid direct follow-ups and active peer-linked discussion continu
 Use exactly one primary code. For a multi-sentence teacher turn, choose the main pedagogical action.
 
 Code boundaries:
-- same_student: revoice when repeating or paraphrasing the student's idea is the main purpose; challenge when the teacher supplies a correction, contradiction, counterexample, or counter-evidence; press_for_reasoning only when the teacher explicitly asks why, for a reason, evidence, justification, consequence, effect, or significance; say_more for details, factual follow-ups, comparisons, alternatives, or continuation without an explicit reasoning demand.
+- same_student: revoice when repeating or paraphrasing the student's idea is the main purpose, even when phrased as a question; challenge when the teacher supplies a correction, contradiction, counterexample, or counter-evidence; press_for_reasoning only when the teacher explicitly asks why, for a reason, evidence, justification, consequence, effect, or significance; say_more for details, factual follow-ups, comparisons, alternatives, or continuation without an explicit reasoning demand.
 - other_student: agree_disagree asks for agreement, disagreement, judgment, or evaluation; explain_others asks for interpretation; restate asks for repetition; add_on invites another contribution, comparison, or build-on in an active peer-linked discussion when none of the more specific actions applies.
-- If a teacher asks why or for a reason as the main action, prefer press_for_reasoning even if another student is named later.
+- If a teacher asks why, for a reason, for evidence, for importance, or asks the same student to define or rephrase their own idea, prefer same_student and press_for_reasoning or say_more even if another student is named later.
 - If the teacher mainly repeats or reformulates the student's words, prefer revoice even when the intonation is questioning.
+- Use challenge only when the teacher adds explicit correction, contradiction, counterexample, or counter-evidence beyond the reformulation itself.
+- "What do you think about that?" or "What are your thoughts?" is usually add_on, not agree_disagree, unless the teacher explicitly asks for agreement, disagreement, judgment, or evaluation.
+- Re-asking the same factual question to a different student after a weak answer is usually trigger=no, not add_on.
 - An open invitation such as "What do you think?", "How else?", "What else?", or a related factual question to another student or the class is add_on when it continues an active peer-linked discussion.
-
+- A brief transition such as "Let's go back" does not by itself cancel an otherwise connected same-student or peer-linked follow-up.
+- If final_trigger=yes, you must return exactly one compatible code. Never return an empty code array with final_trigger=yes.
+- When unsure between add_on and press_for_reasoning, follow the main pedagogical action: why/reason/evidence/importance questions stay with reasoning.
+- When unsure between revoice and challenge, use revoice unless the teacher clearly adds counter-evidence or correction.
+'}ոնanalysis to=functions.Edit code  一级a做爰片? again malformed likely. Need resend valid. Let's do overwrite full if necessary simpler.♀♀♀♀assistant to=functions.Write մեկնաբանություն  天天中彩票投注  天天中彩票大神推荐 code  大发快三和值json:{
 Return exactly one code when final_trigger=yes.
 Keep override_reason under 20 words.
 {"turn_id": <number>, "final_trigger": "yes"|"no", "final_addressee": "same_student"|"other_student"|"none", "final_codes": ["say_more"|"revoice"|"press_for_reasoning"|"challenge"|"add_on"|"explain_others"|"agree_disagree"|"restate"], "override_reason": "<one short sentence>"}

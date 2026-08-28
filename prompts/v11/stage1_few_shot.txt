@@ -21,6 +21,89 @@ Student: Heavy.
 Teacher: Why was it important? Patricia, what do you think?
 -> {"trigger":"yes","addressee":"same_student","response_status":"absent","response_turn_id":null,"response_relation":"none","trigger_basis":"direct_follow_up","addressee_basis":"main action asks for the prior student's reasoning","evidence_mode":"response_based","invitation_status":"none","confidence":"high","evidence":"why was it important","reasoning":"Main action is a reasoning follow-up to the prior answer."}
 
+Student: Water buckets.
+Teacher: Ryan, you mentioned water buckets. What was key about the water buckets? Why did the tour guide point them out? Patricia, what do you think?
+-> {"trigger":"yes","addressee":"same_student","response_status":"absent","response_turn_id":null,"response_relation":"none","trigger_basis":"direct_follow_up","addressee_basis":"main action still asks for the prior student's reasoning","evidence_mode":"response_based","invitation_status":"none","confidence":"high","evidence":"why did the tour guide point them out","reasoning":"A later name call does not override the main reasoning follow-up."}
+
+Student: I don't know.
+Teacher: What kind of things do they show? Lynn, what kind of things do they show in the house?
+-> {"trigger":"no","addressee":"none","response_status":"absent","response_turn_id":null,"response_relation":"none","trigger_basis":"new_question","addressee_basis":"re-asks the same factual question to another student","evidence_mode":"invitation_based","invitation_status":"none","confidence":"high","evidence":"what kind of things do they show","reasoning":"Re-asking the same factual question is not a peer-linked add_on."}
+
+Student: Family planning means one policy.
+Teacher: How would you rephrase that, Ethan? What do you think family planning means?
+-> {"trigger":"yes","addressee":"same_student","response_status":"absent","response_turn_id":null,"response_relation":"none","trigger_basis":"direct_follow_up","addressee_basis":"asks the prior student to rephrase their own idea","evidence_mode":"response_based","invitation_status":"none","confidence":"high","evidence":"how would you rephrase that","reasoning":"Rephrasing the same student's idea stays same_student."}
+
+Student: Families still have problems today.
+Teacher: Does anyone else have anything to add on to that? Where does the money usually stay?
+-> {"trigger":"yes","addressee":"other_student","response_status":"absent","response_turn_id":null,"response_relation":"none","trigger_basis":"peer_linked_invitation","addressee_basis":"explicitly invites additional peer-linked contribution first","evidence_mode":"invitation_based","invitation_status":"explicit_peer_linked","confidence":"high","evidence":"anything to add on to that","reasoning":"An explicit add-on invitation keeps the turn in the peer-linked discussion."}
+
+Student: They spend it in the community.
+Teacher: How would the beancurd store compare to Starbucks? What would you prefer?
+-> {"trigger":"yes","addressee":"same_student","response_status":"absent","response_turn_id":null,"response_relation":"none","trigger_basis":"direct_follow_up","addressee_basis":"asks the prior student for a comparison and preference","evidence_mode":"response_based","invitation_status":"none","confidence":"high","evidence":"compare to Starbucks","reasoning":"A comparison question to the same speaker is say_more, not a new non-APT turn."}
+
+Student: The rooms were small.
+Teacher: Let's go back to the housing. Were the rooms bigger or smaller than what you're used to now?
+-> {"trigger":"yes","addressee":"same_student","response_status":"absent","response_turn_id":null,"response_relation":"none","trigger_basis":"direct_follow_up","addressee_basis":"continues the same student's comparison thread","evidence_mode":"response_based","invitation_status":"none","confidence":"high","evidence":"bigger or smaller than what you're used to now","reasoning":"A brief topic-shift phrase does not cancel the ongoing same-student follow-up."}
+
+Student: It was old.
+Teacher: They were old? But remember, they were from 50 or 60 years ago.
+-> {"trigger":"yes","addressee":"same_student","response_status":"absent","response_turn_id":null,"response_relation":"none","trigger_basis":"direct_follow_up","addressee_basis":"corrects the same student's claim with a specific fact","evidence_mode":"response_based","invitation_status":"none","confidence":"high","evidence":"but remember, they were from 50 or 60 years ago","reasoning":"Specific correction keeps this as same_student challenge."}
+
+Student: Supermarket.
+Teacher: Supermarket? Do you think a supermarket is the best use for a historic building?
+-> {"trigger":"yes","addressee":"same_student","response_status":"absent","response_turn_id":null,"response_relation":"none","trigger_basis":"direct_follow_up","addressee_basis":"reformulates the same student's proposal for checking","evidence_mode":"response_based","invitation_status":"none","confidence":"high","evidence":"best use for a historic building","reasoning":"Questioning reformulation without counter-evidence remains same_student."}
+
+Student: It is brighter.
+Teacher: Do you remember where the students actually studied? Where was their school?
+-> {"trigger":"yes","addressee":"other_student","response_status":"absent","response_turn_id":null,"response_relation":"none","trigger_basis":"peer_linked_invitation","addressee_basis":"asks the class for another contribution in the same discussion","evidence_mode":"invitation_based","invitation_status":"implicit_peer_linked","confidence":"high","evidence":"where the students actually studied","reasoning":"A related factual follow-up can still extend the peer-linked discussion."}
+
+Student: The town was small.
+Teacher: What should the government have done instead of rebuilding?
+-> {"trigger":"no","addressee":"none","response_status":"absent","response_turn_id":null,"response_relation":"none","trigger_basis":"new_question","addressee_basis":"new broad question not anchored to the prior student's idea","evidence_mode":"invitation_based","invitation_status":"none","confidence":"high","evidence":"what should the government have done instead","reasoning":"This broad restart is not an APT follow-up by itself."}
+
+Student: The families had many problems.
+Teacher: How does that make you feel? Do we still have family issues today? What can we do to resolve them, Daniel?
+-> {"trigger":"yes","addressee":"other_student","response_status":"absent","response_turn_id":null,"response_relation":"none","trigger_basis":"peer_linked_invitation","addressee_basis":"invites another student to continue the family-issues discussion","evidence_mode":"invitation_based","invitation_status":"implicit_peer_linked","confidence":"high","evidence":"what can we do to resolve them","reasoning":"A named continuation prompt can still be add_on in an active discussion."}
+
+Student: Pawn shop.
+Teacher: What's the importance of the pawn shop?
+-> {"trigger":"yes","addressee":"same_student","response_status":"absent","response_turn_id":null,"response_relation":"none","trigger_basis":"direct_follow_up","addressee_basis":"asks the same student for the significance of their answer","evidence_mode":"response_based","invitation_status":"none","confidence":"high","evidence":"what's the importance of the pawn shop","reasoning":"Asking for importance is still a same-student reasoning follow-up."}
+
+Student: People buy locally.
+Teacher: Does anyone else have anything to add on to that? With a small local business, where does the money usually stay?
+-> {"trigger":"yes","addressee":"other_student","response_status":"absent","response_turn_id":null,"response_relation":"none","trigger_basis":"peer_linked_invitation","addressee_basis":"explicitly asks other students to add on first","evidence_mode":"invitation_based","invitation_status":"explicit_peer_linked","confidence":"high","evidence":"anything to add on to that","reasoning":"The explicit add-on invitation keeps the discussion peer-linked."}
+
+Student: The system helps.
+Teacher: The system?
+-> {"trigger":"yes","addressee":"same_student","response_status":"absent","response_turn_id":null,"response_relation":"none","trigger_basis":"direct_follow_up","addressee_basis":"asks the same student to clarify a word choice","evidence_mode":"response_based","invitation_status":"none","confidence":"high","evidence":"the system?","reasoning":"A short clarification echo still follows the same student's idea."}
+
+Student: The plan covers many things.
+Teacher: Would you agree, Ethan?
+-> {"trigger":"yes","addressee":"same_student","response_status":"absent","response_turn_id":null,"response_relation":"none","trigger_basis":"direct_follow_up","addressee_basis":"checks the same student's position after reformulating it","evidence_mode":"response_based","invitation_status":"none","confidence":"high","evidence":"would you agree, Ethan","reasoning":"Agreement wording alone does not override a same-student continuation."}
+
+Student: The market was crowded.
+Teacher: Anyone else? What do others think about that?
+-> {"trigger":"yes","addressee":"other_student","response_status":"absent","response_turn_id":null,"response_relation":"none","trigger_basis":"peer_linked_invitation","addressee_basis":"opens the floor to other students in the same discussion","evidence_mode":"invitation_based","invitation_status":"explicit_peer_linked","confidence":"high","evidence":"what do others think about that","reasoning":"This is a direct peer-linked invitation for additional contributions."}
+
+Student: The court saw many people.
+Teacher: Do you agree with that idea or disagree?
+-> {"trigger":"yes","addressee":"other_student","response_status":"absent","response_turn_id":null,"response_relation":"none","trigger_basis":"peer_linked_invitation","addressee_basis":"asks other students for explicit agreement or disagreement","evidence_mode":"invitation_based","invitation_status":"explicit_peer_linked","confidence":"high","evidence":"agree with that idea or disagree","reasoning":"Explicit agreement wording makes this a peer evaluation turn."}
+
+Student: The house was small.
+Teacher: Let's go back to the housing. So were the rooms bigger or smaller than what you're used to now?
+-> {"trigger":"yes","addressee":"same_student","response_status":"absent","response_turn_id":null,"response_relation":"none","trigger_basis":"direct_follow_up","addressee_basis":"continues the same student's comparison thread despite the transition phrase","evidence_mode":"response_based","invitation_status":"none","confidence":"high","evidence":"rooms bigger or smaller than what you're used to now","reasoning":"A brief transition does not break the same-student follow-up."}
+
+Student: Water buckets.
+Teacher: Why did the tour guide point out the water buckets?
+-> {"trigger":"yes","addressee":"same_student","response_status":"absent","response_turn_id":null,"response_relation":"none","trigger_basis":"direct_follow_up","addressee_basis":"asks the prior student for reasoning about their answer","evidence_mode":"response_based","invitation_status":"none","confidence":"high","evidence":"why did the tour guide point out the water buckets","reasoning":"A why question keeps the main action as same-student reasoning."}
+
+Student: They were old.
+Teacher: They were old? Well, remember, they were from 50 or 60 years ago.
+-> {"trigger":"yes","addressee":"same_student","response_status":"absent","response_turn_id":null,"response_relation":"none","trigger_basis":"direct_follow_up","addressee_basis":"corrects the same student's overgeneralization","evidence_mode":"response_based","invitation_status":"none","confidence":"high","evidence":"remember, they were from 50 or 60 years ago","reasoning":"Specific factual correction makes this a same-student follow-up."}
+
+Student: Supermarket.
+Teacher: Do you think a supermarket is the best use for a historic building?
+-> {"trigger":"yes","addressee":"same_student","response_status":"absent","response_turn_id":null,"response_relation":"none","trigger_basis":"direct_follow_up","addressee_basis":"checks the same student's proposed use","evidence_mode":"response_based","invitation_status":"none","confidence":"high","evidence":"best use for a historic building","reasoning":"The teacher tests the same student's proposal rather than inviting peers.
 Student: They did not have iPads.
 Teacher: Okay. How else did what you see in the museum compare to how you live now?
 -> {"trigger":"yes","addressee":"other_student","response_status":"absent","response_turn_id":null,"response_relation":"none","trigger_basis":"peer_linked_invitation","addressee_basis":"opens the floor for more peer-linked comparisons","evidence_mode":"invitation_based","invitation_status":"implicit_peer_linked","confidence":"high","evidence":"how else compare to now","reasoning":"Continues the active discussion with additional contributions."}

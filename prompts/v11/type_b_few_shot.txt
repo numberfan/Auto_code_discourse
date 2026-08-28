@@ -27,3 +27,15 @@ Teacher: What they said? What do you say?
 Student A: The buckets were heavy.
 Teacher: Not quite child abuse. Anything else? William do you remember?
 -> {"codes":["add_on"],"confidence":"high"}
+
+Student A: The government rebuilt after the fire.
+Teacher: What do you think about that, William? What are your thoughts?
+-> {"codes":["add_on"],"confidence":"high"}
+
+Student A: The rooms were very small.
+Teacher: Bobo, what do you think about that when four or five people lived there?
+-> {"codes":["add_on"],"confidence":"high"}
+
+Student A: Rebuilding was a good idea.
+Teacher: Do you agree with that idea or disagree?
+-> {"codes":["agree_disagree"],"confidence":"high"}

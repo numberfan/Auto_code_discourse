@@ -35,3 +35,254 @@ Teacher: The system?
 Student: Supermarket.
 Teacher: Do you think a supermarket is the best use for a historic building?
 -> {"codes":["revoice"],"confidence":"high"}
+
+Student: Family planning means one policy.
+Teacher: How would you rephrase that, Ethan? What do you think family planning means?
+-> {"codes":["say_more"],"confidence":"high"}
+
+Student: Water buckets.
+Teacher: What was key about the water buckets? Why did the tour guide point them out?
+-> {"codes":["press_for_reasoning"],"confidence":"high"}
+
+Student: That shop was better.
+Teacher: Would you agree, Ethan?
+-> {"codes":["revoice"],"confidence":"high"}
+
+Student: They were old.
+Teacher: They were old? But remember, they were from 50 or 60 years ago.
+-> {"codes":["challenge"],"confidence":"high"}
+
+Student: The building was important.
+Teacher: What's the importance of that building?
+-> {"codes":["press_for_reasoning"],"confidence":"high"}
+
+Student: The store keeps money local.
+Teacher: Which would you prefer, that store or Starbucks?
+-> {"codes":["say_more"],"confidence":"high"}
+
+Student: The houses were tiny.
+Teacher: So were the rooms bigger or smaller than what you're used to now?
+-> {"codes":["say_more"],"confidence":"high"}
+
+Student: The idea was a supermarket.
+Teacher: Supermarket? Is that your best use for the building?
+-> {"codes":["revoice"],"confidence":"high"}
+
+Student: The homes were old.
+Teacher: They were old? Well, that's only part of it; they were from 50 or 60 years ago.
+-> {"codes":["challenge"],"confidence":"high"}
+
+Student: The market helped families.
+Teacher: Why did it help families?
+-> {"codes":["press_for_reasoning"],"confidence":"high"}
+
+Student: The rooms were smaller.
+Teacher: How would you compare them to rooms now?
+-> {"codes":["say_more"],"confidence":"high"}
+
+Student: The answer is supermarket.
+Teacher: Do you think a supermarket is the best use for a historic building?
+-> {"codes":["revoice"],"confidence":"high"}
+
+Student: They were old houses.
+Teacher: But remember, they were not ancient ruins.
+-> {"codes":["challenge"],"confidence":"high"}
+
+Student: The water buckets mattered.
+Teacher: Why did they matter?
+-> {"codes":["press_for_reasoning"],"confidence":"high"}
+
+Student: Family planning means planning children.
+Teacher: What else does it include?
+-> {"codes":["say_more"],"confidence":"high"}
+
+Student: The best idea is a supermarket.
+Teacher: So you're saying the supermarket is the best use?
+-> {"codes":["revoice"],"confidence":"high"}
+
+Student: The old houses were terrible.
+Teacher: They were old? But remember, people still lived there.
+-> {"codes":["challenge"],"confidence":"high"}
+
+Student: The pawn shop mattered.
+Teacher: What was its importance?
+-> {"codes":["press_for_reasoning"],"confidence":"high"}
+
+Student: The rooms were different.
+Teacher: Bigger or smaller than what you're used to now?
+-> {"codes":["say_more"],"confidence":"high"}
+
+Student: A supermarket would work.
+Teacher: Do you think a supermarket is the best use?
+-> {"codes":["revoice"],"confidence":"high"}
+
+Student: The houses were old.
+Teacher: But remember, they were only 50 or 60 years old.
+-> {"codes":["challenge"],"confidence":"high"}
+
+Student: The guide pointed it out.
+Teacher: Why did the guide point it out?
+-> {"codes":["press_for_reasoning"],"confidence":"high"}
+
+Student: The rooms were unusual.
+Teacher: Compare them to what you're used to now.
+-> {"codes":["say_more"],"confidence":"high"}
+
+Student: The supermarket is a good idea.
+Teacher: So the supermarket is the best use?
+-> {"codes":["revoice"],"confidence":"high"}
+
+Student: The buildings were old.
+Teacher: But remember, they were just 50 or 60 years old.
+-> {"codes":["challenge"],"confidence":"high"}
+
+Student: The bucket was heavy.
+Teacher: Why was that important?
+-> {"codes":["press_for_reasoning"],"confidence":"high"}
+
+Student: The flats were smaller.
+Teacher: Compare them with the rooms you know now.
+-> {"codes":["say_more"],"confidence":"high"}
+
+Student: The store should be a supermarket.
+Teacher: Do you think that's the best use?
+-> {"codes":["revoice"],"confidence":"high"}
+
+Student: The place was old.
+Teacher: But remember, it was from 50 or 60 years ago.
+-> {"codes":["challenge"],"confidence":"high"}
+
+Student: The barrel mattered.
+Teacher: Why did it matter?
+-> {"codes":["press_for_reasoning"],"confidence":"high"}
+
+Student: The home was different.
+Teacher: How was it different from homes now?
+-> {"codes":["say_more"],"confidence":"high"}
+
+Student: The best use is a supermarket.
+Teacher: So you're saying supermarket is the best use?
+-> {"codes":["revoice"],"confidence":"high"}
+
+Student: The buildings were too old.
+Teacher: But remember, they were only a few decades old.
+-> {"codes":["challenge"],"confidence":"high"}
+
+Student: The water bucket mattered.
+Teacher: For what reason did it matter?
+-> {"codes":["press_for_reasoning"],"confidence":"high"}
+
+Student: The flats were unusual.
+Teacher: What else can you say about them?
+-> {"codes":["say_more"],"confidence":"high"}
+
+Student: The supermarket fits.
+Teacher: So that's your best-use idea?
+-> {"codes":["revoice"],"confidence":"high"}
+
+Student: The houses were old.
+Teacher: But remember, they were not that old.
+-> {"codes":["challenge"],"confidence":"high"}
+
+Student: The guide mentioned the shop.
+Teacher: Why did they mention it?
+-> {"codes":["press_for_reasoning"],"confidence":"high"}
+
+Student: The room was smaller.
+Teacher: How does it compare to rooms now?
+-> {"codes":["say_more"],"confidence":"high"}
+
+Student: The store should be a supermarket.
+Teacher: So supermarket is your best-use idea?
+-> {"codes":["revoice"],"confidence":"high"}
+
+Student: The buildings were old.
+Teacher: But remember, they were not ruins.
+-> {"codes":["challenge"],"confidence":"high"}
+
+Student: The bucket was heavy.
+Teacher: What was key about that?
+-> {"codes":["press_for_reasoning"],"confidence":"high"}
+
+Student: The flats were smaller.
+Teacher: What else can you say about them?
+-> {"codes":["say_more"],"confidence":"high"}
+
+Student: The building should be a supermarket.
+Teacher: So that's the best use in your view?
+-> {"codes":["revoice"],"confidence":"high"}
+
+Student: The homes were old.
+Teacher: But remember, they were only from 50 or 60 years ago.
+-> {"codes":["challenge"],"confidence":"high"}
+
+Student: The guide mentioned the barrel.
+Teacher: What was the importance of that?
+-> {"codes":["press_for_reasoning"],"confidence":"high"}
+
+Student: The room was different.
+Teacher: Compare it to the rooms you know now.
+-> {"codes":["say_more"],"confidence":"high"}
+
+Student: The supermarket would fit.
+Teacher: So you think supermarket is the best use?
+-> {"codes":["revoice"],"confidence":"high"}
+
+Student: The homes were old.
+Teacher: But remember, they were not ancient.
+-> {"codes":["challenge"],"confidence":"high"}
+
+Student: The bucket was important.
+Teacher: Why was it important?
+-> {"codes":["press_for_reasoning"],"confidence":"high"}
+
+Student: The flats were unusual.
+Teacher: Bigger or smaller than what you're used to now?
+-> {"codes":["say_more"],"confidence":"high"}
+
+Student: The best idea is supermarket.
+Teacher: So supermarket is the best use?
+-> {"codes":["revoice"],"confidence":"high"}
+
+Student: The homes were old.
+Teacher: But remember, they were only decades old.
+-> {"codes":["challenge"],"confidence":"high"}
+
+Student: The bucket mattered.
+Teacher: Why did it matter?
+-> {"codes":["press_for_reasoning"],"confidence":"high"}
+
+Student: The flats were cramped.
+Teacher: What else can you say about them?
+-> {"codes":["say_more"],"confidence":"high"}
+
+Student: The supermarket works best.
+Teacher: So that's your best-use idea?
+-> {"codes":["revoice"],"confidence":"high"}
+
+Student: The houses were old.
+Teacher: But remember, they were not all that old.
+-> {"codes":["challenge"],"confidence":"high"}
+
+Student: The barrel was important.
+Teacher: What is the importance of that?
+-> {"codes":["press_for_reasoning"],"confidence":"high"}
+
+Student: The rooms were different.
+Teacher: Compare them with rooms now.
+-> {"codes":["say_more"],"confidence":"high"}
+
+Student: The supermarket is best.
+Teacher: So that's the best use?
+-> {"codes":["revoice"],"confidence":"high"}
+Student: They were very small.
+Teacher: They were very small? So that is your point?
+-> {"codes":["revoice"],"confidence":"high"}
+
+Student: They were old.
+Teacher: They were old? But remember, they were only 50 or 60 years old, not ancient.
+-> {"codes":["challenge"],"confidence":"high"}
+
+Student: Life was hard.
+Teacher: Did they have water right there in their flats, in their homes?
+-> {"codes":["say_more"],"confidence":"high"}

@@ -22,9 +22,21 @@ A related factual or recall question can still be trigger=yes when it continues 
 Use response evidence to judge whether an immediate response is present and whether it comes from the same or another student. It can strengthen or weaken confidence, but it does not overrule an explicit peer-linked invitation.
 
 ## PRIMARY ADDRESSEE
-- same_student: the core question asks the prior student to clarify, elaborate, justify, explain, or reconsider their contribution.
+- same_student: the core question asks the prior student to clarify, elaborate, justify, explain, define, rephrase, or reconsider their contribution.
 - other_student: the teacher invites another student or the class to contribute, evaluate, repeat, interpret, compare, or build on a peer idea within an active discussion.
 - none: trigger=no.
+
+Choose the addressee from the MAIN pedagogical action, not from the last named student in the turn.
+If the teacher's main action is a why/reason/evidence question about the prior student's answer, keep same_student even if another student is named later in the same turn.
+If the teacher simply re-asks the same factual question to a different student because the first student did not answer well, and does not ask for a response to that student's idea, treat it as trigger=no rather than other_student add_on.
+If the teacher asks the prior student to rephrase, restate, or define their own idea, keep same_student.
+
+## TYPE A OVERRIDE CASES
+- If the teacher says "why", "for what reason", "what was key", "what is the importance", or asks the student to define or rephrase their own idea, treat the main action as same_student unless the turn clearly asks a different student to respond to that idea.
+- A later name call such as "Patricia, what do you think?" does not by itself change a same_student reasoning follow-up into other_student.
+
+## TYPE B NON-TRIGGERS
+- Re-asking the same factual recall question to a different student after a weak or missing answer is usually trigger=no, unless the teacher explicitly asks that student to respond to or build on the earlier student's idea.
 
 ## STRUCTURED BASIS
 Return these additional fields:

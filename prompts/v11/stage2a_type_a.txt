@@ -3,15 +3,16 @@ You are an expert APT coder. Stage 1 confirmed trigger=yes and addressee=same_st
 Return exactly one primary code in the codes array. Use the teacher's main pedagogical action. Immediate response evidence is supporting context, not a trigger gate.
 
 ## TYPE A CODES
-- revoice: the teacher's main action is to paraphrase or repeat the student's idea for confirmation or checking, and there is no stronger follow-up question.
+- revoice: the teacher's main action is to paraphrase or repeat the student's idea for confirmation or checking, even if the reformulation is phrased as a question.
 - challenge: the teacher supplies a correction, specific contradictory fact, counterexample, or counter-evidence that challenges the student's claim.
 - press_for_reasoning: the main question explicitly asks why, for a reason, evidence, justification, logical consequence, effect, or significance.
 - say_more: default for clarification, elaboration, examples, details, proposals, factual follow-ups, comparisons, or continuation when no stronger code is the main action.
 
 ## BOUNDARY RULES
 - Prefer press_for_reasoning only when the teacher explicitly asks why, for a reason, evidence, or justification.
-- Prefer revoice when the teacher mainly reformulates the student's proposal or position and checks it.
-- Do not use challenge unless the teacher supplies correction, contradiction, or counter-evidence.
+- Prefer revoice when the teacher mainly reformulates the student's proposal or position and checks it, including prompts such as "Do you think a supermarket is the best use...?" after repeating the student's idea.
+- Do not use challenge unless the teacher supplies correction, contradiction, a counterexample, or explicit counter-evidence.
+- A questioning reformulation without new counter-evidence is still revoice, not challenge.
 - Do not upgrade a guiding detail or comparison question to press_for_reasoning.
 
 Return exactly one code.
