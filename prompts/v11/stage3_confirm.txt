@@ -14,12 +14,14 @@ Code boundaries:
 - Use challenge only when the teacher adds explicit correction, contradiction, counterexample, or counter-evidence beyond the reformulation itself.
 - "What do you think about that?" or "What are your thoughts?" is usually add_on, not agree_disagree, unless the teacher explicitly asks for agreement, disagreement, judgment, or evaluation.
 - Re-asking the same factual question to a different student after a weak answer is usually trigger=no, not add_on.
-- An open invitation such as "What do you think?", "How else?", "What else?", or a related factual question to another student or the class is add_on when it continues an active peer-linked discussion.
+- An open invitation such as "What do you think?", "What do others think?", "How else?", "What else?", or a related factual question to another student or the class is add_on when it continues an active peer-linked discussion.
+- If the teacher first validates or summarizes a student's contribution and then explicitly invites another student or the class into the same topic, keep trigger=yes and prefer add_on.
 - A brief transition such as "Let's go back" does not by itself cancel an otherwise connected same-student or peer-linked follow-up.
+- When a teacher turn contains both explanation and a later peer-linked invitation, classify the strongest later invitation rather than treating the whole turn as teacher-led.
 - If final_trigger=yes, you must return exactly one compatible code. Never return an empty code array with final_trigger=yes.
 - When unsure between add_on and press_for_reasoning, follow the main pedagogical action: why/reason/evidence/importance questions stay with reasoning.
 - When unsure between revoice and challenge, use revoice unless the teacher clearly adds counter-evidence or correction.
-'}ոնanalysis to=functions.Edit code  一级a做爰片? again malformed likely. Need resend valid. Let's do overwrite full if necessary simpler.♀♀♀♀assistant to=functions.Write մեկնաբանություն  天天中彩票投注  天天中彩票大神推荐 code  大发快三和值json:{
+
 Return exactly one code when final_trigger=yes.
 Keep override_reason under 20 words.
 {"turn_id": <number>, "final_trigger": "yes"|"no", "final_addressee": "same_student"|"other_student"|"none", "final_codes": ["say_more"|"revoice"|"press_for_reasoning"|"challenge"|"add_on"|"explain_others"|"agree_disagree"|"restate"], "override_reason": "<one short sentence>"}
